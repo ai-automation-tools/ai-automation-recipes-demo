@@ -1,0 +1,26 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "trending-movers",
+  "recipe_version": "0.1.0",
+  "collection": "trending-movers",
+  "title": "Trending Movers — 2026-10-14",
+  "slug": "trending-movers",
+  "date": "2026-10-14",
+  "summary": "One reverse-engineering agent repo, morluto/rea, gained +183,758 stars, more than the other fourteen leaderboard entries combined, while the rest of the week's momentum went to agent skill packs, memory layers, browsers and test tooling.",
+  "files": {
+    "main": "digest.md",
+    "cover": "cover.png",
+    "bookmarks": "bookmarks.html"
+  },
+  "fields": {
+    "site_count": 22
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-haiku-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "Abstract editorial illustration of velocity: a single dense bundle of luminous amber and burnt orange ribbons sweeping from the lower left up a steep curve and out past the upper right edge of the frame, fraying into fine particle trails that streak off the edge. A few smaller, slower curves in off-white run beneath it, falling behind. Flat vector shapes with soft grain, deep charcoal background with a faint warm glow along the lead curve. Palette strictly deep charcoal, warm amber, burnt orange, off-white. Asymmetric composition, subject low and left with open charcoal negative space upper left, light radiating from the leading edge of the ribbons. Mood: urgent, accelerating, quietly intense. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T15:40:40+00:00"
+}

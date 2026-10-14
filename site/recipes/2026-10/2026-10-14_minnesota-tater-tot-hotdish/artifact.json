@@ -1,0 +1,26 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Minnesota Tater Tot Hotdish",
+  "slug": "minnesota-tater-tot-hotdish",
+  "date": "2026-10-14",
+  "summary": "The classic Upper Midwest casserole: seasoned ground beef and vegetables in a creamy mushroom-soup sauce, topped with rows of crisp tater tots and melted cheddar. Families make it because it feeds a crowd cheaply, travels to potlucks, and can be assembled ahead.",
+  "files": {
+    "main": "recipe.md",
+    "cover": "cover.png",
+    "cooks_card": "cooks-card.html"
+  },
+  "fields": {
+    "cuisine": "Midwest"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "A rectangular glass baking dish of golden-brown tater tot hotdish, photographed from a three-quarter overhead angle and filling most of the frame. Neat rows of crisp, deeply golden tater tots topped with bubbling melted cheddar, with a clean square scooped out to show the creamy beef, corn and green bean filling underneath. Photograph style, natural soft window light from the left, shallow depth of field, rustic pale wooden table with a plain linen napkin and a wooden serving spatula at the edge. Palette: golden amber, warm cream, muted green, soft brown. Homey, comforting, church-supper mood. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T15:40:14+00:00"
+}

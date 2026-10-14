@@ -1,0 +1,67 @@
+{
+  "state": {
+    "journeys": {
+      "my.lumenfit.app": {
+        "host": "my.lumenfit.app",
+        "started": "2026-10-02T18:41:07.000Z",
+        "status": "done",
+        "confirmation": "Your subscription ends on October 31, 2026. Confirmation number LF-90317.",
+        "steps": [
+          { "at": "2026-10-02T18:41:07.000Z", "url": "https://my.lumenfit.app/settings/billing", "title": "Billing · LumenFit", "findings": [
+            { "kind": "hidden", "label": "Real exit, made hard to see", "text": "End my subscription" }
+          ] },
+          { "at": "2026-10-02T18:41:52.000Z", "url": "https://my.lumenfit.app/settings/billing/leave", "title": "Before you go · LumenFit", "findings": [
+            { "kind": "offer", "label": "Retention offer", "text": "Get 2 months free when you stay" },
+            { "kind": "offer", "label": "Retention offer", "text": "Pause my subscription for 30 days" },
+            { "kind": "exit", "label": "Real exit", "text": "Continue to cancel" }
+          ] },
+          { "at": "2026-10-02T18:42:30.000Z", "url": "https://my.lumenfit.app/settings/billing/leave/reason", "title": "Tell us why · LumenFit", "findings": [
+            { "kind": "shame", "label": "Pressure copy", "text": "You'll lose your 214-day streak" },
+            { "kind": "exit", "label": "Real exit", "text": "Cancel anyway" }
+          ] },
+          { "at": "2026-10-02T18:43:04.000Z", "url": "https://my.lumenfit.app/settings/billing/leave/done", "title": "Cancelled · LumenFit", "findings": [
+            { "kind": "done", "label": "Cancellation confirmed", "text": "Your subscription ends on October 31, 2026. Confirmation number LF-90317." }
+          ] }
+        ]
+      },
+      "account.pagewire-news.com": {
+        "host": "account.pagewire-news.com",
+        "started": "2026-10-07T12:15:40.000Z",
+        "status": "done",
+        "confirmation": "Your plan will end on November 6, 2026.",
+        "steps": [
+          { "at": "2026-10-07T12:15:40.000Z", "url": "https://account.pagewire-news.com/subscription", "title": "Your subscription · Pagewire", "findings": [
+            { "kind": "hidden", "label": "Real exit, made hard to see", "text": "Turn off auto-renewal" },
+            { "kind": "prechecked", "label": "Pre-ticked box", "text": "Send me partner offers" }
+          ] },
+          { "at": "2026-10-07T12:16:22.000Z", "url": "https://account.pagewire-news.com/subscription/offer", "title": "A better rate · Pagewire", "findings": [
+            { "kind": "offer", "label": "Retention offer", "text": "Special offer: $1 a week for 6 months" },
+            { "kind": "shame", "label": "Pressure copy", "text": "No thanks, I'd rather pay full price later" },
+            { "kind": "exit", "label": "Real exit", "text": "Continue to cancel" }
+          ] },
+          { "at": "2026-10-07T12:17:01.000Z", "url": "https://account.pagewire-news.com/subscription/confirm", "title": "Confirm · Pagewire", "findings": [
+            { "kind": "shame", "label": "Pressure copy", "text": "Are you sure? Independent journalism needs you." },
+            { "kind": "exit", "label": "Real exit", "text": "Yes, cancel my subscription" }
+          ] },
+          { "at": "2026-10-07T12:17:15.000Z", "url": "https://account.pagewire-news.com/subscription/ended", "title": "Plan ending · Pagewire", "findings": [
+            { "kind": "done", "label": "Cancellation confirmed", "text": "Your plan will end on November 6, 2026." }
+          ] }
+        ]
+      },
+      "my.cloudbox.io": {
+        "host": "my.cloudbox.io",
+        "started": "2026-10-12T21:03:18.000Z",
+        "status": "in-progress",
+        "steps": [
+          { "at": "2026-10-12T21:03:18.000Z", "url": "https://my.cloudbox.io/plan", "title": "Plan · Cloudbox", "findings": [
+            { "kind": "offer", "label": "Retention offer", "text": "Downgrade to Basic and keep 200 GB at 40% off" },
+            { "kind": "hidden", "label": "Real exit, made hard to see", "text": "Cancel my plan" }
+          ] },
+          { "at": "2026-10-12T21:04:02.000Z", "url": "https://my.cloudbox.io/plan/cancel", "title": "Cancel plan · Cloudbox", "findings": [
+            { "kind": "shame", "label": "Pressure copy", "text": "You'll lose access to 1,284 files after 30 days" }
+          ] }
+        ]
+      }
+    }
+  }
+}

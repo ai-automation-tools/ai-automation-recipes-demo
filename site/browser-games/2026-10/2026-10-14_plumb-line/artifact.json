@@ -1,0 +1,29 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "browser-game",
+  "recipe_version": "0.1.0",
+  "collection": "browser-games",
+  "title": "Plumb Line",
+  "slug": "plumb-line",
+  "date": "2026-10-14",
+  "summary": "Swing cargo off a dockside crane onto a narrow pier and stack it as high as the wind will let you, landing each piece dead level to keep a bonus chain going.",
+  "files": {
+    "main": "index.html",
+    "game-design-brief": "game-design-brief.md",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "genre": "Physics stacking",
+    "controls": "Mouse: move to aim, click to drop · Touch: drag to aim, lift to drop · Keys: Left/Right or A/D aim, Space/Down drop, P pause",
+    "gameplay": "Time the release of a swinging crate, plank, pillar, iron or ice block from a crane so it settles flat on a physics-simulated tower, chaining level landings for bonus points while gusts push and three splashes end the run.",
+    "cdn_deps": "none"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-opus-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "A precarious tower of mismatched wooden cargo crates, long planks, a pale blue ice block and a dark riveted iron block balanced on a narrow concrete pier above calm water, a single crate swinging from a yellow steel crane hook just above the top, caught mid-sway. Vibrant stylized game key art, clean flat shapes with soft painterly gradients and crisp edges. Palette of deep violet, sunset coral, warm amber and crane yellow. Tower centered with generous open sky around it, scene running full-bleed edge to edge, a low sunset sun glowing behind the tower and a faint city skyline on the horizon, warm rim light on the crates. Mood: tense, playful, one gust from collapse. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T15:16:07+00:00"
+}

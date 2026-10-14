@@ -1,0 +1,34 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "podcast-scripts",
+  "title": "Should We Text the Aliens First?",
+  "slug": "should-we-text-the-aliens-first",
+  "date": "2026-10-14",
+  "summary": "A cautious astrophysicist, a backyard radio enthusiast, a contrarian linguist and a cruise-ship crooner argue over whether humanity should beam deliberate messages to the stars, covering the 'dark forest' risk, who gets to decide, whether anyone could understand us, and the century of TV and radar we've already leaked.",
+  "files": {
+    "main": "script.md",
+    "cast": "cast.md",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "topic": "Should We Text the Aliens First?",
+    "host": "Juno Partridge",
+    "cast": [
+      "Barnaby \"Beacon\" Okafor-Lund",
+      "Dr. Odalys Venn",
+      "Gus Fennimore",
+      "Professor Thessaly Crane"
+    ],
+    "word_count": 2017
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-opus-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "A small, glowing old-fashioned studio microphone standing alone on a tiny rocky planet, emitting bright concentric radio rings that ripple outward into a vast dark forest of towering silhouetted pine trees made of stars and nebula, with dozens of pairs of curious glowing eyes peeking out from between the cosmic trees. Bold flat vector editorial illustration with subtle grain texture, retro 1970s space-age poster aesthetic. Palette: deep midnight indigo, electric signal orange, pale starlight cream, muted teal. Centered composition, the microphone and rings as the bold focal motif, generous dark negative space around it, glowing rim light from the signal rings. Mood: playful, curious and faintly ominous. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T16:44:36+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Exit Ramp",
+  "version": "0.1.0",
+  "description": "Marks the real cancel button on subscription account pages, flags the retention tricks around it, and logs every step with a timestamp.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Exit Ramp"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://myaccount.nytimes.com/*", "https://account.adobe.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "short-story",
+  "recipe_version": "0.1.0",
+  "collection": "short-stories",
+  "title": "The Blue Words",
+  "slug": "the-blue-words",
+  "date": "2026-10-14",
+  "summary": "When a firmware update shows a retired Duluth dock worker which words his hearing aids have been quietly guessing, he learns that the one sentence that carried him through his wife's death was never said.",
+  "files": {
+    "main": "story.md",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "genre": "near-future AI fiction",
+    "word_count": 3100
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-opus-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "Two empty wooden porch chairs angled toward each other on the front porch of an old clapboard house high on a hillside, seen from slightly behind and above, looking down over steep rooftops to a wide grey harbour on a great lake at dusk. Far below, a distant steel lift bridge has its road deck raised between two tall towers as a long, heavily loaded freighter slides toward it, its deck lights just coming on. Cool autumn air, a few bare branches at the edge of the frame, the lake flat and pewter out to a hazy horizon. Cinematic digital painting with rich brushwork and atmospheric haze. Palette of slate blue, pewter grey, rust orange and a warm amber glow from the porch light. The scene fills the whole canvas edge to edge, with the porch and chairs in the lower third, the harbour and bridge in the middle and generous open dusk sky above. Quiet, tender and unresolved. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T15:08:31+00:00"
+}

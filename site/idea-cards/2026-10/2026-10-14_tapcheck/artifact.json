@@ -1,0 +1,27 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "TapCheck",
+  "slug": "tapcheck",
+  "date": "2026-10-14",
+  "summary": "A browser extension that tells you, on the ChatGPT, Claude or Gemini page itself, when another extension is wiretapping your chat.",
+  "files": {
+    "main": "card.md",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "category": "Browser Extension",
+    "form_factor": "browser extension",
+    "monetization": "freemium"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "A glowing translucent glass chat bubble floating centered slightly above middle, with a thin copper wire discreetly tapped into its underside, while a large round magnifying lens hovers over the wire and reveals it in sharp bright detail against a softly blurred surface. Modern editorial-tech illustration, clean vector-influenced shapes, soft gradients, subtle depth and gentle shadows. Palette: deep indigo, electric teal, warm amber, off-white. Centered composition with generous margins and negative space, soft rim lighting from the upper left. Mood: quietly vigilant. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T15:01:43+00:00"
+}

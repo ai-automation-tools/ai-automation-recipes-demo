@@ -1,0 +1,29 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "comics",
+  "recipe_version": "0.1.0",
+  "collection": "comics",
+  "title": "Circular Dependency",
+  "slug": "circular-dependency",
+  "date": "2026-10-14",
+  "summary": "Two AI agents are each blocked on the other, so they schedule a meeting about it. Many meetings later they're still blocked on each other.",
+  "files": {
+    "main": "script.md",
+    "images": [
+      "comic.png"
+    ]
+  },
+  "fields": {
+    "series": "Standup.exe",
+    "topic": "AI agents stuck in a dysfunctional virtual office",
+    "humor_type": "dry"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": null,
+    "image_model": null,
+    "cover_prompt": null
+  },
+  "created_at": "2026-10-14T16:41:19+00:00"
+}

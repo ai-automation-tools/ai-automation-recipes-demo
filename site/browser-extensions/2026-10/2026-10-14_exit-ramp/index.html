@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exit Ramp demo</title>
+  <link rel="stylesheet" href="extension/popup.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <p class="demo-hint">Demo of the Exit Ramp extension. Click the <strong>ER</strong> button in the toolbar, then follow the green-marked exit through the cancel flow.</p>
+
+  <div class="browser" role="application" aria-label="Mock browser window">
+    <div class="titlebar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="tab" id="tab-title">Account · Streamly</span>
+    </div>
+    <div class="toolbar">
+      <span class="nav" aria-hidden="true">&larr; &rarr; &#8635;</span>
+      <div class="urlbar" id="urlbar">https://account.streamly.tv/account</div>
+      <button type="button" class="ext-btn" id="ext-btn" aria-expanded="false" aria-controls="popup-panel" title="Exit Ramp">ER</button>
+    </div>
+
+    <div class="viewport">
+      <article class="site" id="mock-page" aria-label="Mock subscription site"></article>
+
+      <!-- Same markup as extension/popup.html -->
+      <div class="popup-panel" id="popup-panel" hidden>
+        <main class="xr-popup">
+          <header class="xr-head">
+            <h1>Exit Ramp</h1>
+            <span id="xr-site" class="xr-site"></span>
+          </header>
+          <p id="xr-status" class="xr-status"></p>
+          <h2>On this page</h2>
+          <ul id="xr-findings" class="xr-findings"></ul>
+          <h2>Your path so far</h2>
+          <ol id="xr-steps" class="xr-steps"></ol>
+          <footer class="xr-foot">
+            <button id="xr-copy" type="button">Copy evidence log</button>
+            <button id="xr-clear" type="button" class="xr-ghost">Clear this site</button>
+            <span id="xr-note" class="xr-note" role="status"></span>
+          </footer>
+          <p id="xr-others" class="xr-others"></p>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" id="sample-data">
+{
+  "state": {
+    "journeys": {
+      "my.lumenfit.app": {
+        "host": "my.lumenfit.app",
+        "started": "2026-10-02T18:41:07.000Z",
+        "status": "done",
+        "confirmation": "Your subscription ends on October 31, 2026. Confirmation number LF-90317.",
+        "steps": [
+          {
+            "at": "2026-10-02T18:41:07.000Z",
+            "url": "https://my.lumenfit.app/settings/billing",
+            "title": "Billing · LumenFit",
+            "findings": [
+              {
+                "kind": "hidden",
+                "label": "Real exit, made hard to see",
+                "text": "End my subscription"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-02T18:41:52.000Z",
+            "url": "https://my.lumenfit.app/settings/billing/leave",
+            "title": "Before you go · LumenFit",
+            "findings": [
+              {
+                "kind": "offer",
+                "label": "Retention offer",
+                "text": "Get 2 months free when you stay"
+              },
+              {
+                "kind": "offer",
+                "label": "Retention offer",
+                "text": "Pause my subscription for 30 days"
+              },
+              {
+                "kind": "exit",
+                "label": "Real exit",
+                "text": "Continue to cancel"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-02T18:42:30.000Z",
+            "url": "https://my.lumenfit.app/settings/billing/leave/reason",
+            "title": "Tell us why · LumenFit",
+            "findings": [
+              {
+                "kind": "shame",
+                "label": "Pressure copy",
+                "text": "You'll lose your 214-day streak"
+              },
+              {
+                "kind": "exit",
+                "label": "Real exit",
+                "text": "Cancel anyway"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-02T18:43:04.000Z",
+            "url": "https://my.lumenfit.app/settings/billing/leave/done",
+            "title": "Cancelled · LumenFit",
+            "findings": [
+              {
+                "kind": "done",
+                "label": "Cancellation confirmed",
+                "text": "Your subscription ends on October 31, 2026. Confirmation number LF-90317."
+              }
+            ]
+          }
+        ]
+      },
+      "account.pagewire-news.com": {
+        "host": "account.pagewire-news.com",
+        "started": "2026-10-07T12:15:40.000Z",
+        "status": "done",
+        "confirmation": "Your plan will end on November 6, 2026.",
+        "steps": [
+          {
+            "at": "2026-10-07T12:15:40.000Z",
+            "url": "https://account.pagewire-news.com/subscription",
+            "title": "Your subscription · Pagewire",
+            "findings": [
+              {
+                "kind": "hidden",
+                "label": "Real exit, made hard to see",
+                "text": "Turn off auto-renewal"
+              },
+              {
+                "kind": "prechecked",
+                "label": "Pre-ticked box",
+                "text": "Send me partner offers"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-07T12:16:22.000Z",
+            "url": "https://account.pagewire-news.com/subscription/offer",
+            "title": "A better rate · Pagewire",
+            "findings": [
+              {
+                "kind": "offer",
+                "label": "Retention offer",
+                "text": "Special offer: $1 a week for 6 months"
+              },
+              {
+                "kind": "shame",
+                "label": "Pressure copy",
+                "text": "No thanks, I'd rather pay full price later"
+              },
+              {
+                "kind": "exit",
+                "label": "Real exit",
+                "text": "Continue to cancel"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-07T12:17:01.000Z",
+            "url": "https://account.pagewire-news.com/subscription/confirm",
+            "title": "Confirm · Pagewire",
+            "findings": [
+              {
+                "kind": "shame",
+                "label": "Pressure copy",
+                "text": "Are you sure? Independent journalism needs you."
+              },
+              {
+                "kind": "exit",
+                "label": "Real exit",
+                "text": "Yes, cancel my subscription"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-07T12:17:15.000Z",
+            "url": "https://account.pagewire-news.com/subscription/ended",
+            "title": "Plan ending · Pagewire",
+            "findings": [
+              {
+                "kind": "done",
+                "label": "Cancellation confirmed",
+                "text": "Your plan will end on November 6, 2026."
+              }
+            ]
+          }
+        ]
+      },
+      "my.cloudbox.io": {
+        "host": "my.cloudbox.io",
+        "started": "2026-10-12T21:03:18.000Z",
+        "status": "in-progress",
+        "steps": [
+          {
+            "at": "2026-10-12T21:03:18.000Z",
+            "url": "https://my.cloudbox.io/plan",
+            "title": "Plan · Cloudbox",
+            "findings": [
+              {
+                "kind": "offer",
+                "label": "Retention offer",
+                "text": "Downgrade to Basic and keep 200 GB at 40% off"
+              },
+              {
+                "kind": "hidden",
+                "label": "Real exit, made hard to see",
+                "text": "Cancel my plan"
+              }
+            ]
+          },
+          {
+            "at": "2026-10-12T21:04:02.000Z",
+            "url": "https://my.cloudbox.io/plan/cancel",
+            "title": "Cancel plan · Cloudbox",
+            "findings": [
+              {
+                "kind": "shame",
+                "label": "Pressure copy",
+                "text": "You'll lose access to 1,284 files after 30 days"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+  </script>
+  <script src="extension/content.js"></script>
+  <script src="extension/popup.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

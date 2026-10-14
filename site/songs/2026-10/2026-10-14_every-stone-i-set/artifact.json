@@ -1,0 +1,37 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "song-generator",
+  "recipe_version": "0.1.0",
+  "collection": "songs",
+  "title": "Every Stone I Set",
+  "slug": "every-stone-i-set",
+  "date": "2026-10-14",
+  "summary": "A dry-stone waller looks back on a life of building walls on the hill, until the first wall he ever built is the one holding him up.",
+  "files": {
+    "main": "song.md",
+    "composition-plan": "composition-plan.json",
+    "song": "song.mp3",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "song_type": "folk",
+    "genre": "folk / chamber folk",
+    "stance": "Fingerpicked chamber folk — premise: A working life",
+    "mood": "hushed, autumnal",
+    "key": "D minor",
+    "tempo_bpm": 72,
+    "target_ms": 180000,
+    "word_cap": 260,
+    "lyric_words": 215,
+    "plan_ms": 180000,
+    "length_sec": 180.0
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-opus-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "An old dry-stone wall running up a bare hillside at dusk, its rough grey fieldstones stacked by hand, with a weathered wooden-handled hammer resting on the top course and a lone curlew in flight over the ridge. Hand-carved woodcut print style with visible gouge marks and slightly uneven ink on textured paper. Palette of slate grey, moss green, rust ochre and warm cream. Low horizon, wall leading diagonally from the bottom left toward the ridge, soft fading autumn light from behind the hill, generous empty sky. Quiet, patient and tender. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T16:42:56+00:00"
+}

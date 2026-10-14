@@ -1,0 +1,67 @@
+{
+  "chunks": [
+    {
+      "text": "[Intro]",
+      "duration_ms": 12000,
+      "positive_styles": ["chamber folk", "acoustic folk", "hushed autumnal mood", "72 BPM", "D minor", "intricate fingerpicked steel-string acoustic guitar", "string quartet entering softly with sustained cello", "real wooden room ambience", "instrumental"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "vocals"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Verse 1]\nI was nine when he walked me up the hill,\na cart of fieldstone and a cold March sky.\nHe said, find the face and turn it out,\nlet the long side run across the line.\nBy the time the curlews came that spring\nI could fill a gap and keep it dry.",
+      "duration_ms": 28000,
+      "positive_styles": ["chamber folk", "acoustic folk", "hushed autumnal mood", "72 BPM", "D minor", "breathy close-mic male lead vocal, natural and unprocessed, clear storytelling diction", "intricate fingerpicked acoustic guitar", "sparse cello underneath", "intimate and quiet"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "belting", "southern drawl"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Chorus]\nLay it heavy, lay it low,\nleave the weather what it gets.\nI was never made to stay,\nbut I'll stand in every stone I set.",
+      "duration_ms": 18000,
+      "positive_styles": ["chamber folk", "full string quartet joins", "warm violin countermelody", "plain singable refrain", "breathy close male vocal", "fingerpicked guitar"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "big pop chorus"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Verse 2]\nForty winters on the open fell,\nmy knuckles split like bark in frost.\nI built for men who never learned my name\nand mended what the floods had tossed.\nI raised a house for Annie by the ford\nand counted every lamb we lost.",
+      "duration_ms": 28000,
+      "positive_styles": ["chamber folk", "fingerpicked guitar", "viola and cello holding low drones", "breathy close male vocal", "steady and weathered", "hushed"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "southern drawl"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Chorus]\nLay it heavy, lay it low,\nleave the weather what it gets.\nI was never made to stay,\nbut I'll stand in every stone I set.",
+      "duration_ms": 18000,
+      "positive_styles": ["chamber folk", "full string quartet", "soft second harmony voice on the refrain", "fingerpicked guitar", "gentle swell"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "big pop chorus"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Interlude]",
+      "duration_ms": 16000,
+      "positive_styles": ["chamber folk", "instrumental", "string quartet carries a modal melody", "fingerpicked guitar arpeggios", "autumnal and spacious", "72 BPM", "D minor"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "vocals"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Verse 3]\nNow my hands shake on the hammer,\nand my daughter climbs the hill alone.\nI sit all day on the wall I built at nine,\nand for once it's holding me, stone on stone.",
+      "duration_ms": 22000,
+      "positive_styles": ["chamber folk", "stripped back to fingerpicked guitar and solo cello", "breathy close male vocal, older and tender", "very quiet", "the emotional turn"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "melodrama"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Final Chorus]\nLay it heavy, lay it low,\nleave the weather what it gets.\nI was never made to stay,\nbut I'll stand in every stone I set.",
+      "duration_ms": 20000,
+      "positive_styles": ["chamber folk", "full string quartet returns", "two-voice close harmony on the refrain", "fingerpicked guitar", "fullest moment of the song, still gentle"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "big pop chorus"],
+      "context_adherence": "high"
+    },
+    {
+      "text": "[Outro]\nLay it heavy, lay it low.",
+      "duration_ms": 18000,
+      "positive_styles": ["chamber folk", "single soft vocal line then fade", "fingerpicked guitar alone", "a last sustained cello note", "hushed ending", "D minor"],
+      "negative_styles": ["muddy mix", "off-key vocals", "robotic vocals", "low fidelity", "pedal steel", "country twang", "electric guitar solo", "synth pads", "programmed drums", "heavy autotune", "drum kit", "abrupt ending"],
+      "context_adherence": "high"
+    }
+  ]
+}

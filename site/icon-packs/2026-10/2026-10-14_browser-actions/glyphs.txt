@@ -1,0 +1,39 @@
+=== ICON: back ===
+<polygon points="10,50 46,16 46,38 90,38 90,62 46,62 46,84"/>
+=== ICON: forward ===
+<polygon points="90,50 54,16 54,38 10,38 10,62 54,62 54,84"/>
+=== ICON: reload ===
+<path d="M85.7 37 A38 38 0 1 1 37 14.3 L41.8 27.4 A24 24 0 1 0 72.6 41.8 Z"/>
+<polygon points="33.6,4.9 45.2,36.9 60.1,13.4"/>
+=== ICON: new-tab ===
+<path fill-rule="evenodd" d="M20 22 H80 A10 10 0 0 1 90 32 V74 A10 10 0 0 1 80 84 H20 A10 10 0 0 1 10 74 V32 A10 10 0 0 1 20 22 Z M22 38 V72 H78 V38 Z"/>
+<rect x="10" y="8" width="34" height="18" rx="6"/>
+<rect x="45" y="46" width="10" height="22"/>
+<rect x="39" y="52" width="22" height="10"/>
+=== ICON: bookmarks ===
+<path d="M26 10 H74 A4 4 0 0 1 78 14 V92 L50 70 L22 92 V14 A4 4 0 0 1 26 10 Z"/>
+=== ICON: history ===
+<path fill-rule="evenodd" d="M50 8 A42 42 0 1 1 49.9 8 Z M50 20 A30 30 0 1 0 50.1 20 Z"/>
+<rect x="46" y="30" width="8" height="26"/>
+<rect x="46" y="48" width="24" height="8"/>
+=== ICON: downloads ===
+<polygon points="38,8 62,8 62,40 80,40 50,72 20,40 38,40"/>
+<rect x="12" y="80" width="76" height="12" rx="6"/>
+=== ICON: home ===
+<path d="M50 8 L94 48 H82 V90 H60 V62 H40 V90 H18 V48 H6 Z"/>
+=== ICON: stop ===
+<path fill-rule="evenodd" d="M50 8 A42 42 0 1 1 49.9 8 Z M50 20 A30 30 0 1 0 50.1 20 Z"/>
+<rect x="46" y="28" width="8" height="44" transform="rotate(45 50 50)"/>
+<rect x="46" y="28" width="8" height="44" transform="rotate(-45 50 50)"/>
+=== ICON: find ===
+<path fill-rule="evenodd" d="M42 8 A34 34 0 1 1 41.9 8 Z M42 20 A22 22 0 1 0 42.1 20 Z"/>
+<polygon points="60,70 70,60 94,84 84,94"/>
+=== ICON: fullscreen ===
+<path d="M10 10 H38 V22 H22 V38 H10 Z"/>
+<path d="M90 10 H62 V22 H78 V38 H90 Z"/>
+<path d="M10 90 H38 V78 H22 V62 H10 Z"/>
+<path d="M90 90 H62 V78 H78 V62 H90 Z"/>
+=== ICON: print ===
+<rect x="28" y="8" width="44" height="22" rx="3"/>
+<path d="M18 36 H82 A8 8 0 0 1 90 44 V62 A8 8 0 0 1 82 70 H76 V56 H24 V70 H18 A8 8 0 0 1 10 62 V44 A8 8 0 0 1 18 36 Z"/>
+<rect x="30" y="60" width="40" height="32" rx="3"/>

@@ -1,0 +1,139 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "icon-packs",
+  "recipe_version": "0.1.0",
+  "collection": "icon-packs",
+  "title": "Browser Actions",
+  "slug": "browser-actions",
+  "date": "2026-10-14",
+  "summary": "Twelve solid white browser-control glyphs on cool-toned squircle tiles, for toolbars, launchers and shortcuts.",
+  "files": {
+    "main": "pack.md",
+    "glyphs": "glyphs.txt",
+    "svg/back": "svg/back.svg",
+    "svg/forward": "svg/forward.svg",
+    "svg/reload": "svg/reload.svg",
+    "svg/new-tab": "svg/new-tab.svg",
+    "svg/bookmarks": "svg/bookmarks.svg",
+    "svg/history": "svg/history.svg",
+    "svg/downloads": "svg/downloads.svg",
+    "svg/home": "svg/home.svg",
+    "svg/stop": "svg/stop.svg",
+    "svg/find": "svg/find.svg",
+    "svg/fullscreen": "svg/fullscreen.svg",
+    "svg/print": "svg/print.svg",
+    "png/back": "png/back.png",
+    "ico/back": "ico/back.ico",
+    "png/forward": "png/forward.png",
+    "ico/forward": "ico/forward.ico",
+    "png/reload": "png/reload.png",
+    "ico/reload": "ico/reload.ico",
+    "png/new-tab": "png/new-tab.png",
+    "ico/new-tab": "ico/new-tab.ico",
+    "png/bookmarks": "png/bookmarks.png",
+    "ico/bookmarks": "ico/bookmarks.ico",
+    "png/history": "png/history.png",
+    "ico/history": "ico/history.ico",
+    "png/downloads": "png/downloads.png",
+    "ico/downloads": "ico/downloads.ico",
+    "png/home": "png/home.png",
+    "ico/home": "ico/home.ico",
+    "png/stop": "png/stop.png",
+    "ico/stop": "ico/stop.ico",
+    "png/find": "png/find.png",
+    "ico/find": "ico/find.ico",
+    "png/fullscreen": "png/fullscreen.png",
+    "ico/fullscreen": "ico/fullscreen.ico",
+    "png/print": "png/print.png",
+    "ico/print": "ico/print.ico",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "theme": "Browser Actions — back, forward, reload, new tab, bookmarks, history, downloads — squircle tiles",
+    "category": "Apps-and-Services",
+    "container": "squircle-tile",
+    "glyph_color": "#FFFFFF",
+    "icons": [
+      {
+        "name": "Back",
+        "slug": "back",
+        "concept": "thick left-pointing arrow",
+        "tile_color": "#2563EB"
+      },
+      {
+        "name": "Forward",
+        "slug": "forward",
+        "concept": "thick right-pointing arrow",
+        "tile_color": "#3B82F6"
+      },
+      {
+        "name": "Reload",
+        "slug": "reload",
+        "concept": "circular arc with arrowhead",
+        "tile_color": "#0EA5E9"
+      },
+      {
+        "name": "New tab",
+        "slug": "new-tab",
+        "concept": "window outline with tab and plus",
+        "tile_color": "#4F46E5"
+      },
+      {
+        "name": "Bookmarks",
+        "slug": "bookmarks",
+        "concept": "notched ribbon",
+        "tile_color": "#7C3AED"
+      },
+      {
+        "name": "History",
+        "slug": "history",
+        "concept": "clock face with hands",
+        "tile_color": "#6366F1"
+      },
+      {
+        "name": "Downloads",
+        "slug": "downloads",
+        "concept": "down arrow onto a tray",
+        "tile_color": "#0891B2"
+      },
+      {
+        "name": "Home",
+        "slug": "home",
+        "concept": "house with pitched roof",
+        "tile_color": "#1D4ED8"
+      },
+      {
+        "name": "Stop",
+        "slug": "stop",
+        "concept": "ring with a cross",
+        "tile_color": "#8B5CF6"
+      },
+      {
+        "name": "Find in page",
+        "slug": "find",
+        "concept": "magnifying glass",
+        "tile_color": "#0D9488"
+      },
+      {
+        "name": "Full screen",
+        "slug": "fullscreen",
+        "concept": "four outward corner brackets",
+        "tile_color": "#4338CA"
+      },
+      {
+        "name": "Print",
+        "slug": "print",
+        "concept": "printer with paper in and out",
+        "tile_color": "#0284C7"
+      }
+    ]
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": null,
+    "image_model": null,
+    "cover_prompt": null
+  },
+  "created_at": "2026-10-14T17:45:01+00:00"
+}

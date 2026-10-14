@@ -1,0 +1,40 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "voiceover-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "voiceover-scripts",
+  "title": "The Spacecraft Lost to a Unit Label",
+  "slug": "mars-climate-orbiter-unit-error",
+  "date": "2026-10-14",
+  "summary": "In 1999 NASA's Mars Climate Orbiter burned up at Mars because ground software reported thruster data in pound-seconds instead of newton-seconds.",
+  "files": {
+    "main": "script.md",
+    "direction-notes": "direction-notes.md",
+    "voiceover": "voiceover.mp3",
+    "short": "short.mp4",
+    "cover": "cover.png",
+    "images": [
+      "scenes/scene-1.png",
+      "scenes/scene-2.png",
+      "scenes/scene-3.png",
+      "scenes/scene-4.png",
+      "scenes/scene-5.png"
+    ]
+  },
+  "fields": {
+    "category": "expensive-mistakes",
+    "topic": "NASA Mars Climate Orbiter Loss (1999)",
+    "word_count": 261,
+    "narrator": "Charon",
+    "delivery": "with calm, procedural restraint, building quiet dread and then dry disbelief",
+    "speech_engine": "gemini"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": "gemini",
+    "image_model": "gemini-3.1-flash-image",
+    "cover_prompt": "A small spacecraft silhouette descending toward a rust-red planet, with a giant balance scale in the foreground: a pound weight on one pan and a newton-style spring gauge on the other, the scale tipping and bending the spacecraft's glowing trajectory line downward into the planet's thin atmosphere. Modern editorial-tech illustration, soft gradients, clean shapes. Palette: deep navy, rust orange, off-white, muted gold. Wide cinematic composition, subject centered, generous negative space. Mood: quietly tragic. STRICT: no text, letters, words, numbers, captions, titles, labels, banners, credits, stat blocks, logos, watermarks, signatures, UI chrome, or borders anywhere in the image."
+  },
+  "created_at": "2026-10-14T16:48:20+00:00"
+}

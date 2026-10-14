@@ -1,0 +1,42 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-episode",
+  "recipe_version": "0.1.0",
+  "collection": "podcasts",
+  "title": "Should We Text the Aliens First?",
+  "slug": "should-we-text-the-aliens-first",
+  "date": "2026-10-14",
+  "summary": "A risk analyst, an allotment radio ham, a contrarian linguist and a cruise-ship crooner argue over whether humanity should transmit a hello to the stars or keep listening.",
+  "files": {
+    "main": "episode.md",
+    "episode": "episode.mp3",
+    "script": "script.md",
+    "cover": "cover.png"
+  },
+  "fields": {
+    "voices": {
+      "Juno Partridge": "Kore",
+      "Dr. Odalys Venn": "Charon",
+      "Barnaby \"Beacon\" Okafor-Lund": "Fenrir",
+      "Gus Fennimore": "Algenib",
+      "Professor Thessaly Crane": "Gacrux"
+    },
+    "delivery": {
+      "Juno Partridge": "with dry, quick, mock-solemn authority, enjoying the fight",
+      "Dr. Odalys Venn": "with bone-dry, precise calm, faintly weary",
+      "Barnaby \"Beacon\" Okafor-Lund": "excitedly, talking fast, warm and misty-eyed",
+      "Gus Fennimore": "like a seasoned showman, gravelly and cheerful, with a wink",
+      "Professor Thessaly Crane": "with elegant, theatrical, unhurried disdain"
+    },
+    "script": "podcast-scripts/2026-10/2026-10-14_should-we-text-the-aliens-first",
+    "speech_engine": "gemini"
+  },
+  "generator": {
+    "engine": "claude",
+    "model": "claude-sonnet-5-5",
+    "image_engine": null,
+    "image_model": null,
+    "cover_prompt": null
+  },
+  "created_at": "2026-10-14T17:02:54+00:00"
+}
