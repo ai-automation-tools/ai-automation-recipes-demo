@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "content-idea-gen",
+  "recipe_version": "0.1.0",
+  "collection": "content-ideas",
+  "title": "AI Life Director",
+  "slug": "ai-life-director",
+  "date": "2026-07-29",
+  "summary": "A content concept: a fully automated daily morning briefing that pulls calendar, email, fitness and weather into one AI-narrated report, with formats and hooks for each platform.",
+  "files": {
+    "main": "ai-life-director_2026-07-29.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

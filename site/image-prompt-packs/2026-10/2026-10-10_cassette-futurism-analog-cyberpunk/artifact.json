@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "image-prompt-packs",
+  "recipe_version": "0.1.0",
+  "collection": "image-prompt-packs",
+  "title": "Cassette Futurism & Analog Cyberpunk",
+  "slug": "cassette-futurism-analog-cyberpunk",
+  "date": "2026-10-10",
+  "summary": "An image-prompt pack for a future run on cathode-ray tubes, magnetic tape and chunky tactile hardware: a cyber-deck, an analog android, a synth bunker and more.",
+  "files": {
+    "main": "analog-android-chassis.md"
+  },
+  "fields": {
+    "theme": "Cassette Futurism & Analog Cyberpunk"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

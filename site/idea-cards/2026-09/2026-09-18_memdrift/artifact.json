@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "MemDrift",
+  "slug": "memdrift",
+  "date": "2026-09-18",
+  "summary": "Reads an AI agent's persistent memory store, finds facts that contradict each other or have gone stale, and lets you roll one back before it steers a real conversation wrong.",
+  "files": {
+    "main": "card.md"
+  },
+  "fields": {
+    "category": "AI Tool / AI Automation Tool",
+    "form_factor": "web app",
+    "monetization": "B2B SaaS",
+    "status": "idea"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
