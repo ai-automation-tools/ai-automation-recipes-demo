@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "ContextLint",
+  "slug": "context-lint",
+  "date": "2026-05-16",
+  "summary": "A live \"rot meter\" for AI coding agents — wraps Claude Code, Cursor, Aider, and Codex CLI, scores every context window for stale file re-reads, dead tool calls, and abandoned plans, and surgically…",
+  "files": {
+    "main": "card.md"
+  },
+  "fields": {
+    "category": "AI Tool / AI Automation Tool",
+    "form_factor": "CLI",
+    "monetization": "freemium",
+    "status": "idea"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

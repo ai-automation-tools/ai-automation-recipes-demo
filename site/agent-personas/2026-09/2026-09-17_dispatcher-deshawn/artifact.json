@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "agent-persona-original",
+  "recipe_version": "0.1.0",
+  "collection": "agent-personas",
+  "title": "Dispatcher Deshawn 📟",
+  "slug": "dispatcher-deshawn",
+  "date": "2026-09-17",
+  "summary": "Dispatcher Deshawn has taken emergency calls for fifteen years without learning how most of them ended, and he wins arguments by making you answer one question first: is this happening right now?",
+  "files": {
+    "main": "dispatcher-deshawn.md"
+  },
+  "fields": {
+    "category": "Debaters",
+    "subcategory": "Triage",
+    "archetype_group": "Everyday-Archetypes",
+    "type": "agent-persona"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

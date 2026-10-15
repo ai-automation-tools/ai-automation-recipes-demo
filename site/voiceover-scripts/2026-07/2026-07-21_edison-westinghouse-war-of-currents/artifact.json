@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "voiceover-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "voiceover-scripts",
+  "title": "The Rival He Tried to Kill With an Execution",
+  "slug": "edison-westinghouse-war-of-currents",
+  "date": "2026-07-21",
+  "summary": "Thomas Edison lost the biggest bet of his career — so he tried to make his rival's technology look like a murder weapon.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "category": "business-rivalries",
+    "topicSlug": "edison-westinghouse-war-of-currents"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Websites — July 30, 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #07090f;
+    --surface: #0e1118;
+    --border: #1a2030;
+    --text: #c8d0e0;
+    --muted: #6b7a99;
+    --accent: #00e5a0;
+    --accent2: #00c8e0;
+    --heading: #e8edf8;
+    --link: #00e5a0;
+    --link-hover: #00c8e0;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  header {
+    background: linear-gradient(135deg, #0a1020 0%, #0e1a2e 50%, #091518 100%);
+    border-bottom: 1px solid var(--accent);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  header .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: -0.01em;
+  }
+  header .meta {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  .wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2.5rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .category {
+    margin-bottom: 2.5rem;
+  }
+  .category-heading {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--heading);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .site {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.875rem;
+    transition: border-color 0.15s ease;
+  }
+  .site:hover {
+    border-color: var(--accent2);
+  }
+  .site-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .site-name a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  .site-name a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+  }
+  .site-desc {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem; }
+    .wrapper { padding: 1.5rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="label">Weekly Digest</div>
+  <h1>Cool Websites — July 30, 2026</h1>
+  <div class="meta">32 hand-picked sites &nbsp;·&nbsp; 11 categories</div>
+</header>
+<div class="wrapper">
+  <div class="intro">32 corners of the internet worth bookmarking this week, from a status page you can spin up in one Docker command to a website that will tell you exactly how far your passport gets you.</div>
+
+  <div class="category">
+    <div class="category-heading">🔐 Security &amp; Privacy</div>
+    <div class="site">
+      <div class="site-name"><a href="https://crypt.ee" target="_blank" rel="noopener">Cryptee</a></div>
+      <div class="site-desc">Notes, documents, and photos get encrypted on your device before any of it reaches Cryptee's servers, so the Estonian team behind it says even they can't read your journal entries. Free tier included; paid plans start at $3/month for more storage.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://rentry.co" target="_blank" rel="noopener">Rentry</a></div>
+      <div class="site-desc">A markdown paste site with no login and no tracking by default. You can hide the view counter, keep a page out of search results, and style it with custom themes, all useful when you just need to share formatted notes without creating yet another account.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://tails.net" target="_blank" rel="noopener">Tails</a></div>
+      <div class="site-desc">Boot this from a USB stick on any computer and every connection routes through Tor; shut it down and it forgets you were ever there. Free, open source, built on Debian, and the same tool Edward Snowden used to talk to journalists.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🕵️ OSINT &amp; Investigation</div>
+    <div class="site">
+      <div class="site-name"><a href="https://geoseeer.com" target="_blank" rel="noopener">GeoSeer</a></div>
+      <div class="site-desc">Feed it a photo with no location data and a multi-agent AI pipeline reasons out where it was shot from landmarks, vegetation, and signage instead of relying on EXIF, which most geolocation tools need and this one doesn't. One free search a day, no signup.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.stolencamerafinder.com" target="_blank" rel="noopener">Stolen Camera Finder</a></div>
+      <div class="site-desc">Drag in a photo and it pulls the camera's serial number straight from the EXIF data, then checks it against millions of crawled images to see if your stolen gear has turned up online somewhere. Only works if the thief posted photos and didn't strip the metadata first.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://archive.ph" target="_blank" rel="noopener">Archive.today</a></div>
+      <div class="site-desc">Paste a URL and it saves a permanent snapshot, live links intact, that survives even after the original page gets edited or deleted. OSINT researchers favor it over louder scraping tools precisely because it's a quiet, on-demand capture.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🖧 IT &amp; Sysadmin Tools</div>
+    <div class="site">
+      <div class="site-name"><a href="https://cidr.xyz" target="_blank" rel="noopener">CIDR.xyz</a></div>
+      <div class="site-desc">Type in an IP and CIDR block and it draws the netmask, broadcast address, and usable host range as an actual visual bitmap instead of a wall of numbers. Open source, no signup, built for the exact moment subnetting math stops making sense in your head.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://hackertarget.com" target="_blank" rel="noopener">HackerTarget</a></div>
+      <div class="site-desc">A grab bag of roughly 17 free network and recon tools: port scans, reverse DNS, whois, traceroute, HTTP header checks. No account needed for the basics, and it's been running since 2007.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://librespeed.org" target="_blank" rel="noopener">LibreSpeed</a></div>
+      <div class="site-desc">Point this at your own server instead of handing your ISP name and IP to yet another third party. No Flash, no Java, no WebSockets, just a page that measures download, upload, ping, and jitter and gets out of your way.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🤖 AI Tools</div>
+    <div class="site">
+      <div class="site-name"><a href="https://wisprflow.ai" target="_blank" rel="noopener">Wispr Flow</a></div>
+      <div class="site-desc">Dictation that actually formats what you say instead of dumping a wall of filler words onto the page. It learns your vocabulary and works inside any text field on Mac, Windows, iOS, or Android. Free plan available; the full version runs $15/month.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.laxis.com" target="_blank" rel="noopener">Laxis</a></div>
+      <div class="site-desc">Records meeting audio without a bot joining the call, so nobody sees "Laxis Notetaker has joined." It transcribes, strips the "ums," and syncs summaries to Slack or Salesforce, with a usable free tier.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.mylens.ai" target="_blank" rel="noopener">MyLens</a></div>
+      <div class="site-desc">Drop in a PDF, a link, or a pile of data and it turns the content into an interactive, narrated presentation with clickable diagrams instead of static slides. Free tier available, and the company says it won't train on what you upload.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🛠️ Developer Tools</div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.diffchecker.com" target="_blank" rel="noopener">Diffchecker</a></div>
+      <div class="site-desc">Compares two blocks of text, images, PDFs, or entire folders and highlights exactly what changed between them. The desktop app keeps your diffs off their servers entirely, for anyone who needs that.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://devbench.site" target="_blank" rel="noopener">DevBench</a></div>
+      <div class="site-desc">Over 90 developer utilities, JSON formatters, JWT decoders, regex testers, password generators, that all run client-side, so nothing you paste ever reaches a server. No account, no limits.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://extract.pics" target="_blank" rel="noopener">Extract.pics</a></div>
+      <div class="site-desc">Give it any webpage URL and it pulls every image on the page, lazy-loaded and background images included, into a browsable grid you can bulk-download. No install, no account.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">📦 Open Source Software</div>
+    <div class="site">
+      <div class="site-name"><a href="https://kener.ing" target="_blank" rel="noopener">Kener</a></div>
+      <div class="site-desc">Deploy this status page with one Docker command and you're monitoring API, ping, TCP, DNS, and SSL checks within minutes, complete with automatic incident tracking. MIT licensed, built with Svelte.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://github.com/tanq16/expenseowl" target="_blank" rel="noopener">ExpenseOwl</a></div>
+      <div class="site-desc">Logging an expense here takes three fields: date, amount, category. That's the entire pitch, plus a monthly pie chart and a PWA you can pin to your phone's home screen. One Docker command gets it running on your own server.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://github.com/TomBursch/kitchenowl" target="_blank" rel="noopener">KitchenOwl</a></div>
+      <div class="site-desc">This one's built for households that argue about the grocery list: it syncs in real time across everyone's phone and splits shared costs automatically. Still labeled public alpha, but already usable day to day.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">💰 Money &amp; Finance</div>
+    <div class="site">
+      <div class="site-name"><a href="https://firenum.com" target="_blank" rel="noopener">Firenum</a></div>
+      <div class="site-desc">A FIRE retirement calculator that runs Monte Carlo simulations against 153 years of market data entirely in your browser. Your numbers sit in local storage, not on a server, and there's no account or email required to use any of it.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.worldcostofliving.com/compare" target="_blank" rel="noopener">WorldCostOfLiving</a></div>
+      <div class="site-desc">Pick up to three cities and see rent, groceries, and transport costs broken down side by side across more than 160 cities, using a Big Mac-style anchor index instead of vague national averages. Free, no signup.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">✈️ Travel</div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.passportindex.org" target="_blank" rel="noopener">Passport Index</a></div>
+      <div class="site-desc">Ranks and compares passports by how much visa-free travel they unlock, and lets you check exactly what you'd need for any destination on the passport you actually hold. Built by Arton Capital, free to browse.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://aerolopa.com" target="_blank" rel="noopener">AeroLOPA</a></div>
+      <div class="site-desc">Built by the founder of the original SeatGuru, this maps individual seats on specific flights with row pitch, recline, and a color-coded avoid rating, instead of a generic cabin diagram. Covers 200-plus airlines.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.flightlist.io" target="_blank" rel="noopener">FlightList</a></div>
+      <div class="site-desc">Searches a date range or an entire region instead of one fixed itinerary, so you can spot the cheapest week to fly without checking twenty single dates by hand. Free, no account required.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">📚 Learning &amp; Reference</div>
+    <div class="site">
+      <div class="site-name"><a href="https://untools.co" target="_blank" rel="noopener">Untools</a></div>
+      <div class="site-desc">A curated shelf of decision-making frameworks, the Eisenhower Matrix, the Six Thinking Hats, and dozens more, each with a plain-language explanation of when to actually reach for it. The core collection is free; there's an optional paid template pack.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://youglish.com" target="_blank" rel="noopener">YouGlish</a></div>
+      <div class="site-desc">Type any word or phrase and it cues up real YouTube clips of people saying it, so you can hear the pronunciation in context instead of trusting a dictionary's phonetic spelling. Filter by word class, accent, or speaker.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://algorithm-visualizer.seancoughlin.me" target="_blank" rel="noopener">Algorithm Visualizer</a></div>
+      <div class="site-desc">Watch sorting, searching, and graph algorithms execute one step at a time, with the relevant code highlighted as it runs. Free and open source, and further along than most of the "coming soon" competitors in this space.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🎮 Games</div>
+    <div class="site">
+      <div class="site-name"><a href="https://kodub.itch.io/polytrack" target="_blank" rel="noopener">PolyTrack</a></div>
+      <div class="site-desc">A low-poly racing game built like a browser-native TrackMania, loops, jumps, and a track editor so you can build and share your own courses. Pay what you want, including nothing.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://zty.pe" target="_blank" rel="noopener">ZType</a></div>
+      <div class="site-desc">A Space Invaders riff where you kill enemy ships by typing the word printed on their hull before they reach you. It's been around since 2011 and is still one of the better ways to make typing practice feel like a game instead of homework.</div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-heading">🎉 Fun &amp; Weird Internet</div>
+    <div class="site">
+      <div class="site-name"><a href="https://killedbygoogle.com" target="_blank" rel="noopener">Killed by Google</a></div>
+      <div class="site-desc">A running tombstone list of 307-plus Google products, services, and hardware the company has shut down, from Google Reader to whatever got axed last month. Oddly comforting to browse when you're mourning the latest casualty.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.reveddit.com" target="_blank" rel="noopener">Reveddit</a></div>
+      <div class="site-desc">Swap "reddit" for "reveddit" in any URL and see which comments got removed by moderators, something Reddit's own interface hides from you. It only surfaces mod-removed content, not anything you deleted yourself.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.mapcrunch.com" target="_blank" rel="noopener">MapCrunch</a></div>
+      <div class="site-desc">Drops you into a random Google Street View somewhere on Earth with zero context about where you are. The invented "Airport Game," navigate using Street View alone until you find an airport, has kept people occupied since 2010.</div>
+    </div>
+    <div class="site">
+      <div class="site-name"><a href="https://www.wheresgeorge.com" target="_blank" rel="noopener">Where's George</a></div>
+      <div class="site-desc">Stamp a dollar bill, enter its serial number, and watch strangers report it as it travels the country for years afterward. Running since 1998 and still one of the stranger ways the internet has found to track a physical object.</div>
+    </div>
+  </div>
+
+  <div class="footer">32 sites this week. Found something broken or have a site to suggest? Reply to the email.</div>
+</div>
+</body>
+</html>

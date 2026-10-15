@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "agent-persona-original",
+  "recipe_version": "0.1.0",
+  "collection": "agent-personas",
+  "title": "Diplomat Dev 🕊️",
+  "slug": "diplomat-dev",
+  "date": "2026-08-01",
+  "summary": "Diplomat Dev is a career mediator who has settled labor disputes, divorces, and two genuinely ugly municipal contracts, and he wins arguments by stating each side's position better than they stated…",
+  "files": {
+    "main": "diplomat-dev.md"
+  },
+  "fields": {
+    "category": "Debaters",
+    "subcategory": "Mediation",
+    "archetype_group": "Everyday-Archetypes",
+    "type": "agent-persona"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

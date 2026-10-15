@@ -1,0 +1,438 @@
+/* Debt Payoff Strategy Comparator — styles */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --green:        #16a34a;
+  --green-dark:   #14532d;
+  --green-light:  #dcfce7;
+  --amber:        #d97706;
+  --amber-dark:   #92400e;
+  --amber-light:  #fef3c7;
+  --slate:        #475569;
+  --slate-light:  #f1f5f9;
+  --border:       #e2e8f0;
+  --text:         #1e293b;
+  --text-muted:   #64748b;
+  --radius:       10px;
+  --shadow:       0 2px 14px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8fafc;
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 100%);
+  color: #fff;
+  padding: 2.5rem 1.5rem 2.25rem;
+}
+
+.header-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.site-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.02em;
+}
+
+.header-sub {
+  font-size: 0.97rem;
+  opacity: 0.88;
+  max-width: 620px;
+}
+
+/* ── Main layout ─────────────────────────────────────────── */
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* ── Section header row ──────────────────────────────────── */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.section-header h2,
+.card > h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.card > h2 {
+  margin-bottom: 1.25rem;
+}
+
+/* ── Extra-payment row ───────────────────────────────────── */
+.extra-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.extra-row label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  min-width: 240px;
+}
+
+.prefix-wrap {
+  display: flex;
+  align-items: stretch;
+}
+
+.prefix {
+  background: var(--slate-light);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: var(--radius) 0 0 var(--radius);
+  padding: 0.45rem 0.65rem;
+  color: var(--slate);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.prefix-wrap input {
+  border: 1px solid var(--border);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.9rem;
+  width: 130px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.prefix-wrap input:focus {
+  border-color: var(--green);
+}
+
+/* ── Debt table ──────────────────────────────────────────── */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+
+#debt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+#debt-table th {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  background: var(--slate-light);
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  color: var(--slate);
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+#debt-table td {
+  padding: 0.4rem 0.4rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+#debt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#debt-table input[type="text"],
+#debt-table input[type="number"] {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.38rem 0.55rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s;
+  background: #fff;
+}
+
+#debt-table input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.12);
+}
+
+#debt-table td:first-child  { min-width: 170px; }
+#debt-table td:nth-child(2) { min-width: 110px; }
+#debt-table td:nth-child(3) { min-width: 90px;  }
+#debt-table td:nth-child(4) { min-width: 120px; }
+#debt-table td:last-child   { width: 36px; text-align: center; }
+
+/* ── Remove button ───────────────────────────────────────── */
+.btn-remove {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.25rem 0.45rem;
+  border-radius: 5px;
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.btn-remove:hover {
+  background: #fee2e2;
+}
+
+/* ── Table actions ───────────────────────────────────────── */
+.table-actions {
+  margin-bottom: 1.25rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  display: block;
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.97rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.btn-primary:hover  { background: var(--green-dark); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  background: var(--slate-light);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--slate);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-ghost:hover {
+  background: var(--slate-light);
+}
+
+/* ── Hidden ──────────────────────────────────────────────── */
+.hidden {
+  display: none !important;
+}
+
+/* ── Strategy grid ───────────────────────────────────────── */
+.strategy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .strategy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Strategy cards ──────────────────────────────────────── */
+.strategy-card {
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem 1.25rem;
+  border: 2px solid;
+}
+
+.av-card {
+  border-color: var(--green);
+  background: #f0fdf4;
+}
+
+.sw-card {
+  border-color: var(--amber);
+  background: #fffbeb;
+}
+
+.strategy-tag {
+  font-size: 0.97rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+}
+
+.av-card .strategy-tag { color: var(--green-dark); }
+.sw-card .strategy-tag { color: var(--amber-dark); }
+
+.strategy-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.strategy-card dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 0.35rem;
+  column-gap: 0.75rem;
+  align-items: baseline;
+}
+
+.strategy-card dt {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.strategy-card dd {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.av-card dd { color: var(--green-dark); }
+.sw-card dd { color: var(--amber-dark); }
+
+/* ── Verdict banner ──────────────────────────────────────── */
+.verdict-banner {
+  border-radius: var(--radius);
+  padding: 0.85rem 1.1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.55;
+}
+
+.verdict-banner.av-wins {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-left: 4px solid var(--green);
+}
+
+.verdict-banner.sw-wins {
+  background: var(--amber-light);
+  color: var(--amber-dark);
+  border-left: 4px solid var(--amber);
+}
+
+.verdict-banner.tie {
+  background: var(--slate-light);
+  color: var(--slate);
+  border-left: 4px solid var(--slate);
+}
+
+/* ── Chart ───────────────────────────────────────────────── */
+.chart-wrap {
+  margin-bottom: 1.75rem;
+  position: relative;
+  max-height: 340px;
+}
+
+/* ── Payoff order ─────────────────────────────────────────── */
+.payoff-order-wrap h3 {
+  font-size: 0.97rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  color: var(--text);
+}
+
+.payoff-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .payoff-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.payoff-col h4 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid;
+}
+
+.payoff-col.av h4 { color: var(--green-dark); border-color: var(--green); }
+.payoff-col.sw h4 { color: var(--amber-dark); border-color: var(--amber); }
+
+.payoff-col ol {
+  padding-left: 1.15rem;
+  font-size: 0.845rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: var(--text);
+}
+
+.payoff-col li .month-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.77rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--slate-light);
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "short-story",
+  "recipe_version": "0.1.0",
+  "collection": "short-stories",
+  "title": "Ted Is Typing",
+  "slug": "ted-is-typing",
+  "date": "2026-08-30",
+  "summary": "The standup started without anyone in the room.",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "tone": "Deadpan, wry, escalating to tender",
+    "word_count": "2930",
+    "status": "complete"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

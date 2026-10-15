@@ -1,0 +1,50 @@
+$ python3 script.py --config sample-config.json
+IIQ Zombie Task Guard
+Running TaskResults scanned: 8
+Zombie findings: 5
+
+  HIGH: 3
+  MEDIUM: 1
+  LOW: 1
+
+TASK DEFINITION                                  HOST        SEV     ELAPSED   AVG    CONCUR  NEXT LAUNCH IN
+--------------------------------------------------------------------------------------------------------------------
+Active Directory Delta Aggregation               iiq-app02   HIGH    46.0h     18m    no      2.0h (Daily 08:00)
+Workday Delta Aggregation                        iiq-app02   HIGH    20.9h     22m    no      3.0h (Daily 09:00)
+Perform Maintenance                              iiq-app01   HIGH    77.0h     35m    no      19.0h (Daily 01:00)
+Manager Access Review Certification Generation   iiq-app01   MEDIUM  25.8h     95m    no      358.0h (Monthly 1st 04:00)
+GitHub Enterprise Aggregation                    iiq-app02   LOW     20.0h     8m     yes     4.0h (Daily 10:00)
+
+Wrote 5 findings to zombie-task-findings.json
+$ echo $?
+0
+
+$ python3 script.py --config sample-config.json --dry-run
+IIQ Zombie Task Guard
+Running TaskResults scanned: 8
+Zombie findings: 5
+
+  HIGH: 3
+  MEDIUM: 1
+  LOW: 1
+
+TASK DEFINITION                                  HOST        SEV     ELAPSED   AVG    CONCUR  NEXT LAUNCH IN
+--------------------------------------------------------------------------------------------------------------------
+Active Directory Delta Aggregation               iiq-app02   HIGH    46.0h     18m    no      2.0h (Daily 08:00)
+Workday Delta Aggregation                        iiq-app02   HIGH    20.9h     22m    no      3.0h (Daily 09:00)
+Perform Maintenance                              iiq-app01   HIGH    77.0h     35m    no      19.0h (Daily 01:00)
+Manager Access Review Certification Generation   iiq-app01   MEDIUM  25.8h     95m    no      358.0h (Monthly 1st 04:00)
+GitHub Enterprise Aggregation                    iiq-app02   LOW     20.0h     8m     yes     4.0h (Daily 10:00)
+$ echo $?
+0
+
+$ python3 script.py --config does-not-exist.json
+ERROR: could not read config file 'does-not-exist.json': [Errno 2] No such file or directory: 'does-not-exist.json'
+$ echo $?
+1
+
+$ echo '{"stuck_threshold_multiplier": 3.0}' > incomplete-config.json
+$ python3 script.py --config incomplete-config.json
+ERROR: config file is missing required key: 'concurrency_lookahead_hours'
+$ echo $?
+1

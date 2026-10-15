@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "app-prototypes",
+  "title": "Debt Map",
+  "slug": "debt-map",
+  "date": "2026-07-09",
+  "summary": "See exactly when you'll be debt-free — and how much you'll save by going faster.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-app-prototype (Claude)",
+    "form_factor": "web app"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

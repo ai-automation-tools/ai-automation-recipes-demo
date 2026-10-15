@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "FleetJudge",
+  "slug": "fleet-judge",
+  "date": "2026-07-14",
+  "summary": "A single-binary CLI that scores and ranks outputs from parallel AI coding agents — so the verification bottleneck doesn't undo the speed gains of running a fleet.",
+  "files": {
+    "main": "card.md"
+  },
+  "fields": {
+    "category": "GitHub Repo",
+    "form_factor": "CLI",
+    "monetization": "freemium",
+    "status": "idea"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "alternate-history",
+  "recipe_version": "0.1.0",
+  "collection": "alternate-history",
+  "title": "The Radiant Age",
+  "slug": "the-radiant-age",
+  "date": "2026-08-07",
+  "summary": "What if… What if J.P. Morgan had kept funding Nikola Tesla's Wardenclyffe tower, and the world had been built around wireless, broadcast electric power instead of wires?",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "era": "20th Century",
+    "word_count": "1065",
+    "scenes_rendered": "8/8"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

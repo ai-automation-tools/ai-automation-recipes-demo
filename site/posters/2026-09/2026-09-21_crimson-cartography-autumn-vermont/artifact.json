@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "poster",
+  "recipe_version": "0.1.0",
+  "collection": "posters",
+  "title": "Crimson Cartography: Autumn in Vermont",
+  "slug": "crimson-cartography-autumn-vermont",
+  "date": "2026-09-21",
+  "summary": "A striking modern design featuring a hyper-detailed, fiery-red sugar maple leaf. Its intricate vein structure seamlessly morphs into a glowing, golden-embossed topographic map of Vermont's Green Mountain range, set against a moody, misty slate-gray forest background.",
+  "files": {
+    "main": "caption.md"
+  },
+  "fields": {
+    "theme": "Autumn Leaves in Vermont",
+    "style": "Modern Minimalist / Graphic Art"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

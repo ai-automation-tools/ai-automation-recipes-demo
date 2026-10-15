@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "regional-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "regional-recipes",
+  "title": "Bibimbap",
+  "slug": "bibimbap",
+  "date": "2026-09-15",
+  "summary": "Korean rice bowl with seasoned vegetables, marinated beef, a fried egg and gochujang, plus a Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

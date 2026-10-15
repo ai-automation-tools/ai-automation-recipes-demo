@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "3d-print-design",
+  "recipe_version": "0.1.0",
+  "collection": "3d-print-designs",
+  "title": "Coilback Desk Critter",
+  "slug": "coilback-desk-critter",
+  "date": "2026-09-23",
+  "summary": "A palm-sized, print-in-place fidget creature that stands on four posable ball-jointed legs and flicks its coiled spring tail like a real spring.",
+  "files": {},
+  "fields": {
+    "workflow": "weekly-3d-print-ideas (Claude)",
+    "subcategory": "Toys-and-Fidgets",
+    "interest_tie-in": "Toys / fidgets",
+    "subcategory_folder": "Toys-and-Fidgets"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

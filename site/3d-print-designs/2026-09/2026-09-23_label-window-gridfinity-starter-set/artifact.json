@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "3d-print-design",
+  "recipe_version": "0.1.0",
+  "collection": "3d-print-designs",
+  "title": "Label-Window Gridfinity Starter Organizer Set",
+  "slug": "label-window-gridfinity-starter-set",
+  "date": "2026-09-23",
+  "summary": "A no-hardware, Gridfinity-pitch organizer set whose bins each show a slide-in paper label through a front window, so you can read what's inside without pulling anything out.",
+  "files": {},
+  "fields": {
+    "workflow": "weekly-3d-print-ideas (Claude)",
+    "subcategory": "Organization-and-Storage",
+    "interest_tie-in": "Household items / computer and desk organization",
+    "subcategory_folder": "Organization-and-Storage"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

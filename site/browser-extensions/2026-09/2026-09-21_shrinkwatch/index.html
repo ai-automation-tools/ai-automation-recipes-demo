@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShrinkWatch — demo</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="extension/popup.css" />
+</head>
+<body>
+  <div class="browser-frame">
+    <div class="browser-frame__titlebar">
+      <span class="browser-frame__dot browser-frame__dot--red"></span>
+      <span class="browser-frame__dot browser-frame__dot--yellow"></span>
+      <span class="browser-frame__dot browser-frame__dot--green"></span>
+      <span class="browser-frame__title">ShrinkWatch demo — mock browser window</span>
+    </div>
+
+    <div class="browser-frame__toolbar">
+      <div class="browser-frame__urlbar" id="url-bar">https://www.amazon.com/dp/B0SW00CRL1</div>
+      <button class="browser-frame__ext-button" id="toggle-popup" type="button" aria-expanded="false" aria-controls="popup-panel">
+        <span class="browser-frame__ext-icon" aria-hidden="true"></span>
+        ShrinkWatch
+      </button>
+    </div>
+
+    <div class="browser-frame__body">
+      <main class="mock-page" id="mock-page">
+        <!-- Rendered by script.js from sample-data.json. Standing in for the live Amazon DOM
+             that extension/content.js would read on the real site. -->
+      </main>
+
+      <div class="popup-panel" id="popup-panel" hidden>
+        <!-- Same markup extension/popup.html renders inside the real toolbar popup. -->
+        <div class="shrinkwatch-popup">
+          <header class="shrinkwatch-popup__header">
+            <span class="shrinkwatch-popup__mark" aria-hidden="true"></span>
+            <div>
+              <h1>ShrinkWatch</h1>
+              <p class="shrinkwatch-popup__tagline">Same price, smaller box? You'll know.</p>
+            </div>
+          </header>
+
+          <section class="shrinkwatch-popup__section" id="on-this-page">
+            <h2>On this page</h2>
+            <div class="shrinkwatch-popup__loading" data-role="page-loading">Checking this tab&hellip;</div>
+          </section>
+
+          <section class="shrinkwatch-popup__section" id="tracked-products">
+            <div class="shrinkwatch-popup__section-head">
+              <h2>Tracked products</h2>
+              <span class="shrinkwatch-popup__count" data-role="tracked-count"></span>
+            </div>
+            <ul class="shrinkwatch-popup__list" data-role="tracked-list"></ul>
+            <p class="shrinkwatch-popup__upgrade" data-role="upgrade-banner" hidden>
+              Free plan tracks 8 products. Upgrade for unlimited tracking and cross-device sync.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="extension/popup.js"></script>
+</body>
+</html>

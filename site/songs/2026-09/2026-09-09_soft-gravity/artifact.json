@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "song-generator",
+  "recipe_version": "0.1.0",
+  "collection": "songs",
+  "title": "Soft Gravity",
+  "slug": "soft-gravity",
+  "date": "2026-09-09",
+  "summary": "Lying down and finally letting your weight belong to the earth.",
+  "files": {
+    "main": "soft-gravity_lyrics.md"
+  },
+  "fields": {
+    "1": "Intro",
+    "2": "Verse 1",
+    "3": "Refrain",
+    "4": "Verse 2"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "finance-app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "financial-ideas",
+  "title": "Debt Payoff Strategy Comparator",
+  "slug": "debt-payoff-strategy-comparator",
+  "date": "2026-07-14",
+  "summary": "Side-by-side avalanche vs. snowball calculator — enter your debts and see instantly which method saves you more money and gets you debt-free faster.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-financial-idea (Claude)",
+    "type": "App",
+    "theme": "Debt",
+    "finance_area": "Debt"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "browser-game",
+  "recipe_version": "0.1.0",
+  "collection": "browser-games",
+  "title": "Last Ember",
+  "slug": "last-ember",
+  "date": "2026-09-23",
+  "summary": "Last Ember is a top-down maze run where your torch is a countdown, not just a light source. Fuel drains the moment you start moving, and your vision radius shrinks with it, so the corridors you can see are always a step behind the ones you're in. Starting at l",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-browser-game (Claude)",
+    "genre": "maze",
+    "game": "Last Ember",
+    "cdn_deps": "none"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

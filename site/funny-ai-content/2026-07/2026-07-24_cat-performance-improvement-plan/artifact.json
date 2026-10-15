@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "funny-ai-content",
+  "recipe_version": "0.1.0",
+  "collection": "funny-ai-content",
+  "title": "CatPIP: The AI HR Suite That Put Your Cat on a Performance Improvement Plan",
+  "slug": "cat-performance-improvement-plan",
+  "date": "2026-07-24",
+  "summary": "Your cat missed three OKRs this quarter, and the AI wants a conversation.",
+  "files": {
+    "main": "cat-performance-improvement-plan_2026-07-24.md"
+  },
+  "fields": {
+    "type": "funny-ai-content",
+    "format": "Short vertical video / mock product demo"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

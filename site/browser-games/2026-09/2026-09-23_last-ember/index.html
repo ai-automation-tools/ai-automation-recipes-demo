@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Last Ember</title>
+<!--
+  Last Ember — maze genre.
+  Guide a dying torch through a procedural maze to the glowing exit before
+  your fuel runs out (your vision shrinks with it) or a shadow wisp finds you.
+  Controls: WASD / Arrow keys to move, R to restart. Touch: swipe or the
+  on-screen D-pad. All art is drawn on canvas; all sound is synthesized.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<style>
+  html, body {
+    margin: 0; height: 100%; background: #05070c; overflow: hidden;
+    touch-action: none; -webkit-user-select: none; user-select: none;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  #app { position: fixed; inset: 0; display: flex; flex-direction: column; }
+  #hud {
+    flex: 0 0 auto; display: flex; align-items: center; gap: 14px;
+    padding: 8px 14px; color: #e8d9b8; font-size: 14px; z-index: 5;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  }
+  #hud .stat { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  #fuelWrap {
+    flex: 1 1 auto; height: 12px; background: rgba(255,255,255,0.08);
+    border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15);
+  }
+  #fuelBar {
+    height: 100%; width: 100%; border-radius: 6px;
+    background: linear-gradient(90deg, #ff8a2b, #ffd873);
+    transition: width 0.12s linear;
+  }
+  #stage { flex: 1 1 auto; position: relative; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  canvas { display: block; background: #05070c; touch-action: none; }
+  .overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    background: rgba(3,4,8,0.86); color: #f2e6c9; padding: 24px; z-index: 10;
+  }
+  .overlay h1 { font-size: clamp(28px, 6vw, 48px); margin: 0 0 6px; letter-spacing: 2px; color: #ffcf7a; text-shadow: 0 0 18px rgba(255,180,80,0.6); }
+  .overlay p { max-width: 480px; line-height: 1.5; font-size: clamp(13px, 2.4vw, 16px); color: #d9c9a3; margin: 6px 0; }
+  .overlay .big { font-size: clamp(20px, 4vw, 30px); color: #ffcf7a; margin: 10px 0; }
+  .overlay button {
+    margin-top: 16px; padding: 12px 28px; font-size: 16px; border-radius: 8px;
+    border: 1px solid #ffcf7a; background: rgba(255,207,122,0.12); color: #ffcf7a;
+    cursor: pointer; letter-spacing: 1px;
+  }
+  .overlay button:active { background: rgba(255,207,122,0.3); }
+  .hidden { display: none !important; }
+  #dpad {
+    position: absolute; right: 16px; bottom: 16px; z-index: 8;
+    display: grid; grid-template-columns: repeat(3, 54px); grid-template-rows: repeat(3, 54px);
+    gap: 4px; opacity: 0.85;
+  }
+  #dpad button {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 10px; color: #f2e6c9; font-size: 20px; touch-action: none;
+  }
+  #dpad button:active { background: rgba(255,207,122,0.35); }
+  #dUp { grid-column: 2; grid-row: 1; }
+  #dLeft { grid-column: 1; grid-row: 2; }
+  #dRight { grid-column: 3; grid-row: 2; }
+  #dDown { grid-column: 2; grid-row: 3; }
+  #hint { font-size: 12px; color: #a99a78; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="hud">
+    <div class="stat">Score <b id="scoreVal">0</b></div>
+    <div class="stat">Level <b id="levelVal">1</b></div>
+    <div id="fuelWrap"><div id="fuelBar"></div></div>
+    <div class="stat">Best <b id="bestVal">0</b></div>
+  </div>
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="dpad" class="hidden">
+      <button id="dUp">&#9650;</button>
+      <button id="dLeft">&#9664;</button>
+      <button id="dRight">&#9654;</button>
+      <button id="dDown">&#9660;</button>
+    </div>
+    <div id="titleScreen" class="overlay">
+      <h1>Last Ember</h1>
+      <p>Your torch is burning out. Steer through the dark maze toward the glowing exit before your light dies — or a wisp finds you in the black.</p>
+      <p>Oil flasks scattered in the maze refuel your torch. The brighter your torch, the further you see.</p>
+      <div class="big">Press any key or tap to begin</div>
+      <p id="hint">WASD / Arrows to move &middot; swipe or D-pad on touch &middot; R restarts</p>
+    </div>
+    <div id="overScreen" class="overlay hidden">
+      <h1 id="overTitle">Light Lost</h1>
+      <p id="overReason"></p>
+      <div class="big">Score: <span id="finalScore">0</span> &nbsp;&nbsp; Best: <span id="finalBest">0</span></div>
+      <button id="restartBtn">Restart (R)</button>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- element references (grabbed up front; DOM already exists) ---------- */
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+  var stage = document.getElementById('stage');
+  var hud = document.getElementById('hud');
+  var dpad = document.getElementById('dpad');
+  var titleScreen = document.getElementById('titleScreen');
+  var overScreen = document.getElementById('overScreen');
+  var overTitle = document.getElementById('overTitle');
+  var overReason = document.getElementById('overReason');
+  var restartBtn = document.getElementById('restartBtn');
+  var scoreVal = document.getElementById('scoreVal');
+  var levelVal = document.getElementById('levelVal');
+  var bestVal = document.getElementById('bestVal');
+  var fuelBar = document.getElementById('fuelBar');
+  var finalScore = document.getElementById('finalScore');
+  var finalBest = document.getElementById('finalBest');
+  var dUp = document.getElementById('dUp');
+  var dDown = document.getElementById('dDown');
+  var dLeft = document.getElementById('dLeft');
+  var dRight = document.getElementById('dRight');
+
+  var IS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+  /* ---------- state machine ---------- */
+  var STATE = { TITLE: 'title', PLAY: 'play', OVER: 'over' };
+  var state = STATE.TITLE;
+
+  /* ---------- persistent best score ---------- */
+  var bestScore = 0;
+  try {
+    var stored = localStorage.getItem('lastEmberBest');
+    if (stored) bestScore = parseInt(stored, 10) || 0;
+  } catch (e) { /* localStorage unavailable, best stays session-only */ }
+  bestVal.textContent = bestScore;
+
+  /* ---------- run state ---------- */
+  var level, score, cols, rows, cellN, cellS, cellE, cellW, cellVisited;
+  var startCell, exitCell;
+  var player, wisps, flasks;
+  var toast = { text: '', t: 0 };
+
+  function idx(c, r) { return r * cols + c; }
+
+  /* ---------- maze generation: iterative randomized DFS (recursive backtracker) ---------- */
+  function generateMaze(w, h) {
+    cols = w; rows = h;
+    var n = cols * rows;
+    cellN = new Uint8Array(n).fill(1);
+    cellS = new Uint8Array(n).fill(1);
+    cellE = new Uint8Array(n).fill(1);
+    cellW = new Uint8Array(n).fill(1);
+    cellVisited = new Uint8Array(n);
+
+    var stack = [0];
+    cellVisited[0] = 1;
+    var dirs = [0, 1, 2, 3];
+
+    while (stack.length) {
+      var cur = stack[stack.length - 1];
+      var cx = cur % cols, cy = (cur / cols) | 0;
+      // shuffle dirs (Fisher-Yates, reuse array)
+      for (var i = 3; i > 0; i--) {
+        var j = (Math.random() * (i + 1)) | 0;
+        var tmp = dirs[i]; dirs[i] = dirs[j]; dirs[j] = tmp;
+      }
+      var advanced = false;
+      for (var k = 0; k < 4; k++) {
+        var d = dirs[k];
+        var nx = cx, ny = cy;
+        if (d === 0) ny--; else if (d === 1) ny++; else if (d === 2) nx++; else nx--;
+        if (nx < 0 || ny < 0 || nx >= cols || ny >= rows) continue;
+        var ni = idx(nx, ny);
+        if (cellVisited[ni]) continue;
+        // carve
+        if (d === 0) { cellN[cur] = 0; cellS[ni] = 0; }
+        else if (d === 1) { cellS[cur] = 0; cellN[ni] = 0; }
+        else if (d === 2) { cellE[cur] = 0; cellW[ni] = 0; }
+        else { cellW[cur] = 0; cellE[ni] = 0; }
+        cellVisited[ni] = 1;
+        stack.push(ni);
+        advanced = true;
+        break;
+      }
+      if (!advanced) stack.pop();
+    }
+  }
+
+  function bfsDistances(fromCell) {
+    var n = cols * rows;
+    var dist = new Int16Array(n).fill(-1);
+    var queue = [fromCell];
+    dist[fromCell] = 0;
+    var qi = 0;
+    while (qi < queue.length) {
+      var cur = queue[qi++];
+      var cx = cur % cols, cy = (cur / cols) | 0;
+      var neigh = neighborsOf(cur, cx, cy);
+      for (var i = 0; i < neigh.length; i++) {
+        var ni = neigh[i];
+        if (dist[ni] === -1) { dist[ni] = dist[cur] + 1; queue.push(ni); }
+      }
+    }
+    return dist;
+  }
+
+  function neighborsOf(cell, cx, cy) {
+    var out = [];
+    if (!cellN[cell] && cy > 0) out.push(idx(cx, cy - 1));
+    if (!cellS[cell] && cy < rows - 1) out.push(idx(cx, cy + 1));
+    if (!cellE[cell] && cx < cols - 1) out.push(idx(cx + 1, cy));
+    if (!cellW[cell] && cx > 0) out.push(idx(cx - 1, cy));
+    return out;
+  }
+
+  /* ---------- difficulty curve ---------- */
+  function gridSizeForLevel(lv) {
+    var s = Math.min(6 + lv, 16);
+    return { w: s, h: s };
+  }
+  function fuelMaxForLevel(lv) { return Math.min(55 + 3 * lv, 100); }
+  function fuelDrainForLevel(lv) { return Math.min(1.0 + 0.08 * (lv - 1), 2.2); }
+  function flaskCountForLevel(lv) { return Math.max(2, 5 - Math.floor(lv / 2)); }
+  function wispCountForLevel(lv) { return lv < 3 ? 0 : Math.min(lv - 2, 5); }
+  function wispSpeedForLevel(lv) { return lv < 3 ? 0 : 2.0 + 0.1 * (lv - 3); }
+  function playerSpeedForLevel(lv) { return Math.min(4.5 + 0.05 * (lv - 1), 6.0); }
+
+  var VISION_MAX = 6.0, VISION_MIN = 1.5;
+  var WISP_DETECT_R = 5;
+
+  function newLevel(lv) {
+    level = lv;
+    var g = gridSizeForLevel(lv);
+    generateMaze(g.w, g.h);
+    startCell = 0;
+    var dist = bfsDistances(startCell);
+    var farthest = 0, farD = -1;
+    for (var i = 0; i < dist.length; i++) { if (dist[i] > farD) { farD = dist[i]; farthest = i; } }
+    exitCell = farthest;
+
+    var carriedFuel = player ? Math.min(fuelMaxForLevel(lv), player.fuel + 20) : fuelMaxForLevel(lv);
+    player = {
+      cx: 0, cy: 0,
+      fromC: 0, fromR: 0, toC: 0, toR: 0, moving: false, moveT: 0, moveDur: 0.15,
+      fuel: carriedFuel,
+      fuelMax: fuelMaxForLevel(lv)
+    };
+
+    // scatter flasks on cells with decent distance from start/exit, avoiding overlap
+    flasks = [];
+    var count = flaskCountForLevel(lv);
+    var candidates = [];
+    for (var c = 0; c < cols; c++) {
+      for (var r = 0; r < rows; r++) {
+        var ci = idx(c, r);
+        if (ci === startCell || ci === exitCell) continue;
+        if (dist[ci] > 2) candidates.push(ci);
+      }
+    }
+    for (var i2 = candidates.length - 1; i2 > 0; i2--) {
+      var j2 = (Math.random() * (i2 + 1)) | 0;
+      var t2 = candidates[i2]; candidates[i2] = candidates[j2]; candidates[j2] = t2;
+    }
+    for (var f = 0; f < Math.min(count, candidates.length); f++) {
+      var fc = candidates[f];
+      flasks.push({ c: fc % cols, r: (fc / cols) | 0, alive: true });
+    }
+
+    // wisps spawn far from player start
+    wisps = [];
+    var wCount = wispCountForLevel(lv);
+    var wCandidates = candidates.slice(Math.min(count, candidates.length));
+    for (var w = 0; w < wCount && w < wCandidates.length; w++) {
+      var wc = wCandidates[wCandidates.length - 1 - w];
+      wisps.push({
+        c: wc % cols, r: (wc / cols) | 0, fromC: wc % cols, fromR: (wc / cols) | 0,
+        toC: wc % cols, toR: (wc / cols) | 0, moving: false, moveT: 0,
+        speed: wispSpeedForLevel(lv), repathT: Math.random() * 0.5
+      });
+    }
+
+    toast.text = lv === 1 ? '' : 'Level ' + lv;
+    toast.t = lv === 1 ? 0 : 1.4;
+  }
+
+  function resetRun() {
+    score = 0;
+    player = null;
+    newLevel(1);
+  }
+
+  /* ---------- input ---------- */
+  var keyDir = { up: false, down: false, left: false, right: false };
+  var lastMoveDir = null;
+  var touchStartX = 0, touchStartY = 0, touchActive = false;
+
+  function tryStart() {
+    if (state === STATE.TITLE) {
+      unlockAudio();
+      titleScreen.classList.add('hidden');
+      resetRun();
+      state = STATE.PLAY;
+    }
+  }
+
+  function doRestart() {
+    unlockAudio();
+    overScreen.classList.add('hidden');
+    titleScreen.classList.add('hidden');
+    resetRun();
+    state = STATE.PLAY;
+  }
+
+  window.addEventListener('keydown', function (e) {
+    var k = e.key.toLowerCase();
+    if (k === 'arrowup' || k === 'w') { keyDir.up = true; lastMoveDir = 'up'; }
+    else if (k === 'arrowdown' || k === 's') { keyDir.down = true; lastMoveDir = 'down'; }
+    else if (k === 'arrowleft' || k === 'a') { keyDir.left = true; lastMoveDir = 'left'; }
+    else if (k === 'arrowright' || k === 'd') { keyDir.right = true; lastMoveDir = 'right'; }
+    else if (k === 'r') { doRestart(); return; }
+    if (state === STATE.TITLE) tryStart();
+    if (['arrowup','arrowdown','arrowleft','arrowright',' '].indexOf(k) !== -1) e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('keyup', function (e) {
+    var k = e.key.toLowerCase();
+    if (k === 'arrowup' || k === 'w') keyDir.up = false;
+    else if (k === 'arrowdown' || k === 's') keyDir.down = false;
+    else if (k === 'arrowleft' || k === 'a') keyDir.left = false;
+    else if (k === 'arrowright' || k === 'd') keyDir.right = false;
+  });
+
+  canvas.addEventListener('pointerdown', function () {
+    unlockAudio();
+    if (state === STATE.TITLE) tryStart();
+  });
+
+  restartBtn.addEventListener('click', doRestart);
+
+  titleScreen.addEventListener('pointerdown', tryStart);
+  overScreen.addEventListener('pointerdown', function (e) {
+    if (e.target === restartBtn) return;
+    doRestart();
+  });
+
+  function bindDpad(btn, dir) {
+    btn.addEventListener('touchstart', function (e) { e.preventDefault(); keyDir[dir] = true; lastMoveDir = dir; }, { passive: false });
+    btn.addEventListener('touchend', function (e) { e.preventDefault(); keyDir[dir] = false; }, { passive: false });
+    btn.addEventListener('mousedown', function () { keyDir[dir] = true; lastMoveDir = dir; });
+    window.addEventListener('mouseup', function () { keyDir[dir] = false; });
+  }
+  bindDpad(dUp, 'up'); bindDpad(dDown, 'down'); bindDpad(dLeft, 'left'); bindDpad(dRight, 'right');
+
+  canvas.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; touchActive = true;
+    unlockAudio();
+    if (state === STATE.TITLE) tryStart();
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+
+  canvas.addEventListener('touchend', function (e) {
+    if (!touchActive) return;
+    touchActive = false;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
+    if (Math.abs(dx) < 18 && Math.abs(dy) < 18) return;
+    if (Math.abs(dx) > Math.abs(dy)) lastMoveDir = dx > 0 ? 'right' : 'left';
+    else lastMoveDir = dy > 0 ? 'down' : 'up';
+    keyDir[lastMoveDir] = true;
+    setTimeout(function () { keyDir[lastMoveDir] = false; }, 90);
+  }, { passive: false });
+
+  if (IS_TOUCH) dpad.classList.remove('hidden');
+
+  /* ---------- audio (WebAudio, unlocked on first gesture) ---------- */
+  var audioCtx = null, audioUnlocked = false;
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    } catch (e) { audioCtx = null; }
+  }
+  function beep(freq, dur, type, vol, startDelay) {
+    if (!audioCtx) return;
+    var t0 = audioCtx.currentTime + (startDelay || 0);
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.linearRampToValueAtTime(vol || 0.15, t0 + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(t0); osc.stop(t0 + dur + 0.02);
+  }
+  function sfxBump() { beep(120, 0.08, 'square', 0.08); }
+  function sfxPickup() { beep(660, 0.09, 'sine', 0.16); beep(880, 0.12, 'sine', 0.12, 0.06); }
+  function sfxLevel() { beep(523, 0.1, 'triangle', 0.15); beep(659, 0.1, 'triangle', 0.15, 0.09); beep(784, 0.18, 'triangle', 0.15, 0.18); }
+  function sfxOver() { beep(220, 0.25, 'sawtooth', 0.15); beep(140, 0.35, 'sawtooth', 0.15, 0.15); }
+  var lastPulseBeep = 0;
+  function sfxPulse(rate) {
+    if (!audioCtx) return;
+    var now = audioCtx.currentTime;
+    if (now - lastPulseBeep < rate) return;
+    lastPulseBeep = now;
+    beep(90, 0.06, 'sine', 0.07);
+  }
+
+  /* ---------- canvas sizing (DPR-aware) ---------- */
+  var viewW = 0, viewH = 0, dpr = 1;
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    var availW = stage.clientWidth;
+    var availH = stage.clientHeight;
+    var size = Math.max(200, Math.min(availW, availH));
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
+    canvas.width = Math.round(size * dpr);
+    canvas.height = Math.round(size * dpr);
+    viewW = size; viewH = size;
+  }
+  window.addEventListener('resize', resize);
+  window.addEventListener('orientationchange', resize);
+
+  /* ---------- game over ---------- */
+  function endRun(reason) {
+    state = STATE.OVER;
+    sfxOver();
+    if (score > bestScore) {
+      bestScore = score;
+      try { localStorage.setItem('lastEmberBest', String(bestScore)); } catch (e) { /* ignore */ }
+    }
+    overTitle.textContent = reason === 'wisp' ? 'Caught in the Dark' : 'Your Torch Went Out';
+    overReason.textContent = reason === 'wisp'
+      ? 'A shadow wisp found you before you reached the light.'
+      : 'The fuel ran dry and the maze swallowed you whole.';
+    finalScore.textContent = score;
+    finalBest.textContent = bestScore;
+    overScreen.classList.remove('hidden');
+  }
+
+  /* ---------- update ---------- */
+  function canMove(cell, dir) {
+    if (dir === 'up') return !cellN[cell];
+    if (dir === 'down') return !cellS[cell];
+    if (dir === 'left') return !cellW[cell];
+    if (dir === 'right') return !cellE[cell];
+    return false;
+  }
+
+  function update(dt) {
+    if (state !== STATE.PLAY) return;
+
+    if (toast.t > 0) toast.t -= dt;
+
+    var speed = playerSpeedForLevel(level); // cells per second
+    var moveDur = 1 / speed;
+
+    if (!player.moving) {
+      var dir = null;
+      if (keyDir.up) dir = 'up';
+      else if (keyDir.down) dir = 'down';
+      else if (keyDir.left) dir = 'left';
+      else if (keyDir.right) dir = 'right';
+      if (dir) {
+        var cell = idx(player.cx, player.cy);
+        if (canMove(cell, dir)) {
+          player.fromC = player.cx; player.fromR = player.cy;
+          player.toC = player.cx + (dir === 'left' ? -1 : dir === 'right' ? 1 : 0);
+          player.toR = player.cy + (dir === 'up' ? -1 : dir === 'down' ? 1 : 0);
+          player.moving = true; player.moveT = 0; player.moveDur = moveDur;
+        } else {
+          sfxBump();
+        }
+      }
+    } else {
+      player.moveT += dt;
+      var tt = Math.min(1, player.moveT / player.moveDur);
+      if (tt >= 1) {
+        player.cx = player.toC; player.cy = player.toR;
+        player.moving = false;
+
+        // pickup check
+        for (var i = 0; i < flasks.length; i++) {
+          var fl = flasks[i];
+          if (fl.alive && fl.c === player.cx && fl.r === player.cy) {
+            fl.alive = false;
+            player.fuel = Math.min(player.fuelMax, player.fuel + 18);
+            score += 15;
+            sfxPickup();
+          }
+        }
+        // exit check
+        if (idx(player.cx, player.cy) === exitCell) {
+          score += 100 * level + Math.floor(player.fuel) * 2;
+          sfxLevel();
+          newLevel(level + 1);
+          return;
+        }
+      }
+    }
+
+    // fuel drains continuously
+    player.fuel -= fuelDrainForLevel(level) * dt;
+    if (player.fuel <= 0) {
+      player.fuel = 0;
+      endRun('fuel');
+      return;
+    }
+
+    // wisps
+    var pcell = idx(player.cx, player.cy);
+    var nearestDist = 999;
+    for (var w = 0; w < wisps.length; w++) {
+      var wsp = wisps[w];
+      wsp.repathT -= dt;
+      if (!wsp.moving) {
+        if (wsp.repathT <= 0) {
+          wsp.repathT = 0.5;
+          var wcell = idx(wsp.c, wsp.r);
+          var dist = bfsDistances(pcell);
+          if (dist[wcell] >= 0 && dist[wcell] <= WISP_DETECT_R) {
+            // step toward player: find neighbor with smaller distance-to-player
+            var neigh = neighborsOf(wcell, wsp.c, wsp.r);
+            var best = -1, bestD = dist[wcell];
+            for (var ni = 0; ni < neigh.length; ni++) {
+              var nc = neigh[ni];
+              var dd = bfsDistanceLookup(dist, nc);
+              if (dd >= 0 && dd < bestD) { bestD = dd; best = nc; }
+            }
+            if (best !== -1) {
+              wsp.fromC = wsp.c; wsp.fromR = wsp.r;
+              wsp.toC = best % cols; wsp.toR = (best / cols) | 0;
+              wsp.moving = true; wsp.moveT = 0;
+            }
+          } else {
+            // random wander
+            var opts = neighborsOf(wcell, wsp.c, wsp.r);
+            if (opts.length) {
+              var pick = opts[(Math.random() * opts.length) | 0];
+              wsp.fromC = wsp.c; wsp.fromR = wsp.r;
+              wsp.toC = pick % cols; wsp.toR = (pick / cols) | 0;
+              wsp.moving = true; wsp.moveT = 0;
+            }
+          }
+        }
+      } else {
+        wsp.moveT += dt;
+        var wtt = Math.min(1, wsp.moveT / (1 / wsp.speed));
+        if (wtt >= 1) { wsp.c = wsp.toC; wsp.r = wsp.toR; wsp.moving = false; }
+      }
+      var ddx = wsp.c - player.cx, ddy = wsp.r - player.cy;
+      var eucl = Math.sqrt(ddx * ddx + ddy * ddy);
+      if (eucl < nearestDist) nearestDist = eucl;
+      if (wsp.c === player.cx && wsp.r === player.cy) {
+        endRun('wisp'); return;
+      }
+    }
+
+    // proximity heartbeat: warns of unseen wisps closing in
+    if (nearestDist <= WISP_DETECT_R) {
+      var rate = 0.15 + 0.5 * (nearestDist / WISP_DETECT_R);
+      sfxPulse(rate);
+    }
+
+    // HUD
+    scoreVal.textContent = score;
+    levelVal.textContent = level;
+    fuelBar.style.width = Math.max(0, (player.fuel / player.fuelMax) * 100) + '%';
+    bestVal.textContent = Math.max(bestScore, score);
+  }
+
+  function bfsDistanceLookup(distArr, cellIndex) { return distArr[cellIndex]; }
+
+  /* ---------- render ---------- */
+  function visionRadius() {
+    var frac = player.fuel / player.fuelMax;
+    return VISION_MIN + (VISION_MAX - VISION_MIN) * frac;
+  }
+
+  function playerPixelPos() {
+    if (!player.moving) return { x: player.cx, y: player.cy };
+    var tt = Math.min(1, player.moveT / player.moveDur);
+    var ease = tt < 0.5 ? 2 * tt * tt : 1 - Math.pow(-2 * tt + 2, 2) / 2;
+    return {
+      x: player.fromC + (player.toC - player.fromC) * ease,
+      y: player.fromR + (player.toR - player.fromR) * ease
+    };
+  }
+
+  function render() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, viewW, viewH);
+    ctx.fillStyle = '#05070c';
+    ctx.fillRect(0, 0, viewW, viewH);
+
+    if (state === STATE.TITLE) return;
+
+    var pp = playerPixelPos();
+    var vr = visionRadius();
+    var tilePx = Math.min(viewW, viewH) / Math.max(4, vr * 2 + 2);
+    var camX = viewW / 2 - pp.x * tilePx - tilePx / 2;
+    var camY = viewH / 2 - pp.y * tilePx - tilePx / 2;
+
+    ctx.save();
+    ctx.translate(camX, camY);
+
+    var minC = Math.max(0, Math.floor(pp.x - vr - 1));
+    var maxC = Math.min(cols - 1, Math.ceil(pp.x + vr + 1));
+    var minR = Math.max(0, Math.floor(pp.y - vr - 1));
+    var maxR = Math.min(rows - 1, Math.ceil(pp.y + vr + 1));
+
+    for (var r = minR; r <= maxR; r++) {
+      for (var c = minC; c <= maxC; c++) {
+        var dx = c - pp.x, dy = r - pp.y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        var alpha = 1 - (d - vr) / 1.6;
+        alpha = Math.max(0, Math.min(1, alpha));
+        if (alpha <= 0.01) continue;
+
+        var x = c * tilePx, y = r * tilePx;
+        var cell = idx(c, r);
+
+        ctx.globalAlpha = alpha;
+        var isExit = cell === exitCell;
+        ctx.fillStyle = isExit ? '#3a2f12' : '#11141c';
+        ctx.fillRect(x, y, tilePx, tilePx);
+
+        ctx.strokeStyle = '#4a4030';
+        ctx.lineWidth = Math.max(2, tilePx * 0.08);
+        ctx.beginPath();
+        if (cellN[cell]) { ctx.moveTo(x, y); ctx.lineTo(x + tilePx, y); }
+        if (cellS[cell]) { ctx.moveTo(x, y + tilePx); ctx.lineTo(x + tilePx, y + tilePx); }
+        if (cellW[cell]) { ctx.moveTo(x, y); ctx.lineTo(x, y + tilePx); }
+        if (cellE[cell]) { ctx.moveTo(x + tilePx, y); ctx.lineTo(x + tilePx, y + tilePx); }
+        ctx.stroke();
+
+        if (isExit) {
+          ctx.fillStyle = '#ffd873';
+          ctx.globalAlpha = alpha * (0.6 + 0.4 * Math.sin(performance.now() / 200));
+          ctx.beginPath();
+          ctx.arc(x + tilePx / 2, y + tilePx / 2, tilePx * 0.22, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // flasks
+    for (var i = 0; i < flasks.length; i++) {
+      var fl = flasks[i];
+      if (!fl.alive) continue;
+      var fdx = fl.c - pp.x, fdy = fl.r - pp.y;
+      var fd = Math.sqrt(fdx * fdx + fdy * fdy);
+      var falpha = Math.max(0, Math.min(1, 1 - (fd - vr) / 1.6));
+      if (falpha <= 0.01) continue;
+      ctx.globalAlpha = falpha;
+      var fx = fl.c * tilePx + tilePx / 2, fy = fl.r * tilePx + tilePx / 2;
+      ctx.fillStyle = '#7fd8ff';
+      ctx.beginPath();
+      ctx.arc(fx, fy, tilePx * 0.14, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // wisps (only visible within vision radius)
+    for (var w = 0; w < wisps.length; w++) {
+      var wsp = wisps[w];
+      var wpx = wsp.moving ? wsp.fromC + (wsp.toC - wsp.fromC) * Math.min(1, wsp.moveT / (1 / wsp.speed)) : wsp.c;
+      var wpy = wsp.moving ? wsp.fromR + (wsp.toR - wsp.fromR) * Math.min(1, wsp.moveT / (1 / wsp.speed)) : wsp.r;
+      var wdx = wpx - pp.x, wdy = wpy - pp.y;
+      var wd = Math.sqrt(wdx * wdx + wdy * wdy);
+      var walpha = Math.max(0, Math.min(1, 1 - (wd - vr) / 1.6));
+      if (walpha <= 0.01) continue;
+      ctx.globalAlpha = walpha;
+      var wx = wpx * tilePx + tilePx / 2, wy = wpy * tilePx + tilePx / 2;
+      ctx.fillStyle = '#c96bff';
+      ctx.beginPath();
+      ctx.arc(wx, wy, tilePx * 0.24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(wx - tilePx * 0.06, wy - tilePx * 0.03, tilePx * 0.04, 0, Math.PI * 2);
+      ctx.arc(wx + tilePx * 0.06, wy - tilePx * 0.03, tilePx * 0.04, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    // player ember
+    var px = pp.x * tilePx + tilePx / 2, py = pp.y * tilePx + tilePx / 2;
+    ctx.fillStyle = '#ffcf7a';
+    ctx.beginPath();
+    ctx.arc(px, py, tilePx * 0.26, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#fff3d6';
+    ctx.beginPath();
+    ctx.arc(px, py, tilePx * 0.12, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+
+    // torch light vignette overlay
+    var grad = ctx.createRadialGradient(viewW / 2, viewH / 2, tilePx * 0.5, viewW / 2, viewH / 2, tilePx * (vr + 0.8));
+    grad.addColorStop(0, 'rgba(0,0,0,0)');
+    grad.addColorStop(0.75, 'rgba(0,0,0,0)');
+    grad.addColorStop(1, 'rgba(0,0,0,0.55)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, viewW, viewH);
+    ctx.fillStyle = 'rgba(0,0,0,0.9)';
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, viewW, viewH);
+    ctx.arc(viewW / 2, viewH / 2, tilePx * (vr + 0.8), 0, Math.PI * 2, true);
+    ctx.clip('evenodd');
+    ctx.fillRect(0, 0, viewW, viewH);
+    ctx.restore();
+
+    // toast
+    if (toast.t > 0 && toast.text) {
+      ctx.globalAlpha = Math.min(1, toast.t);
+      ctx.fillStyle = '#ffd873';
+      ctx.font = 'bold ' + Math.round(viewW * 0.06) + 'px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(toast.text, viewW / 2, viewH * 0.18);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  /* ---------- main loop (fixed timestep) ---------- */
+  var last = performance.now();
+  var acc = 0;
+  var STEP = 1000 / 60;
+  function frame(now) {
+    var delta = Math.min(now - last, 250);
+    last = now;
+    acc += delta;
+    while (acc >= STEP) { update(STEP / 1000); acc -= STEP; }
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) last = performance.now();
+  });
+
+  /* ---------- boot ---------- */
+  resize();
+  bestVal.textContent = bestScore;
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

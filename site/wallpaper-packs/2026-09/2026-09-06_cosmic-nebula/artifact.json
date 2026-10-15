@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "wallpaper-packs",
+  "recipe_version": "0.1.0",
+  "collection": "wallpaper-packs",
+  "title": "Cosmic Nebula",
+  "slug": "cosmic-nebula",
+  "date": "2026-09-06",
+  "summary": "A matched wallpaper pair: one desktop render, then the same scene reframed for a phone.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "theme": "Cosmic Nebula",
+    "categories": "Universe, Space, Abstract",
+    "render_style": "digital-art",
+    "resolution": "3072x1728 desktop, 1728x3072 mobile"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

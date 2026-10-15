@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "finance-app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "financial-ideas",
+  "title": "Membership Break Even Calculator",
+  "slug": "membership-break-even-calculator",
+  "date": "2026-09-06",
+  "summary": "Enter what you actually spend at Costco, Sam's Club, BJ's, or Amazon, and see whether the upgraded membership tier earns back its extra fee — or whether the cheaper card in your wallet was right all…",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-financial-idea (Claude)",
+    "theme": "Discounts",
+    "finance_area": "Discounts"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "icon-packs",
+  "recipe_version": "0.1.0",
+  "collection": "icon-packs",
+  "title": "Prism Glass Refractive Icon Set",
+  "slug": "prism-glass-refractive-icon-set",
+  "date": "2026-07-23",
+  "summary": "A stunning collection of 3D crystal-glass icons featuring high-fidelity refraction, chromatic aberration, and colorful spectral light dispersion. Designed to bring a futuristic, premium glassmorphism aesthetic to luxury user interfaces, web applications, and OS customization.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "theme": "Prism Glass Refractive Icon Set",
+    "category": "Design-Styles",
+    "style": "Glassmorphism & 3D Ray-Traced Glass",
+    "count": "12 icons"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

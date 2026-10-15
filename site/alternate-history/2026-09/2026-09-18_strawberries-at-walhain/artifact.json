@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "alternate-history",
+  "recipe_version": "0.1.0",
+  "collection": "alternate-history",
+  "title": "The Strawberries at Walhain",
+  "slug": "strawberries-at-walhain",
+  "date": "2026-09-18",
+  "summary": "What if… Marshal Grouchy marches to the sound of the guns on 18 June 1815, the Prussians never reach the field, and Napoleon wins at Mont-Saint-Jean.",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "era": "Napoleonic Wars",
+    "word_count": "1089",
+    "scenes_rendered": "8/8"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

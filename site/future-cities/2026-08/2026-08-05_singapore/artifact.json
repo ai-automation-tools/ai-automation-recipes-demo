@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "future-cities",
+  "recipe_version": "0.1.0",
+  "collection": "future-cities",
+  "title": "Future Cities: Singapore",
+  "slug": "singapore",
+  "date": "2026-08-05",
+  "summary": "Singapore in 2500 is a vertical garden-state archipelago where Marina Bay, the Singapore River, the Central Business District, Gardens by the Bay, the Merlion waterfront, the Singapore Flyer, and the reclaimed coastal edge have evolved into a climate-adapted t",
+  "files": {
+    "main": "city.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

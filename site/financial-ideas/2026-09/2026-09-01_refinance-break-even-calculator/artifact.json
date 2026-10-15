@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "finance-app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "financial-ideas",
+  "title": "Refinance Break Even Calculator",
+  "slug": "refinance-break-even-calculator",
+  "date": "2026-09-01",
+  "summary": "Enter your current loan and a refinance offer, and see the month your savings actually catch up to the closing costs — not just the back-of-envelope version.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-financial-idea (Claude)",
+    "type": "App",
+    "theme": "Debt",
+    "finance_area": "Debt"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

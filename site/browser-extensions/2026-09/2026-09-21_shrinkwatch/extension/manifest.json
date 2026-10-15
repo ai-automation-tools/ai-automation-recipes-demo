@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ShrinkWatch — Unit Price & Shrinkflation Tracker",
+  "version": "0.1.0",
+  "description": "Remembers the size and price of products you look at on Amazon and flags it when a package gets smaller without getting cheaper.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.amazon.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": ["storage", "activeTab"]
+}

@@ -1,0 +1,207 @@
+{
+  "retailers": [
+    {
+      "id": "marshalls-tjmaxx",
+      "name": "Marshalls / TJ Maxx",
+      "category": "Off-price apparel & home",
+      "mailReturnFee": { "type": "flat", "amount": 11.99 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Mail fee is deducted from the refund regardless of item condition."
+    },
+    {
+      "id": "macys",
+      "name": "Macy's",
+      "category": "Department store",
+      "mailReturnFee": { "type": "flat", "amount": 9.99 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 90,
+      "loyaltyWaiver": "Star Rewards members",
+      "notes": "Mail fee is waived for Star Rewards members; everyone else pays it out of the refund."
+    },
+    {
+      "id": "jcpenney",
+      "name": "JCPenney",
+      "category": "Department store",
+      "mailReturnFee": { "type": "flat", "amount": 8.0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 60,
+      "loyaltyWaiver": null,
+      "notes": "Flat label fee applies to all mailed returns."
+    },
+    {
+      "id": "jcrew",
+      "name": "J.Crew",
+      "category": "Apparel",
+      "mailReturnFee": { "type": "flat", "amount": 7.5 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Fee applies per mailed package, not per item."
+    },
+    {
+      "id": "dillards",
+      "name": "Dillard's",
+      "category": "Department store",
+      "mailReturnFee": { "type": "flat", "amount": 9.95 },
+      "restockingFee": { "type": "percent", "amount": 0.1, "condition": "opened" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Label fee stacks with a 10% restocking fee on opened items."
+    },
+    {
+      "id": "urban-outfitters",
+      "name": "Urban Outfitters",
+      "category": "Apparel & home",
+      "mailReturnFee": { "type": "flat", "amount": 5.0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Flat restocking fee applies to most mailed returns."
+    },
+    {
+      "id": "bestbuy",
+      "name": "Best Buy",
+      "category": "Electronics",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "percent", "amount": 0.15, "condition": "opened" },
+      "inStoreReturnFee": 0,
+      "windowDays": 15,
+      "loyaltyWaiver": "My Best Buy Plus/Total members get an extended window",
+      "notes": "15% restocking fee on opened electronics like drones, cameras, and computers; unopened items return free."
+    },
+    {
+      "id": "kohls",
+      "name": "Kohl's",
+      "category": "Department store",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 180,
+      "loyaltyWaiver": null,
+      "notes": "Still free to mail back as of this year, one of the few major chains that hasn't added a fee."
+    },
+    {
+      "id": "target",
+      "name": "Target",
+      "category": "General merchandise",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 90,
+      "loyaltyWaiver": null,
+      "notes": "Free mail returns for most categories; electronics and some seasonal items have a shorter window."
+    },
+    {
+      "id": "rei",
+      "name": "REI",
+      "category": "Outdoor gear",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 365,
+      "loyaltyWaiver": "Co-op members",
+      "notes": "One-year window for members; non-members get 90 days."
+    },
+    {
+      "id": "nordstrom",
+      "name": "Nordstrom",
+      "category": "Department store",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 45,
+      "loyaltyWaiver": null,
+      "notes": "No stated deadline in writing, but staff enforce roughly 45 days without a receipt exception."
+    },
+    {
+      "id": "sephora",
+      "name": "Sephora",
+      "category": "Beauty",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Free returns even on opened, used products within 30 days."
+    },
+    {
+      "id": "wayfair",
+      "name": "Wayfair",
+      "category": "Furniture & home",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "percent", "amount": 0.2, "condition": "non-defective large item" },
+      "inStoreReturnFee": 0,
+      "windowDays": 30,
+      "loyaltyWaiver": null,
+      "notes": "Return shipping on large furniture is deducted from the refund even when the item isn't defective."
+    },
+    {
+      "id": "homedepot",
+      "name": "Home Depot",
+      "category": "Home improvement",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "percent", "amount": 0.15, "condition": "special-order or opened power equipment" },
+      "inStoreReturnFee": 0,
+      "windowDays": 90,
+      "loyaltyWaiver": null,
+      "notes": "Fee is limited to special-order items and opened power tools/generators."
+    },
+    {
+      "id": "costco",
+      "name": "Costco",
+      "category": "Warehouse club",
+      "mailReturnFee": { "type": "flat", "amount": 0 },
+      "restockingFee": { "type": "none" },
+      "inStoreReturnFee": 0,
+      "windowDays": 0,
+      "loyaltyWaiver": null,
+      "notes": "No stated deadline for most items; electronics carry a separate 90-day guideline."
+    }
+  ],
+  "trackedReturns": [
+    {
+      "id": "r1",
+      "retailerId": "dillards",
+      "item": "Wool overcoat",
+      "price": 189.0,
+      "opened": true,
+      "purchaseDate": "2026-07-22",
+      "method": "mail"
+    },
+    {
+      "id": "r2",
+      "retailerId": "bestbuy",
+      "item": "4K action camera",
+      "price": 349.0,
+      "opened": true,
+      "purchaseDate": "2026-07-24",
+      "method": "mail"
+    },
+    {
+      "id": "r3",
+      "retailerId": "wayfair",
+      "item": "Accent chair",
+      "price": 412.0,
+      "opened": false,
+      "purchaseDate": "2026-07-18",
+      "method": "mail"
+    },
+    {
+      "id": "r4",
+      "retailerId": "urban-outfitters",
+      "item": "Desk lamp",
+      "price": 42.0,
+      "opened": false,
+      "purchaseDate": "2026-08-01",
+      "method": "mail"
+    }
+  ]
+}

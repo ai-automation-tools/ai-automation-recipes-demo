@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "future-cities",
+  "recipe_version": "0.1.0",
+  "collection": "future-cities",
+  "title": "Future Cities: Chicago",
+  "slug": "chicago",
+  "date": "2026-08-05",
+  "summary": "Chicago in 2500 is the Great Lakes Climate Citadel, a freshwater research capital and climate refuge whose celebrated engineering tradition has evolved into wind-responsive arcologies, winter gardens, clean transit, and living water infrastructure. The Chicago",
+  "files": {
+    "main": "city.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

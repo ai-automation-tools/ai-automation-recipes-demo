@@ -1,0 +1,120 @@
+{
+  "retailers": [
+    {
+      "id": "costco",
+      "name": "Costco",
+      "tiers": [
+        {
+          "id": "gold-star",
+          "label": "Gold Star",
+          "annualFeeCents": 6500,
+          "rewardRate": 0,
+          "rewardCapCents": 0,
+          "upgradeOf": null,
+          "notes": "Full warehouse, Costco.com, food court, and pharmacy access. No annual reward.",
+          "source": "Costco Executive 2% Reward FAQs; The Motley Fool, Jan 16, 2026"
+        },
+        {
+          "id": "executive",
+          "label": "Executive",
+          "annualFeeCents": 13000,
+          "rewardRate": 0.02,
+          "rewardCapCents": 125000,
+          "upgradeOf": "gold-star",
+          "notes": "Includes the $65 Gold Star base plus a $65 Executive upgrade. Pays 2% back on qualifying Costco, Costco.com, and Costco Travel purchases, capped at $1,250/yr. Costco refunds the upgrade fee if your 2% reward doesn't cover it.",
+          "source": "Costco Executive 2% Reward FAQs; The Motley Fool, Jan 16, 2026"
+        }
+      ]
+    },
+    {
+      "id": "sams-club",
+      "name": "Sam's Club",
+      "tiers": [
+        {
+          "id": "club",
+          "label": "Club",
+          "annualFeeCents": 6000,
+          "rewardRate": 0,
+          "rewardCapCents": 0,
+          "upgradeOf": null,
+          "notes": "Standard membership, no Sam's Cash reward.",
+          "source": "CNBC, Apr 1, 2026; Sam's Club official join page"
+        },
+        {
+          "id": "plus",
+          "label": "Plus",
+          "annualFeeCents": 12000,
+          "rewardRate": 0.02,
+          "rewardCapCents": 75000,
+          "upgradeOf": "club",
+          "notes": "2% Sam's Cash on qualifying in-club purchases, capped at $750/yr (raised from $500/yr on May 1, 2026). Also includes early shopping hours and free shipping on orders over $50.",
+          "source": "The Krazy Coupon Lady, 2026; Sam's Club official join page"
+        }
+      ]
+    },
+    {
+      "id": "bjs",
+      "name": "BJ's Wholesale",
+      "tiers": [
+        {
+          "id": "club-card",
+          "label": "Club Card",
+          "annualFeeCents": 6000,
+          "rewardRate": 0,
+          "rewardCapCents": 0,
+          "upgradeOf": null,
+          "notes": "Standard membership, no reward.",
+          "source": "Fox Business, 2026 fee-increase coverage"
+        },
+        {
+          "id": "club-plus",
+          "label": "Club+",
+          "annualFeeCents": 12000,
+          "rewardRate": 0.02,
+          "rewardCapCents": 50000,
+          "upgradeOf": "club-card",
+          "notes": "2% back on eligible purchases, capped at $500/yr, plus 5 cents/gallon off BJ's gas and two free same-day delivery orders per membership year.",
+          "source": "BJ's Wholesale Club membership program breakdown, 2026"
+        }
+      ]
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "tiers": [
+        {
+          "id": "prime",
+          "label": "Prime",
+          "annualFeeCents": 13900,
+          "monthlyFeeCents": 1499,
+          "rewardRate": 0,
+          "rewardCapCents": 0,
+          "upgradeOf": null,
+          "valueBased": true,
+          "notes": "No purchase-based reward. Value comes from free/fast shipping, Prime Video, and other perks — you estimate what that's worth to you.",
+          "source": "Amazon Prime pricing overview, 2026"
+        }
+      ]
+    }
+  ],
+  "demoProfiles": [
+    {
+      "id": "family-of-four",
+      "label": "Family of four — weekly warehouse runs",
+      "annualSpendCents": { "costco": 480000, "sams-club": 0, "bjs": 0 },
+      "primeEstimatedValueCents": 30000
+    },
+    {
+      "id": "single-professional",
+      "label": "Single professional — occasional bulk trips",
+      "annualSpendCents": { "costco": 150000, "sams-club": 0, "bjs": 0 },
+      "primeEstimatedValueCents": 15000
+    },
+    {
+      "id": "small-business-owner",
+      "label": "Small business owner — bulk supply runs at two clubs",
+      "annualSpendCents": { "costco": 900000, "sams-club": 300000, "bjs": 0 },
+      "primeEstimatedValueCents": 8000
+    }
+  ]
+}

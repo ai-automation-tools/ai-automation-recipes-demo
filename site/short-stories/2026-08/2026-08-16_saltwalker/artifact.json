@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "short-story",
+  "recipe_version": "0.1.0",
+  "collection": "short-stories",
+  "title": "Saltwalker",
+  "slug": "saltwalker",
+  "date": "2026-08-16",
+  "summary": "The rope was the first thing Ise checked and the last thing she trusted.",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "genre": "Magical Realism / Literary Fiction",
+    "tone": "Luminous, spare, aching but clear-eyed",
+    "word_count": "3997",
+    "status": "complete"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

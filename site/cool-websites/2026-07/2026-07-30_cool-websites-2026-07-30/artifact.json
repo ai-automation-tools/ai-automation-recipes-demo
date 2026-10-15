@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "cool-websites",
+  "recipe_version": "0.1.0",
+  "collection": "cool-websites",
+  "title": "Cool Websites",
+  "slug": "cool-websites-2026-07-30",
+  "date": "2026-07-30",
+  "summary": "32 corners of the internet worth bookmarking, from tools to toys, each with a one-line reason to visit.",
+  "files": {
+    "main": "cool-websites-2026-07-30.md"
+  },
+  "fields": {
+    "stream": "cool-websites",
+    "itemNoun": "websites"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

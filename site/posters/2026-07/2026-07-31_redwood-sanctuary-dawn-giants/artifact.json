@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "poster",
+  "recipe_version": "0.1.0",
+  "collection": "posters",
+  "title": "Redwood Sanctuary: Dawn of the Giants",
+  "slug": "redwood-sanctuary-dawn-giants",
+  "date": "2026-07-31",
+  "summary": "A stunning modern-vintage tribute to Redwood National Park. This piece reimagines the classic WPA travel posters of the 1930s with a dramatic, cinematic color palette of deep forest greens, warm amber, and misty teal, capturing a vintage overland camper nestled beneath towering, ancient sequoias as the first morning light pierces the fog.",
+  "files": {
+    "main": "caption.md"
+  },
+  "fields": {
+    "theme": "National Park Vintage",
+    "style": "Cinematic WPA Retro"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

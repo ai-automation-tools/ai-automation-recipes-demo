@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cutline — PC Game Concept</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --charcoal: #17181a;
+    --charcoal-panel: #1e2022;
+    --steel: #3a3f45;
+    --steel-light: #6a7178;
+    --sodium: #ff8a2b;
+    --sodium-dim: #c96a1f;
+    --rust: #9c4433;
+    --bone: #e9e4d6;
+    --bone-dim: #a9a396;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', -apple-system, sans-serif;
+    background: var(--charcoal);
+    color: var(--bone);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,138,43,0.04) 0%, transparent 22%),
+      radial-gradient(ellipse at 80% 0%, rgba(156,68,51,0.08) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 90px;
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    padding-top: 52px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--sodium);
+    margin-bottom: 22px;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(46px, 9vw, 86px);
+    color: var(--bone);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-shadow: 0 0 46px rgba(255,138,43,0.18), 0 4px 24px rgba(0,0,0,0.9);
+    margin-bottom: 20px;
+  }
+
+  .hero-hook {
+    font-size: clamp(16.5px, 2.5vw, 21px);
+    color: var(--bone);
+    max-width: 720px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+    opacity: 0.92;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .meta-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sodium);
+    border: 1px solid rgba(255,138,43,0.35);
+    padding: 7px 14px;
+    border-radius: 2px;
+    background: rgba(255,138,43,0.06);
+  }
+
+  /* ─── Key art ─── */
+  .key-art {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid rgba(255,138,43,0.22);
+    box-shadow: 0 10px 60px rgba(0,0,0,0.8);
+    display: block;
+    margin-bottom: 68px;
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,138,43,0.35), transparent);
+  }
+  .divider-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sodium-dim);
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sodium);
+    margin-bottom: 16px;
+    opacity: 0.92;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 56px;
+  }
+  @media (max-width: 640px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--charcoal-panel);
+    border: 1px solid rgba(255,138,43,0.14);
+    border-radius: 2px;
+    padding: 26px 24px;
+  }
+
+  .card p {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--bone);
+    opacity: 0.88;
+  }
+
+  /* ─── Systems ─── */
+  .systems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-bottom: 56px;
+    border: 1px solid rgba(255,138,43,0.14);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .system-item {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 22px;
+    align-items: start;
+    padding: 18px 22px;
+    background: var(--charcoal-panel);
+    border-bottom: 1px solid rgba(255,138,43,0.09);
+  }
+  .system-item:last-child { border-bottom: none; }
+  @media (max-width: 640px) {
+    .system-item { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .system-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--sodium);
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  .system-desc {
+    font-size: 14.5px;
+    line-height: 1.62;
+    color: var(--bone);
+    opacity: 0.85;
+  }
+
+  /* ─── Key features (copyable) ─── */
+  .features-section { margin-bottom: 64px; }
+
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 15px 18px;
+    background: rgba(156,68,51,0.1);
+    border: 1px solid rgba(156,68,51,0.28);
+    border-radius: 2px;
+    transition: background 0.15s;
+  }
+  .feature-row:hover { background: rgba(156,68,51,0.16); }
+
+  .feature-bullet {
+    color: var(--sodium);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    flex-shrink: 0;
+  }
+
+  .feature-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--bone);
+    opacity: 0.93;
+  }
+
+  .copy-btn {
+    flex-shrink: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--sodium);
+    background: transparent;
+    border: 1px solid rgba(255,138,43,0.4);
+    border-radius: 2px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    align-self: center;
+  }
+  .copy-btn:hover { background: rgba(255,138,43,0.15); border-color: var(--sodium); }
+  .copy-btn.copied { color: #7fc98a; border-color: #7fc98a; }
+
+  /* ─── Differentiators ─── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+
+  .diff-card {
+    background: #131415;
+    border: 1px solid rgba(255,138,43,0.18);
+    border-top: 2px solid var(--sodium);
+    border-radius: 0 0 2px 2px;
+    padding: 20px 20px;
+  }
+
+  .diff-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--sodium);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    opacity: 0.88;
+  }
+
+  .diff-desc {
+    font-size: 14.5px;
+    line-height: 1.62;
+    color: var(--bone);
+    opacity: 0.86;
+  }
+
+  /* ─── Timeline (prototype plan) ─── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 78px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--sodium), rgba(255,138,43,0.08));
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    padding: 14px 0 14px 30px;
+  }
+  .timeline-era {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--sodium);
+    padding-right: 20px;
+    text-align: right;
+    line-height: 1.6;
+    opacity: 0.88;
+    position: relative;
+  }
+  .timeline-era::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--sodium);
+    border-radius: 50%;
+    background: var(--charcoal);
+  }
+  .timeline-content { padding-left: 18px; }
+  .timeline-phase {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--bone);
+    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+  }
+  .timeline-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--bone);
+    opacity: 0.85;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    border-top: 1px solid rgba(255,138,43,0.2);
+    padding-top: 30px;
+    text-align: center;
+  }
+  .footer-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--bone);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .footer-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--steel-light);
+    opacity: 0.75;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-eyebrow">PC Game Concept · Extraction Shooter · 2026-09-28</div>
+    <h1 class="hero-title">Cutline</h1>
+    <p class="hero-hook">A demolition crew is taking a hyperscale tower apart floor by floor for its rare-earth bones, and the only way in is to outrun the same public countdown every other crew can hear too.</p>
+    <div class="hero-meta">
+      <span class="meta-chip">Extraction Shooter</span>
+      <span class="meta-chip">PC (Windows)</span>
+      <span class="meta-chip">Keyboard &amp; Mouse / Controller</span>
+      <span class="meta-chip">Free-to-Play + Season Pass</span>
+    </div>
+  </header>
+
+  <img src="cover.jpg" alt="Cutline key art — a salvager stands on an exposed girder at the torn-open edge of a half-demolished skyscraper, looking out over a hazy city at dusk" class="key-art">
+
+  <div class="divider"><span class="divider-text">Who It's For</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title">The Target Player</div>
+      <p>Someone with fifty hours in ARC Raiders or Marathon who's good at the genre and tired anyway &mdash; tired of sprinting the last two hundred meters to a landing zone only to eat a shotgun blast from someone who's been lying in the grass outside it for ten minutes. They want the loot-and-live tension. They just want the exit to be a race, not a known camera angle.</p>
+    </div>
+    <div class="card">
+      <div class="section-title">The Gap It Fills</div>
+      <p>Players who bounced off Tarkov-style all-or-nothing loss but loved what Escape from Duckov proved: a lower-stakes, PvE-first entry point can still be a real extraction shooter. Cutline pairs that on-ramp with full PvP stakes for players who want them, in the same tower.</p>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-text">Core Loop</span></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title">The 30 Seconds</div>
+      <p>Strip a condemned floor for salvage while a broadcast demolition countdown ticks toward the charge under your feet, then gamble on reaching whichever stairwell or shaft the collapse hasn't sealed yet. Everyone in the tower hears the same warning at the same time.</p>
+    </div>
+    <div class="card">
+      <div class="section-title">The 30 Minutes</div>
+      <p>Clear three floors tracking two numbers: the public burn schedule and the independent structural decay under your boots. Cut a beam to seal a rival crew's route. Call your cage, lose the fight for its three seats, and rappel down the tower's face to call a second one.</p>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-text">Key Systems</span></div>
+  <div class="systems-list">
+    <div class="system-item">
+      <div class="system-name">PUBLIC BURN SCHEDULE</div>
+      <div class="system-desc">A PA countdown broadcast to every player in the tower, naming the next floor sector and the time to detonation. No private timers &mdash; the tension is what everyone does with the same information.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">NO FIXED EXTRACTION</div>
+      <div class="system-desc">The cage travels to whichever shaft is structurally intact when it arrives. There is no landing pad to memorize and camp, and rival crews can beat you to a cage you called.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">INDEPENDENT STRUCTURAL DECAY</div>
+      <div class="system-desc">Beyond the scheduled charges, every floor has its own integrity value that drops from gunfights and nearby collapses. A floor can go early if enough happens on it.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">STRUCTURAL SABOTAGE</div>
+      <div class="system-desc">Cut a support beam to drop a floor section on command &mdash; seal a stairwell behind you or take a pursuing crew's route out from under them.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">VERTICAL TRAVERSAL KIT</div>
+      <div class="system-desc">Grapple across gaps, rappel down the tower's exterior, climb collapsed sections. A sealed stairwell is an obstacle, not a dead run.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">DEAD-DROP CACHING</div>
+      <div class="system-desc">Weld a partial cache mid-run. It survives your death and can be retrieved later in the same raid, or lost to whoever finds it first &mdash; a middle ground between full loss and full safety.</div>
+    </div>
+    <div class="system-item">
+      <div class="system-name">RECLAMATION LEDGER</div>
+      <div class="system-desc">One corporate progression track, not a faction web. Turning in salvage by category raises your access tier and opens floors deeper in the tower before the demolition front reaches them.</div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-text">Key Features</span></div>
+  <div class="features-section">
+    <div class="features-list" id="features">
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f1">No extraction point ever stays put &mdash; the cage arrives wherever the shaft survives, killing the camped landing zone at the root instead of patching it</span>
+        <button class="copy-btn" onclick="copyFeature('f1', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f2">A public, shared demolition countdown &mdash; every player hears the same warning at the same time, turning private-timer tension into a race over shared information</span>
+        <button class="copy-btn" onclick="copyFeature('f2', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f3">The map is a countdown too &mdash; floors demolished this week are gone for the whole season, for every player, permanently</span>
+        <button class="copy-btn" onclick="copyFeature('f3', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f4">Dead-drop caching turns permanent loss into a graduated risk instead of an all-or-nothing gamble on a stranger finding your body first</span>
+        <button class="copy-btn" onclick="copyFeature('f4', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f5">Structural sabotage as a tactical tool &mdash; drop a floor on command to seal a route or deny a rival crew's shaft access</span>
+        <button class="copy-btn" onclick="copyFeature('f5', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f6">A single Reclamation Ledger progression track instead of a faction web, tied directly to the tower's own countdown</span>
+        <button class="copy-btn" onclick="copyFeature('f6', this)">Copy</button>
+      </div>
+      <div class="feature-row">
+        <span class="feature-bullet">#</span>
+        <span class="feature-text" id="f7">A genuinely complete solo/duo PvE mode from day one, not a stopgap patched in after launch</span>
+        <button class="copy-btn" onclick="copyFeature('f7', this)">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-text">What Sets It Apart</span></div>
+  <div class="diff-grid">
+    <div class="diff-card">
+      <div class="diff-number">01 // NO CAMPED EXIT</div>
+      <div class="diff-desc">The cage arrives wherever the shaft survives, which removes the single most-repeated complaint in ARC Raiders' own community right now by making a fixed camera angle impossible to establish.</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-number">02 // A PUBLIC CLOCK</div>
+      <div class="diff-desc">Every player in the tower hears the same PA warning at the same time &mdash; the fight is over what everyone does with information nobody had to earn.</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-number">03 // THE MAP SPENDS ITSELF</div>
+      <div class="diff-desc">Most extraction shooters rotate a fixed map pool. This one spends its map, permanently, and doesn't get it back until the season resets.</div>
+    </div>
+    <div class="diff-card">
+      <div class="diff-number">04 // GRADUATED LOSS</div>
+      <div class="diff-desc">Dead-drop caching answers the genre's harshest criticism &mdash; losing everything to a stranger &mdash; with a real middle ground instead of a difficulty toggle.</div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-text">6-Week Prototype Plan</span></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>1</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Vertical Movement</div>
+        <div class="timeline-desc">Climbing, grapple-crossing, rappelling, and the feel of a floor shuddering underfoot. No combat, no loot &mdash; movement has to feel right before anything else is added.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>2</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">The Burn Schedule</div>
+        <div class="timeline-desc">A three-floor graybox with the public countdown system running live, basic loot placement, and a first pass on structural decay from gunfire.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>3</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Threats &amp; Sabotage</div>
+        <div class="timeline-desc">AI salvagers, the structural sabotage tool with a verified-alternate-route constraint, and the alternate-route layout pattern the traversal kit needs to matter.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>4</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">The Cage</div>
+        <div class="timeline-desc">Extraction call-in with travel time, a shaft-survival check against the current burn state, three-seat capacity, and contest behavior when two crews call it at once.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>5</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Ledger &amp; Network</div>
+        <div class="timeline-desc">Dead-drop caching, Reclamation Ledger currency and access-tier gating, and an 8-player network test of the full raid loop end to end.</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-era">Week<br>6</div>
+      <div class="timeline-content">
+        <div class="timeline-phase">Vertical Slice</div>
+        <div class="timeline-desc">A 12-player playtest across a floor bank with one live scripted burn event mid-session; tune timing and cage contest frequency against real data before a stakeholder build.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-title">Cutline</div>
+    <div class="footer-sub">PC Game Concept · Extraction Shooter · September 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  function copyFeature(id, btn) {
+    var text = document.getElementById(id).textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        showCopied(btn);
+      }).catch(function() {
+        fallbackCopy(text, btn);
+      });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showCopied(btn);
+    } catch(e) {
+      btn.textContent = 'Error';
+    }
+  }
+
+  function showCopied(btn) {
+    var original = btn.textContent;
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1800);
+  }
+</script>
+</body>
+</html>

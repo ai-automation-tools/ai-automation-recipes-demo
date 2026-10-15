@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "icon-packs",
+  "recipe_version": "0.1.0",
+  "collection": "icon-packs",
+  "title": "Code Chrome — IDE & Editor Tiles",
+  "slug": "code-chrome-ide-editor-tiles",
+  "date": "2026-08-15",
+  "summary": "Twelve of the tools programmers actually open all day — reimagined as one clean tile set. Each editor and IDE is reduced to a single flat white mark on its own saturated squircle, so the whole family reads as one system while every member stays instantly nameable. Built for dark IDE launchers, dock replacements, taskbars, and web toolbars.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "category": "Developer-Tools",
+    "count": "12 icons"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

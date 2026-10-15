@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "wallpaper-packs",
+  "recipe_version": "0.1.0",
+  "collection": "wallpaper-packs",
+  "title": "Dark Mountain Nature",
+  "slug": "dark-mountain-nature",
+  "date": "2026-08-23",
+  "summary": "A moody alpine range at dusk, rendered for desktop and reframed for mobile.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "theme": "Dark Mountain Nature",
+    "categories": "Nature, Dark, Modern",
+    "render_style": "photorealistic",
+    "resolution": "3072x1728 desktop, 1728x3072 mobile"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

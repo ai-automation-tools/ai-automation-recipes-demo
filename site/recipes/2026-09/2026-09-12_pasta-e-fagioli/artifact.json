@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Pasta e Fagioli",
+  "slug": "pasta-e-fagioli",
+  "date": "2026-09-12",
+  "summary": "The Italian pasta-and-bean soup, made in one pot, with a Cook's Card for the stove.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

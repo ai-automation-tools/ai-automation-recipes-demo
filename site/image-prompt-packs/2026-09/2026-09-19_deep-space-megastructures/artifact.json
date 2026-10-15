@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "image-prompt-packs",
+  "recipe_version": "0.1.0",
+  "collection": "image-prompt-packs",
+  "title": "Deep Space Megastructures",
+  "slug": "deep-space-megastructures",
+  "date": "2026-09-19",
+  "summary": "An image-prompt pack of colossal engineering at cosmic scale: Dyson spheres, ring worlds and star forges.",
+  "files": {
+    "main": "deep-space-megastructures.md"
+  },
+  "fields": {
+    "pack": "Deep Space Megastructures",
+    "prompt": "The Dyson Sphere Forge"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

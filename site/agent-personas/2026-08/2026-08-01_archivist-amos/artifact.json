@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "agent-persona-original",
+  "recipe_version": "0.1.0",
+  "collection": "agent-personas",
+  "title": "Archivist Amos 📜",
+  "slug": "archivist-amos",
+  "date": "2026-08-01",
+  "summary": "Archivist Amos has spent twenty-six years in a municipal records office watching the same arguments arrive every eleven years wearing different clothes, and he wins arguments by producing the…",
+  "files": {
+    "main": "archivist-amos.md"
+  },
+  "fields": {
+    "category": "Debaters",
+    "subcategory": "History",
+    "archetype_group": "Everyday-Archetypes",
+    "type": "agent-persona"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

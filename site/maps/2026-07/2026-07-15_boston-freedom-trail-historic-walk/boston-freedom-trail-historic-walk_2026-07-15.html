@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Freedom Trail & Historic Neighborhoods Walk</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23060606'/%3E%3Cpath d='M50 16c-13.8 0-25 11-25 24.6C25 59 50 84 50 84s25-25 25-43.4C75 27 63.8 16 50 16z' fill='none' stroke='%2338bdf8' stroke-width='7' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='41' r='9' fill='%2338bdf8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f13; color: #e8e8ea; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* Header */
+  #header { background: linear-gradient(135deg, #1a0a0a 0%, #2c1010 50%, #1a0a0a 100%); border-bottom: 2px solid #c0392b; padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; z-index: 1000; }
+  #header .trail-icon { font-size: 24px; }
+  #header-text h1 { font-size: 17px; font-weight: 700; color: #f5f0f0; letter-spacing: 0.3px; }
+  #header-text p { font-size: 11px; color: #aaa; margin-top: 2px; }
+  #header-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .hdr-badge { background: rgba(192,57,43,0.25); border: 1px solid #c0392b; color: #e88; font-size: 10px; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+
+  /* Layout */
+  #main { display: flex; flex: 1; overflow: hidden; }
+  #map { flex: 1; z-index: 1; }
+
+  /* Sidebar */
+  #sidebar { width: 280px; background: #14141a; border-left: 1px solid #2a2a35; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+  #sidebar-inner { overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: #333 #14141a; }
+  .sidebar-section { padding: 14px 14px 0; }
+  .sidebar-section:last-child { padding-bottom: 14px; }
+  .sidebar-title { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #888; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #222; }
+
+  /* Legend */
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; padding: 6px 8px; border-radius: 8px; transition: background 0.15s; }
+  .legend-item:hover { background: #1e1e28; }
+  .legend-item.inactive { opacity: 0.4; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.2); }
+  .legend-label { font-size: 12px; color: #ccc; }
+  .legend-count { margin-left: auto; font-size: 10px; color: #666; background: #1e1e28; padding: 2px 6px; border-radius: 10px; }
+
+  /* Stop list */
+  .stop-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; margin-bottom: 3px; }
+  .stop-item:hover { background: #1e1e28; }
+  .stop-num { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; color: #fff; margin-top: 1px; }
+  .stop-info { flex: 1; min-width: 0; }
+  .stop-name { font-size: 12px; font-weight: 600; color: #e0e0e8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stop-cat { font-size: 10px; color: #777; margin-top: 1px; }
+  .stop-thumb { position: relative; flex-shrink: 0; width: 46px; height: 46px; margin-top: 1px; padding: 0; border: 0; border-radius: 6px; overflow: hidden; cursor: zoom-in; background: #14141c; }
+  .stop-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter 0.15s; }
+  .stop-thumb:hover img { filter: brightness(1.12); }
+  .stop-thumb-count { position: absolute; right: 2px; bottom: 2px; display: flex; align-items: center; gap: 2px; background: rgba(0,0,0,0.78); color: #fff; font-size: 9px; font-weight: 700; line-height: 1; padding: 2px 4px; border-radius: 8px; }
+
+  /* Route info */
+  .info-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1e1e28; font-size: 12px; }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: #888; }
+  .info-val { color: #ccc; font-weight: 600; }
+
+  /* Tip box */
+  .tip-box { background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.3); border-radius: 8px; padding: 10px; font-size: 11px; color: #c8a0a0; line-height: 1.5; }
+  .tip-box strong { color: #e88; display: block; margin-bottom: 4px; }
+
+  /* Leaflet popup overrides */
+  .leaflet-popup-content-wrapper { background: #18181f; border: 1px solid #2a2a35; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); padding: 0; overflow: hidden; }
+  .leaflet-popup-content { margin: 0; width: 300px !important; max-height: 380px !important; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #333 #18181f; }
+  .leaflet-popup-tip-container .leaflet-popup-tip { background: #18181f; }
+  .leaflet-popup-close-button { color: #aaa !important; top: 8px !important; right: 8px !important; font-size: 18px !important; z-index: 10; background: rgba(0,0,0,0.5) !important; border-radius: 50% !important; width: 22px !important; height: 22px !important; display: flex !important; align-items: center; justify-content: center; }
+
+  /* Mobile popup */
+  @media (max-width: 560px) {
+    .leaflet-popup { max-width: 92vw !important; }
+    .leaflet-popup-content-wrapper { max-width: 92vw; }
+    .leaflet-popup-content { width: min(88vw, 320px) !important; max-height: min(46vh, 320px) !important; }
+    .popup-media img { height: 116px !important; }
+  }
+
+  /* Popup card */
+  .popup-card { color: #e0e0e8; }
+  .popup-media { position: relative; overflow: hidden; cursor: pointer; }
+  .popup-media img { width: 100%; height: 150px; object-fit: cover; display: block; transition: transform 0.2s; }
+  .popup-media:hover img { transform: scale(1.03); }
+  .popup-expand { position: absolute; bottom: 6px; right: 6px; background: rgba(0,0,0,0.65); color: #fff; font-size: 13px; padding: 3px 6px; border-radius: 6px; pointer-events: none; }
+  .popup-photo-counter { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.65); color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 10px; pointer-events: none; }
+  .thumb-strip { display: flex; gap: 4px; overflow-x: auto; padding: 5px 8px; background: #111118; scrollbar-width: none; }
+  .thumb-strip::-webkit-scrollbar { display: none; }
+  .thumb-strip button { flex-shrink: 0; border: 2px solid transparent; border-radius: 4px; padding: 0; cursor: pointer; overflow: hidden; transition: border-color 0.15s; }
+  .thumb-strip button:hover, .thumb-strip button.active { border-color: #c0392b; }
+  .thumb-strip img { width: 46px; height: 34px; object-fit: cover; display: block; }
+
+  .popup-body { padding: 10px 12px 12px; }
+  .cat-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; margin-bottom: 7px; }
+  .popup-name { font-size: 15px; font-weight: 700; color: #f0f0f8; margin-bottom: 5px; line-height: 1.3; }
+  .popup-desc { font-size: 12px; color: #bbb; line-height: 1.5; margin-bottom: 8px; }
+  .popup-tip { background: rgba(192,57,43,0.12); border-left: 3px solid #c0392b; padding: 6px 10px; font-size: 11px; color: #c8a0a0; line-height: 1.5; border-radius: 0 6px 6px 0; margin-bottom: 10px; }
+  .popup-actions { display: flex; gap: 7px; flex-wrap: wrap; }
+  .action-link { font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 20px; text-decoration: none; transition: opacity 0.15s; white-space: nowrap; }
+  .action-link:hover { opacity: 0.8; }
+  .btn-web { background: rgba(192,57,43,0.25); color: #f08080; border: 1px solid rgba(192,57,43,0.5); }
+  .btn-dir { background: rgba(41,128,185,0.25); color: #80c0f0; border: 1px solid rgba(41,128,185,0.5); }
+
+  /* Lightbox */
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 40px rgba(0,0,0,0.8); }
+  #lightbox-caption { margin-top: 14px; color: #ccc; font-size: 13px; text-align: center; }
+  #lightbox-close { position: fixed; top: 20px; right: 24px; color: #fff; font-size: 32px; cursor: pointer; background: none; border: none; line-height: 1; }
+  .lb-arrow { position: fixed; top: 50%; transform: translateY(-50%); color: #fff; font-size: 36px; cursor: pointer; background: rgba(0,0,0,0.5); border: none; padding: 8px 14px; border-radius: 8px; user-select: none; }
+  #lb-prev { left: 16px; }
+  #lb-next { right: 16px; }
+
+  /* Mobile sidebar toggle */
+  @media (max-width: 768px) {
+    #sidebar { display: none; }
+    #sidebar.open { display: flex; position: absolute; right: 0; top: 0; bottom: 0; z-index: 500; width: 260px; }
+    #toggle-sidebar { display: flex !important; }
+  }
+  #toggle-sidebar { display: none; background: rgba(255,255,255,0.1); border: none; color: #fff; font-size: 18px; padding: 4px 8px; border-radius: 6px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div class="trail-icon">🗺️</div>
+  <div id="header-text">
+    <h1>Boston Freedom Trail &amp; Historic Neighborhoods</h1>
+    <p>2.5-mile walk through downtown, Beacon Hill &amp; Charlestown · 16 stops</p>
+  </div>
+  <div id="header-right">
+    <span class="hdr-badge">July 2026</span>
+    <button id="toggle-sidebar" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+  </div>
+</div>
+
+<div id="main">
+  <div id="map"></div>
+  <div id="sidebar">
+    <div id="sidebar-inner">
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Route Info</div>
+        <div class="info-row"><span class="info-key">Trail length</span><span class="info-val">~2.5 miles</span></div>
+        <div class="info-row"><span class="info-key">Walking time</span><span class="info-val">1.5 – 3 hrs</span></div>
+        <div class="info-row"><span class="info-key">Total stops</span><span class="info-val">16 stops</span></div>
+        <div class="info-row"><span class="info-key">Best season</span><span class="info-val">Year-round</span></div>
+        <div class="info-row"><span class="info-key">Difficulty</span><span class="info-val">Easy – Moderate</span></div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Categories</div>
+        <div class="legend-item" id="leg-freedom" onclick="toggleCategory('Freedom Trail')">
+          <div class="legend-dot" style="background:#c0392b"></div>
+          <span class="legend-label">Freedom Trail</span>
+          <span class="legend-count">12</span>
+        </div>
+        <div class="legend-item" id="leg-beacon" onclick="toggleCategory('Beacon Hill')">
+          <div class="legend-dot" style="background:#2980b9"></div>
+          <span class="legend-label">Beacon Hill</span>
+          <span class="legend-count">2</span>
+        </div>
+        <div class="legend-item" id="leg-northend" onclick="toggleCategory('North End Eats')">
+          <div class="legend-dot" style="background:#e67e22"></div>
+          <span class="legend-label">North End Eats</span>
+          <span class="legend-count">2</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">All Stops</div>
+        <div id="stop-list"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Tips</div>
+        <div class="tip-box">
+          <strong>⚠️ Verify Before You Go</strong>
+          Hours, admission fees, and tour schedules change. Check each venue's official website before visiting. USS Constitution tours require timed-entry passes booked in advance.
+        </div>
+        <div class="tip-box" style="margin-top:10px;background:rgba(41,128,185,0.08);border-color:rgba(41,128,185,0.3);color:#a0bcd0;">
+          <strong style="color:#80c0f0;">🧭 Navigation Tip</strong>
+          Follow the red-brick line embedded in the sidewalks — it physically marks the Freedom Trail route through Boston's streets.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lb-arrow" id="lb-prev" onclick="lbStep(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+  <button class="lb-arrow" id="lb-next" onclick="lbStep(1)">›</button>
+</div>
+
+<script>
+// ── Stop data ──────────────────────────────────────────────────────────────
+const stops = [
+  {
+    name: "Boston Common",
+    category: "Freedom Trail",
+    lat: 42.3554, lng: -71.0655,
+    desc: "Established in 1634, America's oldest public park. The red-brick Freedom Trail begins here at the Visitor Information Center near the Tremont St entrance.",
+    tip: "Pick up a free trail map at the Visitor Center on Tremont St. The park covers 44 acres — allow time to explore before heading north.",
+    website: "https://www.boston.gov/parks/boston-common",
+    image: "Images/boston-common-1.jpg",
+    images: ["Images/boston-common-1.jpg","Images/boston-common-2.jpg"]
+  },
+  {
+    name: "Massachusetts State House",
+    category: "Freedom Trail",
+    lat: 42.3589, lng: -71.0636,
+    desc: "Charles Bulfinch's 1798 masterpiece crowns Beacon Hill with its iconic gilded dome, visible from much of downtown. Free tours reveal stained-glass ceilings and historical murals.",
+    tip: "Free guided tours Mon–Fri. The gold dome was originally painted gray — it was gilded in 1874.",
+    website: "https://www.sec.state.ma.us/trs/trsidx.htm",
+    image: "Images/massachusetts-state-house-1.jpg",
+    images: ["Images/massachusetts-state-house-1.jpg","Images/massachusetts-state-house-2.jpg"]
+  },
+  {
+    name: "Granary Burying Ground",
+    category: "Freedom Trail",
+    lat: 42.3572, lng: -71.0618,
+    desc: "Boston's third-oldest cemetery (1660) holds Paul Revere, Samuel Adams, John Hancock, and the victims of the Boston Massacre. Nearly 2,300 markers crowd the half-acre plot.",
+    tip: "Open daily. No admission fee. The central obelisk commemorates Franklin's parents — Benjamin Franklin was born on nearby Milk Street.",
+    website: "https://www.boston.gov/parks/granary-burying-ground",
+    image: "Images/granary-burying-ground-1.jpg"
+  },
+  {
+    name: "King's Chapel & Burying Ground",
+    category: "Freedom Trail",
+    lat: 42.3583, lng: -71.0599,
+    desc: "Boston's first Anglican church (1686, rebuilt 1754), now the nation's first Unitarian congregation. The adjacent burying ground is Boston's oldest, dating to 1630.",
+    tip: "Small admission to enter the chapel. The burying ground contains the grave of John Winthrop, first governor of Massachusetts Bay Colony.",
+    website: "https://www.kings-chapel.org",
+    image: "Images/kings-chapel-1.jpg"
+  },
+  {
+    name: "Old South Meeting House",
+    category: "Freedom Trail",
+    lat: 42.3573, lng: -71.0586,
+    desc: "On December 16, 1773, over 5,000 colonists packed this hall before marching to the harbor to dump 342 chests of British tea. Now a museum with immersive exhibits.",
+    tip: "Admission charged. The building was saved from demolition in 1876 in one of America's first historic preservation campaigns.",
+    website: "https://www.osmh.org",
+    image: "Images/old-south-meeting-house-1.jpg"
+  },
+  {
+    name: "Old State House",
+    category: "Freedom Trail",
+    lat: 42.3583, lng: -71.0578,
+    desc: "Built in 1713, Boston's oldest surviving public building. The Declaration of Independence was read from its balcony on July 18, 1776. Now a museum of Boston history.",
+    tip: "Admission charged. The building is dwarfed by modern skyscrapers — the contrast between colonial and contemporary Boston is striking.",
+    website: "https://www.revolutionaryboston.org/historical-site/old-state-house/",
+    image: "Images/old-state-house-1.jpg"
+  },
+  {
+    name: "Faneuil Hall",
+    category: "Freedom Trail",
+    lat: 42.3601, lng: -71.0563,
+    desc: "The 'Cradle of Liberty' where patriots including Samuel Adams rallied colonists before the Revolution. The hall still hosts public meetings — free to enter ground floor and hall above.",
+    tip: "The marketplace complex (Quincy Market) surrounds Faneuil Hall and is a great lunch stop. NPS rangers give free talks inside the hall hourly.",
+    website: "https://www.faneuilhallmarketplace.com",
+    image: "Images/faneuil-hall-1.jpg",
+    images: ["Images/faneuil-hall-1.jpg","Images/faneuil-hall-2.jpg"]
+  },
+  {
+    name: "Paul Revere House",
+    category: "Freedom Trail",
+    lat: 42.3639, lng: -71.0536,
+    desc: "The oldest remaining structure in downtown Boston (c.1680). Revere owned it from 1770–1800 and departed from here on his famous midnight ride on April 18, 1775.",
+    tip: "Small admission. One of only two surviving 17th-century buildings in Boston. The North Square location feels authentically colonial.",
+    website: "https://www.paulreverehouse.org",
+    image: "Images/paul-revere-house-1.jpg"
+  },
+  {
+    name: "Old North Church",
+    category: "Freedom Trail",
+    lat: 42.3665, lng: -71.0545,
+    desc: "Boston's oldest standing church (1723). On April 18, 1775, sexton Robert Newman hung two lanterns in the steeple — 'one if by land, two if by sea' — signaling Revere's ride.",
+    tip: "Free to enter the pew box area; admission for the 'Behind the Scenes' tower tour. The original signal lanterns are displayed inside.",
+    website: "https://www.oldnorth.com",
+    image: "Images/old-north-church-1.jpg",
+    images: ["Images/old-north-church-1.jpg","Images/old-north-church-2.jpg"]
+  },
+  {
+    name: "Copp's Hill Burying Ground",
+    category: "Freedom Trail",
+    lat: 42.3659, lng: -71.0561,
+    desc: "Boston's second-oldest burying ground (1659). British soldiers used gravestones for target practice during the Siege of Boston. Offers elevated views of the North End and harbor.",
+    tip: "Open daily, free admission. Look for Robert Newman's grave — the sexton who hung the lanterns at Old North Church is buried here.",
+    website: "https://www.boston.gov/parks/copps-hill-burying-ground",
+    image: "Images/copps-hill-burying-ground-1.jpg"
+  },
+  {
+    name: "USS Constitution",
+    category: "Freedom Trail",
+    lat: 42.3736, lng: -71.0567,
+    desc: "Launched in 1797, 'Old Ironsides' is the world's oldest commissioned warship still afloat. She earned her nickname during the War of 1812 when British cannonballs appeared to bounce off her oak hull.",
+    tip: "Free admission, but timed-entry passes strongly recommended — book ahead at recreation.gov. The adjacent USS Constitution Museum is free to enter.",
+    website: "https://www.history.navy.mil/ussconstitution",
+    image: "Images/uss-constitution-1.jpg",
+    images: ["Images/uss-constitution-1.jpg","Images/uss-constitution-2.jpg"]
+  },
+  {
+    name: "Bunker Hill Monument",
+    category: "Freedom Trail",
+    lat: 42.3762, lng: -71.0606,
+    desc: "This 221-foot granite obelisk marks the site of the first major battle of the American Revolution (June 17, 1775). Climb 294 steps for a panoramic view of Boston and the harbor.",
+    tip: "Free to climb; no elevator. Grounds open year-round. The lodge at the base has free exhibits. Charlestown itself is worth exploring for its Federal-era architecture.",
+    website: "https://www.nps.gov/bost/planyourvisit/bunkerhillmonument.htm",
+    image: "Images/bunker-hill-monument-1.jpg"
+  },
+  {
+    name: "Acorn Street",
+    category: "Beacon Hill",
+    lat: 42.3576, lng: -71.0688,
+    desc: "Often called the most photographed street in America, this narrow cobblestone lane dates to the 1820s. Federal-style brick rowhouses line both sides, gas lamps still flicker at night.",
+    tip: "Best visited early morning (before 9am) for photos without crowds. The street is residential — be respectful of residents.",
+    website: "https://en.wikipedia.org/wiki/Acorn_Street_(Boston)",
+    image: "Images/acorn-street-1.jpg"
+  },
+  {
+    name: "Museum of African American History",
+    category: "Beacon Hill",
+    lat: 42.3601, lng: -71.0668,
+    desc: "Located in the Abiel Smith School (1835) and Smith Court — where Boston's 19th-century Black community established homes, schools, and abolitionist movements. Starting point of the Black Heritage Trail.",
+    tip: "Small admission fee. The adjacent African Meeting House (1806) is the oldest surviving Black church building in the U.S. Free guided tours of the Black Heritage Trail available.",
+    website: "https://maah.org",
+    image: "Images/museum-african-american-history-1.jpg"
+  },
+  {
+    name: "Mike's Pastry",
+    category: "North End Eats",
+    lat: 42.3652, lng: -71.0539,
+    desc: "A North End institution since 1946. Famous for its cannoli — choose your shell (crispy or chocolate-dipped) and filling at the counter. Expect a line; it moves fast.",
+    tip: "Cash preferred. The cannoli are made to order with fresh ricotta filling. Also try the lobster tail, sfogliatelle, and almond cookies.",
+    website: "https://mikespastry.com",
+    image: "Images/mikes-pastry-1.jpg"
+  },
+  {
+    name: "Regina Pizzeria",
+    category: "North End Eats",
+    lat: 42.3652, lng: -71.0563,
+    desc: "Boston's oldest pizzeria, serving thin-crust coal-fired pizza since 1926. The original Thacher Street location is a cramped, beloved North End institution with a devoted following.",
+    tip: "Cash only at the original location. Waits can be long on weekends — go at lunch or early dinner to avoid the longest lines.",
+    website: "https://www.reginapizzeria.com",
+    image: "Images/regina-pizzeria-1.jpg"
+  }
+];
+
+// Freedom Trail route line (approximate path order)
+const trailRoute = [
+  [42.3554, -71.0655], // Boston Common
+  [42.3572, -71.0655], // toward State House
+  [42.3589, -71.0636], // State House
+  [42.3572, -71.0618], // Granary Burying Ground
+  [42.3583, -71.0599], // King's Chapel
+  [42.3573, -71.0586], // Old South Meeting House
+  [42.3583, -71.0578], // Old State House
+  [42.3591, -71.0573], // toward Faneuil
+  [42.3601, -71.0563], // Faneuil Hall
+  [42.3614, -71.0552], // toward North End
+  [42.3629, -71.0545], // cross into North End
+  [42.3639, -71.0536], // Paul Revere House
+  [42.3650, -71.0540], // toward Old North
+  [42.3659, -71.0561], // Copp's Hill (brief detour)
+  [42.3665, -71.0545], // Old North Church
+  [42.3685, -71.0540], // toward Charlestown Bridge
+  [42.3700, -71.0530], // bridge approach
+  [42.3718, -71.0555], // into Charlestown
+  [42.3736, -71.0567], // USS Constitution
+  [42.3749, -71.0590], // toward Bunker Hill
+  [42.3762, -71.0606]  // Bunker Hill Monument
+];
+
+// Category config
+const catConfig = {
+  "Freedom Trail": { color: "#c0392b", active: true },
+  "Beacon Hill":   { color: "#2980b9", active: true },
+  "North End Eats":{ color: "#e67e22", active: true }
+};
+
+// ── Map init ───────────────────────────────────────────────────────────────
+const map = L.map('map', { center: [42.368, -71.060], zoom: 14 });
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+// Trail route polyline
+const routeLine = L.polyline(trailRoute, {
+  color: '#c0392b', weight: 4, opacity: 0.7, dashArray: '8, 5', lineJoin: 'round'
+}).addTo(map);
+
+// ── Lightbox ───────────────────────────────────────────────────────────────
+let lbImages = [], lbIdx = 0, lbStopName = '';
+
+function openLightbox(images, idx, stopName) {
+  lbImages = images; lbIdx = idx; lbStopName = stopName;
+  showLbImage();
+  document.getElementById('lightbox').classList.add('open');
+  const hasMulti = images.length > 1;
+  document.getElementById('lb-prev').style.display = hasMulti ? '' : 'none';
+  document.getElementById('lb-next').style.display = hasMulti ? '' : 'none';
+}
+function showLbImage() {
+  const img = document.getElementById('lb-img');
+  img.src = lbImages[lbIdx];
+  img.onerror = () => {};
+  const cap = document.getElementById('lightbox-caption');
+  cap.textContent = lbImages.length > 1
+    ? `${lbStopName} — ${lbIdx + 1}/${lbImages.length}`
+    : lbStopName;
+}
+function lbStep(dir) {
+  lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length;
+  showLbImage();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lbStep(-1);
+  if (e.key === 'ArrowRight') lbStep(1);
+});
+
+// ── Popup builder ──────────────────────────────────────────────────────────
+let popupIdCounter = 0;
+function buildPopupHTML(stop) {
+  const id = ++popupIdCounter;
+  const catColor = catConfig[stop.category]?.color || '#888';
+  const imgList = stop.images || (stop.image ? [stop.image] : []);
+  const hasGallery = imgList.length > 1;
+
+  let mediaHTML = '';
+  if (imgList.length > 0) {
+    const hero = imgList[0];
+    const galleryCount = hasGallery ? `<div class="popup-photo-counter">1/${imgList.length}</div>` : '';
+    mediaHTML = `
+      <div class="popup-media" id="pm-${id}" onclick="openLightbox(window.__imgList_${id}, 0, '${stop.name.replace(/'/g,"\\'")}')">
+        <img id="phero-${id}" src="${hero}" alt="${stop.name}" onerror="this.parentElement.style.display='none'">
+        ${galleryCount}
+        <div class="popup-expand">⤢</div>
+      </div>`;
+    if (hasGallery) {
+      const thumbs = imgList.map((src, i) =>
+        `<button id="pthumb-${id}-${i}" onclick="event.stopPropagation();setPopupPhoto(${id},${i},'${stop.name.replace(/'/g,"\\'")}')"><img src="${src}" alt="${i+1}" onerror="this.parentElement.style.display='none'"></button>`
+      ).join('');
+      mediaHTML += `<div class="thumb-strip" id="pts-${id}">${thumbs}</div>`;
+    }
+  }
+
+  const tipHTML = stop.tip ? `<div class="popup-tip">💡 ${stop.tip}</div>` : '';
+  const webBtn = stop.website ? `<a class="action-link btn-web" href="${stop.website}" target="_blank" rel="noopener">Website ↗</a>` : '';
+  const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${stop.lat},${stop.lng}`;
+
+  return `<div class="popup-card">
+    ${mediaHTML}
+    <div class="popup-body">
+      <span class="cat-badge" style="background:${catColor}22;color:${catColor};border:1px solid ${catColor}44">${stop.category}</span>
+      <div class="popup-name">${stop.name}</div>
+      <div class="popup-desc">${stop.desc}</div>
+      ${tipHTML}
+      <div class="popup-actions">
+        ${webBtn}
+        <a class="action-link btn-dir" href="${dirUrl}" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+  </div>
+  <script>window.__imgList_${id} = ${JSON.stringify(imgList)};<\/script>`;
+}
+
+function setPopupPhoto(id, idx, stopName) {
+  const imgList = window['__imgList_' + id];
+  const hero = document.getElementById('phero-' + id);
+  if (hero) {
+    hero.src = imgList[idx];
+    const counter = document.querySelector(`#pm-${id} .popup-photo-counter`);
+    if (counter) counter.textContent = `${idx+1}/${imgList.length}`;
+    const pm = document.getElementById('pm-' + id);
+    if (pm) pm.onclick = () => openLightbox(imgList, idx, stopName);
+  }
+  const strip = document.getElementById('pts-' + id);
+  if (strip) {
+    strip.querySelectorAll('button').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+  }
+}
+
+// ── Custom markers ─────────────────────────────────────────────────────────
+function makeIcon(color, label) {
+  return L.divIcon({
+    className: '',
+    html: `<div style="
+      background:${color};
+      color:#fff;
+      width:28px;height:28px;
+      border-radius:50% 50% 50% 0;
+      transform:rotate(-45deg);
+      border:2px solid rgba(255,255,255,0.5);
+      box-shadow:0 2px 6px rgba(0,0,0,0.5);
+      display:flex;align-items:center;justify-content:center;
+    "><span style="transform:rotate(45deg);font-size:11px;font-weight:700">${label}</span></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -30]
+  });
+}
+
+// ── Place markers ──────────────────────────────────────────────────────────
+const layerGroups = {};
+for (const cat of Object.keys(catConfig)) {
+  layerGroups[cat] = L.layerGroup().addTo(map);
+}
+
+const trailStops = stops.filter(s => s.category === 'Freedom Trail');
+let trailNum = 1;
+
+stops.forEach(stop => {
+  const color = catConfig[stop.category]?.color || '#888';
+  const label = stop.category === 'Freedom Trail' ? String(trailNum++) : '★';
+  const marker = L.marker([stop.lat, stop.lng], { icon: makeIcon(color, label) });
+
+  marker.bindPopup(buildPopupHTML(stop), {
+    maxWidth: 330, minWidth: 300, maxHeight: 380,
+    autoPanPadding: L.point(40, 40)
+  });
+  marker.bindTooltip(stop.name, { direction: 'top', offset: [0, -32] });
+  marker.addTo(layerGroups[stop.category]);
+});
+
+// ── Stop list in sidebar ───────────────────────────────────────────────────
+function buildStopList() {
+  const el = document.getElementById('stop-list');
+  let html = '';
+  let tNum = 1;
+  stops.forEach((stop, i) => {
+    const color = catConfig[stop.category]?.color || '#888';
+    const num = stop.category === 'Freedom Trail' ? tNum++ : '★';
+    const imgList = stop.images || (stop.image ? [stop.image] : []);
+    const thumb = imgList.length ? `<button class="stop-thumb" onclick="event.stopPropagation();openStopGallery(${i})" title="${imgList.length > 1 ? imgList.length + ' photos' : 'View photo'}">
+        <img src="${imgList[0]}" alt="" onerror="this.parentElement.style.display='none'">
+        ${imgList.length > 1 ? `<span class="stop-thumb-count">▤ ${imgList.length}</span>` : ''}
+      </button>` : '';
+    html += `<div class="stop-item" onclick="flyToStop(${i})">
+      <div class="stop-num" style="background:${color}">${num}</div>
+      ${thumb}
+      <div class="stop-info">
+        <div class="stop-name">${stop.name}</div>
+        <div class="stop-cat">${stop.category}</div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+buildStopList();
+
+// Open a sidebar stop's photos in the lightbox — the whole gallery (arrows page
+// every shot) so a multi-image location is browsable straight from the stop list.
+function openStopGallery(idx) {
+  const stop = stops[idx];
+  const imgList = stop.images || (stop.image ? [stop.image] : []);
+  if (imgList.length) openLightbox(imgList, 0, stop.name);
+}
+
+function flyToStop(idx) {
+  const stop = stops[idx];
+  map.flyTo([stop.lat, stop.lng], 16, { duration: 0.8 });
+}
+
+// ── Category toggle ────────────────────────────────────────────────────────
+const catLegIds = {
+  'Freedom Trail': 'leg-freedom',
+  'Beacon Hill': 'leg-beacon',
+  'North End Eats': 'leg-northend'
+};
+function toggleCategory(cat) {
+  catConfig[cat].active = !catConfig[cat].active;
+  const lg = layerGroups[cat];
+  if (catConfig[cat].active) map.addLayer(lg);
+  else map.removeLayer(lg);
+  document.getElementById(catLegIds[cat]).classList.toggle('inactive', !catConfig[cat].active);
+}
+
+// Fit map to show all stops
+map.fitBounds(L.latLngBounds(stops.map(s => [s.lat, s.lng])).pad(0.08));
+</script>
+</body>
+</html>

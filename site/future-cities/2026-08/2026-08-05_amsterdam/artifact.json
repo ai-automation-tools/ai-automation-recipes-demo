@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "future-cities",
+  "recipe_version": "0.1.0",
+  "collection": "future-cities",
+  "title": "Future Cities: Amsterdam",
+  "slug": "amsterdam",
+  "date": "2026-08-05",
+  "summary": "Amsterdam in 2500 has become an amphibious metropolis whose concentric canals remain its organizing geometry. Preserved brick gables and church towers sit among floating neighborhoods, tidal gardens, living seawalls, algae-glass arcologies, and carbon-negative",
+  "files": {
+    "main": "city.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

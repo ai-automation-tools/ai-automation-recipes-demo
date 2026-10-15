@@ -1,0 +1,15 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-meme-generator",
+  "recipe_version": "0.1.0",
+  "collection": "ai-memes",
+  "title": "Productivity Gains vs Layoffs",
+  "slug": "ai-meme-3",
+  "date": "2026-09-01",
+  "summary": "Which AI headline the boardroom actually wants to hear, in the two-panel reaction format.",
+  "files": {},
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

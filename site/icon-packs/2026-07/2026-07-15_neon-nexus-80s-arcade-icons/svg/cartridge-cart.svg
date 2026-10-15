@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><linearGradient id="g-cartridge-cart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCCB4B"/><stop offset="1" stop-color="#FBBF24"/></linearGradient></defs><rect x="32" y="32" width="448" height="448" rx="104" ry="104" fill="url(#g-cartridge-cart)"/><g transform="translate(136.000 136.000) scale(2.400000)" fill="#FFFFFF" stroke="none"><path d="M6,14 H20 L32,62 H78 L88,30 H26" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="38" cy="82" r="8"/>
+<circle cx="72" cy="82" r="8"/>
+<rect x="46" y="36" width="24" height="20" rx="2"/></g></svg>

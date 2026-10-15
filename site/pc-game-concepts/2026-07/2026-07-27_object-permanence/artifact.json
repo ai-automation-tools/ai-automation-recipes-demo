@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "pc-game-concept",
+  "recipe_version": "0.1.0",
+  "collection": "pc-game-concepts",
+  "title": "Object Permanence",
+  "slug": "object-permanence",
+  "date": "2026-07-27",
+  "summary": "An immersive sim where you are dead, invisible and stuck in one house, so you steer the living by moving their things.",
+  "files": {
+    "main": "game-design-brief.md"
+  },
+  "fields": {
+    "workflow": "weekly-pc-game-concept (Claude)",
+    "genre": "immersive sim"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,287 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+  background: linear-gradient(180deg, #f3f1ee 0%, #e9e5df 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #14213d;
+}
+
+.browser-frame {
+  width: 100%;
+  max-width: 860px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(20, 33, 61, 0.18);
+  background: #fff;
+}
+
+.browser-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #dfe3ea;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.titlebar-label {
+  margin-left: 10px;
+  font-size: 12px;
+  color: #5b6472;
+}
+
+.browser-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #f5f6f8;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.url-bar {
+  flex: 1;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  font-size: 12px;
+  color: #4b5563;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ext-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #dcdfe4;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ext-button:hover {
+  background: #fff5e6;
+  border-color: #ffb703;
+}
+
+.ext-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #14213d;
+  display: block;
+}
+
+.browser-body {
+  position: relative;
+  background: #fbfaf8;
+  min-height: 520px;
+}
+
+.mock-page {
+  padding: 22px 26px 30px;
+}
+
+.mock-page-note {
+  font-size: 12px;
+  color: #8a6d1f;
+  background: #fff5e6;
+  border: 1px solid #ffe1a8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 0 0 18px;
+}
+
+.mock-page-note code {
+  font-size: 11px;
+}
+
+.mock-event-card h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.mock-event-card p {
+  margin: 0 0 18px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.checkout-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.checkout-steps li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #eef0f4;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.checkout-steps li.done {
+  background: #14213d;
+  color: #fdfcfb;
+}
+
+.checkout-steps li.current {
+  background: #ffb703;
+  color: #14213d;
+  font-weight: 600;
+}
+
+.next-step-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #14213d;
+  color: #fdfcfb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+.next-step-btn:disabled {
+  background: #cbd2e0;
+  cursor: not-allowed;
+}
+
+.order-summary {
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+}
+
+.order-summary h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.order-summary ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.order-summary li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f1f3;
+  font-size: 13px;
+}
+
+.order-summary li.empty {
+  color: #9ca3af;
+}
+
+.order-summary li.late span:first-child::after {
+  content: " (added after price shown)";
+  font-size: 11px;
+  color: #d1495b;
+}
+
+.price-history h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.price-history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.price-history th,
+.price-history td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid #f0f1f3;
+  color: #4b5563;
+}
+
+.price-history th {
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+.tt-badge-sim {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #14213d;
+  color: #fdfcfb;
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+}
+
+.tt-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffb703;
+}
+
+.tt-badge-delta {
+  color: #ffb703;
+  font-weight: 600;
+}
+
+.popup-panel {
+  position: absolute;
+  top: 52px;
+  right: 16px;
+  width: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(20, 33, 61, 0.3);
+}
+
+@media (max-width: 640px) {
+  .popup-panel {
+    right: 8px;
+    left: 8px;
+    width: auto;
+  }
+}

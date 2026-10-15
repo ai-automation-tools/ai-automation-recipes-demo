@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cincinnati Chili</title>
+<style>
+:root {
+  --accent: #0d9488; --accent-dark: #096a61; --accent-tint: #e6f4f3;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #e6f4f3;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #61b9b1;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #e6f4f3; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">Midwest Us  &middot;  2026-01-26</p>
+<h1>Cincinnati Chili</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Cincinnati Chili" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">8 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">30 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">2 hr 30 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">Midwest Us</div></div></div>
+<ul class="tags"><li class="tag">beef</li><li class="tag">weeknight</li><li class="tag">make-ahead</li><li class="tag">comfort-food</li><li class="tag">regional-american</li></ul>
+<p class="intro">Cincinnati chili was created in 1922 by Macedonian immigrant Tom Kiradjieff, who opened a small restaurant called the Empress with his brother John. Drawing on Greek and Middle Eastern culinary traditions, they developed a unique meat sauce spiced with cinnamon, allspice, and cloves—flavors foreign to traditional Tex-Mex chili. The dish became inseparable from the city&#x27;s identity, spawning iconic chains like Skyline and Gold Star, and introducing the famous &quot;ways&quot; ordering system that layers spaghetti, chili, cheese, onions, and beans in various combinations.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>For the Chili</h3>
+<ul>
+<li>900 g (2 lb / about 2 lb) ground beef (80/20 lean-to-fat ratio)</li>
+<li>950 ml (32 fl oz / 4 cups) water</li>
+<li>170 g (6 oz / 1 small can) tomato paste</li>
+<li>45 ml (1.5 fl oz / 3 tbsp) apple cider vinegar</li>
+<li>30 ml (1 fl oz / 2 tbsp) Worcestershire sauce</li>
+<li>1 medium yellow onion, finely minced (about 150 g / 5 oz)</li>
+<li>4 cloves garlic, minced</li>
+<li>30 g (1 oz / 3 tbsp) chili powder</li>
+<li>5 g (1 tsp) ground cumin</li>
+<li>5 g (1 tsp) ground cinnamon</li>
+<li>2 g (½ tsp) ground allspice</li>
+<li>1 g (¼ tsp) ground cloves</li>
+<li>1 g (¼ tsp) ground cayenne pepper</li>
+<li>15 g (½ oz / 1 tbsp) unsweetened cocoa powder</li>
+<li>2 bay leaves</li>
+<li>10 g (2 tsp) salt, plus more to taste</li>
+<li>2 g (½ tsp) black pepper</li>
+</ul>
+<h3>For Serving (3-Way)</h3>
+<ul>
+<li>450 g (1 lb) spaghetti, cooked al dente</li>
+<li>340 g (12 oz / 3 cups) mild cheddar cheese, finely shredded</li>
+<li>Oyster crackers</li>
+<li>Hot sauce (Louisiana-style preferred)</li>
+</ul>
+<h3>Optional Additions (4-Way or 5-Way)</h3>
+<ul>
+<li>1 medium sweet onion, diced (for 4-way or 5-way)</li>
+<li>425 g (15 oz / 1 can) kidney beans, drained and warmed (for 4-way or 5-way)</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Ground beef → Ground turkey (leaner, milder flavor)</li>
+<li>Apple cider vinegar → Red wine vinegar (slightly sharper)</li>
+<li>Cocoa powder → Omit if unavailable (adds subtle depth, not chocolate flavor)</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>Large pot or Dutch oven (5-quart / 4.7 L minimum)</li>
+<li>Wooden spoon</li>
+<li>Fine-mesh strainer (optional, for smoother texture)</li>
+<li>Box grater or food processor for cheese</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 15 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Combine beef and water:</strong> Place the ground beef in a large pot and add the water. Use a wooden spoon or potato masher to break the meat into very fine crumbles while still raw. The meat should be in tiny pieces, almost ground further—this is essential for Cincinnati chili&#x27;s distinctive texture.</div></div><div class="step"><div class="step-num">2</div><div class="step-txt">!<a href="../../Images/cincinnati-chili/step-01.jpg">Breaking up raw beef in water</a> <em>Alt text: Raw ground beef being broken into fine crumbles in water in a large pot</em></div></div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Add aromatics and tomato paste:</strong> Stir in the minced onion, garlic, tomato paste, vinegar, and Worcestershire sauce. Mix until the tomato paste is fully dissolved. The mixture will look watery and pink at this stage.</div></div><div class="substep">Cooking (Active time: 15 min, plus simmering)</div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Add spices:</strong> Stir in the chili powder, cumin, cinnamon, allspice, cloves, cayenne, cocoa powder, salt, pepper, and bay leaves. Mix thoroughly until no spice clumps remain. The color will deepen to a rusty brown.</div></div><div class="step"><div class="step-num">5</div><div class="step-txt"><strong>Simmer uncovered:</strong> Bring the mixture to a boil over medium-high heat, stirring occasionally. Once boiling, reduce heat to medium-low and simmer uncovered for 1.5 to 2 hours. Stir every 15-20 minutes. The chili is ready when it has reduced by about one-third and coats a spoon without being too thick—it should remain somewhat soupy. Internal temperature should reach 165°F (74°C) for food safety.</div></div><div class="step"><div class="step-num">6</div><div class="step-txt">!<a href="../../Images/cincinnati-chili/step-02.jpg">Simmering Cincinnati chili</a> <em>Alt text: Cincinnati chili simmering in a pot, showing the characteristic thin, meaty consistency</em></div></div><div class="step"><div class="step-num">7</div><div class="step-txt"><strong>Adjust seasoning:</strong> Remove bay leaves. Taste and adjust salt, adding more if needed. For a smoother texture, you can strain the chili through a fine-mesh strainer, pressing solids through, though traditional versions are left unstrained.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">8</div><div class="step-txt"><strong>Prepare the &quot;ways&quot;:</strong> Cincinnati chili is served in numbered &quot;ways&quot;: <strong>2-Way:</strong> Spaghetti topped with chili <strong>3-Way:</strong> Spaghetti, chili, shredded cheddar cheese <strong>4-Way:</strong> Spaghetti, chili, onions OR beans, cheese <strong>5-Way:</strong> Spaghetti, chili, onions AND beans, cheese</div></div><div class="step"><div class="step-num">9</div><div class="step-txt"><strong>Plate and serve:</strong> Place a generous portion of hot spaghetti on an oval plate. Ladle chili over the spaghetti, covering it completely. Top with a generous mound of finely shredded cheddar cheese—don&#x27;t be shy, the cheese should nearly obscure the chili beneath. Add onions and/or beans if making a 4-way or 5-way. Serve immediately with oyster crackers and hot sauce on the side.</div></div><div class="step"><div class="step-num">10</div><div class="step-txt">!<a href="../../Images/cincinnati-chili/step-03.jpg">Plated Cincinnati chili 3-way</a> <em>Alt text: Classic Cincinnati chili 3-way on an oval plate with spaghetti, chili, and mound of shredded cheddar cheese</em></div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> 165°F (74°C) for ground beef</li>
+<li><strong>Storage:</strong> Refrigerate in airtight container for up to 5 days</li>
+<li><strong>Freezing:</strong> Yes—freeze chili (without pasta) for up to 3 months in freezer-safe containers</li>
+<li><strong>Reheating:</strong> Reheat chili gently on stovetop with a splash of water to restore consistency; microwave works but may require more liquid</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve with oyster crackers scattered on top or on the side</li>
+<li>Pairs well with a cold lager or cream soda</li>
+<li>Traditional serving style: Oval plates called "boats" are traditional in Cincinnati chili parlors</li>
+<li><strong>Coneys:</strong> This same chili is used on hot dogs (Coney dogs)—top a steamed bun with a hot dog, chili, shredded cheese, and diced onion</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (½×):</strong> Works well; reduce simmering time by 15-20 minutes as less liquid needs to reduce.</p>
+<p><strong>Double recipe (2×):</strong> Use a larger pot (8-quart minimum). Simmering time may increase by 20-30 minutes. Stir more frequently to prevent sticking.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>The cheese:</strong> Use mild cheddar, very finely shredded. Pre-shredded cheese works but freshly grated melts better. The cheese should be room temperature for best melting.</li>
+<li><strong>Texture matters:</strong> Breaking the meat into very fine crumbles while raw in water is crucial. This technique, borrowed from Greek cooking, creates the signature texture.</li>
+<li><strong>Make-ahead:</strong> The chili improves after a day in the refrigerator as flavors meld. Reheat and serve the next day for best results.</li>
+<li><strong>Common pitfalls:</strong> Don't brown the meat first—this is intentional. The meat is cooked in water to achieve the fine, almost grainy texture. Also, don't over-reduce; Cincinnati chili should be saucier than Texas-style chili.</li>
+<li><strong>Sourcing:</strong> Any standard chili powder works; avoid "hot" varieties unless you want more heat. The spice profile should be warm and aromatic, not fiery.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving (chili only, without pasta and toppings): approximately 280 kcal</em>
+- Protein: 22g | Fat: 18g | Carbohydrates: 8g | Fiber: 2g</p>
+<hr />
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-01-26): Initial recipe by @flavor_atlas_coordinator</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe development: @flavor_atlas_coordinator</li>
+<li>Testing: @flavor_atlas_coordinator</li>
+<li>Verification: @Coordinator</li>
+<li>Photography: Pending</li>
+</ul>
+<hr />
+<p><strong>Recipe Location:</strong> <code>/Recipes/midwest-us/midwest-us_cincinnati-chili_v1.md</code>
+<strong>Images Location:</strong> <code>/Regions/Images/cincinnati-chili/</code></p>
+<p class="footer">Cincinnati Chili · 2026-01-26 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-meme-generator",
+  "recipe_version": "0.1.0",
+  "collection": "ai-memes",
+  "title": "This Is Fine (AI Edition)",
+  "slug": "ai-meme-1",
+  "date": "2026-09-01",
+  "summary": "Job security, watching AI agents learn everything. The classic burning-room meme, redrawn.",
+  "files": {},
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

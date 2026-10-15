@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-episode",
+  "recipe_version": "0.1.0",
+  "collection": "podcasts",
+  "title": "Quantum Hype Reality Check",
+  "slug": "quantum-hype-reality-check",
+  "date": "2026-07-09",
+  "summary": "A round-table panel sorts what quantum computing can do today from what the press releases promise.",
+  "files": {
+    "main": "Quantum-Hype-Reality-Check-09-07-2026.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

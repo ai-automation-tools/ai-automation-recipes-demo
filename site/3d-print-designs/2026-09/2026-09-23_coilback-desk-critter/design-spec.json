@@ -1,0 +1,61 @@
+{
+  "schema": "print-design/v1",
+  "title": "Coilback Desk Critter",
+  "slug": "coilback-desk-critter",
+  "date": "2026-09-23",
+  "subcategory": "Toys-and-Fidgets",
+  "units": "mm",
+  "summary": "An original print-in-place fidget creature with four ball-jointed legs to pose and a helical spring tail to flick and bounce, printed fully assembled in one part.",
+  "overall_dimensions": { "x": 100, "y": 46, "z": 38 },
+  "coordinate_system": "Origin at the center of the ground plane directly below the body's center, at bed height (Z=0). +X points toward the head/nose, +Y points to the creature's left, +Z points up.",
+  "target_printer": { "process": "FDM", "build_volume": { "x": 220, "y": 220, "z": 220 }, "nozzle": 0.4 },
+  "parts": [
+    {
+      "id": "critter-body",
+      "name": "Coilback critter, print-in-place",
+      "quantity": 1,
+      "material": "PLA",
+      "bounding_box": { "x": 100, "y": 46, "z": 38 },
+      "base_shape": "Ellipsoid body with an integrated head, 4 ball-jointed legs, and a helical coil tail, printed as one part with clearance gaps at every joint",
+      "construction_steps": [
+        "Create the body: a sphere of diameter 38 at (X=0, Y=0, Z=20), scaled non-uniformly to 50 (X) x 38 (Y) x 34 (Z) — an ellipsoid",
+        "Create the head: a sphere of diameter 22 at (X=32, Y=0, Z=26), scaled to 22 (X) x 22 (Y) x 20 (Z); union with the body and fillet the seam 4",
+        "Create two eye bumps: hemispheres, 6 diameter, at (X=36, Y=7, Z=28) and (X=36, Y=-7, Z=28); union with the head",
+        "For each of the 4 hip positions — (15,13,10), (15,-13,10), (-15,13,10), (-15,-13,10) — cut a spherical socket 9.6 diameter, 5 deep, into the body surface at that point",
+        "For each hip position, model a leg: a ball 9 diameter centered in its socket (0.3 clearance from the socket wall on all sides), connected by a neck cylinder 3 diameter x 2 long to a leg cylinder 5 diameter x 14 long, angled 20 degrees outward and downward from the hip toward the ground, ending in a foot hemisphere 6 diameter resting at Z=0",
+        "Model the tail: sweep a circle 4 diameter along a helix — axis along -X starting at (X=-25, Y=0, Z=20), helix radius 8 (tube center to axis), pitch 4.4, 8 turns, running from X=-25 to X=-60 — leaving a 0.4 gap between adjacent coil turns",
+        "Cap the tail's free end with a sphere 4 diameter",
+        "Union the body, head, eyes, and tail into one continuous shell; leave the leg balls and their sockets as separate mating surfaces with the clearance gap from step 5 intact so they rotate after printing"
+      ],
+      "features": [
+        { "type": "hinge", "description": "Hip ball-and-socket joint, 4x, print-in-place", "dimensions": { "ball_diameter": 9, "socket_diameter": 9.6 }, "position": { "x": 15, "y": 13, "z": 10 } },
+        { "type": "hinge", "description": "Helical tail spring, print-in-place, 8 turns", "dimensions": { "tube_diameter": 4, "coil_radius": 8, "pitch": 4.4 }, "position": { "x": -25, "y": 0, "z": 20 } }
+      ],
+      "print_orientation": "Standing on its 4 feet, tail lying back along the bed",
+      "supports": "none",
+      "estimated_print_time_h": 4,
+      "estimated_filament_g": 35
+    }
+  ],
+  "fits": [
+    { "between": ["critter-body", "critter-body"], "type": "print-in-place", "clearance_per_side": 0.3 },
+    { "between": ["critter-body", "critter-body"], "type": "print-in-place", "clearance_per_side": 0.4 }
+  ],
+  "hardware": [],
+  "assembly_steps": [
+    "None — prints ready to use. The leg joints rotate and the tail flexes as soon as the print is removed from the bed"
+  ],
+  "print_settings": { "layer_height": 0.2, "walls": 3, "infill_percent": 20, "infill_pattern": "gyroid", "supports": "none", "adhesion": "none" },
+  "parametric_variables": [
+    { "name": "creature_scale", "default": 1.0, "min": 0.7, "max": 1.3, "affects": ["critter-body"] },
+    { "name": "tail_turns", "default": 8, "min": 5, "max": 12, "affects": ["critter-body"] }
+  ],
+  "pricing": { "printed_usd": [12, 20], "digital_file_usd": 5, "estimate": true },
+  "sources": [
+    "https://www.eufymake.com/blogs/business-ideas/best-3d-print-sell-profitable-items",
+    "https://hyper3d.ai/blog/best-selling-3d-printed-items",
+    "https://cults3d.com/en/3d-model/various/articulated-monster-flexi-printable-fidget-toy-with-stitched-detail",
+    "https://cults3d.com/en/collections/best-3d-printing-fidget-toys-models",
+    "https://www.etsy.com/listing/1874614295/flexi-animals-3d-printed-articulated"
+  ]
+}

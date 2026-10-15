@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "content-idea-gen",
+  "recipe_version": "0.1.0",
+  "collection": "content-ideas",
+  "title": "AI Agent Colosseum",
+  "slug": "ai-agent-colosseum",
+  "date": "2026-06-24",
+  "summary": "A content series concept where two AI personas compete on the same task and the audience picks a winner.",
+  "files": {
+    "main": "ai-agent-colosseum_2026-06-24.md"
+  },
+  "fields": {
+    "topic_slug": "`ai-agent-colosseum`"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

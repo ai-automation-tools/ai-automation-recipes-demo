@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pasta e Fagioli</title>
+<style>
+:root {
+  --accent: #ea580c; --accent-dark: #a83f08; --accent-tint: #fceee6;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #fceee6;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #f19261;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #fceee6; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">Italian  &middot;  2026-09-12</p>
+<h1>Pasta e Fagioli</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Pasta e Fagioli" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">6 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">35 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">1 hr 5 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">Italian</div></div></div>
+<ul class="tags"><li class="tag">family-friendly</li><li class="tag">soup</li><li class="tag">beans</li><li class="tag">meatless</li><li class="tag">one-pot</li></ul>
+<p class="intro">Pasta e fagioli means pasta and beans, a staple of Italian cucina povera with regional versions ranging from soup to thick pasta stew. [Great Italian Chefs](https://www.greatitalianchefs.com/recipes/pasta-e-fagioli-recipe-pasta-bean-soup) describes that variety. This tomato-and-kale adaptation makes a mild family supper from pantry beans; small pasta fits easily on a child&#x27;s spoon.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>Main Components</h3>
+<ul>
+<li>45 ml (3 tablespoons) extra-virgin olive oil</li>
+<li>1 large yellow onion (about 200 g), finely diced</li>
+<li>2 carrots (about 150 g), finely diced</li>
+<li>2 celery ribs (about 100 g), finely diced</li>
+<li>3/4 teaspoon fine sea salt, divided</li>
+<li>1/4 teaspoon ground black pepper</li>
+<li>4 garlic cloves, minced</li>
+<li>425 g (15 oz) canned crushed tomatoes, no salt or sugar added</li>
+<li>960 ml (4 cups) low-sodium vegetable broth, at most 140 mg sodium per cup; choose one without Big-9 allergens</li>
+<li>720 ml (3 cups) water, plus up to 240 ml (1 cup) for thinning if needed</li>
+<li>2 bay leaves</li>
+<li>1 teaspoon dried oregano</li>
+<li>2 cans cannellini beans, 425 g (15 oz) each before draining, no salt added; rinse and drain (about 3 cups cooked beans)</li>
+<li>113 g (4 oz, about 1 cup) dried ditalini, made with wheat and water, without egg</li>
+<li>60 g (2 cups) chopped Tuscan kale, tough stems removed</li>
+<li>15 g (1/4 cup) chopped flat-leaf parsley</li>
+</ul>
+<h3>For the Sauce/Garnish</h3>
+<ul>
+<li>15 ml (1 tablespoon) extra-virgin olive oil</li>
+<li>15 ml (1 tablespoon) fresh lemon juice</li>
+<li>30 g (about 6 tablespoons) finely grated Parmesan-style cheese, optional; choose pasteurized milk cheese without egg-derived lysozyme</li>
+<li>1/4 teaspoon red pepper flakes, optional, passed at the table</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Cannellini beans → the same quantity of canned Great Northern beans.</li>
+<li>Ditalini → the same weight of egg-free dried small shells; follow their doneness rather than the clock.</li>
+<li>Kale → the same weight of stemmed chopped chard.</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>6-quart heavy soup pot with lid</li>
+<li>Knife, cutting board, measuring cups and spoons</li>
+<li>Colander and wooden spoon</li>
+<li>Potato masher and bowl</li>
+<li>Food thermometer for reheating</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 15 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Prepare the vegetables:</strong> Wash the produce, dice the onion, carrots and celery into roughly 1/4-inch pieces, and chop the greens. Measure everything before heating the pot. Drain and rinse the beans; mash 3/4 cup thoroughly in a bowl with a fork or potato masher.</div></div><div class="substep">Cooking (Active time: 18 min)</div><div class="step"><div class="step-num">2</div><div class="step-txt"><strong>Soften the base:</strong> Heat 3 tablespoons oil over medium heat. Add onion, carrots, celery, 1/2 teaspoon salt and black pepper. Stir frequently for 6–10 minutes, until the onion is translucent and the carrots begin to soften. Add garlic for 30 seconds, then tomatoes; let them bubble across the surface.</div></div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Simmer:</strong> Add broth, 3 cups water, bay leaves and oregano. Bring to a gentle simmer and cook for 10 minutes. Stir in the mashed beans, remaining whole beans, pasta, kale and parsley. Simmer uncovered for about 15–20 minutes, stirring along the bottom every 2–3 minutes. Begin tasting the pasta at its package cooking time; stop when it and the greens are tender. Add the reserved thinning water in 1/4-cup increments only if the pasta needs more liquid.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Finish (Active time: 2 min):</strong> Remove the bay leaves and take the pot off the heat. Stir in lemon juice, 1 tablespoon oil and the remaining 1/4 teaspoon salt.</div></div><div class="step"><div class="step-num">5</div><div class="step-txt"><strong>Garnish and serve:</strong> Divide among 6 bowls. Offer the measured cheese and red pepper flakes separately so each person can choose their topping. The soup thickens as it stands; serve promptly.</div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> No raw animal protein is used. Reheated leftovers must reach 165°F (74°C) throughout; bring soup to a rolling boil while stirring and check with a thermometer.</li>
+<li><strong>Storage:</strong> Divide into shallow containers and refrigerate within 2 hours, or 1 hour above 90°F (32°C). Do not wait for a full pot to cool on the counter. Keep at 40°F (4°C) or below and use within 3–4 days.</li>
+<li><strong>Freezing:</strong> Freeze individual portions for up to 3 months for best quality. Pasta will soften after thawing. Thaw in the refrigerator.</li>
+<li><strong>Reheating:</strong> Add a splash of water, stir frequently, and heat to the temperature above.</li>
+<li><strong>Allergens:</strong> Wheat pasta contains gluten; the optional cheese contains dairy. The specified pasta, broth and cheese avoid additional Big-9 ingredients. Check replacement products, especially egg in pasta or cheese and soy in broth. Use only canned or already fully cooked beans here.</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve as the main course in deep bowls, with the cheese at the table.</li>
+<li>A cucumber-and-tomato salad makes a fresh side; side dishes are outside the nutrition estimate.</li>
+<li>The representative photograph shows a thicker penne version without kale; this recipe produces a soup with small pasta.</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (½×):</strong> Use a 3-quart pot and halve every ingredient, including the finishing ingredients. Keep the same simmering and pasta doneness checks.</p>
+<p><strong>Double recipe (2×):</strong> Use two 6-quart pots for 12 servings. Split the ingredients equally; a crowded pot takes longer to heat and is harder to stir and cool safely.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>Sourcing:</strong> Use no-salt-added beans and tomatoes and the specified low-sodium broth; ordinary canned products can substantially raise the sodium estimate.</li>
+<li><strong>Make-ahead:</strong> Prepare through the first 10-minute simmer in step 3, then cool and refrigerate promptly. Within 3–4 days, bring the base back to a boil before adding beans, pasta and greens and completing the recipe.</li>
+<li><strong>Variations:</strong> Regional versions use different beans, pasta shapes and pork seasonings. This adaptation keeps the vegetables and canned beans of Cookie and Kate's version, mashes the reserved beans instead of blending hot soup, and puts chili at the table.</li>
+<li><strong>Common pitfalls:</strong> Pasta can stick before the soup looks thick. Scrape the bottom gently while stirring, and judge the pasta by tasting; brands cook at different rates in tomato broth.</li>
+<li><strong>Review status:</strong> Source-based desk review only; this batch has not been physically cooked or taste-tested. The required front-matter handles identify the automation roles.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving: approximately 330 kcal, including 5 g optional cheese; excludes side dishes.</em>
+- Protein: 13 g | Fat: 12 g | Carbohydrates: 43 g | Fiber: 9 g
+- Sodium: approximately 450 mg | Saturated fat: approximately 2.5 g | Added sugar: 0 g
+- Estimate basis: sodium for the pot is approximately 1,725 mg from salt + up to 560 mg from broth + 180 mg from vegetables and no-salt-added canned foods + 230 mg from cheese = 2,695 mg; divided by 6 is about 450 mg. Saturated fat is approximately (9 g from oil + 5 g from cheese + 1 g from other ingredients) / 6 = 2.5 g. Product labels and drained bean yield will change these estimates; this is not a low-sodium claim.</p>
+<hr /><h2 class="sec">Sources</h2><p>Research checked on 2026-09-12. Adapted from the listed recipes; measurements and cooking methods were cross-checked, with the specific adjustments noted above.
+- <a href="https://cookieandkate.com/pasta-e-fagioli-recipe/">Cookie and Kate: Pasta e Fagioli</a> — main ingredient ratios and tomato, kale, lemon and olive-oil finish; displayed 5/5 from 427 reviews on the research date, with recent family-cooking comments. Selected for established reader enthusiasm rather than a claimed new trend.
+- <a href="https://www.greatitalianchefs.com/recipes/pasta-e-fagioli-recipe-pasta-bean-soup">Valeria Necchio / Great Italian Chefs: Pasta e fagioli</a> — Italian context, pasta cooked in bean liquid, and table cheese.
+- <a href="https://www.jamesbeard.org/recipes/pasta-e-fagioli">Sara Jenkins / James Beard Foundation: Pasta e Fagioli</a> — comparison for thickening with puréed beans and preparing the base ahead.
+- <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety">USDA FSIS: Leftovers and Food Safety</a> — cooling, storage and reheating guidance.
+- <a href="https://commons.wikimedia.org/wiki/File:Pasta_e_fagioli_cannellini.jpg">Wikimedia Commons image source and license</a>; <a href="https://upload.wikimedia.org/wikipedia/commons/8/85/Pasta_e_fagioli_cannellini.jpg">original JPEG</a>.</p>
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-09-12): Initial recipe adaptation by @Codex.</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe adaptation: @Codex, from Kathryne Taylor, Valeria Necchio and Sara Jenkins as linked above.</li>
+<li>Testing: @Codex — automated checks and desk review; not kitchen-tested.</li>
+<li>Verification: @Coordinator — workflow metadata; no separate human sign-off claimed.</li>
+<li>Photography: Spinoziano, “Pasta e fagioli cannellini,” Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <a href="https://commons.wikimedia.org/wiki/File:Pasta_e_fagioli_cannellini.jpg">Source</a>. Original JPEG retained unchanged; the HTML renderer resizes and recompresses its embedded copy. The photograph and that resized copy remain under CC BY-SA 4.0.</li>
+</ul>
+<hr />
+<p class="footer">Pasta e Fagioli · 2026-09-12 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

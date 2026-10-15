@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "podcast-scripts",
+  "title": "Could Wormholes Ever Be Engineered?",
+  "slug": "could-wormholes-ever-be-engineered",
+  "date": "2026-05-06",
+  "summary": "A four-voice panel script that takes the wormhole question apart from every angle: physics, engineering and science fiction.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

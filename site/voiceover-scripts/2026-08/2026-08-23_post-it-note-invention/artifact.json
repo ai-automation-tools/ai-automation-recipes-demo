@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "voiceover-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "voiceover-scripts",
+  "title": "The Adhesive That Wasn't Supposed to Work",
+  "slug": "post-it-note-invention",
+  "date": "2026-08-23",
+  "summary": "In 1968, a 3M chemist named Spencer Silver tried to build the strongest adhesive on Earth. He wanted something to bond aircraft parts together. What he got instead barely stuck at all: tiny acrylic spheres that held paper just long enough to peel it off clean. By 3M's own standards, the experiment failed. Silver patented it anyway in 1972 and spent years giving seminars about a glue that wouldn't fully glue. Nobody bit. He even built a bulletin board coated in the stuff. Dust and grime made it useless.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "category": "accidental-success",
+    "topicSlug": "post-it-note-invention"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

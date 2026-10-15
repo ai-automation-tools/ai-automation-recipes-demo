@@ -1,0 +1,66 @@
+{
+  "site": "ticketmaster.com",
+  "event": {
+    "name": "The Coast Line — Live at Riverside Amphitheater",
+    "venue": "Riverside Amphitheater, Austin TX",
+    "date": "2026-10-18",
+    "section": "GA Floor"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "label": "Select tickets",
+      "description": "2 × GA Floor ticket",
+      "reveals": [{ "type": "base", "amount": 89.0 }]
+    },
+    {
+      "id": 2,
+      "label": "Choose seats",
+      "description": "Seat map confirmed",
+      "reveals": []
+    },
+    {
+      "id": 3,
+      "label": "Review order",
+      "description": "Order summary",
+      "reveals": [{ "type": "fee", "label": "service fee", "amount": 24.5 }]
+    },
+    {
+      "id": 4,
+      "label": "Delivery method",
+      "description": "Mobile entry selected",
+      "reveals": [{ "type": "fee", "label": "processing fee", "amount": 6.95 }]
+    },
+    {
+      "id": 5,
+      "label": "Payment",
+      "description": "Ready to pay",
+      "reveals": [{ "type": "fee", "label": "facility fee", "amount": 9.0 }]
+    }
+  ],
+  "initialState": {
+    "site": "ticketmaster.com",
+    "baseAdvertised": 89.0,
+    "lineItems": [
+      { "label": "service fee", "amount": 24.5, "revealedAfterBase": true },
+      { "label": "processing fee", "amount": 6.95, "revealedAfterBase": true },
+      { "label": "facility fee", "amount": 9.0, "revealedAfterBase": true }
+    ],
+    "total": 129.45,
+    "lastUpdated": 1758000000000
+  },
+  "priceHistory": [
+    { "date": "2026-08-02", "site": "ticketmaster.com", "listing": "Riverside Amphitheater — The Coast Line", "advertised": 79.0, "finalTotal": 118.32, "feePercent": 50 },
+    { "date": "2026-08-05", "site": "airbnb.com", "listing": "Downtown loft, Austin TX", "advertised": 142.0, "finalTotal": 189.6, "feePercent": 34 },
+    { "date": "2026-08-09", "site": "ticketmaster.com", "listing": "Moody Center — Home Opener", "advertised": 65.0, "finalTotal": 97.11, "feePercent": 49 },
+    { "date": "2026-08-11", "site": "airbnb.com", "listing": "Lakeside cabin, Wimberley TX", "advertised": 210.0, "finalTotal": 261.4, "feePercent": 24 },
+    { "date": "2026-08-15", "site": "ticketmaster.com", "listing": "ACL Live — Comedy Night", "advertised": 45.0, "finalTotal": 68.85, "feePercent": 53 },
+    { "date": "2026-08-19", "site": "airbnb.com", "listing": "Studio near South Congress", "advertised": 98.0, "finalTotal": 133.7, "feePercent": 36 },
+    { "date": "2026-08-22", "site": "ticketmaster.com", "listing": "Stubb's BBQ — Fall Tour", "advertised": 55.0, "finalTotal": 84.15, "feePercent": 53 },
+    { "date": "2026-08-25", "site": "airbnb.com", "listing": "Hill Country ranch house", "advertised": 305.0, "finalTotal": 372.1, "feePercent": 22 },
+    { "date": "2026-08-29", "site": "ticketmaster.com", "listing": "Emo's — Reunion Show", "advertised": 38.0, "finalTotal": 59.28, "feePercent": 56 },
+    { "date": "2026-09-01", "site": "airbnb.com", "listing": "Riverside condo, Austin TX", "advertised": 175.0, "finalTotal": 224.0, "feePercent": 28 },
+    { "date": "2026-09-03", "site": "ticketmaster.com", "listing": "Zilker Park — Sunset Series", "advertised": 60.0, "finalTotal": 91.8, "feePercent": 53 },
+    { "date": "2026-09-05", "site": "airbnb.com", "listing": "East Side bungalow", "advertised": 128.0, "finalTotal": 163.84, "feePercent": 28 }
+  ]
+}

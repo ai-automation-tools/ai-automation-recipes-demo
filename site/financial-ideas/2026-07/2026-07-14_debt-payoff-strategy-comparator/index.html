@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debt Payoff Strategy Comparator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>Debt Payoff Strategy Comparator</h1>
+      <p class="header-sub">Enter your debts and see <strong>Avalanche</strong> (highest APR first) vs. <strong>Snowball</strong> (lowest balance first) side-by-side — exact interest saved, months shaved, and payoff order.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── Input section ───────────────────────────────────── -->
+    <section class="card input-section">
+
+      <div class="section-header">
+        <h2>Your Debts</h2>
+        <button id="load-sample-btn" class="btn-ghost">↺ Load sample data</button>
+      </div>
+
+      <div class="extra-row">
+        <label for="extra-payment">Extra monthly payment (beyond all minimums)</label>
+        <div class="prefix-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="extra-payment" value="200" min="0" step="10" />
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table id="debt-table">
+          <thead>
+            <tr>
+              <th>Debt / Account Name</th>
+              <th>Balance ($)</th>
+              <th>APR (%)</th>
+              <th>Min Payment ($/mo)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="debt-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="table-actions">
+        <button id="add-row-btn" class="btn-secondary">+ Add Debt</button>
+      </div>
+
+      <button id="compare-btn" class="btn-primary">Compare Strategies →</button>
+
+    </section>
+
+    <!-- ── Results section ─────────────────────────────────── -->
+    <section class="card results-section hidden" id="results-section">
+
+      <h2>Side-by-Side Results</h2>
+
+      <div class="strategy-grid">
+
+        <div class="strategy-card av-card">
+          <div class="strategy-tag">🏔 Avalanche</div>
+          <div class="strategy-desc">Highest APR first — minimizes total interest</div>
+          <dl>
+            <dt>Total Interest</dt>   <dd id="av-interest">—</dd>
+            <dt>Months to Debt-Free</dt> <dd id="av-months">—</dd>
+            <dt>Total Paid</dt>       <dd id="av-total">—</dd>
+          </dl>
+        </div>
+
+        <div class="strategy-card sw-card">
+          <div class="strategy-tag">⛄ Snowball</div>
+          <div class="strategy-desc">Lowest balance first — fastest early wins</div>
+          <dl>
+            <dt>Total Interest</dt>   <dd id="sw-interest">—</dd>
+            <dt>Months to Debt-Free</dt> <dd id="sw-months">—</dd>
+            <dt>Total Paid</dt>       <dd id="sw-total">—</dd>
+          </dl>
+        </div>
+
+      </div>
+
+      <div class="verdict-banner" id="verdict-banner"></div>
+
+      <div class="chart-wrap">
+        <canvas id="balance-chart"></canvas>
+      </div>
+
+      <div class="payoff-order-wrap" id="payoff-order-wrap"></div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Educational tool only — not personalized financial advice. Calculations assume a fixed APR applied monthly (APR ÷ 12) and fixed minimum payments. Actual results vary by lender billing cycle. Verify your current APR on each statement before making financial decisions.
+  </footer>
+
+</body>
+</html>

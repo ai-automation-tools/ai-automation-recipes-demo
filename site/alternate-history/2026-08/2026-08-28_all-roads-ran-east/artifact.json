@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "alternate-history",
+  "recipe_version": "0.1.0",
+  "collection": "alternate-history",
+  "title": "All Roads Ran East",
+  "slug": "all-roads-ran-east",
+  "date": "2026-08-28",
+  "summary": "What if… What if the Mongol army had not turned back at the Danube in 1242, and instead rode on to conquer Western Europe?",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "era": "13th Century",
+    "word_count": "1088",
+    "scenes_rendered": "8/8"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

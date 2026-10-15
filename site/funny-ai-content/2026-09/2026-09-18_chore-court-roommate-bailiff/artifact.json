@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "funny-ai-content",
+  "recipe_version": "0.1.0",
+  "collection": "funny-ai-content",
+  "title": "Chore Court: The AI Bailiff That Turned the Kitchen Into a Courtroom",
+  "slug": "chore-court-roommate-bailiff",
+  "date": "2026-09-18",
+  "summary": "Your roommate didn't do the dishes. Now there's a docket number.",
+  "files": {
+    "main": "chore-court-roommate-bailiff_2026-09-18.md"
+  },
+  "fields": {
+    "type": "funny-ai-content",
+    "format": "short vertical skit"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

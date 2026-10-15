@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "poster",
+  "recipe_version": "0.1.0",
+  "collection": "posters",
+  "title": "Neon Abyss: The Cybernetic Reef",
+  "slug": "neon-abyss-cybernetic-reef",
+  "date": "2026-09-03",
+  "summary": "An otherworldly depiction of a deep-sea coral reef, where organic life merges with bioluminescent cybernetics. Electric pink and cyan polyps pulse like fiber-optic cables against the pitch-black ocean depths, creating a living, glowing network of marine technology.",
+  "files": {
+    "main": "caption.md"
+  },
+  "fields": {
+    "theme": "Coral Reef",
+    "style": "Bioluminescent Cyberpunk"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

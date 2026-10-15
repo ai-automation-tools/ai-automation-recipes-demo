@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Coast Highway EV Road Trip</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23060606'/%3E%3Cpath d='M50 16c-13.8 0-25 11-25 24.6C25 59 50 84 50 84s25-25 25-43.4C75 27 63.8 16 50 16z' fill='none' stroke='%2338bdf8' stroke-width='7' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='41' r='9' fill='%2338bdf8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #0f0f14; color: #e8e8f0; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* ── Header ── */
+  .app-header { background: #14141c; border-bottom: 1px solid #2a2a3a; padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; z-index: 1000; }
+  .header-icon { font-size: 22px; }
+  .header-text h1 { font-size: 16px; font-weight: 700; color: #38bdf8; letter-spacing: 0.01em; line-height: 1.2; }
+  .header-text p { font-size: 11px; color: #8888aa; margin-top: 1px; }
+  .legend { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #aaa; white-space: nowrap; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Main layout ── */
+  .app-body { display: flex; flex: 1; overflow: hidden; }
+  #map { flex: 1; }
+
+  /* ── Sidebar ── */
+  .sidebar { width: 300px; background: #14141c; border-left: 1px solid #2a2a3a; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+  .sidebar-header { padding: 12px 14px; border-bottom: 1px solid #2a2a3a; }
+  .sidebar-header h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: #8888aa; font-weight: 600; }
+  .sidebar-filter { padding: 10px 14px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid #2a2a3a; }
+  .filter-btn { font-size: 10px; padding: 4px 9px; border-radius: 20px; border: 1px solid #333; background: #1e1e2a; color: #aaa; cursor: pointer; transition: all .15s; }
+  .filter-btn:hover, .filter-btn.active { border-color: currentColor; background: transparent; }
+  .filter-btn[data-cat="all"].active { color: #e8e8f0; border-color: #e8e8f0; }
+  .filter-btn[data-cat="EV Fast Charger"].active { color: #38bdf8; border-color: #38bdf8; }
+  .filter-btn[data-cat="Scenic Landmark"].active { color: #f5d97a; border-color: #f5d97a; }
+  .filter-btn[data-cat="Food & Coffee"].active { color: #f07a4a; border-color: #f07a4a; }
+  .stop-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .stop-row { display: flex; align-items: center; gap: 10px; padding: 9px 14px; cursor: pointer; border-bottom: 1px solid #1e1e2a; transition: background .12s; }
+  .stop-row:hover { background: #1e1e2a; }
+  .stop-row.hidden { display: none; }
+  .stop-thumb-wrap { position: relative; flex-shrink: 0; width: 46px; height: 46px; }
+  .stop-thumb { width: 46px; height: 46px; object-fit: cover; border-radius: 6px; cursor: pointer; }
+  .thumb-count { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,.7); color: #fff; font-size: 9px; border-radius: 3px; padding: 1px 3px; pointer-events: none; }
+  .stop-info { flex: 1; min-width: 0; }
+  .stop-num { font-size: 10px; color: #666; }
+  .stop-name { font-size: 13px; font-weight: 600; color: #e8e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stop-cat { font-size: 10px; margin-top: 2px; }
+
+  /* ── Popup reset ── */
+  .leaflet-popup-content-wrapper { background: #16161e; border: 1px solid #2a2a3a; border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,.6); padding: 0; overflow: hidden; }
+  .leaflet-popup-tip { background: #16161e; }
+  .leaflet-popup-content { margin: 0; width: min(300px, 88vw) !important; }
+
+  /* ── Popup card ── */
+  .popup-card { overflow: hidden; border-radius: 10px; }
+  .popup-media { position: relative; overflow: hidden; }
+  .popup-media img { width: 100%; height: 150px; object-fit: cover; display: block; cursor: pointer; }
+  .popup-expand { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 12px; padding: 2px 5px; border-radius: 4px; pointer-events: none; }
+  .popup-photo-count { position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+  .popup-thumbs { display: flex; gap: 4px; padding: 5px 5px 3px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .popup-thumbs img { width: 46px; height: 34px; object-fit: cover; border-radius: 4px; cursor: pointer; flex-shrink: 0; border: 1.5px solid transparent; transition: border-color .12s; }
+  .popup-thumbs img:hover { border-color: #38bdf8; }
+  .popup-body { padding: 10px 12px 10px; }
+  .popup-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 600; margin-bottom: 6px; }
+  .popup-title { font-size: 15px; font-weight: 700; color: #f0f0f8; line-height: 1.3; margin-bottom: 5px; }
+  .popup-desc { font-size: 12px; color: #aaa; line-height: 1.5; margin-bottom: 6px; }
+  .popup-tip { font-size: 11px; color: #c8b870; background: rgba(245,217,122,.08); border-left: 2px solid #f5d97a; padding: 4px 8px; border-radius: 0 4px 4px 0; margin-bottom: 8px; line-height: 1.4; }
+  .popup-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .popup-link { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid #333; color: #aaa; text-decoration: none; white-space: nowrap; transition: all .12s; }
+  .popup-link:hover { border-color: #38bdf8; color: #38bdf8; }
+  .popup-link.directions { border-color: #4ab8c8; color: #4ab8c8; }
+  .popup-link.directions:hover { background: rgba(74,184,200,.1); }
+
+  /* ── Lightbox ── */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; justify-content: center; align-items: center; }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: min(90vw, 900px); max-height: 90vh; }
+  .lightbox-inner img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 6px; display: block; }
+  .lightbox-caption { text-align: center; color: #ccc; font-size: 13px; margin-top: 10px; }
+  .lightbox-close { position: absolute; top: -36px; right: 0; color: #fff; font-size: 26px; cursor: pointer; line-height: 1; background: none; border: none; }
+  .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.55); color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .lightbox-arrow.prev { left: -48px; }
+  .lightbox-arrow.next { right: -48px; }
+  .lightbox-arrow.hidden { display: none; }
+
+  /* ── Category colours ── */
+  .cat-ev { color: #38bdf8; }
+  .cat-scenic { color: #f5d97a; }
+  .cat-food { color: #f07a4a; }
+  .badge-ev { background: rgba(56,189,248,.15); color: #38bdf8; }
+  .badge-scenic { background: rgba(245,217,122,.15); color: #f5d97a; }
+  .badge-food { background: rgba(240,122,74,.15); color: #f07a4a; }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+  }
+  @media (max-width: 560px) {
+    .leaflet-popup { max-width: 92vw !important; }
+    .leaflet-popup-content-wrapper { max-width: 92vw; }
+    .leaflet-popup-content { width: min(88vw, 320px) !important; max-height: min(46vh, 320px) !important; overflow-y: auto; }
+    .popup-media img { height: 116px !important; }
+    .lightbox-arrow.prev { left: -30px; }
+    .lightbox-arrow.next { right: -30px; }
+  }
+  @media (max-width: 400px) {
+    .legend { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-icon">🔌</div>
+  <div class="header-text">
+    <h1>Pacific Coast Highway EV Road Trip</h1>
+    <p>19 Stops · San Francisco to Los Angeles · Chargers + Scenic Big Sur Stops</p>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>EV Fast Charger</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f5d97a"></div>Scenic Landmark</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f07a4a"></div>Food &amp; Coffee</div>
+  </div>
+</header>
+
+<div class="app-body">
+  <div id="map"></div>
+  <aside class="sidebar">
+    <div class="sidebar-header"><h2>19 Stops · SF → LA</h2></div>
+    <div class="sidebar-filter">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="EV Fast Charger">🔌 Chargers</button>
+      <button class="filter-btn" data-cat="Scenic Landmark">🌊 Scenic</button>
+      <button class="filter-btn" data-cat="Food & Coffee">🍽 Food</button>
+    </div>
+    <div class="stop-list" id="stopList"></div>
+  </aside>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox-arrow prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lightbox-arrow next" id="lbNext" aria-label="Next">&#8250;</button>
+    <p class="lightbox-caption" id="lbCaption"></p>
+  </div>
+</div>
+
+<script>
+// ── Stop Data (SF → LA driving order) ───────────────────────────────────────
+const stops = [
+  {
+    name: "Golden Gate Bridge",
+    category: "Scenic Landmark",
+    lat: 37.8199, lng: -122.4783,
+    desc: "The Art Deco suspension bridge that frames every San Francisco road-trip departure photo — 1.7 miles across the Golden Gate strait, opened in 1937.",
+    tip: "Charge to 100% here before you leave the city — the next fast charger isn't until Seaside, about 1.5 hours south.",
+    website: "https://www.goldengate.org/",
+    image: "Images/golden-gate-bridge-1.jpg",
+    images: ["Images/golden-gate-bridge-1.jpg", "Images/golden-gate-bridge-2.jpg"]
+  },
+  {
+    name: "Devil's Slide Trail",
+    category: "Scenic Landmark",
+    lat: 37.5762, lng: -122.5185,
+    desc: "A paved 1.3-mile coastal trail along a former stretch of Highway 1, with dramatic cliffside views over the Pacific just south of Pacifica.",
+    tip: "Free parking at both ends; the south lot is easiest to reach heading south. Watch for high winds on the open bluffs.",
+    website: "https://www.smcgov.org/parks/devils-slide-trail",
+    image: "Images/devils-slide-trail-1.jpg"
+  },
+  {
+    name: "Duarte's Tavern",
+    category: "Food & Coffee",
+    lat: 37.2555, lng: -122.3822,
+    desc: "A fourth-generation family tavern in tiny Pescadero, open since 1894, famous for olallieberry pie, half-and-half artichoke soup, and cioppino.",
+    tip: "Order the olallieberry pie — people make the detour off Highway 1 just for a slice. Open Wed–Mon, closed Tuesdays.",
+    website: "https://duartestavern.com/",
+    image: "Images/duartes-tavern-1.jpg"
+  },
+  {
+    name: "Santa Cruz Beach Boardwalk",
+    category: "Scenic Landmark",
+    lat: 36.9647, lng: -122.0177,
+    desc: "California's oldest surviving beachfront amusement park (1907), anchored by the wooden Giant Dipper roller coaster and a mile of sandy beach.",
+    tip: "The Giant Dipper is a National Historic Landmark — ride it once for the ocean views alone. Free to walk the boardwalk; rides are pay-per-ride or wristband.",
+    website: "https://www.beachboardwalk.com/",
+    image: "Images/santa-cruz-boardwalk-1.jpg",
+    images: ["Images/santa-cruz-boardwalk-1.jpg", "Images/santa-cruz-boardwalk-2.jpg"]
+  },
+  {
+    name: "Tesla Supercharger – Monterey/Seaside",
+    category: "EV Fast Charger",
+    lat: 36.6146, lng: -121.8330,
+    desc: "A 24/7 Supercharger stop at 1901 Del Monte Blvd in Seaside, the practical charging point for the Monterey Peninsula and 17-Mile Drive detour.",
+    tip: "Grab coffee nearby while charging — this is also the last convenient fast charger before the long, twisting Big Sur stretch.",
+    website: "https://www.tesla.com/findus/location/supercharger/montereyseaside",
+    image: "Images/tesla-supercharger-monterey-1.jpg"
+  },
+  {
+    name: "17-Mile Drive & Pebble Beach",
+    category: "Scenic Landmark",
+    lat: 36.5686, lng: -121.9635,
+    desc: "A scenic private toll road looping the Monterey Peninsula past cypress-lined cliffs, championship golf links, and the iconic Lone Cypress tree.",
+    tip: "A per-car toll applies at the gates (often refunded with a purchase inside). Sunset views from the Lone Cypress viewpoint are outstanding.",
+    website: "https://en.wikipedia.org/wiki/17-Mile_Drive",
+    image: "Images/17-mile-drive-1.jpg",
+    images: ["Images/17-mile-drive-1.jpg", "Images/17-mile-drive-2.jpg"]
+  },
+  {
+    name: "Bixby Creek Bridge",
+    category: "Scenic Landmark",
+    lat: 36.3714, lng: -121.9017,
+    desc: "One of the most photographed bridges in the world — a 1932 open-spandrel concrete arch soaring 280 feet above Bixby Creek Canyon in Big Sur.",
+    tip: "The classic photo is from the small pullout just north of the bridge. Arrive early to beat both fog and crowds.",
+    website: "https://en.wikipedia.org/wiki/Bixby_Bridge",
+    image: "Images/bixby-creek-bridge-1.jpg"
+  },
+  {
+    name: "McWay Falls",
+    category: "Scenic Landmark",
+    lat: 36.1592, lng: -121.6686,
+    desc: "An 80-foot waterfall that drops straight onto the sand of a private cove in Julia Pfeiffer Burns State Park — one of only two U.S. tidefall settings.",
+    tip: "Viewable only from the short Overlook Trail — the cove itself is closed to hikers. Parking fills fast; a day-use fee applies.",
+    website: "https://en.wikipedia.org/wiki/McWay_Falls",
+    image: "Images/mcway-falls-1.jpg",
+    images: ["Images/mcway-falls-1.jpg", "Images/mcway-falls-2.jpg"]
+  },
+  {
+    name: "Nepenthe",
+    category: "Food & Coffee",
+    lat: 36.2225, lng: -121.7318,
+    desc: "A legendary clifftop restaurant 800 feet above the Pacific, open since 1949, famous for its Ambrosiaburger and sweeping Big Sur coastline views.",
+    tip: "Ask for the terrace — the view is the main event. The Phoenix gift shop next door is worth a browse while you wait for a table.",
+    website: "https://www.nepenthebigsur.com/",
+    image: "Images/nepenthe-1.jpg"
+  },
+  {
+    name: "Hearst Castle",
+    category: "Scenic Landmark",
+    lat: 35.6852, lng: -121.1685,
+    desc: "William Randolph Hearst's opulent hilltop estate above San Simeon — Spanish Revival towers, the Neptune Pool, and rooms crammed with imported art.",
+    tip: "Visits are guided-tour only and require advance tickets from the visitor center. Book the Grand Rooms tour for first-timers.",
+    website: "https://hearstcastle.org/",
+    image: "Images/hearst-castle-1.jpg",
+    images: ["Images/hearst-castle-1.jpg", "Images/hearst-castle-2.jpg"]
+  },
+  {
+    name: "Morro Rock",
+    category: "Scenic Landmark",
+    lat: 35.3708, lng: -120.8642,
+    desc: "A 576-foot volcanic plug rising straight out of the harbor at Morro Bay — a sacred Salinan/Chumash site and now a protected peregrine falcon reserve.",
+    tip: "Climbing the rock itself is prohibited to protect nesting falcons; walk the causeway beach at its base instead, especially at sunset.",
+    website: "https://en.wikipedia.org/wiki/Morro_Rock",
+    image: "Images/morro-rock-1.jpg",
+    images: ["Images/morro-rock-1.jpg", "Images/morro-rock-2.jpg"]
+  },
+  {
+    name: "Tesla Supercharger – San Luis Obispo",
+    category: "EV Fast Charger",
+    lat: 35.2685, lng: -120.6745,
+    desc: "An 18-stall, 24/7 Supercharger at 100 Madonna Road next to the Madonna Inn — the natural halfway charging break on the SF–LA run.",
+    tip: "Walk over to the famously pink, over-the-top Madonna Inn lobby and restrooms while your car charges.",
+    website: "https://www.tesla.com/findus/location/supercharger/sanluisobisposupercharger",
+    image: "Images/tesla-supercharger-slo-1.jpg"
+  },
+  {
+    name: "Splash Cafe",
+    category: "Food & Coffee",
+    lat: 35.1430, lng: -120.6413,
+    desc: "A Pismo Beach institution since 1989, serving 40,000+ gallons of award-winning clam chowder a year, classically ladled into a sourdough bread bowl.",
+    tip: "Expect a line at lunch — it moves fast. Get the chowder in a bread bowl and eat it a block away on the Pismo Beach pier.",
+    website: "https://splashcafe.com/",
+    image: "Images/splash-cafe-1.jpg"
+  },
+  {
+    name: "Tesla Supercharger – Buellton",
+    category: "EV Fast Charger",
+    lat: 34.6134, lng: -120.1937,
+    desc: "A Supercharger stop at 555 McMurray Road in Buellton, in the heart of the Santa Ynez wine country just before Highway 1 rejoins the coast at Santa Barbara.",
+    tip: "Pea Soup Andersen's, the town's famous split-pea soup diner, is a short walk away while you top up.",
+    website: "https://www.tesla.com/findus/location/supercharger/buelltonsupercharger",
+    image: "Images/tesla-supercharger-buellton-1.jpg"
+  },
+  {
+    name: "Santa Barbara & Stearns Wharf",
+    category: "Scenic Landmark",
+    lat: 34.4110, lng: -119.6857,
+    desc: "California's oldest working wooden wharf (1872), stretching a quarter-mile into the Pacific at the foot of Santa Barbara's palm-lined State Street.",
+    tip: "Free to walk; parking on the wharf itself is metered. Sea lions and dolphins are commonly spotted from the end of the pier.",
+    website: "https://en.wikipedia.org/wiki/Stearns_Wharf",
+    image: "Images/santa-barbara-stearns-wharf-1.jpg"
+  },
+  {
+    name: "Tesla Supercharger – Oxnard",
+    category: "EV Fast Charger",
+    lat: 34.2159, lng: -119.1930,
+    desc: "A 20-stall Supercharger at The Collection at RiverPark shopping center in Oxnard, the last convenient fast-charging stop before Malibu and LA traffic.",
+    tip: "The Collection has restaurants and shops on-site — good timing for a dinner break before the final Malibu stretch.",
+    website: "https://www.tesla.com/findus/location/supercharger/oxnardcasupercharger",
+    image: "Images/tesla-supercharger-oxnard-1.jpg"
+  },
+  {
+    name: "Point Dume State Beach",
+    category: "Scenic Landmark",
+    lat: 34.0011, lng: -118.8065,
+    desc: "A dramatic Malibu headland with a bluff-top trail, tide pools, and a favorite whale-watching perch overlooking Zuma and Westward beaches.",
+    tip: "The short climb to the bluff overlook rewards you with one of the best sunset views on the whole Malibu coast — go an hour before sunset.",
+    website: "https://en.wikipedia.org/wiki/Point_Dume",
+    image: "Images/point-dume-1.jpg"
+  },
+  {
+    name: "Tesla Supercharger – Santa Monica",
+    category: "EV Fast Charger",
+    lat: 34.0195, lng: -118.4839,
+    desc: "An urban Supercharger at 1425 Santa Monica Blvd, one of several charging options clustered near the trip's finish line in Santa Monica.",
+    tip: "Plenty of EV charging density in Santa Monica generally — this is a reliable, centrally located option to top off before flying home or returning a rental.",
+    website: "https://www.tesla.com/findus/location/supercharger/SantaMonicaCASupercharger",
+    image: "Images/tesla-supercharger-santamonica-1.jpg"
+  },
+  {
+    name: "Santa Monica Pier",
+    category: "Scenic Landmark",
+    lat: 34.0092, lng: -118.4973,
+    desc: "The official western terminus of Route 66 and the classic finish line for a Pacific Coast Highway road trip — an amusement pier since 1909.",
+    tip: "Ride the solar-powered Pacific Wheel after dark for the best skyline and ocean views, and toast the end of the drive on the beach below.",
+    website: "https://santamonicapier.org/",
+    image: "Images/santa-monica-pier-1.jpg",
+    images: ["Images/santa-monica-pier-1.jpg", "Images/santa-monica-pier-2.jpg"]
+  }
+];
+
+// ── Category helpers ───────────────────────────────────────────────────────
+function catClass(cat) {
+  if (cat === "EV Fast Charger") return "ev";
+  if (cat === "Food & Coffee") return "food";
+  return "scenic";
+}
+function catColor(cat) {
+  if (cat === "EV Fast Charger") return "#38bdf8";
+  if (cat === "Food & Coffee") return "#f07a4a";
+  return "#f5d97a";
+}
+function markerIcon(cat) {
+  const col = catColor(cat);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42">
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity=".4"/></filter>
+    <path d="M15 1C8.4 1 3 6.4 3 13c0 9.5 12 27 12 27s12-17.5 12-27C27 6.4 21.6 1 15 1z" fill="${col}" stroke="rgba(0,0,0,.3)" stroke-width="1" filter="url(#s)"/>
+    <circle cx="15" cy="13" r="5" fill="rgba(0,0,0,.35)"/>
+  </svg>`;
+  return L.divIcon({
+    className: "",
+    html: `<div style="width:30px;height:42px">${svg}</div>`,
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -44]
+  });
+}
+
+// ── Lightbox ───────────────────────────────────────────────────────────────
+let lbPhotos = [], lbIdx = 0, lbStopName = "";
+const lightbox = document.getElementById("lightbox");
+const lbImg    = document.getElementById("lbImg");
+const lbCaption= document.getElementById("lbCaption");
+const lbClose  = document.getElementById("lbClose");
+const lbPrev   = document.getElementById("lbPrev");
+const lbNext   = document.getElementById("lbNext");
+
+function openLightbox(photos, idx, stopName) {
+  lbPhotos = photos; lbIdx = idx; lbStopName = stopName;
+  showLbSlide();
+  lightbox.classList.add("open");
+  document.addEventListener("keydown", lbKeyHandler);
+}
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.removeEventListener("keydown", lbKeyHandler);
+}
+function showLbSlide() {
+  lbImg.src = lbPhotos[lbIdx];
+  lbCaption.textContent = lbPhotos.length > 1
+    ? `${lbStopName} — ${lbIdx + 1}/${lbPhotos.length}`
+    : lbStopName;
+  lbPrev.classList.toggle("hidden", lbPhotos.length <= 1);
+  lbNext.classList.toggle("hidden", lbPhotos.length <= 1);
+}
+function lbKeyHandler(e) {
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft" && lbPhotos.length > 1) { lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length; showLbSlide(); }
+  if (e.key === "ArrowRight" && lbPhotos.length > 1) { lbIdx = (lbIdx + 1) % lbPhotos.length; showLbSlide(); }
+}
+lbClose.onclick = closeLightbox;
+lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
+lbPrev.onclick = (e) => { e.stopPropagation(); lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length; showLbSlide(); };
+lbNext.onclick = (e) => { e.stopPropagation(); lbIdx = (lbIdx + 1) % lbPhotos.length; showLbSlide(); };
+
+// ── Build popup HTML ───────────────────────────────────────────────────────
+function buildPopupHtml(stop) {
+  const photos = stop.images || (stop.image ? [stop.image] : []);
+  const cls = catClass(stop.category);
+  const badgeCls = `badge-${cls}`;
+
+  let mediaHtml = "";
+  if (stop.image) {
+    const countPill = photos.length > 1
+      ? `<div class="popup-photo-count">1/${photos.length}</div>` : "";
+    const thumbs = photos.length > 1
+      ? `<div class="popup-thumbs">${photos.map((p,i) =>
+          `<img src="${p}" alt="photo ${i+1}" onclick="openLightbox(${JSON.stringify(photos)},${i},${JSON.stringify(stop.name)});event.stopPropagation()">`
+        ).join("")}</div>` : "";
+    mediaHtml = `
+      <div class="popup-media">
+        <button onclick="openLightbox(${JSON.stringify(photos)},0,${JSON.stringify(stop.name)})" style="border:none;padding:0;cursor:pointer;display:block;width:100%">
+          <img src="${stop.image}" alt="${stop.name}" onerror="this.parentElement.style.display='none'">
+        </button>
+        ${countPill}
+        <div class="popup-expand">⤢</div>
+      </div>${thumbs}`;
+  }
+
+  const tipHtml = stop.tip ? `<div class="popup-tip">💡 ${stop.tip}</div>` : "";
+  const websiteLink = stop.website
+    ? `<a href="${stop.website}" target="_blank" rel="noopener" class="popup-link" onclick="event.stopPropagation()">Website</a>` : "";
+  const directionsLink = `<a href="https://www.google.com/maps/dir/?api=1&destination=${stop.lat},${stop.lng}" target="_blank" rel="noopener" class="popup-link directions" onclick="event.stopPropagation()">Directions</a>`;
+
+  return `<div class="popup-card">
+    ${mediaHtml}
+    <div class="popup-body">
+      <div class="popup-badge ${badgeCls}">${stop.category}</div>
+      <div class="popup-title">${stop.name}</div>
+      <div class="popup-desc">${stop.desc}</div>
+      ${tipHtml}
+      <div class="popup-actions">${websiteLink}${directionsLink}</div>
+    </div>
+  </div>`;
+}
+
+// ── Map ────────────────────────────────────────────────────────────────────
+const map = L.map("map", { center: [35.9, -120.9], zoom: 7, zoomControl: false });
+L.control.zoom({ position: "bottomright" }).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+// Single route line in driving order (SF → LA)
+const routeCoords = stops.map(s => [s.lat, s.lng]);
+L.polyline(routeCoords, { color: "#e8e8f0", weight: 2.5, opacity: 0.35, dashArray: "6 5" }).addTo(map);
+
+// Markers
+const markers = stops.map((stop) => {
+  const marker = L.marker([stop.lat, stop.lng], { icon: markerIcon(stop.category) })
+    .bindPopup(buildPopupHtml(stop), {
+      maxWidth: 330, minWidth: 300, maxHeight: 380,
+      autoPanPadding: L.point(40, 40)
+    })
+    .bindTooltip(stop.name, { permanent: false, direction: "top", offset: [0, -42] })
+    .addTo(map);
+  return marker;
+});
+
+// ── Sidebar stop list ──────────────────────────────────────────────────────
+const stopList = document.getElementById("stopList");
+stops.forEach((stop, idx) => {
+  const cls = catClass(stop.category);
+  const photos = stop.images || (stop.image ? [stop.image] : []);
+  const thumbHtml = stop.image
+    ? `<div class="stop-thumb-wrap">
+        <img class="stop-thumb" src="${stop.image}" alt="${stop.name}"
+          onclick="openLightbox(${JSON.stringify(photos)},0,${JSON.stringify(stop.name)});event.stopPropagation()">
+        ${photos.length > 1 ? `<div class="thumb-count">▤ ${photos.length}</div>` : ""}
+      </div>`
+    : "";
+
+  const row = document.createElement("div");
+  row.className = "stop-row";
+  row.dataset.cat = stop.category;
+  row.innerHTML = `${thumbHtml}
+    <div class="stop-info">
+      <div class="stop-num">${idx + 1}</div>
+      <div class="stop-name">${stop.name}</div>
+      <div class="stop-cat cat-${cls}">${stop.category}</div>
+    </div>`;
+  row.addEventListener("click", () => {
+    map.setView([stop.lat, stop.lng], 13, { animate: true });
+    setTimeout(() => markers[idx].openPopup(), 400);
+  });
+  stopList.appendChild(row);
+});
+
+// ── Filter buttons ─────────────────────────────────────────────────────────
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const cat = btn.dataset.cat;
+    document.querySelectorAll(".stop-row").forEach(row => {
+      row.classList.toggle("hidden", cat !== "all" && row.dataset.cat !== cat);
+    });
+    markers.forEach((marker, idx) => {
+      const visible = cat === "all" || stops[idx].category === cat;
+      if (visible) {
+        if (!map.hasLayer(marker)) marker.addTo(map);
+      } else {
+        if (map.hasLayer(marker)) marker.removeFrom(map);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

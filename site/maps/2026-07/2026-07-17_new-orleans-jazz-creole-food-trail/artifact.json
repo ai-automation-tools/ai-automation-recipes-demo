@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-map",
+  "recipe_version": "0.1.0",
+  "collection": "maps",
+  "title": "New Orleans Jazz & Creole Food Trail",
+  "slug": "new-orleans-jazz-creole-food-trail",
+  "date": "2026-07-17",
+  "summary": "15 essential stops across the French Quarter and Marigny — legendary jazz clubs, century-old Creole restaurants, and National Historic Landmark sites, mapped as a walking trail you can do in a weekend.",
+  "files": {
+    "main": "new-orleans-jazz-creole-food-trail_2026-07-17.html"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

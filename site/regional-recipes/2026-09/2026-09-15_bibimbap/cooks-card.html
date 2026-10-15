@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bibimbap (비빔밥)</title>
+<style>
+:root {
+  --accent: #16a34a; --accent-dark: #0f7535; --accent-tint: #e7f5ec;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #e7f5ec;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #67c389;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #e7f5ec; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">East Asian  &middot;  2026-02-02</p>
+<h1>Bibimbap (비빔밥)</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Bibimbap" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">4 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">45 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">1 hr 15 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">East Asian</div></div></div>
+<ul class="tags"><li class="tag">rice</li><li class="tag">beef</li><li class="tag">vegetables</li><li class="tag">korean</li><li class="tag">weeknight</li><li class="tag">gluten-free-adaptable</li></ul>
+<p class="intro">Bibimbap, meaning &quot;mixed rice&quot; in Korean, is one of Korea&#x27;s most iconic dishes and a cornerstone of Korean home cooking. Originating as a practical way to use leftover vegetables and rice, it evolved into a celebrated dish with regional variations across the Korean peninsula. Jeonju bibimbap from the Jeolla province is considered the gold standard, featuring an abundance of carefully prepared namul (seasoned vegetables). The dish embodies the Korean philosophy of balance — combining the five colors (obangsaek) representing the five elements — and is traditionally mixed thoroughly before eating, blending gochujang&#x27;s heat with the richness of sesame oil and egg.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>Rice</h3>
+<ul>
+<li>400 g (14 oz / 2 cups) short-grain white rice, rinsed until water runs clear</li>
+<li>480 ml (16 fl oz / 2 cups) water</li>
+</ul>
+<h3>Beef (Bulgogi-style)</h3>
+<ul>
+<li>225 g (8 oz) beef sirloin or ribeye, sliced into thin strips</li>
+<li>30 ml (1 fl oz / 2 tbsp) soy sauce</li>
+<li>15 ml (½ fl oz / 1 tbsp) sesame oil</li>
+<li>10 g (2 tsp) sugar</li>
+<li>2 cloves garlic, minced</li>
+<li>5 g (1 tsp) freshly ground black pepper</li>
+</ul>
+<h3>Namul (Seasoned Vegetables)</h3>
+<ul>
+<li>200 g (7 oz / 1 bunch) spinach, washed and trimmed</li>
+<li>150 g (5 oz / 1 medium) carrot, julienned</li>
+<li>150 g (5 oz / 1 medium) zucchini, julienned</li>
+<li>200 g (7 oz / 1 cup) bean sprouts</li>
+<li>150 g (5 oz) shiitake mushrooms, sliced</li>
+<li>15 ml (1 tbsp) sesame oil, divided for each vegetable</li>
+<li>10 g (2 tsp) toasted sesame seeds</li>
+<li>Salt to taste</li>
+</ul>
+<h3>Gochujang Sauce</h3>
+<ul>
+<li>45 g (3 tbsp) gochujang (Korean red pepper paste)</li>
+<li>15 ml (1 tbsp) sesame oil</li>
+<li>15 ml (1 tbsp) rice vinegar</li>
+<li>10 g (2 tsp) sugar</li>
+<li>5 ml (1 tsp) water</li>
+</ul>
+<h3>Toppings</h3>
+<ul>
+<li>4 large eggs</li>
+<li>15 ml (1 tbsp) neutral oil (for frying eggs)</li>
+<li>Toasted sesame seeds for garnish</li>
+<li>Sliced scallions for garnish</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Beef → firm tofu or marinated portobello mushrooms (for vegetarian; adjust soy marinade accordingly)</li>
+<li>Gochujang → sriracha mixed with a small amount of miso paste (less complex but serviceable)</li>
+<li>Short-grain rice → medium-grain rice (slightly less sticky texture)</li>
+<li>Soy sauce → tamari or coconut aminos (for gluten-free)</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>Medium pot with lid (for rice)</li>
+<li>Large skillet or wok</li>
+<li>Small mixing bowls (for marinating and seasoning)</li>
+<li>Non-stick pan (for eggs)</li>
+<li>Stone pot / dolsot (optional, for dolsot bibimbap)</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 20 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Cook the rice:</strong> Combine rinsed rice and water in a pot. Bring to a boil, reduce heat to low, cover, and cook for 15 minutes. Remove from heat and let steam, covered, for 10 minutes. The grains should be tender and slightly sticky.</div></div><div class="step"><div class="step-num">2</div><div class="step-txt"><strong>Marinate the beef:</strong> Combine sliced beef with soy sauce, sesame oil, sugar, garlic, and black pepper in a bowl. Toss to coat evenly. Set aside for at least 15 minutes while you prepare the vegetables.</div></div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Mix the gochujang sauce:</strong> Whisk together gochujang, sesame oil, rice vinegar, sugar, and water in a small bowl until smooth. Set aside.</div></div><div class="substep">Cooking the Namul (Active time: 20 min)</div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Blanch the spinach:</strong> Bring a pot of salted water to a boil. Add spinach and blanch for 30 seconds until wilted but still bright green. Drain and squeeze out excess water firmly. Toss with a splash of sesame oil, a pinch of salt, and sesame seeds.</div></div><div class="step"><div class="step-num">5</div><div class="step-txt"><strong>Sauté the carrots:</strong> Heat a teaspoon of sesame oil in a skillet over medium-high heat. Cook julienned carrots for 2–3 minutes, stirring frequently, until just tender with a slight bite. Season with a pinch of salt. Transfer to a plate.</div></div><div class="step"><div class="step-num">6</div><div class="step-txt"><strong>Sauté the zucchini:</strong> In the same skillet, add a teaspoon of sesame oil. Cook zucchini for 2 minutes until lightly golden at the edges but not mushy. Season with salt. Transfer to a plate.</div></div><div class="step"><div class="step-num">7</div><div class="step-txt"><strong>Cook the bean sprouts:</strong> Add bean sprouts to the skillet with a splash of water. Cook for 2 minutes until slightly softened but still crunchy. Season with sesame oil and salt.</div></div><div class="step"><div class="step-num">8</div><div class="step-txt"><strong>Cook the mushrooms:</strong> Add a teaspoon of sesame oil to the skillet. Sauté mushrooms for 3–4 minutes until golden brown and fragrant. Season with a pinch of salt.</div></div><div class="substep">Cooking the Beef and Eggs (Active time: 5 min)</div><div class="step"><div class="step-num">9</div><div class="step-txt"><strong>Sear the beef:</strong> Heat the skillet over high heat. Add the marinated beef in a single layer and cook for 2–3 minutes, turning once, until caramelized at the edges and cooked through. The beef should sizzle immediately when it hits the pan.</div></div><div class="step"><div class="step-num">10</div><div class="step-txt"><strong>Fry the eggs:</strong> Heat neutral oil in a non-stick pan over medium heat. Crack eggs in one at a time and fry until the whites are set but the yolk is still runny, about 2–3 minutes. The edges should be slightly crispy.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">11</div><div class="step-txt"><strong>Build the bowls:</strong> Divide hot rice among four bowls. Arrange each namul vegetable, mushrooms, and beef in separate sections on top of the rice, creating a colorful pinwheel pattern around the bowl.</div></div><div class="step"><div class="step-num">12</div><div class="step-txt"><strong>Top and serve:</strong> Place a fried egg in the center of each bowl. Add a generous spoonful of gochujang sauce on the side. Garnish with sesame seeds and sliced scallions. Instruct diners to mix everything together vigorously before eating — the runny yolk should coat the rice and vegetables.</div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> 145°F (63°C) for beef; 160°F (71°C) for eggs if cooking fully</li>
+<li><strong>Storage:</strong> Refrigerate individual components separately in airtight containers for up to 3 days</li>
+<li><strong>Freezing:</strong> Cooked rice freezes well for up to 1 month; vegetables and beef are best fresh</li>
+<li><strong>Reheating:</strong> Reheat rice and toppings separately; re-fry or microwave. Prepare fresh eggs when serving</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve with a side of kimchi and a light Korean soup such as miyeokguk (seaweed soup)</li>
+<li>Pairs well with Korean barley tea (boricha) or a crisp lager</li>
+<li>Traditional serving style: present assembled but unmixed, allowing each diner to add their desired amount of gochujang and mix at the table</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (½×):</strong> Halve all ingredients directly; cooking times remain the same for individual vegetable batches.</p>
+<p><strong>Double recipe (2×):</strong> Cook vegetables and beef in batches to avoid overcrowding the pan, which would steam rather than sauté them. Rice can be doubled in a larger pot.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>Sourcing:</strong> Gochujang is widely available in Asian grocery stores and increasingly in mainstream supermarkets. Look for brands with short ingredient lists (red pepper, rice, fermented soybean, salt).</li>
+<li><strong>Make-ahead:</strong> All namul vegetables can be prepared up to a day in advance and stored refrigerated. Bring to room temperature or briefly reheat before assembling.</li>
+<li><strong>Variations:</strong> For dolsot bibimbap, heat a stone pot with sesame oil, add rice and toppings, and cook on high heat for 5–8 minutes to develop a golden crispy rice crust (nurungji) on the bottom. Hwedeopbap is a raw fish variation popular in coastal regions.</li>
+<li><strong>Common pitfalls:</strong> Overcrowding the pan when cooking vegetables leads to steaming rather than sautéing — cook each component separately. Don't skip squeezing water from the spinach, or it will make the bowl watery.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving: approximately 580 kcal</em>
+- Protein: 28g | Fat: 18g | Carbohydrates: 72g | Fiber: 5g</p>
+<hr />
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-02-02): Initial recipe by @flavor_atlas_coordinator</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe development: @flavor_atlas_coordinator</li>
+<li>Testing: @flavor_atlas_coordinator</li>
+<li>Verification: @Coordinator</li>
+<li>Photography: pending</li>
+</ul>
+<hr />
+<p><strong>Recipe Location:</strong> <code>/Recipes/east-asian/east-asian_bibimbap_v1.md</code>
+<strong>Images Location:</strong> <code>/Regions/Images/bibimbap/</code></p>
+<p class="footer">Bibimbap (비빔밥) · 2026-02-02 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

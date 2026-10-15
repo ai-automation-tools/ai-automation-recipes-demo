@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-episode",
+  "recipe_version": "0.1.0",
+  "collection": "podcasts",
+  "title": "Why Nostalgia Rules Entertainment",
+  "slug": "why-nostalgia-rules-entertainment",
+  "date": "2026-06-26",
+  "summary": "Reboots, sequels and legacy casts: the panel argues over why audiences keep buying the past, and what it costs new stories.",
+  "files": {
+    "main": "Why-Nostalgia-Rules-Entertainment-26-06-2026.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

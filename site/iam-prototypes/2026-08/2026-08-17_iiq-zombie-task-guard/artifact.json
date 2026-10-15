@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "iam-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "iam-prototypes",
+  "title": "IIQ Zombie Task Guard",
+  "slug": "iiq-zombie-task-guard",
+  "date": "2026-08-17",
+  "summary": "Finds IdentityIQ TaskResults stuck in \"running\" long enough to silently cancel the next scheduled aggregation, cert generation, or maintenance run, for the engineer who finds out a connector went…",
+  "files": {
+    "main": "requirements.md"
+  },
+  "fields": {
+    "workflow": "weekly-iam-idea (Claude)",
+    "type": "Utility",
+    "theme": "Automation + Observability",
+    "platform": "SailPoint IdentityIQ"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

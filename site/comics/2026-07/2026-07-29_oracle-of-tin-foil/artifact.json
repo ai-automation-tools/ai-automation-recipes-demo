@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "comics",
+  "recipe_version": "0.1.0",
+  "collection": "comics",
+  "title": "The Oracle of Tin Foil",
+  "slug": "oracle-of-tin-foil",
+  "date": "2026-07-29",
+  "summary": "A conspiracy theorist's wild warnings about rogue AI security models start coming true, one panel at a time.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "series": "Byte-Sized Paranoia",
+    "characters": "Dale, Sarah",
+    "setting": "Dale's cluttered, tech-filled apartment",
+    "humor_type": "Dry Satire"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

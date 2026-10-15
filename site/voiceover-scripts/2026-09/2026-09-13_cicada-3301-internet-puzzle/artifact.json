@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "voiceover-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "voiceover-scripts",
+  "title": "A Test With No Visible Prize",
+  "slug": "cicada-3301-internet-puzzle",
+  "date": "2026-09-13",
+  "summary": "On January 4th, 2012, someone posted a single black image to a 4chan board. White text, no explanation: \"We are looking for highly intelligent individuals. To find them, we have devised a test.\" Buried inside the image was a hidden message pointing to another image. Then another. Then a phone number that read out a string of digits in a robotic recording. Then a QR code taped to a lamppost.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "category": "internet-mysteries",
+    "topicSlug": "cicada-3301-internet-puzzle"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

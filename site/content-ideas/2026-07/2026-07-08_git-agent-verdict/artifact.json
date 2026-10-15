@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "content-idea-gen",
+  "recipe_version": "0.1.0",
+  "collection": "content-ideas",
+  "title": "The Git-Agent Verdict",
+  "slug": "git-agent-verdict",
+  "date": "2026-07-08",
+  "summary": "A daily show concept: a sandboxed AI agent installs a trending repo, tries to use it, and delivers a verdict.",
+  "files": {
+    "main": "git-agent-verdict_2026-07-08.md"
+  },
+  "fields": {
+    "topic_slug": "`git-agent-verdict`"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

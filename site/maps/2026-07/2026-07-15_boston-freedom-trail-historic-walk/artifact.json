@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-map",
+  "recipe_version": "0.1.0",
+  "collection": "maps",
+  "title": "Boston Freedom Trail & Historic Neighborhoods Walk",
+  "slug": "boston-freedom-trail-historic-walk",
+  "date": "2026-07-15",
+  "summary": "An interactive 16-stop guide to Boston's 2.5-mile Freedom Trail, Beacon Hill's cobblestone lanes, and North End Italian classics — from Boston Common to Bunker Hill Monument.",
+  "files": {
+    "main": "boston-freedom-trail-historic-walk_2026-07-15.html"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

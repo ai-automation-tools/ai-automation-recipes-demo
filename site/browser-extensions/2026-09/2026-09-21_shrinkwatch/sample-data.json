@@ -1,0 +1,262 @@
+{
+  "state": {
+    "onThisPage": {
+      "asin": "B0SW00CRL1",
+      "title": "Meadowfield Toasted Oats Cereal, Family Size",
+      "brand": "Meadowfield",
+      "price": 6.49,
+      "quantity": 14,
+      "unit": "oz",
+      "sizeText": "14 oz",
+      "unitPrice": 0.4636,
+      "shrinkflationDetected": true,
+      "sizeChangePct": -12.5,
+      "priceChangePct": 0,
+      "tracked": true
+    },
+    "mockPage": {
+      "asin": "B0SW00CRL1",
+      "title": "Meadowfield Toasted Oats Cereal, Family Size",
+      "brand": "Meadowfield",
+      "icon": "🥣",
+      "price": 6.49,
+      "sizeText": "14 oz (397 g)",
+      "bullets": [
+        "Whole grain oats, toasted for crunch",
+        "11 vitamins and minerals per serving",
+        "Resealable family-size box"
+      ],
+      "previousVisit": {
+        "date": "2026-06-02",
+        "price": 6.49,
+        "sizeText": "16 oz (454 g)"
+      }
+    },
+    "trackedProducts": [
+      {
+        "asin": "B0SW00CRL1",
+        "title": "Meadowfield Toasted Oats Cereal, Family Size",
+        "brand": "Meadowfield",
+        "price": 6.49,
+        "quantity": 14,
+        "unit": "oz",
+        "sizeText": "14 oz",
+        "unitPrice": 0.4636,
+        "firstSeen": "2026-06-02",
+        "lastSeen": "2026-09-21",
+        "shrinkflationDetected": true,
+        "sizeChangePct": -12.5,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-06-02", "price": 6.49, "quantity": 16, "sizeText": "16 oz" },
+          { "date": "2026-09-21", "price": 6.49, "quantity": 14, "sizeText": "14 oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00LDR2",
+        "title": "BrightWash Laundry Detergent, Original",
+        "brand": "BrightWash",
+        "price": 12.99,
+        "quantity": 92,
+        "unit": "fl oz",
+        "sizeText": "92 fl oz",
+        "unitPrice": 0.1412,
+        "firstSeen": "2026-05-14",
+        "lastSeen": "2026-09-08",
+        "shrinkflationDetected": true,
+        "sizeChangePct": -8,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-05-14", "price": 12.99, "quantity": 100, "sizeText": "100 fl oz" },
+          { "date": "2026-09-08", "price": 12.99, "quantity": 92, "sizeText": "92 fl oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00CHP3",
+        "title": "Kettlecrisp Potato Chips, Party Size",
+        "brand": "Kettlecrisp",
+        "price": 5.29,
+        "quantity": 9.5,
+        "unit": "oz",
+        "sizeText": "9.5 oz",
+        "unitPrice": 0.5568,
+        "firstSeen": "2026-04-20",
+        "lastSeen": "2026-09-15",
+        "shrinkflationDetected": true,
+        "sizeChangePct": -5,
+        "priceChangePct": 3.9,
+        "history": [
+          { "date": "2026-04-20", "price": 5.09, "quantity": 10, "sizeText": "10 oz" },
+          { "date": "2026-09-15", "price": 5.29, "quantity": 9.5, "sizeText": "9.5 oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00APL4",
+        "title": "Orchard Peak Applesauce Cups, No Sugar Added",
+        "brand": "Orchard Peak",
+        "price": 7.49,
+        "quantity": 20,
+        "unit": "ct",
+        "sizeText": "20 ct",
+        "unitPrice": 0.3745,
+        "firstSeen": "2026-03-11",
+        "lastSeen": "2026-08-30",
+        "shrinkflationDetected": true,
+        "sizeChangePct": -16.7,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-03-11", "price": 7.49, "quantity": 24, "sizeText": "24 ct" },
+          { "date": "2026-08-30", "price": 7.49, "quantity": 20, "sizeText": "20 ct" }
+        ]
+      },
+      {
+        "asin": "B0SW00PTW5",
+        "title": "Crestline Paper Towels, Double Rolls",
+        "brand": "Crestline",
+        "price": 9.99,
+        "quantity": 6,
+        "unit": "ct",
+        "sizeText": "6 ct",
+        "unitPrice": 1.665,
+        "firstSeen": "2026-07-02",
+        "lastSeen": "2026-09-02",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-07-02", "price": 9.99, "quantity": 6, "sizeText": "6 ct" },
+          { "date": "2026-09-02", "price": 9.99, "quantity": 6, "sizeText": "6 ct" }
+        ]
+      },
+      {
+        "asin": "B0SW00ABT6",
+        "title": "Orchard Peak Almond Butter, Creamy",
+        "brand": "Orchard Peak",
+        "price": 8.99,
+        "quantity": 16,
+        "unit": "oz",
+        "sizeText": "16 oz",
+        "unitPrice": 0.5619,
+        "firstSeen": "2026-06-19",
+        "lastSeen": "2026-06-19",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-06-19", "price": 8.99, "quantity": 16, "sizeText": "16 oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00COF7",
+        "title": "Golden Valley Coffee, Medium Roast Ground",
+        "brand": "Golden Valley",
+        "price": 10.49,
+        "quantity": 12,
+        "unit": "oz",
+        "sizeText": "12 oz",
+        "unitPrice": 0.8742,
+        "firstSeen": "2026-05-01",
+        "lastSeen": "2026-08-24",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-05-01", "price": 10.49, "quantity": 12, "sizeText": "12 oz" },
+          { "date": "2026-08-24", "price": 10.49, "quantity": 12, "sizeText": "12 oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00SPW8",
+        "title": "PureSip Sparkling Water, Lime, 12-Pack",
+        "brand": "PureSip",
+        "price": 5.49,
+        "quantity": 12,
+        "unit": "ct",
+        "sizeText": "12 ct",
+        "unitPrice": 0.4575,
+        "firstSeen": "2026-07-20",
+        "lastSeen": "2026-09-18",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-07-20", "price": 5.49, "quantity": 12, "sizeText": "12 ct" },
+          { "date": "2026-09-18", "price": 5.49, "quantity": 12, "sizeText": "12 ct" }
+        ]
+      },
+      {
+        "asin": "B0SW00YOG9",
+        "title": "Meadowfield Greek Yogurt, Plain Whole Milk Tub",
+        "brand": "Meadowfield",
+        "price": 5.99,
+        "quantity": 32,
+        "unit": "oz",
+        "sizeText": "32 oz",
+        "unitPrice": 0.1872,
+        "firstSeen": "2026-04-08",
+        "lastSeen": "2026-08-11",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 9.1,
+        "history": [
+          { "date": "2026-04-08", "price": 5.49, "quantity": 32, "sizeText": "32 oz" },
+          { "date": "2026-08-11", "price": 5.99, "quantity": 32, "sizeText": "32 oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00TRB0",
+        "title": "Crestline Contractor Trash Bags, 42 Gallon",
+        "brand": "Crestline",
+        "price": 13.99,
+        "quantity": 45,
+        "unit": "ct",
+        "sizeText": "45 ct",
+        "unitPrice": 0.3109,
+        "firstSeen": "2026-06-30",
+        "lastSeen": "2026-06-30",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-06-30", "price": 13.99, "quantity": 45, "sizeText": "45 ct" }
+        ]
+      },
+      {
+        "asin": "B0SW00DSH1",
+        "title": "BrightWash Dish Soap, Lemon",
+        "brand": "BrightWash",
+        "price": 3.49,
+        "quantity": 28,
+        "unit": "fl oz",
+        "sizeText": "28 fl oz",
+        "unitPrice": 0.1246,
+        "firstSeen": "2026-09-10",
+        "lastSeen": "2026-09-10",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-09-10", "price": 3.49, "quantity": 28, "sizeText": "28 fl oz" }
+        ]
+      },
+      {
+        "asin": "B0SW00CCA2",
+        "title": "Golden Valley Hot Cocoa Mix, Classic",
+        "brand": "Golden Valley",
+        "price": 4.29,
+        "quantity": 12,
+        "unit": "oz",
+        "sizeText": "12 oz",
+        "unitPrice": 0.3575,
+        "firstSeen": "2026-05-25",
+        "lastSeen": "2026-05-25",
+        "shrinkflationDetected": false,
+        "sizeChangePct": 0,
+        "priceChangePct": 0,
+        "history": [
+          { "date": "2026-05-25", "price": 4.29, "quantity": 12, "sizeText": "12 oz" }
+        ]
+      }
+    ]
+  }
+}

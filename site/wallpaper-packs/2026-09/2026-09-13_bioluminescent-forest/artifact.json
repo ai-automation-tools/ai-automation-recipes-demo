@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "wallpaper-packs",
+  "recipe_version": "0.1.0",
+  "collection": "wallpaper-packs",
+  "title": "Bioluminescent Forest",
+  "slug": "bioluminescent-forest",
+  "date": "2026-09-13",
+  "summary": "A glowing night forest as a desktop and phone wallpaper pair.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "theme": "Bioluminescent Forest",
+    "categories": "Nature, Dark, Abstract",
+    "render_style": "photorealistic",
+    "resolution": "3072x1728 desktop, 1728x3072 mobile"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

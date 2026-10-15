@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Southern Chicken and Dumplings",
+  "slug": "southern-chicken-and-dumplings",
+  "date": "2026-08-08",
+  "summary": "A whole-chicken broth with rolled dumplings, the slow Sunday version, plus a Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

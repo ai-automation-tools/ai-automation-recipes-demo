@@ -1,0 +1,11 @@
+{
+  "task_api": {
+    "mode": "sample",
+    "description": "In production, mode is 'live' and the fields below point at the IdentityIQ REST API. 'sample' makes the script use its embedded synthetic dataset instead, so it runs with no network access.",
+    "base_url": "https://iiq.example.invalid/identityiq/rest",
+    "auth_token_env": "IIQ_API_TOKEN"
+  },
+  "stuck_threshold_multiplier": 3.0,
+  "concurrency_lookahead_hours": 24,
+  "output_path": "zombie-task-findings.json"
+}

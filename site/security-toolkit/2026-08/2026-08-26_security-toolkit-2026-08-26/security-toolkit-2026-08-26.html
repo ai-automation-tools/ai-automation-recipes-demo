@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Toolkit — August 26, 2026</title>
+<style>
+  :root {
+    --bg: #07090f;
+    --card: #10141d;
+    --border: #1f2733;
+    --text: #e7e9ee;
+    --muted: #9aa4b2;
+    --accent: #5b9bd5;
+    --red: #e0342a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+  header {
+    background: linear-gradient(180deg, rgba(91,155,213,0.14), rgba(7,9,15,0));
+    border-bottom: 1px solid var(--border);
+    padding: 48px 20px 32px;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0 0 8px;
+    font-size: 1.9rem;
+    color: var(--text);
+  }
+  header .date {
+    color: var(--red);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .intro {
+    margin: 28px 0 8px;
+    padding: 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .authz-note {
+    margin: 10px 0 0;
+    color: var(--red);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  h2 {
+    margin: 44px 0 18px;
+    font-size: 1.3rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .tool {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .tool a {
+    color: var(--red);
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+  }
+  .tool a:hover { text-decoration: underline; }
+  .tool p {
+    margin: 10px 0 0;
+    color: var(--text);
+    font-size: 0.96rem;
+  }
+  .tool code {
+    background: #1a2029;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.9em;
+  }
+  .tool .pricing {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Security Toolkit</h1>
+  <div class="date">August 26, 2026</div>
+</header>
+<div class="wrap">
+  <p class="intro">The first run of this stream: 28 tools across identity, offense, defense, OSINT, privacy, AppSec, cloud, and the guardrails now wrapped around AI agents, split between what people already run in production and what shipped in the last few weeks.</p>
+
+  <h2>🔑 Identity &amp; Access</h2>
+
+  <div class="tool">
+    <a href="https://github.com/keycloak/keycloak" target="_blank" rel="noopener">Keycloak</a>
+    <p>Open source IdP handling OIDC, SAML, and preview SCIM provisioning, with WebAuthn and MFA policies configured through its admin console. Spin it up with <code>docker run quay.io/keycloak/keycloak</code> or a Helm chart — it's the default choice most teams reach for before evaluating anything commercial. Release 26.7.2 shipped August 19, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0); Red Hat sells support separately.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/openbao/openbao" target="_blank" rel="noopener">OpenBao</a>
+    <p>When HashiCorp moved Vault to the Business Source License in 2023, this fork picked up the MPL-2.0 codebase and kept building. v2.6.2 landed August 18, 2026, and a February 2026 release added namespaces and HA read scaling that used to be Vault Enterprise-only. It handles secrets, certificates, and encryption keys, and now sits under Linux Foundation governance. Run it via <code>docker run openbao/openbao</code> or a Helm chart. <span class="pricing">Pricing: free, open source (MPL-2.0).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/MasterKale/SimpleWebAuthn" target="_blank" rel="noopener">SimpleWebAuthn</a>
+    <p>A TypeScript library pair, <code>@simplewebauthn/server</code> and <code>/browser</code>, that implements passkey registration and authentication so you don't have to read the WebAuthn spec yourself. It's become the standard choice for Node and browser-based passkey flows; <code>npm install @simplewebauthn/server</code> gets you started. <span class="pricing">Pricing: free, open source (MIT).</span></p>
+  </div>
+
+  <h2>⚔️ Offensive &amp; Recon</h2>
+  <p class="authz-note">Every tool below is for systems you own or are contracted to test.</p>
+
+  <div class="tool">
+    <a href="https://github.com/rapid7/metasploit-framework" target="_blank" rel="noopener">Metasploit Framework</a>
+    <p>Twenty-three years in, this is still the reference exploitation and post-exploitation framework: a module library, a console, and an RPC API for chaining payloads together. Install via <code>msfinstall</code> or apt, then run <code>msfconsole</code>. v6.5 added 422 modules over the past two years. <span class="pricing">Pricing: free, open source (3-clause BSD).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/SpecterOps/BloodHound" target="_blank" rel="noopener">BloodHound Community Edition</a>
+    <p>Maps Active Directory and Azure attack paths as a graph, so you can see which low-privilege account sits three hops from Domain Admin instead of guessing. Feed it data with the SharpHound or AzureHound collectors, then explore relationships in the CE web UI, backed by Neo4j and Postgres. v9.6.0 shipped August 18, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0); SpecterOps sells a separate commercial Enterprise SaaS.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/BishopFox/sliver" target="_blank" rel="noopener">Sliver</a>
+    <p>A Golang command-and-control framework built for red-team exercises, supporting mTLS, WireGuard, HTTP(S), and DNS transports for implant traffic. Run the server binary and generate implants through the CLI client. Bishop Fox keeps it actively maintained even though the last tagged release, v1.7.3, dates to February 2026. <span class="pricing">Pricing: free, open source (GPL-3.0).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/Pennyw0rth/NetExec" target="_blank" rel="noopener">NetExec</a>
+    <p>The CrackMapExec successor for enumerating and testing authentication across SMB, WinRM, RDP, LDAP, and MSSQL. <code>pipx install netexec</code> or pull the Docker image, then point <code>nxc</code> at your scoped protocol and hosts. Commit activity has stayed constant through August 2026. <span class="pricing">Pricing: free, open source (BSD-2-Clause).</span></p>
+  </div>
+
+  <h2>🛡️ Defensive &amp; Detection</h2>
+
+  <div class="tool">
+    <a href="https://github.com/wazuh/wazuh" target="_blank" rel="noopener">Wazuh</a>
+    <p>A SIEM and XDR platform in one: log analysis, file integrity monitoring, vulnerability detection, and an endpoint agent, with nothing held back behind a paid tier. Start with the docker-compose quickstart or the official installer, then roll out agents via package or MSI. v4.14.7 shipped July 30, 2026. <span class="pricing">Pricing: free, open source (GPLv2); Wazuh Inc. sells optional cloud hosting and support.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener">Sigma (SigmaHQ)</a>
+    <p>The generic detection-rule format most SIEMs can consume one way or another. Write once, then convert with <code>pySigma</code> or <code>sigma-cli</code> into queries for Splunk, Elastic, Sentinel, or Wazuh. The July 9, 2026 release added coverage for CVE-2026-41089 alongside 20 new rules and 70 updates. <span class="pricing">Pricing: free; rules ship under the Detection Rule License 1.1, which requires attribution on reproduction rather than a standard MIT/Apache grant.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/Velocidex/velociraptor" target="_blank" rel="noopener">Velociraptor</a>
+    <p>Endpoint monitoring and DFIR built on its own query language, VQL, for fleet-wide artifact collection when you need to hunt across hundreds of machines at once. Deploy the server binary, then push the client via MSI, deb, or exe. v0.77.2 landed August 10, 2026 with a CVE fix. Rapid7 acquired the project in 2021 but kept it under AGPL. <span class="pricing">Pricing: free, open source (AGPL-3.0-or-later).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/telekom-security/tpotce" target="_blank" rel="noopener">T-Pot</a>
+    <p>Bundles more than 20 honeypots, including LLM-based ones like Beelzebub and Galah, with an Elastic Stack front end so you're not standing up each sensor separately. The installer targets a dedicated Linux host, or you can run the Docker Compose stack. Deutsche Telekom Security's team was still committing fixes as of August 25, 2026, even though the last tagged release predates that. <span class="pricing">Pricing: free, open source (GPL-3.0).</span></p>
+  </div>
+
+  <h2>🕵️ OSINT &amp; Investigation</h2>
+
+  <div class="tool">
+    <a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">Sherlock</a>
+    <p>Checks a username against 400-plus platforms to see where an account exists, useful for mapping exposure before an assessment. <code>pipx install sherlock-project</code> or run it via Docker, then <code>sherlock &lt;username&gt;</code>. It's the tool most OSINT lists lead with, and commit activity is current. <span class="pricing">Pricing: free, open source (MIT).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener">OWASP Amass</a>
+    <p>Passive and active reconnaissance for mapping an organization's external attack surface: subdomains, IP ranges, netblocks, ASNs. Grab the Go binary or Docker image and run <code>amass enum -d &lt;domain&gt;</code> against infrastructure you own. It's an OWASP flagship project; v5.1.1 shipped April 7, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0); optional paid API integrations (WhoisXML, for example) improve result coverage.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://exiftool.org/" target="_blank" rel="noopener">ExifTool</a>
+    <p>Reads and strips EXIF, IPTC, XMP, and GPS metadata from thousands of file formats — the standard way to check what a photo or document is quietly carrying before you publish it, or to pull that data during an investigation. <code>exiftool -gps:all file.jpg</code> gets you the location fields in one line. Version 13.59 shipped May 27, 2026. <span class="pricing">Pricing: free (dual Artistic-1.0-Perl/GPL license).</span></p>
+  </div>
+
+  <h2>🔒 Privacy &amp; Encryption</h2>
+
+  <div class="tool">
+    <a href="https://www.torproject.org/download/" target="_blank" rel="noopener">Tor Browser</a>
+    <p>Routes traffic through the Tor relay network to resist tracking and censorship — still the reference way to browse anonymously, and still actively shipped. Download the desktop build for Windows, macOS, or Linux, or the Android app, straight from the Tor Project. v15.0.20 shipped August 18, 2026. <span class="pricing">Pricing: free (Tor core is 3-clause BSD; the browser bundles Firefox under MPL-2.0).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/FiloSottile/age" target="_blank" rel="noopener">age</a>
+    <p>A file-encryption tool and Go library with small, explicit keys and no config file to get wrong, increasingly the default replacement for <code>gpg -c</code> when you just need to encrypt a file to a recipient's public key. Install via your package manager or <code>go install filippo.io/age/cmd/...@latest</code>, then <code>age-keygen</code> and <code>age -r &lt;pubkey&gt;</code>. The 1.3 line added post-quantum support. <span class="pricing">Pricing: free, open source (BSD-3-Clause).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/simplex-chat/simplex-chat" target="_blank" rel="noopener">SimpleX Chat</a>
+    <p>An end-to-end encrypted messenger that skips persistent user identifiers entirely: no phone number, no account ID tying messages back to you across the network. Run the mobile apps or the terminal client, and self-host your own SMP relay if you'd rather not rely on the default servers. v7.1.0-beta.1 shipped August 20, 2026. <span class="pricing">Pricing: free, open source (AGPL-3.0).</span></p>
+  </div>
+
+  <h2>🧩 AppSec &amp; Supply Chain</h2>
+
+  <div class="tool">
+    <a href="https://github.com/semgrep/semgrep" target="_blank" rel="noopener">Semgrep</a>
+    <p>A semantic-grep SAST engine covering 30-plus languages with over 2,800 free community rules, fast enough to run on every commit instead of once a quarter. <code>pip install semgrep</code>, <code>brew install semgrep</code>, or pull the Docker image. The core engine ships under LGPL-2.1; cross-file dataflow, the Pro rule pack, and supply-chain scanning sit behind the paid AppSec Platform. <span class="pricing">Pricing: free open source engine; Platform free up to 10 contributors, then $30/contributor/month.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/google/osv-scanner" target="_blank" rel="noopener">OSV-Scanner</a>
+    <p>Google's SCA scanner queries the OSV.dev vulnerability database across 20-plus ecosystems, and the v2 line rewrote the extraction pipeline on OSV-Scalibr, adding guided remediation and container-layer attribution. <code>go install github.com/google/osv-scanner/v2/cmd/osv-scanner@latest</code>, then <code>osv-scanner scan source -r .</code>. v2.5.0 shipped August 7, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0), no paid tier.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/sigstore/cosign" target="_blank" rel="noopener">Sigstore Cosign</a>
+    <p>Signs and verifies container images and other artifacts, keyless or key-based, and anchors them to the Rekor transparency log with in-toto/SLSA attestations. Most of the Sigstore ecosystem builds around it. Install via <code>brew install cosign</code> or the <code>sigstore/cosign-installer</code> GitHub Action. v3.1.3 shipped August 6, 2026, patching a verification-bypass CVE. <span class="pricing">Pricing: free, open source (Apache-2.0).</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/SocketDev/socket-cli" target="_blank" rel="noopener">Socket CLI</a>
+    <p>Flags dependency confusion, typosquats, and malicious packages using behavioral analysis instead of matching against known CVEs, which catches supply-chain attacks before a CVE ever gets assigned. <code>npm install -g @socketsecurity/cli</code>, then <code>socket scan create</code>, or gate installs with <code>socket npm install</code>. The CLI is open source; the backing platform is proprietary. <span class="pricing">Pricing: free up to 1,000 scans/month; Team from $25/dev/month.</span></p>
+  </div>
+
+  <h2>☁️ Cloud &amp; Infra Security</h2>
+
+  <div class="tool">
+    <a href="https://github.com/prowler-cloud/prowler" target="_blank" rel="noopener">Prowler</a>
+    <p>Runs hundreds of checks against AWS, Azure, GCP, Kubernetes, and M365 for CIS, PCI-DSS, and SOC2 compliance — the CSPM CLI most teams reach for before paying for a hosted equivalent. <code>pip install prowler</code> or <code>docker run toniblyx/prowler</code>. v5.39.1 shipped August 18, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0); Prowler Cloud is a separate paid hosted tier.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/kubescape/kubescape" target="_blank" rel="noopener">Kubescape</a>
+    <p>A CNCF-incubating platform scanning Kubernetes clusters and manifests for misconfiguration, vulnerabilities, RBAC issues, and runtime drift. Install with the one-line script, Homebrew, or <code>helm upgrade --install kubescape kubescape/kubescape-operator</code>. v4.0.12 shipped August 12, 2026, adding concurrent image-scan pipelines and runtime profile drift detection. <span class="pricing">Pricing: free, open source (Apache-2.0); maintainer ARMO sells a commercial management layer.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener">Trivy</a>
+    <p>One scanner for container images, IaC, SBOM generation, secrets, and misconfiguration, with enough overlap with the rest of this bucket that it's often the only scanner a small team runs. <code>brew install trivy</code> or <code>docker run aquasec/trivy</code>. v0.74.0 shipped August 14, 2026. Worth knowing: the project suffered a supply-chain compromise in March 2026 that's since been remediated. <span class="pricing">Pricing: free, open source (Apache-2.0); Aqua Security sells a commercial platform built on top.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/falcosecurity/falco" target="_blank" rel="noopener">Falco</a>
+    <p>CNCF-graduated runtime security using eBPF or a kernel module to catch abnormal syscalls, privilege escalation, and container escapes as they happen. Deploy as a Kubernetes DaemonSet via Helm, or try the Docker Compose demo first. <span class="pricing">Pricing: free, open source (Apache-2.0); Sysdig, the original creator, sells a commercial platform built on top.</span></p>
+  </div>
+
+  <h2>🤖 Security AI &amp; Agents</h2>
+
+  <div class="tool">
+    <a href="https://github.com/NVIDIA/garak" target="_blank" rel="noopener">NVIDIA Garak</a>
+    <p>Probes an LLM or endpoint with adversarial prompts across 50-plus modules covering jailbreaks, prompt injection, data leakage, toxicity, and hallucination, then scores what comes back. <code>pip install garak</code>, then <code>garak --model_type openai --model_name gpt-4o-mini --probes promptinject</code>. NVIDIA's AI Red Team has backed it since 2023; v0.16.0 shipped August 4, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0); you pay only for the target model's API calls.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/snyk/agent-scan" target="_blank" rel="noopener">Snyk agent-scan</a>
+    <p>Formerly Invariant Labs' mcp-scan, folded into Snyk after the acquisition. It scans installed MCP servers and agent configs for prompt-injection-laden tool descriptions, tool poisoning, and cross-origin tool shadowing, and can run as a proxy to guardrail live MCP traffic. <code>uvx snyk-agent-scan@latest</code> gets you the core scanner; a free Snyk account unlocks the rest. v0.6.0 shipped August 19, 2026. <span class="pricing">Pricing: free, open source core (Apache-2.0); deeper features require a Snyk account.</span></p>
+  </div>
+
+  <div class="tool">
+    <a href="https://github.com/NVIDIA-NeMo/Guardrails" target="_blank" rel="noopener">NeMo Guardrails</a>
+    <p>Defines programmable rails for LLM applications using Colang rules — block jailbreaks, restrict topics, validate input and output before and after a model call. <code>pip install nemoguardrails</code>, then write a <code>config.yml</code> and rail files. NVIDIA has maintained it since 2023; v0.23.0 shipped July 1, 2026. <span class="pricing">Pricing: free, open source (Apache-2.0).</span></p>
+  </div>
+
+  <footer>
+    28 tools this month. Offensive tooling is listed for systems you own or are authorized to test. Found a dead link or have something to add? Reply to the email.
+  </footer>
+</div>
+</body>
+</html>

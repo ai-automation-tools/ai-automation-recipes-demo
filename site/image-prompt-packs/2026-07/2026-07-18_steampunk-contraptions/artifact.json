@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "image-prompt-packs",
+  "recipe_version": "0.1.0",
+  "collection": "image-prompt-packs",
+  "title": "Steampunk Contraptions",
+  "slug": "steampunk-contraptions",
+  "date": "2026-07-18",
+  "summary": "An image-prompt pack set in an alternate Victorian age of steam and clockwork: a jetpack blueprint, a clockwork arm, a chrono-locomotive and more.",
+  "files": {
+    "main": "aether-wing-jetpack-blueprint.md"
+  },
+  "fields": {
+    "theme": "Steampunk Contraptions"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

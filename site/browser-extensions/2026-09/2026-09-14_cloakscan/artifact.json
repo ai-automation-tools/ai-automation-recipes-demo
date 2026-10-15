@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "browser-extension",
+  "recipe_version": "0.1.0",
+  "collection": "browser-extensions",
+  "title": "Cloakscan",
+  "slug": "cloakscan",
+  "date": "2026-09-14",
+  "summary": "Scans the page you're on for text hidden from view, so you know whether it was written for you or for the AI agent reading over your shoulder.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-browser-extension (Claude)",
+    "form_factor": "Browser extension (Manifest V3)",
+    "permissions": "activeTab, scripting, storage"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

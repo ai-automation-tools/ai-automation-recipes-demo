@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refinance Break-Even Calculator</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Refinance Break-Even Calculator</h1>
+  <p class="subtitle">Find out how many months it takes for a lower rate to pay back the closing costs — and whether that's before or after you plan to move on.</p>
+</header>
+
+<main>
+  <section class="panel" id="scenario-panel">
+    <label for="scenario-select">Load a sample scenario</label>
+    <select id="scenario-select">
+      <option value="">— choose a scenario —</option>
+    </select>
+  </section>
+
+  <div class="form-grid">
+    <section class="panel">
+      <h2>Your current loan</h2>
+
+      <label for="loan-type">Loan type</label>
+      <select id="loan-type">
+        <option>Mortgage</option>
+        <option>Auto</option>
+        <option>Personal</option>
+        <option>Student</option>
+      </select>
+
+      <label for="current-balance">Current balance ($)</label>
+      <input type="number" id="current-balance" min="0.01" step="0.01" placeholder="e.g. 320000" />
+
+      <label for="current-apr">Current APR (%)</label>
+      <input type="number" id="current-apr" min="0.01" max="40" step="0.01" placeholder="e.g. 7.25" />
+
+      <label for="current-term">Remaining term (months)</label>
+      <input type="number" id="current-term" min="1" max="480" step="1" placeholder="e.g. 336" />
+    </section>
+
+    <section class="panel">
+      <h2>Refinance offer</h2>
+
+      <label for="new-apr">New APR (%)</label>
+      <input type="number" id="new-apr" min="0.01" max="40" step="0.01" placeholder="e.g. 6.71" />
+
+      <label for="new-term">New term (months)</label>
+      <input type="number" id="new-term" min="1" max="480" step="1" placeholder="e.g. 336" />
+
+      <label for="closing-costs">
+        Closing costs ($)
+        <button type="button" id="estimate-costs-btn" class="btn-link">estimate 3% of balance</button>
+      </label>
+      <input type="number" id="closing-costs" min="0" step="0.01" placeholder="e.g. 9600" />
+      <p class="field-hint">Typical range is 2%–5% of the loan balance (Bankrate).</p>
+
+      <label for="plan-to-stay">How long do you plan to keep this loan? (months)</label>
+      <input type="number" id="plan-to-stay" min="1" max="480" step="1" placeholder="e.g. 84" />
+    </section>
+  </div>
+
+  <div class="actions">
+    <button id="calculate-btn" class="btn-primary">Calculate break-even</button>
+  </div>
+
+  <section id="results-section" class="hidden">
+    <div class="summary-cards">
+      <div class="card">
+        <span class="card-label">New monthly payment</span>
+        <span class="card-value" id="new-payment">—</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Monthly savings</span>
+        <span class="card-value" id="monthly-savings">—</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Simple break-even</span>
+        <span class="card-value" id="simple-breakeven">—</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Term-adjusted break-even</span>
+        <span class="card-value" id="adjusted-breakeven">—</span>
+      </div>
+    </div>
+
+    <div id="verdict-banner" class="verdict-banner"></div>
+
+    <div class="chart-wrap">
+      <canvas id="cost-chart" height="320"></canvas>
+    </div>
+
+    <p class="rule-of-thumb">
+      Rule of thumb: a rate drop of at least <strong>0.75–1.0 percentage points</strong> is usually needed for the
+      monthly savings to offset closing costs within about two years. Smaller drops can still be worth it if you plan
+      to keep the loan a long time — that's what the term-adjusted break-even above is for.
+    </p>
+  </section>
+</main>
+
+<footer class="page-footer">
+  <p>Educational estimator only — not personalized financial advice. Verify current rates and closing costs with your lender before deciding.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

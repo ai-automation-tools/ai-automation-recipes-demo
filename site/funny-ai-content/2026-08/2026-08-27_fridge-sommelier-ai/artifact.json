@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "funny-ai-content",
+  "recipe_version": "0.1.0",
+  "collection": "funny-ai-content",
+  "title": "Your Fridge, Reviewed by a Man Who Has Given Up on You",
+  "slug": "fridge-sommelier-ai",
+  "date": "2026-08-27",
+  "summary": "A camera bolted to your top shelf tastes nothing and judges everything.",
+  "files": {
+    "main": "fridge-sommelier-ai_2026-08-27.md"
+  },
+  "fields": {
+    "type": "funny-ai-content",
+    "format": "mock product demo / short vertical skit"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "certificationThreshold": 25,
+  "certificates": [
+    {
+      "id": "HM-2026-0847",
+      "title": "Why we're raising prices in September",
+      "issuer": "Fernweh Coffee Roasters",
+      "category": "Newsletter",
+      "score": 6,
+      "issuedDate": "2026-08-18",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0846",
+      "title": "The client email I almost didn't send",
+      "issuer": "Priya Nair, Freelance Copywriter",
+      "category": "Newsletter",
+      "score": 11,
+      "issuedDate": "2026-08-17",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0839",
+      "title": "Fall lookbook: the case for wool",
+      "issuer": "Birchmark Goods",
+      "category": "Blog",
+      "score": 18,
+      "issuedDate": "2026-08-14",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0831",
+      "title": "Our new refund policy, explained plainly",
+      "issuer": "Loop Fitness Studio",
+      "category": "Product page",
+      "score": 9,
+      "issuedDate": "2026-08-11",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0822",
+      "title": "What three years of client work taught me",
+      "issuer": "Devon Marsh, Illustrator",
+      "category": "Blog",
+      "score": 14,
+      "issuedDate": "2026-08-06",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0815",
+      "title": "August product update notes",
+      "issuer": "Ledgerly (accounting software)",
+      "category": "Release notes",
+      "score": 22,
+      "issuedDate": "2026-08-03",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0809",
+      "title": "Behind the scenes of our harvest week",
+      "issuer": "Salt Hollow Farm",
+      "category": "Social caption",
+      "score": 4,
+      "issuedDate": "2026-07-29",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0798",
+      "title": "Q3 client newsletter draft",
+      "issuer": "Marrow & Vine PR",
+      "category": "Newsletter",
+      "score": 27,
+      "issuedDate": "2026-07-22",
+      "status": "Needs rescan"
+    },
+    {
+      "id": "HM-2026-0790",
+      "title": "Five things I got wrong about pricing",
+      "issuer": "Tom Okafor, Consultant",
+      "category": "Blog",
+      "score": 13,
+      "issuedDate": "2026-07-18",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0781",
+      "title": "New collection: why we chose these colors",
+      "issuer": "Aster & Pine Ceramics",
+      "category": "Product page",
+      "score": 8,
+      "issuedDate": "2026-07-12",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0774",
+      "title": "September event announcement",
+      "issuer": "Northside Bookshop",
+      "category": "Social caption",
+      "score": 19,
+      "issuedDate": "2026-07-08",
+      "status": "Verified"
+    },
+    {
+      "id": "HM-2026-0766",
+      "title": "Why our onboarding takes longer than most",
+      "issuer": "Cairn HR Consulting",
+      "category": "Blog",
+      "score": 24,
+      "issuedDate": "2026-06-30",
+      "status": "Verified"
+    }
+  ],
+  "sampleDrafts": [
+    {
+      "label": "Heavy AI tells (product launch blurb)",
+      "text": "Our new platform stands as a testament to our unwavering commitment to innovation, empowering teams to unlock their full potential. It's not just a tool, it's a game-changing solution that streamlines workflows, enhances collaboration, and fosters alignment across the organization. Industry experts believe this represents a pivotal moment in the evolving landscape of productivity software. Additionally, the platform boasts a vibrant, intuitive interface that showcases our dedication to excellence. In conclusion, we're excited to embark on this journey with you, and we believe the future looks bright for everyone involved."
+    },
+    {
+      "label": "Mixed (client update email)",
+      "text": "Hi Sam, wanted to give you a quick update on where things stand. We finished the homepage redesign and it's live now. A few notes: the load time dropped from 4.2s to 1.8s, and we fixed the mobile nav bug you flagged last week. Moving forward, this update serves as a foundation for the next phase of the project, ensuring smoother collaboration and highlighting the value of our partnership. Let me know if you have questions, I'm around most of this week."
+    },
+    {
+      "label": "Mostly clean (personal essay excerpt)",
+      "text": "I quit my job in March without much of a plan. My savings covered four months, maybe five if I stopped eating out. The first two weeks were fine, almost fun. Then the fear showed up, right on schedule, and I spent a lot of nights doing math I already knew the answer to. What actually helped wasn't a plan. It was a part-time contract that fell into my lap in week six, from a client I'd emailed cold back in January and forgotten about."
+    }
+  ]
+}

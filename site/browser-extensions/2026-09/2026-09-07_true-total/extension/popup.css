@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 360px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fdfcfb;
+  color: #14213d;
+}
+
+.tt-header {
+  padding: 16px 18px 12px;
+  background: #14213d;
+  color: #fdfcfb;
+}
+
+.tt-header h1 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+.tt-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #c9d2e3;
+}
+
+main {
+  padding: 14px 18px 18px;
+}
+
+.tt-total-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fff5e6;
+  border: 1px solid #ffe1a8;
+  margin-bottom: 14px;
+}
+
+.tt-total-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a6d1f;
+}
+
+.tt-total-amount {
+  font-size: 28px;
+  font-weight: 700;
+  color: #14213d;
+}
+
+.tt-delta-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d1495b;
+}
+
+.tt-breakdown h2,
+.tt-premium h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  margin: 0 0 8px;
+}
+
+.tt-line-items {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  border-top: 1px solid #eee;
+}
+
+.tt-line-items li {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.tt-line-items li.tt-empty {
+  color: #9ca3af;
+  justify-content: flex-start;
+}
+
+.tt-line-items li .tt-late-tag {
+  font-size: 10px;
+  color: #d1495b;
+  border: 1px solid #f3c1c9;
+  border-radius: 999px;
+  padding: 1px 6px;
+  margin-left: 6px;
+}
+
+.tt-export-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #14213d;
+  color: #fdfcfb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.tt-export-btn:disabled {
+  background: #cbd2e0;
+  cursor: not-allowed;
+}
+
+.tt-premium {
+  border-top: 1px dashed #e5c98a;
+  padding-top: 14px;
+}
+
+.tt-premium p {
+  font-size: 12px;
+  color: #4b5563;
+  margin: 0 0 8px;
+}
+
+.tt-premium-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.tt-premium-list li::before {
+  content: "🔒 ";
+}
+
+.tt-upgrade-btn {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #ffb703;
+  border-radius: 8px;
+  background: #fff5e6;
+  color: #8a6d1f;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}

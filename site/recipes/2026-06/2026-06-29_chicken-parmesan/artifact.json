@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Chicken Parmesan",
+  "slug": "chicken-parmesan",
+  "date": "2026-06-29",
+  "summary": "Breaded cutlets under marinara and melted mozzarella, written up with a printable Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

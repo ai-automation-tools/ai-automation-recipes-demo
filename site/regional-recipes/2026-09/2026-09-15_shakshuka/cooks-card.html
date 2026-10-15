@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shakshuka</title>
+<style>
+:root {
+  --accent: #ca8a04; --accent-dark: #916302; --accent-tint: #f9f3e5;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #f9f3e5;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #dcb25b;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #f9f3e5; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">North African  &middot;  2026-01-12</p>
+<h1>Shakshuka</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Shakshuka" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">4 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">15 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">35 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">North African</div></div></div>
+<ul class="tags"><li class="tag">vegetarian</li><li class="tag">breakfast</li><li class="tag">brunch</li><li class="tag">one-pan</li><li class="tag">weeknight</li><li class="tag">gluten-free</li></ul>
+<p class="intro">Shakshuka (meaning &quot;a mixture&quot; or &quot;shaken&quot; in Arabic) is a beloved North African dish that originated with the Amazigh (Berber) peoples of Tunisia and spread throughout the Maghreb region. The dish gained international recognition after Maghrebi Jewish immigrants brought it to Israel in the 1950s and 1960s, where it became a national breakfast staple. Today, shakshuka is enjoyed across North Africa, the Middle East, and increasingly worldwide, with each region adding its own variations—from the addition of merguez sausage in Tunisia to feta cheese in modern Israeli versions.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>Tomato Base</h3>
+<ul>
+<li>800 g (28 oz / 3½ cups) canned whole peeled tomatoes, crushed by hand</li>
+<li>60 ml (2 fl oz / ¼ cup) extra virgin olive oil</li>
+<li>1 large yellow onion, about 200 g (7 oz), diced</li>
+<li>2 medium red bell peppers, about 300 g (10½ oz) total, seeded and diced</li>
+<li>4 cloves garlic, minced</li>
+<li>1 small fresh red chili or jalapeño, seeded and minced (optional, for heat)</li>
+</ul>
+<h3>Spices</h3>
+<ul>
+<li>10 g (2 tsp) sweet paprika</li>
+<li>5 g (1 tsp) ground cumin</li>
+<li>2.5 g (½ tsp) smoked paprika</li>
+<li>1.25 g (¼ tsp) cayenne pepper (adjust to taste)</li>
+<li>5 g (1 tsp) granulated sugar</li>
+<li>5 g (1 tsp) fine sea salt, plus more to taste</li>
+<li>Freshly ground black pepper, to taste</li>
+</ul>
+<h3>For Finishing</h3>
+<ul>
+<li>6 large eggs, room temperature</li>
+<li>15 g (½ oz / ¼ cup) fresh flat-leaf parsley, roughly chopped</li>
+<li>15 g (½ oz / ¼ cup) fresh cilantro, roughly chopped (optional)</li>
+<li>60 g (2 oz / ¼ cup) crumbled feta cheese (optional)</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Canned whole tomatoes → Fresh ripe tomatoes (900 g / 2 lb), blanched, peeled, and chopped (flavor may vary by season)</li>
+<li>Red bell pepper → Green bell pepper or roasted jarred peppers (slightly different flavor profile)</li>
+<li>Fresh chili → ½ tsp red pepper flakes (less fresh heat, but convenient)</li>
+<li>Feta cheese → Goat cheese or labneh for a creamier finish</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>25-30 cm (10-12 inch) cast iron or oven-safe skillet with lid</li>
+<li>Sharp knife and cutting board</li>
+<li>Wooden spoon or spatula</li>
+<li>Lid or aluminum foil for covering</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 10 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Prep the vegetables:</strong> Dice the onion into 1 cm (½ inch) pieces. Seed and dice the bell peppers into similar-sized pieces. Mince the garlic and fresh chili if using. You should have uniform pieces that will cook evenly. Set aside in separate bowls.</div></div><div class="step"><div class="step-num">2</div><div class="step-txt"><strong>Prepare the tomatoes:</strong> Pour the canned tomatoes into a bowl and crush them by hand into rough chunks, keeping some texture. Don&#x27;t over-process—you want rustic, chunky pieces about 2 cm (¾ inch).</div></div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Mix the spices:</strong> Combine the sweet paprika, cumin, smoked paprika, and cayenne in a small bowl. This spice blend is ready to add all at once.</div></div><div class="substep">Cooking (Active time: 20 min)</div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Sauté the aromatics:</strong> Heat the olive oil in your skillet over medium heat until shimmering. Add the diced onion and cook, stirring occasionally, for 4-5 minutes until softened and translucent. The edges should just begin to turn golden.</div></div><div class="step"><div class="step-num">5</div><div class="step-txt">!<a href="../../Images/shakshuka/step-01.jpg">Sautéing onions for shakshuka base</a> <em>Alt text: Diced onions cooking in olive oil in a cast iron skillet, becoming translucent</em></div></div><div class="step"><div class="step-num">6</div><div class="step-txt"><strong>Add the peppers:</strong> Add the diced bell peppers and cook for another 5-6 minutes, stirring occasionally, until they soften and release their juices. The mixture should be fragrant and slightly caramelized.</div></div><div class="step"><div class="step-num">7</div><div class="step-txt"><strong>Bloom the spices:</strong> Add the minced garlic and fresh chili (if using) and cook for 30 seconds until fragrant. Clear a small space in the center of the pan, add the spice mixture directly to the hot surface, and stir for 30 seconds. This blooms the spices and releases their essential oils. You&#x27;ll smell the warm, earthy aroma intensify.</div></div><div class="step"><div class="step-num">8</div><div class="step-txt"><strong>Build the sauce:</strong> Pour in the crushed tomatoes, sugar, salt, and pepper. Stir well to combine everything. Bring to a gentle simmer and cook uncovered for 10-12 minutes, stirring occasionally. The sauce should thicken noticeably and the oil may start to separate slightly at the edges—this is a sign of a well-developed sauce.</div></div><div class="step"><div class="step-num">9</div><div class="step-txt">!<a href="../../Images/shakshuka/step-02.jpg">Shakshuka sauce simmering</a> <em>Alt text: Rich red tomato sauce bubbling gently in cast iron skillet with visible pieces of pepper and onion</em></div></div><div class="substep">Poaching the Eggs</div><div class="step"><div class="step-num">10</div><div class="step-txt"><strong>Create wells for the eggs:</strong> Reduce heat to medium-low. Use the back of a spoon to make 6 evenly spaced wells in the sauce, pushing the tomato mixture aside to expose the bottom of the pan slightly.</div></div><div class="step"><div class="step-num">11</div><div class="step-txt"><strong>Add the eggs:</strong> Crack each egg into a small bowl first, then gently slide one egg into each well. Season the eggs with a small pinch of salt and pepper. The whites should start to set immediately from the heat of the sauce.</div></div><div class="step"><div class="step-num">12</div><div class="step-txt"><strong>Cover and poach:</strong> Cover the skillet with a lid or aluminum foil. Cook for 5-8 minutes depending on your preference: 5 minutes: Very runny yolks (soft) 6-7 minutes: Jammy yolks (medium, recommended) 8+ minutes: Fully set yolks (hard)</div></div><div class="step"><div class="step-num">13</div><div class="step-txt">Check at 5 minutes—the whites should be completely opaque and set, while the yolks should still jiggle when you gently shake the pan.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">14</div><div class="step-txt"><strong>Garnish:</strong> Remove the lid and scatter the chopped parsley and cilantro over the top. Add crumbled feta cheese if using—it will soften slightly from the residual heat.</div></div><div class="step"><div class="step-num">15</div><div class="step-txt"><strong>Serve immediately:</strong> Bring the skillet directly to the table. Shakshuka is traditionally served family-style, eaten directly from the pan with crusty bread for scooping.</div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> Egg whites should be completely set (opaque white, not translucent). Yolk doneness is personal preference.</li>
+<li><strong>Storage:</strong> Refrigerate leftover sauce (without eggs) in an airtight container for up to 4 days. The eggs do not store well—cook fresh eggs when reheating.</li>
+<li><strong>Freezing:</strong> The tomato sauce base (before adding eggs) freezes well for up to 3 months. Thaw overnight in refrigerator.</li>
+<li><strong>Reheating:</strong> Warm sauce over medium-low heat, then poach fresh eggs directly in the reheated sauce.</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve with warm crusty bread, challah, or pita for scooping</li>
+<li>Traditional accompaniments include labne (thick yogurt), hummus, and Israeli salad</li>
+<li>Pairs well with fresh mint tea or strong Turkish coffee</li>
+<li>For a heartier meal, serve alongside feta cheese, olives, and fresh cucumbers</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (½×):</strong> Use a smaller 20 cm (8 inch) skillet. Reduce sauce cooking time to 8 minutes as it will thicken faster. Use 3 eggs.</p>
+<p><strong>Double recipe (2×):</strong> Use a large 35 cm (14 inch) skillet or baking dish. Extend sauce cooking time to 15 minutes. Can also be made in a roasting pan and finished in a 190°C (375°F) oven for 12-15 minutes.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>Sourcing:</strong> For the best results, use San Marzano or high-quality fire-roasted canned tomatoes. In summer, ripe garden tomatoes are exceptional.</li>
+<li><strong>Make-ahead:</strong> The tomato sauce can be prepared up to 3 days ahead and refrigerated. Simply reheat and add eggs when ready to serve.</li>
+<li><strong>Variations:</strong> Add merguez sausage (Tunisia), chorizo (Spanish-influenced), or spinach and artichokes (Mediterranean) to the sauce before adding eggs. Green shakshuka made with tomatillos and spinach is a popular modern variation.</li>
+<li><strong>Common pitfalls:</strong> Don't rush the sauce—under-cooked sauce will be too watery and the eggs won't poach properly. The sauce should be thick enough to hold the eggs in their wells.</li>
+<li><strong>Heat level:</strong> The recipe as written is mild-medium. For authentic North African heat, double the cayenne or add harissa paste to taste.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving (1/4 of recipe with 1.5 eggs): approximately 285 kcal</em>
+- Protein: 14g | Fat: 18g | Carbohydrates: 18g | Fiber: 4g</p>
+<hr />
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-01-12): Initial recipe by @flavor_atlas_coordinator</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe development: @flavor_atlas_coordinator</li>
+<li>Testing: @flavor_atlas_coordinator</li>
+<li>Verification: @Coordinator</li>
+<li>Photography: Pending</li>
+</ul>
+<hr />
+<p><strong>Recipe Location:</strong> <code>/Recipes/north-african/north-african_shakshuka_v1.md</code>
+<strong>Images Location:</strong> <code>/Regions/Images/shakshuka/</code></p>
+<p class="footer">Shakshuka · 2026-01-12 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

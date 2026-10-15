@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "app-prototypes",
+  "title": "Human Mark",
+  "slug": "human-mark",
+  "date": "2026-08-20",
+  "summary": "Scan a draft for the phrasing that reads as AI before you publish it, then issue a certificate your audience can check.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-app-prototype (Claude)",
+    "form_factor": "web app"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "pc-game-concept",
+  "recipe_version": "0.1.0",
+  "collection": "pc-game-concepts",
+  "title": "Cutline",
+  "slug": "cutline",
+  "date": "2026-09-28",
+  "summary": "An extraction shooter set inside a hyperscale tower being stripped for its rare-earth bones. Every crew races the same public countdown.",
+  "files": {
+    "main": "game-design-brief.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

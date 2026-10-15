@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIQ SOD Exception Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">&#9670;</div>
+        <div>
+          <h1 class="brand-title">SOD Exception Tracker</h1>
+          <p class="brand-subtitle">SailPoint IdentityIQ &mdash; Policy Violation Dashboard</p>
+        </div>
+      </div>
+      <div class="header-meta" id="envMeta"></div>
+    </header>
+
+    <div class="summary-bar" id="summaryBar">
+      <div class="summary-card" data-filter="all" id="cardAll">
+        <span class="summary-count" id="countAll">0</span>
+        <span class="summary-label">Total Violations</span>
+      </div>
+      <div class="summary-card status-open" data-filter="Open" id="cardOpen">
+        <span class="summary-count" id="countOpen">0</span>
+        <span class="summary-label">Open</span>
+      </div>
+      <div class="summary-card status-allowed" data-filter="Allowed" id="cardAllowed">
+        <span class="summary-count" id="countAllowed">0</span>
+        <span class="summary-label">Allowed (Exception)</span>
+      </div>
+      <div class="summary-card status-expiring" data-filter="Expiring" id="cardExpiring">
+        <span class="summary-count" id="countExpiring">0</span>
+        <span class="summary-label">Expiring &lt;30 Days</span>
+      </div>
+      <div class="summary-card status-delegated" data-filter="Delegated" id="cardDelegated">
+        <span class="summary-count" id="countDelegated">0</span>
+        <span class="summary-label">Delegated</span>
+      </div>
+      <div class="summary-card status-complete" data-filter="Complete" id="cardComplete">
+        <span class="summary-count" id="countComplete">0</span>
+        <span class="summary-label">Complete</span>
+      </div>
+    </div>
+
+    <div class="expiry-alert" id="expiryAlert" style="display:none">
+      <div class="alert-icon">&#9888;</div>
+      <div class="alert-content">
+        <strong>Upcoming Exception Expirations</strong>
+        <p id="alertText"></p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search identity, policy, application&hellip;" />
+      </div>
+      <div class="filter-group">
+        <label>Status</label>
+        <select id="statusFilter">
+          <option value="all">All Statuses</option>
+          <option value="Open">Open</option>
+          <option value="Allowed">Allowed</option>
+          <option value="Delegated">Delegated</option>
+          <option value="Complete">Complete</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Policy</label>
+        <select id="policyFilter">
+          <option value="all">All Policies</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Age</label>
+        <select id="ageFilter">
+          <option value="all">Any Age</option>
+          <option value="critical">&gt;90 days</option>
+          <option value="warning">30&ndash;90 days</option>
+          <option value="recent">&lt;30 days</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Sort by Risk</label>
+        <select id="sortFilter">
+          <option value="risk-desc">Risk &#8595;</option>
+          <option value="risk-asc">Risk &#8593;</option>
+          <option value="age-desc">Oldest First</option>
+          <option value="age-asc">Newest First</option>
+          <option value="expiry-asc">Expiry Soonest</option>
+        </select>
+      </div>
+      <div class="count-display" id="resultCount"></div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="violationTable">
+        <thead>
+          <tr>
+            <th>Identity</th>
+            <th>Policy / Rule</th>
+            <th>Applications</th>
+            <th>Risk</th>
+            <th>Age</th>
+            <th>Status</th>
+            <th>Exception Expiry</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="empty-icon">&#9698;</div>
+        <p>No violations match the current filters.</p>
+      </div>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="overlay" id="overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
+      <div class="detail-panel" id="detailPanel">
+        <button class="panel-close" id="closePanel" aria-label="Close">&times;</button>
+        <div id="panelContent"></div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+{
+  "schema": "print-design/v1",
+  "title": "Telescoping GPU Sag Brace with Cable Comb",
+  "slug": "telescoping-gpu-sag-brace",
+  "date": "2026-09-23",
+  "subcategory": "Desk-and-Tech",
+  "units": "mm",
+  "summary": "A height-adjustable graphics-card support brace that clips a cable comb onto its post so the PCIe power cable routes cleanly instead of dangling.",
+  "overall_dimensions": { "x": 70, "y": 60, "z": 95 },
+  "coordinate_system": "Origin at the center of the base-plate's bottom face. +X runs right, +Y runs toward the back of the case, +Z runs up. Each part below carries its own local origin, stated in its first construction step, positioned relative to this global frame when assembled.",
+  "target_printer": { "process": "FDM", "build_volume": { "x": 220, "y": 220, "z": 220 }, "nozzle": 0.4 },
+  "parts": [
+    {
+      "id": "base-plate",
+      "name": "Base plate",
+      "quantity": 1,
+      "material": "PETG",
+      "bounding_box": { "x": 70, "y": 60, "z": 16 },
+      "base_shape": "Rectangle 70 x 60, corner radius 4, with a square socket boss cut into the top and four magnet pockets cut into the bottom",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 70 x 60 centered on origin, corner radius 4",
+        "Extrude 16 in +Z",
+        "On the top face (z=16), sketch a square 28 x 28 centered at (0,0)",
+        "Pocket cut 10 deep from the top face (z=16 down to z=6)",
+        "On the bottom face (z=0), sketch four circles 10 diameter, centers at (25,20), (-25,20), (25,-20), (-25,-20)",
+        "Pocket cut 3 deep from the bottom face at each of the four circles (z=0 up to z=3)",
+        "Chamfer the top outer edge of the plate 1 x 45 degrees for finish"
+      ],
+      "features": [
+        { "type": "pocket", "description": "Riser socket", "dimensions": { "x": 28, "y": 28, "depth": 10 }, "position": { "x": 0, "y": 0, "z": 16 } },
+        { "type": "pocket", "description": "Magnet pocket, 4x", "dimensions": { "diameter": 10, "depth": 3 }, "position": { "x": 25, "y": 20, "z": 0 } }
+      ],
+      "print_orientation": "Flat, bottom face down",
+      "supports": "none",
+      "estimated_print_time_h": 1.5,
+      "estimated_filament_g": 35
+    },
+    {
+      "id": "riser-tube",
+      "name": "Riser tube",
+      "quantity": 1,
+      "material": "PETG",
+      "bounding_box": { "x": 27.8, "y": 27.8, "z": 70 },
+      "base_shape": "Hollow square tube, 27.8 x 27.8 outer, 3 mm wall, corner radius 1",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom end): square 27.8 x 27.8, centered, corner radius 1",
+        "Extrude 70 in +Z",
+        "Shell the extrusion inward by 3 (wall thickness), leaving the top and bottom faces open",
+        "On the front wall (Y = -13.9 plane), sketch 11 circles 3.3 diameter, centered on the face width (X=0), at Z = 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65",
+        "Cut each circle through both the front and back walls (through-hole along +Y)"
+      ],
+      "features": [
+        { "type": "hole", "description": "Height-lock pin hole, 11x, 5 mm pitch", "dimensions": { "diameter": 3.3 }, "position": { "x": 0, "y": 0, "z": 15 } }
+      ],
+      "print_orientation": "Vertical, bottom end down",
+      "supports": "none",
+      "estimated_print_time_h": 2.5,
+      "estimated_filament_g": 40
+    },
+    {
+      "id": "locking-pin",
+      "name": "Locking pin",
+      "quantity": 2,
+      "material": "PETG",
+      "bounding_box": { "x": 8, "y": 8, "z": 22 },
+      "base_shape": "T-pin: 3 mm diameter shaft with an 8 mm diameter retaining head",
+      "construction_steps": [
+        "Sketch a circle 3 diameter on XY at z=0, centered on origin",
+        "Extrude 20 in +Z (shaft)",
+        "On top of the shaft (z=20), sketch a circle 8 diameter centered on origin",
+        "Extrude 2 in +Z (head disc)"
+      ],
+      "features": [],
+      "print_orientation": "Vertical, head down",
+      "supports": "none",
+      "estimated_print_time_h": 0.3,
+      "estimated_filament_g": 3
+    },
+    {
+      "id": "gpu-cradle",
+      "name": "GPU cradle",
+      "quantity": 1,
+      "material": "PETG",
+      "bounding_box": { "x": 65, "y": 34, "z": 18 },
+      "base_shape": "Block 65 x 34 x 18 with a bottom socket for the riser and a top trough for the GPU edge",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 65 x 34 centered on origin, corner radius 3",
+        "Extrude 18 in +Z",
+        "On the bottom face (z=0), sketch a square 28.2 x 28.2 centered at (0,0)",
+        "Pocket cut 10 deep from the bottom face (z=0 up to z=10)",
+        "On the top face (z=18), sketch a slot 55 x 18.2 centered at (0,0) with 4 mm corner radius",
+        "Pocket cut 8 deep from the top face (z=18 down to z=10)",
+        "On the socket side wall (Y = -14.1 plane, within the pocket), sketch a circle 3.3 diameter centered at (X=0, Z=5 measured from the part's bottom face)",
+        "Cut the circle through both socket side walls (through-hole along Y)"
+      ],
+      "features": [
+        { "type": "pocket", "description": "Riser socket", "dimensions": { "x": 28.2, "y": 28.2, "depth": 10 }, "position": { "x": 0, "y": 0, "z": 0 } },
+        { "type": "slot", "description": "GPU-edge trough", "dimensions": { "x": 55, "y": 18.2, "depth": 8 }, "position": { "x": 0, "y": 0, "z": 18 } },
+        { "type": "hole", "description": "Height-lock pin hole", "dimensions": { "diameter": 3.3 }, "position": { "x": 0, "y": 0, "z": 5 } }
+      ],
+      "print_orientation": "Flat, bottom (socket) face down",
+      "supports": "none",
+      "estimated_print_time_h": 1.5,
+      "estimated_filament_g": 25
+    },
+    {
+      "id": "friction-pad",
+      "name": "Friction pad",
+      "quantity": 1,
+      "material": "TPU",
+      "bounding_box": { "x": 55, "y": 18, "z": 2 },
+      "base_shape": "Flat strip, 55 x 18 x 2, press-fit into the cradle trough",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of the strip): rectangle 55 x 18 centered on origin, corner radius 2",
+        "Extrude 2 in +Z"
+      ],
+      "features": [],
+      "print_orientation": "Flat",
+      "supports": "none",
+      "estimated_print_time_h": 0.4,
+      "estimated_filament_g": 4
+    },
+    {
+      "id": "cable-comb",
+      "name": "Cable comb",
+      "quantity": 1,
+      "material": "PETG",
+      "bounding_box": { "x": 40, "y": 15, "z": 12 },
+      "base_shape": "Block 40 x 15 x 12 with 6 top slots and two rear snap prongs",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of back-bottom edge): rectangle 40 x 15 centered on X, from Y=0 to Y=15",
+        "Extrude 12 in +Z",
+        "On the top face (z=12), sketch a row of 6 rectangles, each 3 x 15, spaced 3 apart, centered as a group on X=0",
+        "Pocket cut 6 deep from the top face at each rectangle (z=12 down to z=6)",
+        "On the back face (Y=0 plane), sketch two rectangles 1.5 x 8, centered at X=-14 and X=14, from Z=0 to Z=10",
+        "Extrude both -6 in -Y (snap prongs), leaving an inner face-to-face gap of 28.1 between the two prongs"
+      ],
+      "features": [
+        { "type": "slot", "description": "Cable slot, 6x", "dimensions": { "x": 3, "y": 15, "depth": 6 }, "position": { "x": 0, "y": 0, "z": 12 } },
+        { "type": "snap", "description": "Riser snap prong, 2x", "dimensions": { "x": 1.5, "y": 6, "z": 8 }, "position": { "x": 14, "y": 0, "z": 0 } }
+      ],
+      "print_orientation": "Flat, back face down",
+      "supports": "none",
+      "estimated_print_time_h": 0.8,
+      "estimated_filament_g": 8
+    }
+  ],
+  "fits": [
+    { "between": ["base-plate", "riser-tube"], "type": "press", "clearance_per_side": 0.1 },
+    { "between": ["riser-tube", "gpu-cradle"], "type": "sliding", "clearance_per_side": 0.2 },
+    { "between": ["riser-tube", "locking-pin"], "type": "sliding", "clearance_per_side": 0.15 },
+    { "between": ["gpu-cradle", "friction-pad"], "type": "press", "clearance_per_side": 0.1 },
+    { "between": ["riser-tube", "cable-comb"], "type": "snap", "clearance_per_side": 0.15 }
+  ],
+  "hardware": [
+    { "item": "6 x 3 mm N35 disc magnet", "quantity": 4, "notes": "Glued into the base-plate's underside pockets, flush with the bottom face, to hold the brace to a steel case floor" }
+  ],
+  "assembly_steps": [
+    "Press the riser-tube into the base-plate's top socket until it seats flush; add a drop of plastic-safe adhesive if the fit feels loose",
+    "Glue the 4 disc magnets into the base-plate's underside pockets, flush with the surface",
+    "Press the TPU friction pad into the gpu-cradle's top trough",
+    "Slide the gpu-cradle onto the riser-tube, choose the pin hole that puts the trough level with the GPU's underside, and insert a locking pin through the cradle and that hole",
+    "Snap the cable-comb onto the riser-tube at a convenient height and route the PCIe power cable through its slots",
+    "Set the base-plate on the case floor beneath the GPU; the magnets hold it to a steel floor, and the cradle should sit just under the card's far edge"
+  ],
+  "print_settings": { "layer_height": 0.2, "walls": 4, "infill_percent": 25, "infill_pattern": "grid", "supports": "none", "adhesion": "brim 5 on riser-tube" },
+  "parametric_variables": [
+    { "name": "riser_height", "default": 70, "min": 50, "max": 120, "affects": ["riser-tube"] },
+    { "name": "trough_length", "default": 55, "min": 40, "max": 80, "affects": ["gpu-cradle", "friction-pad"] }
+  ],
+  "pricing": { "printed_usd": [18, 26], "digital_file_usd": 5, "estimate": true },
+  "sources": [
+    "https://www.bgr.com/2250183/best-desk-gadgets-to-3d-print-instead-of-buying/",
+    "https://www.etsy.com/market/gpu_support",
+    "https://www.etsy.com/listing/4332375889/gpu-support-bracket-3mf-file-adjustable",
+    "https://www.etsy.com/listing/1871487442/gpu-support-bracket-50-65mm-stl-file-for",
+    "https://www.etsy.com/listing/970396775/gpu-support-anti-sag-3d-printed"
+  ]
+}

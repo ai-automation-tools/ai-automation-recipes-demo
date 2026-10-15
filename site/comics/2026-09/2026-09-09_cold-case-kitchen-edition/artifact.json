@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "comics",
+  "recipe_version": "0.1.0",
+  "collection": "comics",
+  "title": "Cold Case: Kitchen Edition",
+  "slug": "cold-case-kitchen-edition",
+  "date": "2026-09-09",
+  "summary": "True-crime podcast fans turn their detective skills on a minor household mystery, with predictable results.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "series": "Domestic Detectives",
+    "characters": "Sarah, Mark, Barnaby the Cat",
+    "setting": "An apartment kitchen and living room",
+    "humor_type": "Dry/Satire"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

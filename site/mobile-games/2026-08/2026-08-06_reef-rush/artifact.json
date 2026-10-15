@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "mobile-game",
+  "recipe_version": "0.1.0",
+  "collection": "mobile-games",
+  "title": "Reef Rush",
+  "slug": "reef-rush",
+  "date": "2026-08-06",
+  "summary": "A six-by-eight grid of coral, teal, gold, violet, and sunset gems sits inside a glowing reef. The player swaps neighbors to build runs of three, and every clear buys back a few seconds on a draining tide meter, which is the actual clock the run lives or dies b",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-mobile-game (Claude)",
+    "genre": "match-3",
+    "platform": "Mobile (portrait, touch-first)",
+    "game": "Reef Rush"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

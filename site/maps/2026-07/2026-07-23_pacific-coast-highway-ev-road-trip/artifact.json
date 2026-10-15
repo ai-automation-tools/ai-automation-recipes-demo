@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-map",
+  "recipe_version": "0.1.0",
+  "collection": "maps",
+  "title": "Pacific Coast Highway EV Road Trip",
+  "slug": "pacific-coast-highway-ev-road-trip",
+  "date": "2026-07-23",
+  "summary": "An interactive Leaflet map plotting a San Francisco-to-Los Angeles Highway 1 road trip for EV drivers — real Tesla Supercharger stops woven between Big Sur's most iconic scenic landmarks and a few legendary food stops.",
+  "files": {
+    "main": "pacific-coast-highway-ev-road-trip_2026-07-23.html"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

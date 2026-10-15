@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "regional-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "regional-recipes",
+  "title": "Shakshuka",
+  "slug": "shakshuka",
+  "date": "2026-09-15",
+  "summary": "Eggs poached in a spiced tomato and pepper sauce, with the dish's North African history and a Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

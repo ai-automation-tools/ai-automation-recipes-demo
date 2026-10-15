@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Southern Chicken and Dumplings</title>
+<style>
+:root {
+  --accent: #ca8a04; --accent-dark: #916302; --accent-tint: #f9f3e5;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #f9f3e5;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #dcb25b;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #f9f3e5; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">Southern Us  &middot;  2026-08-08</p>
+<h1>Southern Chicken and Dumplings</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Southern Chicken and Dumplings" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">6 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">45 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">1 hr 50 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">Southern Us</div></div></div>
+<ul class="tags"><li class="tag">comfort-food</li><li class="tag">family-friendly</li><li class="tag">one-pot</li><li class="tag">southern</li></ul>
+<p class="intro">Chicken and dumplings is home cooking across much of the Southern United States. The defining Southern version pairs tender chicken and concentrated broth with simple rolled strips of dough, sometimes called slick or flat dumplings. This recipe follows that tradition, using buttermilk for a tender dumpling and the chicken&#x27;s cooking liquid as the base of the finished dish.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>Chicken and Broth</h3>
+<ul>
+<li>1 whole chicken, 3 to 3 1/2 lb (1.36 to 1.59 kg), giblets removed</li>
+<li>8 cups (1.9 L) water</li>
+<li>1 medium yellow onion, quartered</li>
+<li>2 medium carrots, cut into 2-inch pieces</li>
+<li>2 celery stalks, cut into 2-inch pieces</li>
+<li>2 bay leaves</li>
+<li>2 tsp Diamond Crystal kosher salt, divided</li>
+<li>1/2 tsp freshly ground black pepper, plus more for serving</li>
+</ul>
+<h3>Rolled Buttermilk Dumplings</h3>
+<ul>
+<li>2 cups (240 g) all-purpose flour, plus more for rolling</li>
+<li>1/2 tsp baking soda</li>
+<li>1/2 tsp Diamond Crystal kosher salt</li>
+<li>3 tbsp (36 g) nonhydrogenated vegetable shortening, chilled</li>
+<li>3/4 cup (180 ml) whole buttermilk, chilled</li>
+</ul>
+<h3>For Finishing</h3>
+<ul>
+<li>2 tbsp finely chopped fresh chives or flat-leaf parsley</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Whole chicken → 3 lb (1.36 kg) bone-in, skin-on chicken thighs; keep the same 165°F (74°C) safety target</li>
+<li>Nonhydrogenated vegetable shortening → 3 tbsp (42 g) cold unsalted butter; the dumplings will taste richer and slightly less neutral</li>
+<li>Buttermilk → 3/4 cup (180 ml) whole milk mixed with 2 tsp lemon juice and rested for 5 minutes</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>6- to 8-quart Dutch oven or heavy pot with a lid</li>
+<li>Instant-read thermometer</li>
+<li>Rolling pin</li>
+<li>Fine-mesh strainer</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 30 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Start the chicken:</strong> Put the chicken, water, onion, carrots, celery, bay leaves, 1 tsp salt, and black pepper in the pot. Bring just to a boil over medium-high heat, then immediately lower the heat to maintain a gentle simmer. Partially cover and cook for 45 to 60 minutes, turning the chicken once, until the thickest part of the breast and the innermost thigh both reach 165°F (74°C).</div></div><div class="step"><div class="step-num">2</div><div class="step-txt"><strong>Strain and pick the chicken:</strong> Transfer the chicken to a rimmed tray. Strain the broth, discard the cooked vegetables and bay leaves, and return 6 cups (1.4 L) broth to the pot. When the chicken is cool enough to handle, remove and discard the skin and bones. Tear the meat into bite-size pieces; you should have about 4 cups (560 g). Keep the meat refrigerated if it will stand longer than 30 minutes.</div></div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Make the dough:</strong> Whisk the flour, baking soda, and 1/2 tsp salt in a bowl. Cut in the shortening with your fingertips or a pastry blender until the largest pieces are pea-size. Stir in the cold buttermilk just until a shaggy dough forms. Do not knead it smooth.</div></div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Roll and cut the dumplings:</strong> Turn the dough onto a well-floured surface. Pat it together, then roll it 1/8 inch (3 mm) thick. Cut into strips about 1 inch wide and 2 inches long. Dust lightly with flour so they do not stick; the loose flour will also give the broth a little body.</div></div><div class="substep">Cooking (Active time: 15 min)</div><div class="step"><div class="step-num">5</div><div class="step-txt"><strong>Cook the dumplings:</strong> Bring the 6 cups broth to a lively simmer. Drop in the dumplings one at a time, gently nudging them under the surface without vigorous stirring. Reduce the heat to medium-low, cover, and simmer for 12 minutes. Uncover and simmer for 5 to 8 minutes more, gently lifting from the bottom once or twice, until the dumplings are tender with no raw floury center.</div></div><div class="step"><div class="step-num">6</div><div class="step-txt"><strong>Return the chicken:</strong> Fold in the shredded chicken and remaining 1 tsp salt. Simmer for 3 to 5 minutes, until the chicken is steaming and the center of the pot reaches 165°F (74°C). The broth should lightly coat a spoon but still be loose enough to ladle.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">7</div><div class="step-txt"><strong>Rest the pot:</strong> Remove from the heat and let stand for 5 minutes. Taste the broth and add black pepper or a small pinch of salt only if needed.</div></div><div class="step"><div class="step-num">8</div><div class="step-txt"><strong>Garnish and serve:</strong> Ladle the chicken, dumplings, and broth into warm bowls. Scatter with chives or parsley and serve hot.</div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> Cook the whole chicken to 165°F (74°C) in both the thickest breast and innermost thigh; reheat the finished dish to 165°F (74°C)</li>
+<li><strong>Storage:</strong> Refrigerate in shallow airtight containers within 2 hours and use within 3 days</li>
+<li><strong>Freezing:</strong> Freeze for up to 2 months; the dumplings will soften but remain usable</li>
+<li><strong>Reheating:</strong> Warm gently on the stovetop with a splash of water or unsalted broth, stirring carefully, until the center reaches 165°F (74°C)</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve with braised green beans, collard greens, or a crisp cabbage slaw</li>
+<li>Add hot sauce at the table so each person can choose the heat level</li>
+<li>Traditional serving style: Spoon into deep bowls with plenty of broth and cracked black pepper</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (1/2x):</strong> Use 1 1/2 to 2 lb (680 to 910 g) bone-in chicken pieces and a 4- to 5-quart pot. Begin checking the chicken after 30 minutes, but rely on the 165°F (74°C) internal temperature.</p>
+<p><strong>Double recipe (2x):</strong> Cook the chickens in separate pots or use one 12-quart stockpot so they stay submerged. Roll the dough in two batches and add the dumplings gradually to keep the broth simmering; allow 5 to 10 extra minutes for the pot to return to temperature.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>Sourcing:</strong> A chicken around 3 to 3 1/2 lb (1.36 to 1.59 kg) cooks more evenly in this timeframe than a large roasting bird. Check that packaged shortening is labeled nonhydrogenated and contains 0 g trans fat.</li>
+<li><strong>Make-ahead:</strong> Cook and pick the chicken and strain the broth up to 2 days ahead. Refrigerate them separately; make and cook the dumplings just before serving.</li>
+<li><strong>Variations:</strong> Some Southern families prefer fluffy drop dumplings, while others use very thin rolled squares. These rolled strips land between noodle-like slicks and soft, puffy dumplings.</li>
+<li><strong>Common pitfalls:</strong> Keep the broth at a steady simmer after the dough goes in. A hard boil can tear the dumplings, while a weak simmer can leave their centers gummy.</li>
+<li><strong>Richness:</strong> This is a hearty main dish. Removing the chicken skin before serving keeps the broth full-flavored without making each bowl excessively fatty.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving: approximately 480 kcal</em>
+- Protein: 38 g | Fat: 17 g | Carbohydrates: 42 g | Fiber: 2 g
+- Sodium: approximately 650 mg | Saturated fat: approximately 4 g | Added sugar: 0 g</p><h2 class="sec">Sources</h2><ul>
+<li><a href="https://www.southernliving.com/recipes/old-fashioned-chicken-dumplings-recipe">Southern Living: Old-Fashioned Chicken and Dumplings</a> - primary reference for the whole-chicken broth and rolled buttermilk dumplings</li>
+<li><a href="https://www.pauladeen.com/recipe/southern-chicken-and-dumplings-recipe/">Paula Deen: Easy Southern Chicken and Dumplings</a> - reference for the traditional rolled-dumpling method and family-style serving</li>
+<li><a href="https://www.kingarthurbaking.com/recipes/chicken-and-dumplings-recipe">King Arthur Baking: Chicken and Dumplings</a> - ratio and technique cross-check for tender buttermilk dumplings</li>
+<li><a href="https://commons.wikimedia.org/wiki/File:Chicken_and_dumplings.JPG">Wikimedia Commons: Chicken and dumplings.JPG</a> - hero image source</li>
+</ul>
+<hr />
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-08-08): Initial recipe by @Codex</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe development: @Codex; adapted from the sources listed above</li>
+<li>Testing: @Codex</li>
+<li>Verification: @Coordinator</li>
+<li>Photography: Amadscientist, <a href="https://commons.wikimedia.org/wiki/File:Chicken_and_dumplings.JPG">Wikimedia Commons</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>; no changes made</li>
+</ul>
+<hr />
+<p><strong>Recipe Location:</strong> <code>/Recipe-of-the-Week/Recipes/2026-08-08_southern-chicken-and-dumplings.md</code>
+<strong>Images Location:</strong> <code>/Recipe-of-the-Week/Images/southern-chicken-and-dumplings/</code></p>
+<p class="footer">Southern Chicken and Dumplings · 2026-08-08 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

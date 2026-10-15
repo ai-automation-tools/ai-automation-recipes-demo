@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "short-story",
+  "recipe_version": "0.1.0",
+  "collection": "short-stories",
+  "title": "The Cartographer's Debt",
+  "slug": "the-cartographers-debt",
+  "date": "2026-08-23",
+  "summary": "The pen had been dry for six years, and Maren Osk kept it filled anyway.",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "genre": "Fantasy (Secondary-World / Craft Fantasy)",
+    "word_count": "3266"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "label": "30-yr mortgage, rate improved 0.54 pts",
+    "loanType": "Mortgage",
+    "currentBalance": 320000,
+    "currentApr": 7.25,
+    "currentRemainingMonths": 336,
+    "newApr": 6.71,
+    "newTermMonths": 336,
+    "closingCosts": 9600,
+    "planToStayMonths": 84
+  },
+  {
+    "label": "30-yr mortgage, term reset trap",
+    "loanType": "Mortgage",
+    "currentBalance": 250000,
+    "currentApr": 6.10,
+    "currentRemainingMonths": 300,
+    "newApr": 5.90,
+    "newTermMonths": 360,
+    "closingCosts": 7500,
+    "planToStayMonths": 36
+  },
+  {
+    "label": "15-yr mortgage refi, kept short term",
+    "loanType": "Mortgage",
+    "currentBalance": 180000,
+    "currentApr": 6.85,
+    "currentRemainingMonths": 150,
+    "newApr": 6.18,
+    "newTermMonths": 150,
+    "closingCosts": 5400,
+    "planToStayMonths": 150
+  },
+  {
+    "label": "Mortgage refi with points bought down",
+    "loanType": "Mortgage",
+    "currentBalance": 410000,
+    "currentApr": 6.95,
+    "currentRemainingMonths": 348,
+    "newApr": 5.75,
+    "newTermMonths": 348,
+    "closingCosts": 16400,
+    "planToStayMonths": 180
+  },
+  {
+    "label": "Cash-strapped move, refi too soon",
+    "loanType": "Mortgage",
+    "currentBalance": 295000,
+    "currentApr": 6.60,
+    "currentRemainingMonths": 312,
+    "newApr": 6.10,
+    "newTermMonths": 312,
+    "closingCosts": 8850,
+    "planToStayMonths": 18
+  },
+  {
+    "label": "Auto loan, credit union refi",
+    "loanType": "Auto",
+    "currentBalance": 18500,
+    "currentApr": 9.90,
+    "currentRemainingMonths": 48,
+    "newApr": 6.50,
+    "newTermMonths": 48,
+    "closingCosts": 250,
+    "planToStayMonths": 48
+  },
+  {
+    "label": "Auto loan, near-zero-cost refi",
+    "loanType": "Auto",
+    "currentBalance": 11200,
+    "currentApr": 11.25,
+    "currentRemainingMonths": 30,
+    "newApr": 7.90,
+    "newTermMonths": 30,
+    "closingCosts": 25,
+    "planToStayMonths": 30
+  },
+  {
+    "label": "Personal loan consolidation",
+    "loanType": "Personal",
+    "currentBalance": 12000,
+    "currentApr": 18.99,
+    "currentRemainingMonths": 36,
+    "newApr": 11.50,
+    "newTermMonths": 36,
+    "closingCosts": 300,
+    "planToStayMonths": 36
+  },
+  {
+    "label": "Private student loan refi",
+    "loanType": "Student",
+    "currentBalance": 42000,
+    "currentApr": 8.25,
+    "currentRemainingMonths": 120,
+    "newApr": 6.40,
+    "newTermMonths": 120,
+    "closingCosts": 0,
+    "planToStayMonths": 120
+  },
+  {
+    "label": "Student loan refi, extended term",
+    "loanType": "Student",
+    "currentBalance": 28000,
+    "currentApr": 7.80,
+    "currentRemainingMonths": 84,
+    "newApr": 6.90,
+    "newTermMonths": 120,
+    "closingCosts": 0,
+    "planToStayMonths": 60
+  }
+]

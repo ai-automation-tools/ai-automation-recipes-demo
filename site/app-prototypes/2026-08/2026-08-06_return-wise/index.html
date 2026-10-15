@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReturnWise — know the real cost before you buy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">ReturnWise</span>
+      </div>
+      <p class="tagline">See what a return actually costs before you buy — or before the deadline sneaks up on you.</p>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="ReturnWise sections">
+      <button class="tab-btn active" data-tab="calculator" role="tab" aria-selected="true">Cost calculator</button>
+      <button class="tab-btn" data-tab="tracker" role="tab" aria-selected="false">My returns</button>
+      <button class="tab-btn" data-tab="compare" role="tab" aria-selected="false">Compare retailers</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="calculator" class="tab-panel active" role="tabpanel">
+      <div class="panel-grid">
+        <form id="calc-form" class="card calc-form">
+          <h2>Before you buy — or before you mail it back</h2>
+          <label for="calc-retailer">Retailer</label>
+          <select id="calc-retailer" required></select>
+
+          <label for="calc-price">Item price</label>
+          <input id="calc-price" type="number" min="0" step="0.01" value="80.00" required />
+
+          <div class="checkbox-row">
+            <input id="calc-opened" type="checkbox" checked />
+            <label for="calc-opened">Item has been opened / worn / used</label>
+          </div>
+
+          <fieldset class="method-fieldset">
+            <legend>Return method</legend>
+            <label class="radio-label"><input type="radio" name="method" value="mail" checked /> Mail it back</label>
+            <label class="radio-label"><input type="radio" name="method" value="store" /> Return in store</label>
+          </fieldset>
+        </form>
+
+        <div class="card calc-result" id="calc-result" aria-live="polite">
+          <!-- populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <section id="tracker" class="tab-panel" role="tabpanel">
+      <div class="tracker-head">
+        <h2>Purchases with a return window still open</h2>
+        <button id="add-return-btn" class="primary-btn" type="button">+ Track a purchase</button>
+      </div>
+      <div id="tracker-list" class="tracker-list"></div>
+
+      <dialog id="add-return-dialog">
+        <form id="add-return-form" method="dialog" class="card">
+          <h3>Track a new purchase</h3>
+          <label for="new-retailer">Retailer</label>
+          <select id="new-retailer" required></select>
+
+          <label for="new-item">Item name</label>
+          <input id="new-item" type="text" placeholder="e.g. Running shoes" required />
+
+          <label for="new-price">Price</label>
+          <input id="new-price" type="number" min="0" step="0.01" required />
+
+          <label for="new-date">Purchase date</label>
+          <input id="new-date" type="date" required />
+
+          <div class="checkbox-row">
+            <input id="new-opened" type="checkbox" />
+            <label for="new-opened">Already opened / used</label>
+          </div>
+
+          <div class="dialog-actions">
+            <button type="button" id="cancel-add-return" class="ghost-btn">Cancel</button>
+            <button type="submit" class="primary-btn">Add</button>
+          </div>
+        </form>
+      </dialog>
+    </section>
+
+    <section id="compare" class="tab-panel" role="tabpanel">
+      <h2>Same $100 item, opened, mailed back — who charges you the least?</h2>
+      <p class="compare-note">Ranked by how much of your refund a return actually eats, worst offenders first.</p>
+      <div id="compare-list" class="compare-list"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Return policy data is a hand-curated sample for this demo, not a live feed. Always confirm the current policy at checkout.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

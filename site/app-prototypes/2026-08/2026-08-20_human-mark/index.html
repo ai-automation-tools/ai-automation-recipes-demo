@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HumanMark — pre-publish AI-tell scanner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">HM</span>
+    <div>
+      <h1>HumanMark</h1>
+      <p class="tagline">Scan before you publish. Certify what passes.</p>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Views">
+    <button class="tab-btn is-active" data-view="scanner" type="button">Scanner</button>
+    <button class="tab-btn" data-view="certificates" type="button">Certificates</button>
+  </nav>
+</header>
+
+<main>
+  <section id="scanner-view" class="view is-active">
+    <div class="panel input-panel">
+      <div class="panel-row">
+        <label for="sample-select">Load a sample draft</label>
+        <div class="sample-controls">
+          <select id="sample-select">
+            <option value="">Choose a sample…</option>
+          </select>
+          <button id="load-sample-btn" type="button" class="btn btn-ghost">Load</button>
+        </div>
+      </div>
+      <label for="draft-input" class="sr-only">Draft text</label>
+      <textarea id="draft-input" placeholder="Paste your draft here — a newsletter, a caption, a product blurb, anything you're about to publish." rows="10"></textarea>
+      <div class="panel-row panel-row-end">
+        <span id="word-count" class="hint">0 words</span>
+        <button id="scan-btn" type="button" class="btn btn-primary">Scan for AI tells</button>
+      </div>
+    </div>
+
+    <div id="results-panel" class="panel results-panel is-hidden">
+      <div class="score-block">
+        <div id="score-ring" class="score-ring">
+          <span id="score-value">0</span>
+        </div>
+        <div class="score-copy">
+          <p id="score-verdict" class="score-verdict"></p>
+          <p id="score-detail" class="hint"></p>
+          <div class="cert-fields">
+            <input id="cert-title" type="text" placeholder="Title (e.g. September newsletter)">
+            <input id="cert-issuer" type="text" placeholder="Issuer name">
+          </div>
+        </div>
+        <button id="certify-btn" type="button" class="btn btn-primary" disabled>Issue Human-Made Certificate</button>
+      </div>
+
+      <div class="results-grid">
+        <div class="highlighted-draft">
+          <h2>Flagged text</h2>
+          <div id="highlighted-text" class="highlighted-text"></div>
+        </div>
+        <div class="category-breakdown">
+          <h2>What got flagged</h2>
+          <ul id="category-list" class="category-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="certificate-issued" class="panel cert-issued-panel is-hidden">
+      <h2>Certificate issued</h2>
+      <div class="cert-card" id="issued-cert-card"></div>
+      <div class="embed-block">
+        <label for="embed-snippet">Embed this badge</label>
+        <textarea id="embed-snippet" rows="3" readonly></textarea>
+        <button id="copy-embed-btn" type="button" class="btn btn-ghost">Copy embed code</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates-view" class="view">
+    <div class="panel verify-panel">
+      <h2>Verify a certificate</h2>
+      <div class="verify-row">
+        <input id="verify-input" type="text" placeholder="e.g. HM-2026-0847">
+        <button id="verify-btn" type="button" class="btn btn-primary">Verify</button>
+      </div>
+      <div id="verify-result" class="verify-result"></div>
+    </div>
+
+    <div class="panel registry-panel">
+      <div class="registry-header">
+        <h2>Certificate registry</h2>
+        <div class="sort-controls">
+          <span class="hint">Sort by</span>
+          <button class="btn btn-ghost sort-btn is-active" data-sort="date">Date</button>
+          <button class="btn btn-ghost sort-btn" data-sort="score">Score</button>
+        </div>
+      </div>
+      <table class="registry-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Issuer</th>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>Issued</th>
+          </tr>
+        </thead>
+        <tbody id="registry-body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Prototype — scanning runs entirely in your browser. No text is sent anywhere. Certificates issued in this session live only in this tab and reset on reload.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

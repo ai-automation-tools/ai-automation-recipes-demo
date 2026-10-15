@@ -1,0 +1,3 @@
+# Synopsis
+
+Backed by a financier who does not walk away, Tesla proves wireless power at Wardenclyffe and reclaims radio from Marconi in the courts. Over three decades the world stops stringing wire and starts broadcasting current from great copper-domed towers, each one lighting a ring of country around it. Cities clear of coal smoke; farmers run motors off coils bolted to their barns; the map fills with light. But a system that can send power through the air can also be switched off, and two world wars are fought partly over who holds the switch. The dream half-works, dazzling and wasteful and centralized, and the men who inherit the grid turn out to be different men than the one who dreamed it.

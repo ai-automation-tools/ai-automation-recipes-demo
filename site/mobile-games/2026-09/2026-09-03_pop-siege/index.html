@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Pop Siege</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 20%, #2a2f4a 0%, #121420 55%, #0a0b12 100%);
+    background-color: #0a0b12;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    touch-action: none;
+    -webkit-user-select: none; user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phone-frame {
+    position: relative;
+    width: min(92vw, calc(92vh * 9 / 16));
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(155deg, #3a3f55 0%, #1c1e2b 60%, #101119 100%);
+    border-radius: 42px;
+    padding: 14px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55), inset 0 0 0 2px rgba(255,255,255,0.06);
+  }
+  .phone-frame::before {
+    content: "";
+    position: absolute;
+    top: 6px; left: 50%; transform: translateX(-50%);
+    width: 34%; height: 22px;
+    background: #0a0b12;
+    border-radius: 0 0 16px 16px;
+    z-index: 5;
+    pointer-events: none !important;
+  }
+  .screen {
+    position: relative;
+    width: 100%; height: 100%;
+    background: #05060a;
+    border-radius: 28px;
+    overflow: hidden;
+  }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 24px; text-align: center;
+    background: rgba(5,6,12,0.86);
+    color: #f4f6ff;
+    transition: opacity 0.15s ease;
+  }
+  .overlay.hidden { display: none; pointer-events: none; }
+  .overlay h1 {
+    margin: 0; font-size: 1.9rem; letter-spacing: 0.06em;
+    background: linear-gradient(90deg,#ff5b5b,#ffd23f,#57e389,#4da6ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .overlay p { margin: 0; font-size: 0.95rem; color: #b9bdd6; max-width: 260px; line-height: 1.4; }
+  .overlay .score-line { font-size: 1.15rem; color: #f4f6ff; margin-top: 4px; }
+  .btn {
+    min-height: 46px; padding: 12px 30px; font-size: 1.05rem; font-weight: 700;
+    color: #10121c; background: linear-gradient(180deg,#ffe27a,#ffb347);
+    border: none; border-radius: 14px; cursor: pointer;
+    box-shadow: 0 6px 0 #a9701f, 0 10px 18px rgba(0,0,0,0.4);
+    letter-spacing: 0.03em;
+  }
+  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #a9701f, 0 4px 10px rgba(0,0,0,0.4); }
+  .hint-key { color: #7d8199; font-size: 0.78rem; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="screen">
+      <canvas id="game"></canvas>
+      <div id="titleOverlay" class="overlay">
+        <h1>POP SIEGE</h1>
+        <p id="titleHint">Drag to aim, lift your finger to fire. Match 3+ same-color bubbles. Bank shots off the walls for tricky angles.</p>
+        <button id="startBtn" class="btn" type="button">Tap to Start</button>
+        <p class="hint-key">Desktop: drag with mouse, or Arrow keys + Space</p>
+      </div>
+      <div id="overOverlay" class="overlay hidden">
+        <h1>WALL BREACHED</h1>
+        <p class="score-line">Score: <span id="finalScore">0</span></p>
+        <p class="score-line">Best this session: <span id="finalBest">0</span></p>
+        <button id="restartBtn" class="btn" type="button">Play Again</button>
+        <p class="hint-key">Press R to restart</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+/*
+  Pop Siege — bubble shooter (mobile, portrait, touch-first)
+  Controls: drag anywhere to aim, release to fire. Bubbles bounce off the
+  side walls. Match 3+ same-color bubbles to pop them.
+  Desktop equivalents: mouse drag-release; ArrowLeft/ArrowRight nudge aim,
+  Space fires. R restarts after game over.
+*/
+
+// ---------- DOM refs (assigned up front; script runs after DOM exists) ----------
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const titleOverlay = document.getElementById('titleOverlay');
+const overOverlay = document.getElementById('overOverlay');
+const titleHint = document.getElementById('titleHint');
+const startBtn = document.getElementById('startBtn');
+const restartBtn = document.getElementById('restartBtn');
+const finalScoreEl = document.getElementById('finalScore');
+const finalBestEl = document.getElementById('finalBest');
+
+// ---------- Constants ----------
+const LOGICAL_W = 360, LOGICAL_H = 640;
+const R = 17, D = R * 2;
+const COLS = 9;
+const ROWH = Math.round(D * 0.87);
+const Y0 = 54;
+const INIT_ROWS = 5;
+const SHOOTER_X = LOGICAL_W / 2, SHOOTER_Y = 552;
+const TOP_LIMIT = Y0;
+const DANGER_Y = 470;
+const SPEED = 620; // px/sec
+const PALETTE = ['#ff5b5b', '#4da6ff', '#57e389', '#ffd23f', '#c77dff'];
+const STATE = { TITLE: 'title', PLAY: 'play', OVER: 'over' };
+const IS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+// ---------- Mutable state ----------
+let state = STATE.TITLE;
+let rows = [];
+let score = 0, bestScore = 0;
+let comboMultiplier = 1;
+let colorsUnlocked = 4;
+let currentColor = PALETTE[0], nextColor = PALETTE[1];
+let shotsSinceDrop = 0, dropInterval = 10;
+let dragging = false;
+let aimAngleDeg = 0;
+const projectile = { active: false, x: 0, y: 0, vx: 0, vy: 0, color: null };
+let audioCtx = null;
+
+const PARTICLE_POOL_SIZE = 200;
+const particles = Array.from({ length: PARTICLE_POOL_SIZE }, () => ({ active: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, maxLife: 0, color: '#fff', size: 3 }));
+const FALL_POOL_SIZE = 60;
+const fallingBubbles = Array.from({ length: FALL_POOL_SIZE }, () => ({ active: false, x: 0, y: 0, vx: 0, vy: 0, color: '#fff' }));
+
+// ---------- Grid helpers ----------
+function makeRow(offset) {
+  const len = offset === 0 ? COLS : COLS - 1;
+  return { offset, cells: new Array(len).fill(null) };
+}
+function fillRandom(row) {
+  for (let i = 0; i < row.cells.length; i++) row.cells[i] = randomColor();
+}
+function buildInitialRows() {
+  rows = [];
+  for (let i = 0; i < INIT_ROWS; i++) {
+    const row = makeRow(i % 2);
+    fillRandom(row);
+    rows.push(row);
+  }
+}
+function impliedOffset(index) {
+  if (index < rows.length) return rows[index].offset;
+  return rows.length ? (rows[rows.length - 1].offset === 0 ? 1 : 0) : 0;
+}
+function rowColsAt(index) {
+  if (index < rows.length) return rows[index].cells.length;
+  return impliedOffset(index) === 0 ? COLS : COLS - 1;
+}
+function ensureRow(index) {
+  while (rows.length <= index) {
+    const offset = rows.length ? (rows[rows.length - 1].offset === 0 ? 1 : 0) : 0;
+    rows.push(makeRow(offset));
+  }
+}
+function cellPos(row, col) {
+  const offset = impliedOffset(row);
+  const x = offset === 0 ? R + col * D : R + D + col * D;
+  const y = Y0 + row * ROWH;
+  return { x, y };
+}
+function cellColor(row, col) {
+  if (row < 0 || row >= rows.length) return null;
+  const r = rows[row];
+  if (col < 0 || col >= r.cells.length) return null;
+  return r.cells[col];
+}
+function cellEmpty(row, col) {
+  if (row < 0) return false;
+  if (col < 0 || col >= rowColsAt(row)) return false;
+  if (row >= rows.length) return true;
+  return rows[row].cells[col] === null;
+}
+function getNeighbors(row, col) {
+  const offset = rows[row].offset;
+  if (offset === 0) {
+    return [[row, col - 1], [row, col + 1], [row - 1, col - 1], [row - 1, col], [row + 1, col - 1], [row + 1, col]];
+  }
+  return [[row, col - 1], [row, col + 1], [row - 1, col], [row - 1, col + 1], [row + 1, col], [row + 1, col + 1]];
+}
+function keyOf(r, c) { return r + ',' + c; }
+
+function floodFillColor(startRow, startCol, color) {
+  const visited = new Set();
+  const stack = [[startRow, startCol]];
+  const result = [];
+  visited.add(keyOf(startRow, startCol));
+  while (stack.length) {
+    const [r, c] = stack.pop();
+    result.push([r, c]);
+    for (const [nr, nc] of getNeighbors(r, c)) {
+      const k = keyOf(nr, nc);
+      if (visited.has(k)) continue;
+      if (cellColor(nr, nc) === color) {
+        visited.add(k);
+        stack.push([nr, nc]);
+      }
+    }
+  }
+  return result;
+}
+function floodFillConnectedToTop() {
+  const visited = new Set();
+  if (!rows.length) return visited;
+  const stack = [];
+  for (let c = 0; c < rows[0].cells.length; c++) {
+    if (rows[0].cells[c] !== null) { stack.push([0, c]); visited.add(keyOf(0, c)); }
+  }
+  while (stack.length) {
+    const [r, c] = stack.pop();
+    for (const [nr, nc] of getNeighbors(r, c)) {
+      const k = keyOf(nr, nc);
+      if (visited.has(k)) continue;
+      if (cellColor(nr, nc) !== null) { visited.add(k); stack.push([nr, nc]); }
+    }
+  }
+  return visited;
+}
+
+function randomColor() { return PALETTE[Math.floor(Math.random() * colorsUnlocked)]; }
+
+function dropCeiling() {
+  const offset = rows.length ? (rows[0].offset === 0 ? 1 : 0) : 0;
+  const row = makeRow(offset);
+  fillRandom(row);
+  rows.unshift(row);
+  playTone(120, 0.18, 'square', 0.15);
+}
+
+function checkDanger() {
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    for (let c = 0; c < r.cells.length; c++) {
+      if (r.cells[c] !== null) {
+        const y = Y0 + i * ROWH;
+        if (y + R >= DANGER_Y) return true;
+        break;
+      }
+    }
+  }
+  return false;
+}
+
+function checkUnlocks() {
+  if (colorsUnlocked < 5 && score >= 800) colorsUnlocked = 5;
+}
+
+// ---------- Particles & falling bubbles ----------
+function spawnPopParticles(x, y, color) {
+  let spawned = 0;
+  for (let i = 0; i < particles.length && spawned < 12; i++) {
+    if (particles[i].active) continue;
+    const p = particles[i];
+    const ang = Math.random() * Math.PI * 2;
+    const spd = 60 + Math.random() * 120;
+    p.active = true; p.x = x; p.y = y;
+    p.vx = Math.cos(ang) * spd; p.vy = Math.sin(ang) * spd;
+    p.life = p.maxLife = 0.4 + Math.random() * 0.25;
+    p.color = color; p.size = 2 + Math.random() * 2.5;
+    spawned++;
+  }
+}
+function spawnFallingBubble(x, y, color) {
+  for (let i = 0; i < fallingBubbles.length; i++) {
+    if (fallingBubbles[i].active) continue;
+    const b = fallingBubbles[i];
+    b.active = true; b.x = x; b.y = y;
+    b.vx = (Math.random() - 0.5) * 60; b.vy = 20 + Math.random() * 40;
+    b.color = color;
+    return;
+  }
+}
+function updateEffects(dt) {
+  for (const p of particles) {
+    if (!p.active) continue;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    p.vy += 260 * dt;
+    p.life -= dt;
+    if (p.life <= 0) p.active = false;
+  }
+  for (const b of fallingBubbles) {
+    if (!b.active) continue;
+    b.x += b.vx * dt; b.y += b.vy * dt;
+    b.vy += 480 * dt;
+    if (b.y - R > LOGICAL_H) b.active = false;
+  }
+}
+
+// ---------- Audio ----------
+function unlockAudio() {
+  if (!audioCtx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) audioCtx = new AC();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}
+function playTone(freq, dur, type, vol) {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t);
+  gain.gain.setValueAtTime(0, t);
+  gain.gain.linearRampToValueAtTime(vol, t + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  osc.connect(gain).connect(audioCtx.destination);
+  osc.start(t); osc.stop(t + dur + 0.02);
+}
+function playPopSound(combo) {
+  playTone(420 + Math.min(combo, 10) * 45, 0.13, 'sine', 0.22);
+}
+function playCascadeSound() {
+  playTone(680, 0.18, 'sawtooth', 0.12);
+}
+function playGameOverSound() {
+  if (!audioCtx) return;
+  const t = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(420, t);
+  osc.frequency.exponentialRampToValueAtTime(90, t + 0.6);
+  gain.gain.setValueAtTime(0.18, t);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
+  osc.connect(gain).connect(audioCtx.destination);
+  osc.start(t); osc.stop(t + 0.7);
+}
+
+// ---------- Shot resolution ----------
+function matchAndPop(row, col) {
+  const color = rows[row].cells[col];
+  const comp = floodFillColor(row, col, color);
+  if (comp.length >= 3) {
+    for (const [r, c] of comp) {
+      const { x, y } = cellPos(r, c);
+      rows[r].cells[c] = null;
+      spawnPopParticles(x, y, color);
+    }
+    score += comp.length * 10 * comboMultiplier;
+    comboMultiplier++;
+    playPopSound(comboMultiplier);
+
+    const connected = floodFillConnectedToTop();
+    const floating = [];
+    for (let r = 0; r < rows.length; r++) {
+      for (let c = 0; c < rows[r].cells.length; c++) {
+        if (rows[r].cells[c] !== null && !connected.has(keyOf(r, c))) floating.push([r, c]);
+      }
+    }
+    if (floating.length) {
+      for (const [r, c] of floating) {
+        const { x, y } = cellPos(r, c);
+        const fc = rows[r].cells[c];
+        rows[r].cells[c] = null;
+        spawnFallingBubble(x, y, fc);
+      }
+      score += floating.length * 20 * comboMultiplier;
+      playCascadeSound();
+    }
+  } else {
+    comboMultiplier = 1;
+  }
+}
+
+function findNearestEmptyInRow(rowIndex, px) {
+  ensureRow(rowIndex);
+  const cols = rows[rowIndex].cells.length;
+  const offset = rows[rowIndex].offset;
+  const base = offset === 0 ? R : R + D;
+  let guess = Math.round((px - base) / D);
+  guess = Math.max(0, Math.min(cols - 1, guess));
+  if (cellEmpty(rowIndex, guess)) return guess;
+  for (let d = 1; d < cols; d++) {
+    if (guess - d >= 0 && cellEmpty(rowIndex, guess - d)) return guess - d;
+    if (guess + d < cols && cellEmpty(rowIndex, guess + d)) return guess + d;
+  }
+  return -1;
+}
+
+function resolveProjectile(placedRow, placedCol) {
+  if (placedRow !== null) {
+    ensureRow(placedRow);
+    rows[placedRow].cells[placedCol] = projectile.color;
+    matchAndPop(placedRow, placedCol);
+  } else {
+    comboMultiplier = 1;
+  }
+  currentColor = nextColor;
+  nextColor = randomColor();
+  shotsSinceDrop++;
+  if (shotsSinceDrop >= dropInterval) {
+    dropCeiling();
+    shotsSinceDrop = 0;
+    dropInterval = Math.max(6, dropInterval - 1);
+  }
+  checkUnlocks();
+  bestScore = Math.max(bestScore, score);
+  projectile.active = false;
+  if (checkDanger()) triggerGameOver();
+}
+
+function handleCollision() {
+  let hitRow = -1, hitCol = -1, hitDist = Infinity;
+  for (let r = 0; r < rows.length; r++) {
+    const row = rows[r];
+    const offset = row.offset;
+    const base = offset === 0 ? R : R + D;
+    const y = Y0 + r * ROWH;
+    const dy0 = projectile.y - y;
+    if (Math.abs(dy0) > D * 1.5) continue;
+    for (let c = 0; c < row.cells.length; c++) {
+      if (row.cells[c] === null) continue;
+      const x = base + c * D;
+      const dx = projectile.x - x, dy = projectile.y - y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < D * 0.96 && dist < hitDist) { hitDist = dist; hitRow = r; hitCol = c; }
+    }
+  }
+  if (hitRow >= 0) {
+    const candidates = getNeighbors(hitRow, hitCol).filter(([r, c]) => r >= 0 && cellEmpty(r, c));
+    if (!candidates.length) { resolveProjectile(null); return; }
+    let best = null, bestDist = Infinity;
+    for (const [r, c] of candidates) {
+      const { x, y } = cellPos(r, c);
+      const dist = Math.hypot(projectile.x - x, projectile.y - y);
+      if (dist < bestDist) { bestDist = dist; best = [r, c]; }
+    }
+    resolveProjectile(best[0], best[1]);
+    return;
+  }
+  if (projectile.y <= TOP_LIMIT) {
+    const rowIndex = 0;
+    ensureRow(rowIndex);
+    const col = findNearestEmptyInRow(rowIndex, projectile.x);
+    if (col === -1) { resolveProjectile(null); return; }
+    resolveProjectile(rowIndex, col);
+  }
+}
+
+// ---------- Input ----------
+function toLogical(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (clientX - rect.left) * (LOGICAL_W / rect.width),
+    y: (clientY - rect.top) * (LOGICAL_H / rect.height)
+  };
+}
+function updateAimFromPoint(x, y) {
+  const dx = x - SHOOTER_X;
+  const dy = y - SHOOTER_Y;
+  let deg = Math.atan2(dx, -dy) * 180 / Math.PI;
+  deg = Math.max(-80, Math.min(80, deg));
+  aimAngleDeg = deg;
+}
+function fireProjectile() {
+  if (state !== STATE.PLAY || projectile.active) return;
+  const rad = aimAngleDeg * Math.PI / 180;
+  projectile.active = true;
+  projectile.x = SHOOTER_X;
+  projectile.y = SHOOTER_Y;
+  projectile.vx = SPEED * Math.sin(rad);
+  projectile.vy = -SPEED * Math.cos(rad);
+  projectile.color = currentColor;
+  playTone(300, 0.08, 'triangle', 0.16);
+}
+
+canvas.addEventListener('pointerdown', (e) => {
+  unlockAudio();
+  if (state !== STATE.PLAY || projectile.active) return;
+  dragging = true;
+  const p = toLogical(e.clientX, e.clientY);
+  updateAimFromPoint(p.x, p.y);
+}, { passive: false });
+window.addEventListener('pointermove', (e) => {
+  if (!dragging) return;
+  const p = toLogical(e.clientX, e.clientY);
+  updateAimFromPoint(p.x, p.y);
+}, { passive: false });
+window.addEventListener('pointerup', () => {
+  if (!dragging) return;
+  dragging = false;
+  fireProjectile();
+}, { passive: false });
+canvas.addEventListener('touchstart', (e) => e.preventDefault(), { passive: false });
+canvas.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
+
+window.addEventListener('keydown', (e) => {
+  if (state === STATE.TITLE && (e.key === 'Enter' || e.code === 'Space')) {
+    e.preventDefault(); beginGame();
+  } else if (state === STATE.PLAY) {
+    if (e.key === 'ArrowLeft') { aimAngleDeg = Math.max(-80, aimAngleDeg - 4); }
+    else if (e.key === 'ArrowRight') { aimAngleDeg = Math.min(80, aimAngleDeg + 4); }
+    else if (e.code === 'Space') { e.preventDefault(); unlockAudio(); fireProjectile(); }
+  } else if (state === STATE.OVER && (e.key === 'r' || e.key === 'R' || e.key === 'Enter')) {
+    beginGame();
+  }
+});
+startBtn.addEventListener('click', () => { unlockAudio(); beginGame(); });
+restartBtn.addEventListener('click', () => { unlockAudio(); beginGame(); });
+
+// ---------- Game flow ----------
+function triggerGameOver() {
+  state = STATE.OVER;
+  playGameOverSound();
+  finalScoreEl.textContent = String(score);
+  finalBestEl.textContent = String(bestScore);
+  overOverlay.classList.remove('hidden');
+}
+function beginGame() {
+  titleOverlay.classList.add('hidden');
+  overOverlay.classList.add('hidden');
+  score = 0;
+  comboMultiplier = 1;
+  colorsUnlocked = 4;
+  shotsSinceDrop = 0;
+  dropInterval = 10;
+  aimAngleDeg = 0;
+  projectile.active = false;
+  for (const p of particles) p.active = false;
+  for (const b of fallingBubbles) b.active = false;
+  currentColor = randomColor();
+  nextColor = randomColor();
+  buildInitialRows();
+  state = STATE.PLAY;
+}
+titleHint.textContent = IS_TOUCH
+  ? 'Drag to aim, lift your finger to fire. Match 3+ same-color bubbles. Bank shots off the walls for tricky angles.'
+  : 'Click and drag to aim, release to fire. Match 3+ same-color bubbles. Bank shots off the walls for tricky angles.';
+
+// ---------- Render ----------
+function drawBubble(x, y, color, radius) {
+  const grad = ctx.createRadialGradient(x - radius * 0.35, y - radius * 0.4, radius * 0.15, x, y, radius);
+  grad.addColorStop(0, 'rgba(255,255,255,0.9)');
+  grad.addColorStop(0.25, color);
+  grad.addColorStop(1, color);
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+  ctx.stroke();
+}
+
+function render() {
+  ctx.clearRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+  const bg = ctx.createLinearGradient(0, 0, 0, LOGICAL_H);
+  bg.addColorStop(0, '#161a2c');
+  bg.addColorStop(1, '#0a0b12');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,90,90,0.45)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([8, 6]);
+  ctx.beginPath();
+  ctx.moveTo(0, DANGER_Y);
+  ctx.lineTo(LOGICAL_W, DANGER_Y);
+  ctx.stroke();
+  ctx.restore();
+
+  for (let r = 0; r < rows.length; r++) {
+    const row = rows[r];
+    const offset = row.offset;
+    const base = offset === 0 ? R : R + D;
+    const y = Y0 + r * ROWH;
+    if (y - R > DANGER_Y + 60) continue;
+    for (let c = 0; c < row.cells.length; c++) {
+      const color = row.cells[c];
+      if (color === null) continue;
+      drawBubble(base + c * D, y, color, R - 1.5);
+    }
+  }
+
+  for (const b of fallingBubbles) {
+    if (!b.active) continue;
+    drawBubble(b.x, b.y, b.color, R - 2);
+  }
+  for (const p of particles) {
+    if (!p.active) continue;
+    ctx.globalAlpha = Math.max(0, p.life / p.maxLife);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  if (state === STATE.PLAY) {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(SHOOTER_X - 26, SHOOTER_Y + 22);
+    ctx.lineTo(SHOOTER_X + 26, SHOOTER_Y + 22);
+    ctx.stroke();
+    ctx.restore();
+
+    if (dragging) {
+      const rad = aimAngleDeg * Math.PI / 180;
+      const dx = Math.sin(rad), dy = -Math.cos(rad);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 8]);
+      ctx.beginPath();
+      ctx.moveTo(SHOOTER_X, SHOOTER_Y);
+      ctx.lineTo(SHOOTER_X + dx * 110, SHOOTER_Y + dy * 110);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    if (!projectile.active) drawBubble(SHOOTER_X, SHOOTER_Y, currentColor, R);
+    drawBubble(SHOOTER_X + 44, SHOOTER_Y + 4, nextColor, R * 0.6);
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('NEXT', SHOOTER_X + 44, SHOOTER_Y + 24);
+  }
+
+  if (projectile.active) drawBubble(projectile.x, projectile.y, projectile.color, R - 1);
+
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#f4f6ff';
+  ctx.font = '700 22px sans-serif';
+  ctx.fillText(String(score), 18, 34);
+  ctx.font = '11px sans-serif';
+  ctx.fillStyle = 'rgba(244,246,255,0.55)';
+  ctx.fillText('SCORE', 18, 46);
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = 'rgba(244,246,255,0.7)';
+  ctx.font = '13px sans-serif';
+  ctx.fillText('Best ' + Math.max(bestScore, score), LOGICAL_W - 18, 34);
+
+  if (comboMultiplier > 1 && state === STATE.PLAY) {
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#ffd23f';
+    ctx.font = '700 15px sans-serif';
+    ctx.fillText('x' + comboMultiplier + ' COMBO', LOGICAL_W - 18, 52);
+  }
+  ctx.textAlign = 'left';
+}
+
+// ---------- Loop ----------
+function update(dt) {
+  if (state !== STATE.PLAY) { updateEffects(dt); return; }
+  if (projectile.active) {
+    projectile.x += projectile.vx * dt;
+    projectile.y += projectile.vy * dt;
+    if (projectile.x - R < 0) { projectile.x = R; projectile.vx *= -1; playTone(500, 0.05, 'square', 0.1); }
+    else if (projectile.x + R > LOGICAL_W) { projectile.x = LOGICAL_W - R; projectile.vx *= -1; playTone(500, 0.05, 'square', 0.1); }
+    handleCollision();
+  }
+  updateEffects(dt);
+}
+
+let lastTime = 0;
+function frame(now) {
+  if (document.hidden) { lastTime = now; requestAnimationFrame(frame); return; }
+  if (!lastTime) lastTime = now;
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+  update(dt);
+  render();
+  requestAnimationFrame(frame);
+}
+
+// ---------- Sizing ----------
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = Math.round(rect.width * dpr);
+  canvas.height = Math.round(rect.height * dpr);
+  ctx.setTransform(canvas.width / LOGICAL_W, 0, 0, canvas.height / LOGICAL_H, 0, 0);
+}
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', resizeCanvas);
+
+// ---------- Init ----------
+buildInitialRows();
+resizeCanvas();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

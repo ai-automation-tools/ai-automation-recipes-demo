@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TrueTotal</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="tt-header">
+    <h1>TrueTotal</h1>
+    <p class="tt-subtitle" id="tt-site">Checking this page…</p>
+  </header>
+
+  <main>
+    <section class="tt-total-card">
+      <span class="tt-total-label">True total right now</span>
+      <span class="tt-total-amount" id="tt-total-amount">—</span>
+      <span class="tt-delta-badge" id="tt-delta-badge"></span>
+    </section>
+
+    <section class="tt-breakdown">
+      <h2>Where the total came from</h2>
+      <ul id="tt-line-items" class="tt-line-items">
+        <li class="tt-empty">No checkout detected yet.</li>
+      </ul>
+    </section>
+
+    <button id="tt-export-btn" class="tt-export-btn" disabled>Export evidence report</button>
+
+    <section class="tt-premium">
+      <h2>TrueTotal Plus</h2>
+      <p>
+        Track this listing's price across every visit and file-ready complaint
+        reports for the FTC or your state attorney general.
+      </p>
+      <ul class="tt-premium-list" id="tt-premium-preview"></ul>
+      <button class="tt-upgrade-btn" id="tt-upgrade-btn" type="button">Unlock Plus — $4.99/mo</button>
+    </section>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

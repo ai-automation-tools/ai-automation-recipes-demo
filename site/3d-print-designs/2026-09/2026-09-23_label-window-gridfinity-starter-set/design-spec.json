@@ -1,0 +1,154 @@
+{
+  "schema": "print-design/v1",
+  "title": "Label-Window Gridfinity Starter Organizer Set",
+  "slug": "label-window-gridfinity-starter-set",
+  "date": "2026-09-23",
+  "subcategory": "Organization-and-Storage",
+  "units": "mm",
+  "summary": "A simplified, magnet-free Gridfinity-pitch organizer set whose bins hold a small slide-in paper label visible through a front window, so contents are readable without lifting the bin.",
+  "overall_dimensions": { "x": 178, "y": 134.5, "z": 45 },
+  "coordinate_system": "Each part's origin is the center of its own bottom face. +X runs right, +Y runs back, +Z runs up. The baseplate is the ground reference for the assembled set; bins sit in its top-face pockets.",
+  "target_printer": { "process": "FDM", "build_volume": { "x": 220, "y": 220, "z": 220 }, "nozzle": 0.4 },
+  "parts": [
+    {
+      "id": "baseplate",
+      "name": "Baseplate, 4x3 grid",
+      "quantity": 1,
+      "material": "PLA",
+      "bounding_box": { "x": 178, "y": 134.5, "z": 9 },
+      "base_shape": "Rectangle 178 x 134.5 x 9 with a 4-column x 3-row grid of 41.5 x 41.5 pockets on the top face",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 178 x 134.5, centered, corner radius 3",
+        "Extrude 9 in +Z",
+        "On the top face (z=9), sketch 12 rectangles, each 41.5 x 41.5 with corner radius 2, centered at every combination of X = -65.25, -21.75, 21.75, 65.25 and Y = -43.5, 0, 43.5",
+        "Pocket cut each of the 12 rectangles 6 deep (from z=9 down to z=3)"
+      ],
+      "features": [
+        { "type": "pocket", "description": "Bin cell, 12x (4 columns x 3 rows)", "dimensions": { "x": 41.5, "y": 41.5, "depth": 6 }, "position": { "x": -65.25, "y": -43.5, "z": 9 } }
+      ],
+      "print_orientation": "Flat, bottom face down",
+      "supports": "none",
+      "estimated_print_time_h": 4,
+      "estimated_filament_g": 90
+    },
+    {
+      "id": "bin-1x1",
+      "name": "Bin, 1x1 cell, label window",
+      "quantity": 4,
+      "material": "PLA",
+      "bounding_box": { "x": 41, "y": 41, "z": 36 },
+      "base_shape": "Open-top box 41 x 41 x 36, 1.6 mm wall, with a label window on one wall",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 41 x 41, centered, corner radius 2",
+        "Extrude 36 in +Z",
+        "Shell inward 1.6 (wall thickness), leaving the top face open",
+        "On the front outer wall (Y = -20.5 plane), sketch a rectangle 26 x 10 centered at (X=0, Z=27)",
+        "Cut the rectangle through the front wall",
+        "On the inside of the front wall, sketch two ridges, 1 x 1 cross-section, running the full height (Z=0 to Z=36), centered at X = -14.15 and X = 14.15, protruding inward 1"
+      ],
+      "features": [
+        { "type": "slot", "description": "Label window", "dimensions": { "x": 26, "y": 10 }, "position": { "x": 0, "y": -20.5, "z": 27 } },
+        { "type": "boss", "description": "Card guide ridge, 2x", "dimensions": { "x": 1, "y": 1, "z": 36 }, "position": { "x": 14.15, "y": -20.5, "z": 0 } }
+      ],
+      "print_orientation": "Flat, bottom face down",
+      "supports": "none",
+      "estimated_print_time_h": 3.2,
+      "estimated_filament_g": 48
+    },
+    {
+      "id": "bin-2x1",
+      "name": "Bin, 2x1 cell, label window",
+      "quantity": 2,
+      "material": "PLA",
+      "bounding_box": { "x": 84.5, "y": 41, "z": 36 },
+      "base_shape": "Open-top box 84.5 x 41 x 36, 1.6 mm wall, with a label window on one short wall",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 84.5 x 41, centered, corner radius 2",
+        "Extrude 36 in +Z",
+        "Shell inward 1.6 (wall thickness), leaving the top face open",
+        "On the short front outer wall (Y = -20.5 plane), sketch a rectangle 26 x 10 centered at (X=0, Z=27)",
+        "Cut the rectangle through the front wall",
+        "On the inside of the front wall, sketch two ridges, 1 x 1 cross-section, running the full height (Z=0 to Z=36), centered at X = -14.15 and X = 14.15, protruding inward 1"
+      ],
+      "features": [
+        { "type": "slot", "description": "Label window", "dimensions": { "x": 26, "y": 10 }, "position": { "x": 0, "y": -20.5, "z": 27 } },
+        { "type": "boss", "description": "Card guide ridge, 2x", "dimensions": { "x": 1, "y": 1, "z": 36 }, "position": { "x": 14.15, "y": -20.5, "z": 0 } }
+      ],
+      "print_orientation": "Flat, bottom face down",
+      "supports": "none",
+      "estimated_print_time_h": 2.6,
+      "estimated_filament_g": 40
+    },
+    {
+      "id": "bin-2x2",
+      "name": "Bin, 2x2 cell, label window",
+      "quantity": 1,
+      "material": "PLA",
+      "bounding_box": { "x": 84.5, "y": 84.5, "z": 36 },
+      "base_shape": "Open-top box 84.5 x 84.5 x 36, 1.6 mm wall, with a label window on one wall",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of bottom face): rectangle 84.5 x 84.5, centered, corner radius 2",
+        "Extrude 36 in +Z",
+        "Shell inward 1.6 (wall thickness), leaving the top face open",
+        "On the front outer wall (Y = -42.25 plane), sketch a rectangle 26 x 10 centered at (X=0, Z=27)",
+        "Cut the rectangle through the front wall",
+        "On the inside of the front wall, sketch two ridges, 1 x 1 cross-section, running the full height (Z=0 to Z=36), centered at X = -14.15 and X = 14.15, protruding inward 1"
+      ],
+      "features": [
+        { "type": "slot", "description": "Label window", "dimensions": { "x": 26, "y": 10 }, "position": { "x": 0, "y": -42.25, "z": 27 } },
+        { "type": "boss", "description": "Card guide ridge, 2x", "dimensions": { "x": 1, "y": 1, "z": 36 }, "position": { "x": 14.15, "y": -42.25, "z": 0 } }
+      ],
+      "print_orientation": "Flat, bottom face down",
+      "supports": "none",
+      "estimated_print_time_h": 1.8,
+      "estimated_filament_g": 28
+    },
+    {
+      "id": "lid-2x2",
+      "name": "Snap lid for the 2x2 bin",
+      "quantity": 1,
+      "material": "PLA",
+      "bounding_box": { "x": 84.5, "y": 84.5, "z": 7 },
+      "base_shape": "Flat cap 84.5 x 84.5 x 3 with an 81.0 x 81.0 x 4 press-fit lip on the underside",
+      "construction_steps": [
+        "Sketch on XY at z=0 (origin = center of the lip's bottom face): rectangle 81.0 x 81.0, centered, corner radius 2",
+        "Extrude 4 in +Z (lip)",
+        "On top of the lip (z=4), sketch a rectangle 84.5 x 84.5 with corner radius 3, centered at (0,0)",
+        "Extrude 3 in +Z (cap)"
+      ],
+      "features": [],
+      "print_orientation": "Flat, cap face down",
+      "supports": "none",
+      "estimated_print_time_h": 0.6,
+      "estimated_filament_g": 10
+    }
+  ],
+  "fits": [
+    { "between": ["baseplate", "bin-1x1"], "type": "sliding", "clearance_per_side": 0.25 },
+    { "between": ["baseplate", "bin-2x1"], "type": "sliding", "clearance_per_side": 0.25 },
+    { "between": ["baseplate", "bin-2x2"], "type": "sliding", "clearance_per_side": 0.25 },
+    { "between": ["lid-2x2", "bin-2x2"], "type": "press", "clearance_per_side": 0.15 }
+  ],
+  "hardware": [
+    { "item": "User-supplied cardstock label card, cut to 28 x 34 mm", "quantity": 9, "notes": "Slides down the guide-rail channel inside each bin's front wall; not printed or included" }
+  ],
+  "assembly_steps": [
+    "No assembly of the baseplate and bins — they drop into the grid pockets by gravity and hand pressure, no hardware",
+    "Cut a cardstock label to 28 x 34 mm for each bin and slide it down the inside guide rails until it rests on the bin floor, visible through the front window",
+    "Press the lid onto the 2x2 bin's open top until the lip seats"
+  ],
+  "print_settings": { "layer_height": 0.2, "walls": 3, "infill_percent": 15, "infill_pattern": "grid", "supports": "none", "adhesion": "none" },
+  "parametric_variables": [
+    { "name": "grid_columns", "default": 4, "min": 2, "max": 6, "affects": ["baseplate"] },
+    { "name": "grid_rows", "default": 3, "min": 2, "max": 5, "affects": ["baseplate"] }
+  ],
+  "pricing": { "printed_usd": [22, 34], "digital_file_usd": 7, "estimate": true },
+  "sources": [
+    "https://graphitemodular.com/learn/what-is-gridfinity",
+    "https://gridfinity.xyz/specification/",
+    "https://all3dp.com/2/gridfinity-simply-explained/",
+    "https://www.etsy.com/listing/4341909136/ikea-alex-drawer-organizer-set-3d",
+    "https://www.etsy.com/market/gridfinity_drawer_organizer",
+    "https://makerworld.com/en/collections/3415245-gridfinity-accessories"
+  ]
+}

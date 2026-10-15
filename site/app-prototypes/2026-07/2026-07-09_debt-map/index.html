@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DebtMap — See the Path to Debt-Free</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">📊</div>
+    <div>
+      <div>DebtMap</div>
+      <div class="header-tagline">Interactive Debt Payoff Planner</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Debt List -->
+    <div class="card">
+      <div class="debt-list-header">
+        <div class="card-title">Your Debts</div>
+      </div>
+      <div id="debt-list"></div>
+      <button class="add-btn" onclick="showAddDebtModal()">+ Add a Debt</button>
+    </div>
+
+    <!-- Extra Payment -->
+    <div class="card">
+      <div class="card-title">Extra Monthly Payment</div>
+      <div class="input-group">
+        <label for="extra-payment">Amount above minimums</label>
+        <div class="input-wrapper">
+          <span class="input-prefix">$</span>
+          <input type="number" id="extra-payment" min="0" step="25" value="300">
+        </div>
+        <div class="input-hint">Applied to your target debt each month after minimums.</div>
+      </div>
+    </div>
+
+    <!-- Strategy -->
+    <div class="card">
+      <div class="card-title">Payoff Strategy</div>
+      <div class="strategy-btns">
+        <button class="strategy-btn" data-strategy="avalanche" onclick="setStrategy('avalanche')">
+          <strong>Avalanche</strong>
+          <span>Highest APR first — saves the most interest</span>
+        </button>
+        <button class="strategy-btn" data-strategy="snowball" onclick="setStrategy('snowball')">
+          <strong>Snowball</strong>
+          <span>Lowest balance first — fastest psychological wins</span>
+        </button>
+      </div>
+      <div class="strategy-insight" id="strategy-comparison">
+        Calculating…
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">Debt-Free Date</div>
+        <div class="summary-value green" id="debt-free-date">—</div>
+        <div class="summary-sub" id="months-to-free"></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Interest Saved vs Min-Only</div>
+        <div class="summary-value green" id="interest-saved">—</div>
+        <div class="summary-sub" id="total-interest"></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Total Debt</div>
+        <div class="summary-value red" id="total-debt">—</div>
+        <div class="summary-sub" id="debt-count"></div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="card">
+      <div class="card-title">Remaining Balance Over Time</div>
+      <div class="chart-wrap">
+        <canvas id="payoff-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Payoff Schedule -->
+    <div class="card">
+      <div class="card-title">Payoff Schedule</div>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Balance</th>
+            <th>APR</th>
+            <th>Est. Interest</th>
+            <th>Payoff Date</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body"></tbody>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<!-- ADD DEBT MODAL -->
+<div class="modal-overlay" id="debt-modal">
+  <div class="modal">
+    <h3>Add a Debt</h3>
+    <form id="add-debt-form">
+      <div class="form-grid">
+        <div class="form-field full">
+          <label for="modal-name">Account Name</label>
+          <input type="text" id="modal-name" placeholder="e.g. Chase Sapphire Card" required>
+        </div>
+        <div class="form-field">
+          <label for="modal-type">Debt Type</label>
+          <select id="modal-type">
+            <option value="credit_card">Credit Card</option>
+            <option value="student_loan">Student Loan</option>
+            <option value="auto_loan">Auto Loan</option>
+            <option value="personal_loan">Personal Loan</option>
+            <option value="medical">Medical</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="modal-balance">Current Balance ($)</label>
+          <input type="number" id="modal-balance" min="1" step="100" placeholder="5000" required>
+        </div>
+        <div class="form-field">
+          <label for="modal-apr">APR (%)</label>
+          <input type="number" id="modal-apr" min="0" max="100" step="0.01" placeholder="19.99" required>
+        </div>
+        <div class="form-field">
+          <label for="modal-min">Minimum Payment ($)</label>
+          <input type="number" id="modal-min" min="1" step="1" placeholder="100" required>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+        <button type="submit" class="btn-primary">Add Debt</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

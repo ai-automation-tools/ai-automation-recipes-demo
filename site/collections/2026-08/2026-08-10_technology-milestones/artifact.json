@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "image-collections",
+  "recipe_version": "0.1.0",
+  "collection": "collections",
+  "title": "Technology Milestones",
+  "slug": "technology-milestones",
+  "date": "2026-08-10",
+  "summary": "A cartoon timeline of inventions that changed everything, one image and one note per milestone.",
+  "files": {
+    "main": "collection.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
