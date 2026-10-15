@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Creamy Chicken and Wild Rice Soup",
+  "slug": "creamy-chicken-and-wild-rice-soup",
+  "date": "2026-10-03",
+  "summary": "A Minnesota-style stovetop soup of chicken, wild rice, carrot and celery in a milk-thickened broth, with a thermometer check for doneness and a Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

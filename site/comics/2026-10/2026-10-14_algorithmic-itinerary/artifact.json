@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "comics",
+  "recipe_version": "0.1.0",
+  "collection": "comics",
+  "title": "Algorithmic Itinerary",
+  "slug": "algorithmic-itinerary",
+  "date": "2026-10-14",
+  "summary": "A traveler lets his AI assistant optimize everything and ends up with a six-country route, a suitcase of mouthwash and a metaverse lounge on a dirt airstrip.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "series": "Tech Life Chronicles",
+    "characters": "Arthur, TravelBot AI",
+    "setting": "Airport terminal and airstrip",
+    "humor_type": "Satire / Dry"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

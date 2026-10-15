@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "podcast-scripts",
+  "title": "The End of the Universe",
+  "slug": "the-end-of-the-universe",
+  "date": "2026-05-11",
+  "summary": "A five-voice panel script on how everything ends: heat death, the big rip, the big crunch and proton decay, and what any of it means for how people plan and believe.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "song-generator",
+  "recipe_version": "0.1.0",
+  "collection": "songs",
+  "title": "Rooms the Color of Days",
+  "slug": "rooms-the-color-of-days",
+  "date": "2026-10-13",
+  "summary": "The days of the week turn into soft colors and old memories into rooms, every door already open.",
+  "files": {
+    "main": "rooms-the-color-of-days_lyrics.md"
+  },
+  "fields": {
+    "genre": "dream-pop",
+    "mood": "wistful, glowing",
+    "key": "A major",
+    "tempo": "76 BPM"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

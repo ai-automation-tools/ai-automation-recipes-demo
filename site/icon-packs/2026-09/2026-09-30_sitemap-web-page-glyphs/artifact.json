@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "icon-packs",
+  "recipe_version": "0.1.0",
+  "collection": "icon-packs",
+  "title": "Sitemap: Web Page Glyphs",
+  "slug": "sitemap-web-page-glyphs",
+  "date": "2026-09-30",
+  "summary": "Twelve bare, single-weight glyphs for the standard pages of a website (Home, About, Contact and the rest), each in its own hue so a nav menu reads as a colour-coded map.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "category": "Web-Page-Icons",
+    "style": "Flat vector, bare glyphs",
+    "count": "12 icons"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
