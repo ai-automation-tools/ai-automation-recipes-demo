@@ -1,0 +1,69 @@
+{
+  "host": "Dr. Penelope Hartwell",
+  "cast": [
+    {
+      "speaker": "Dr. Penelope Hartwell",
+      "display": "Dr. Penelope Hartwell",
+      "voice_key": "Juliet",
+      "voice_id": "QJksobp1edMNvmwcG5lm",
+      "persona": "Dr. Penelope Hartwell",
+      "role": "host",
+      "match": "persona",
+      "bio": "The host - a calm, devastatingly precise British public-radio interviewer who moderates with quiet curiosity and politely catches guests in their own contradictions.",
+      "visual": "a poised British woman in her 50s, sharp tailored blazer, silver-streaked hair pulled back, warm but incisive expression",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.5,
+      "style": 0.22,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Arthur",
+      "display": "Arthur",
+      "voice_key": "Cormac",
+      "voice_id": "tEo3d4j7gzVojBL5Z4Pt",
+      "persona": "Arthur",
+      "role": "guest",
+      "match": "persona",
+      "bio": "Arthur 'Two-Pints' Sullivan - an aggressively friendly, always-slightly-drunk Irish barfly who slurs, loses his train of thought, and gets emotional over the smallest things.",
+      "visual": "a ruddy-faced jovial Irish man in his 50s, rumpled cardigan, a pint of stout in hand, boisterous tipsy grin",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.35,
+      "style": 0.4,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Prepper Paul",
+      "display": "Prepper Paul",
+      "voice_key": "Villain",
+      "voice_id": "TDTTIZEngvvWARkECefs",
+      "persona": "Prepper Paul",
+      "role": "guest",
+      "match": "persona",
+      "bio": "A paranoid survivalist with three bunkers and ten thousand rounds who whispers about EMPs and the deep state and ties every topic back to the coming collapse.",
+      "visual": "a wiry paranoid survivalist man in camo tactical gear, wary darting eyes, leaning in conspiratorially, a bug-out bag on his shoulder",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.4,
+      "style": 0.3,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Karen Kay",
+      "display": "Karen Kay",
+      "voice_key": "RuthieJo",
+      "voice_id": "MgqVq3OCTPeVHCEDr4HU",
+      "persona": "Karen Kay",
+      "role": "guest",
+      "match": "persona",
+      "bio": "Perpetually offended, records every conversation 'for the record,' takes everything as a personal affront, and always wants to speak to whoever is in charge.",
+      "visual": "an indignant middle-aged white woman with a sharp angled bob haircut, one finger raised, a phone held up recording, entitled expression",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.35,
+      "style": 0.4,
+      "similarity_boost": 0.8,
+      "use_speaker_boost": true
+    }
+  ]
+}

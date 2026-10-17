@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "app-prototypes",
+  "title": "Content Pulse",
+  "slug": "content-pulse",
+  "date": "2026-07-16",
+  "summary": "One dashboard that pulls a solo creator's metrics from several platforms into a single view of growth, engagement, top posts and revenue.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "form_factor": "web app"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

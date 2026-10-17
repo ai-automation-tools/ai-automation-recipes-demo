@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "poster",
+  "recipe_version": "0.1.0",
+  "collection": "posters",
+  "title": "Neon Canopy: Cybernetic Grove",
+  "slug": "neon-canopy-cybernetic-grove",
+  "date": "2026-09-14",
+  "summary": "A futuristic bamboo forest whose stalks carry fiber-optic veins, glowing neon pink and cyan under a rain-slicked night sky.",
+  "files": {
+    "main": "caption.md"
+  },
+  "fields": {
+    "theme": "Bamboo Forest",
+    "style": "Cyberpunk / Biophilic Tech"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

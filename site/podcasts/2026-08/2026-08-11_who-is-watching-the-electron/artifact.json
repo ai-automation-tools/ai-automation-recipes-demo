@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-episode",
+  "recipe_version": "0.1.0",
+  "collection": "podcasts",
+  "title": "Who Is Watching The Electron",
+  "slug": "who-is-watching-the-electron",
+  "date": "2026-08-11",
+  "summary": "A round-table panel on the double-slit experiment, Schrödinger's cat and what \"observation\" really means in quantum mechanics.",
+  "files": {
+    "main": "Who-Is-Watching-The-Electron-11-08-2026.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

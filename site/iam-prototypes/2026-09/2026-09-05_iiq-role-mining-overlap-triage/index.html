@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIQ Role Mining Overlap Triage</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-title">
+    <span class="badge">Prototype</span>
+    <h1>Role Mining Overlap Triage</h1>
+  </div>
+  <div class="task-meta" id="task-meta"></div>
+</header>
+
+<main class="layout">
+  <section class="panel simulator">
+    <h2>Threshold simulator</h2>
+    <p class="hint">Mirrors the two population/volume fields on the IT Role Mining setup screen. Adjust them to see how many candidates in <em>this</em> result set survive &mdash; before you spend a task run finding out.</p>
+    <div class="control-row">
+      <label for="min-identities">Min identities per role</label>
+      <input type="range" id="min-identities" min="10" max="400" step="5" value="25">
+      <output id="min-identities-value">25</output>
+    </div>
+    <div class="control-row">
+      <label for="max-groups">Max groups to mine</label>
+      <input type="range" id="max-groups" min="1" max="20" step="1" value="12">
+      <output id="max-groups-value">12</output>
+    </div>
+    <div id="simulator-result" class="simulator-result"></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Candidates</h2>
+      <input type="search" id="filter-input" placeholder="Filter by application or role name&hellip;">
+    </div>
+    <table id="candidate-table">
+      <thead>
+        <tr>
+          <th data-sort="id">Candidate</th>
+          <th data-sort="application">Application</th>
+          <th data-sort="population">Population</th>
+          <th data-sort="entitlementCount">Entitlements</th>
+          <th data-sort="bestMatchName">Best-match role</th>
+          <th data-sort="similarity">Similarity</th>
+          <th data-sort="recommendation">Recommendation</th>
+        </tr>
+      </thead>
+      <tbody id="candidate-tbody"></tbody>
+    </table>
+  </section>
+
+  <section class="panel detail" id="detail-panel">
+    <h2>Entitlement diff</h2>
+    <div id="detail-empty" class="hint">Select a candidate row to compare it against its best-matching existing role.</div>
+    <div id="detail-content" class="detail-content" hidden>
+      <div class="detail-columns">
+        <div>
+          <h3 id="detail-candidate-title">Candidate only</h3>
+          <ul id="detail-candidate-only"></ul>
+        </div>
+        <div>
+          <h3>Shared</h3>
+          <ul id="detail-shared"></ul>
+        </div>
+        <div>
+          <h3 id="detail-role-title">Existing role only</h3>
+          <ul id="detail-role-only"></ul>
+        </div>
+      </div>
+      <div class="decision-row">
+        <label for="decision-select">Decision</label>
+        <select id="decision-select">
+          <option value="">Needs review</option>
+          <option value="Extend">Extend matched role</option>
+          <option value="Create">Create new role</option>
+          <option value="Discard">Discard</option>
+        </select>
+        <input type="text" id="decision-note" placeholder="Optional note for the change ticket&hellip;">
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header">
+      <h2>Decision log</h2>
+      <button id="export-csv">Export decisions as CSV</button>
+    </div>
+    <table id="decision-table">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Application</th>
+          <th>Recommendation</th>
+          <th>Decision</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody id="decision-tbody"></tbody>
+    </table>
+  </section>
+</main>
+
+<footer class="footer">
+  Synthetic data only. Recommendation thresholds are a design assumption &mdash; see <code>requirements.md</code>.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

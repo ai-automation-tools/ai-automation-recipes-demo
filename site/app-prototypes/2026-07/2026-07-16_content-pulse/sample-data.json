@@ -1,0 +1,184 @@
+{
+  "creator": {
+    "name": "Alex Rivera",
+    "handle": "@alexrivera",
+    "niche": "Personal Finance & Side Hustles",
+    "since": "2023-03"
+  },
+  "platforms": [
+    { "id": "youtube",   "name": "YouTube",    "color": "#FF0000", "icon": "▶" },
+    { "id": "instagram", "name": "Instagram",  "color": "#E1306C", "icon": "◈" },
+    { "id": "tiktok",   "name": "TikTok",     "color": "#010101", "icon": "♪" },
+    { "id": "linkedin",  "name": "LinkedIn",   "color": "#0077B5", "icon": "in" },
+    { "id": "x",         "name": "X",          "color": "#1DA1F2", "icon": "✕" }
+  ],
+  "summary": {
+    "totalFollowers": 284700,
+    "totalViewsThisMonth": 1820400,
+    "avgEngagementRate": 4.7,
+    "revenueThisMonth": 8340
+  },
+  "platformStats": [
+    {
+      "platform": "youtube",
+      "followers": 92000,
+      "followersChange": 3400,
+      "viewsThisMonth": 740000,
+      "avgEngagement": 5.2,
+      "revenue": 4200,
+      "revenueShare": 50.4
+    },
+    {
+      "platform": "instagram",
+      "followers": 61500,
+      "followersChange": 1800,
+      "viewsThisMonth": 380000,
+      "avgEngagement": 6.1,
+      "revenue": 1650,
+      "revenueShare": 19.8
+    },
+    {
+      "platform": "tiktok",
+      "followers": 87200,
+      "followersChange": 5100,
+      "viewsThisMonth": 520000,
+      "avgEngagement": 7.8,
+      "revenue": 980,
+      "revenueShare": 11.7
+    },
+    {
+      "platform": "linkedin",
+      "followers": 29000,
+      "followersChange": 620,
+      "viewsThisMonth": 112000,
+      "avgEngagement": 3.4,
+      "revenue": 1200,
+      "revenueShare": 14.4
+    },
+    {
+      "platform": "x",
+      "followers": 15000,
+      "followersChange": 290,
+      "viewsThisMonth": 68400,
+      "avgEngagement": 2.9,
+      "revenue": 310,
+      "revenueShare": 3.7
+    }
+  ],
+  "followerGrowth": [
+    { "week": "Apr 28", "youtube": 77400, "instagram": 54200, "tiktok": 68300, "linkedin": 26100, "x": 13400 },
+    { "week": "May 5",  "youtube": 79100, "instagram": 55000, "tiktok": 71000, "linkedin": 26500, "x": 13600 },
+    { "week": "May 12", "youtube": 80800, "instagram": 56100, "tiktok": 73800, "linkedin": 27000, "x": 13700 },
+    { "week": "May 19", "youtube": 82300, "instagram": 57400, "tiktok": 76200, "linkedin": 27400, "x": 13800 },
+    { "week": "May 26", "youtube": 83900, "instagram": 58300, "tiktok": 78100, "linkedin": 27700, "x": 13900 },
+    { "week": "Jun 2",  "youtube": 85400, "instagram": 58900, "tiktok": 79600, "linkedin": 27900, "x": 14000 },
+    { "week": "Jun 9",  "youtube": 86600, "instagram": 59400, "tiktok": 81000, "linkedin": 28100, "x": 14100 },
+    { "week": "Jun 16", "youtube": 87900, "instagram": 59900, "tiktok": 82800, "linkedin": 28400, "x": 14200 },
+    { "week": "Jun 23", "youtube": 89000, "instagram": 60500, "tiktok": 84100, "linkedin": 28600, "x": 14400 },
+    { "week": "Jun 30", "youtube": 90100, "instagram": 60900, "tiktok": 85500, "linkedin": 28800, "x": 14600 },
+    { "week": "Jul 7",  "youtube": 91200, "instagram": 61200, "tiktok": 86700, "linkedin": 29000, "x": 14800 },
+    { "week": "Jul 14", "youtube": 92000, "instagram": 61500, "tiktok": 87200, "linkedin": 29000, "x": 15000 }
+  ],
+  "topPosts": [
+    {
+      "platform": "youtube",
+      "title": "I Tried 5 Side Hustles for 30 Days — Here's What Actually Made Money",
+      "date": "2026-07-02",
+      "views": 148000,
+      "likes": 8900,
+      "comments": 1240,
+      "engagementRate": 6.8,
+      "revenue": 880
+    },
+    {
+      "platform": "tiktok",
+      "title": "POV: You just made your first $1k online",
+      "date": "2026-07-08",
+      "views": 920000,
+      "likes": 87000,
+      "comments": 3400,
+      "engagementRate": 9.8,
+      "revenue": 220
+    },
+    {
+      "platform": "youtube",
+      "title": "The $0 Micro-SaaS Framework (Step by Step)",
+      "date": "2026-06-18",
+      "views": 103000,
+      "likes": 6400,
+      "comments": 880,
+      "engagementRate": 7.1,
+      "revenue": 640
+    },
+    {
+      "platform": "instagram",
+      "title": "How I hit $8k/month with 3 income streams (carousel)",
+      "date": "2026-07-10",
+      "views": 74000,
+      "likes": 5200,
+      "comments": 390,
+      "engagementRate": 7.5,
+      "revenue": 180
+    },
+    {
+      "platform": "linkedin",
+      "title": "Quit my job 6 months ago. Here's the real P&L.",
+      "date": "2026-06-30",
+      "views": 48200,
+      "likes": 1840,
+      "comments": 247,
+      "engagementRate": 4.3,
+      "revenue": 510
+    },
+    {
+      "platform": "tiktok",
+      "title": "AI built my SaaS in 4 hours. I made $3k the first week.",
+      "date": "2026-07-05",
+      "views": 540000,
+      "likes": 44000,
+      "comments": 2100,
+      "engagementRate": 8.5,
+      "revenue": 130
+    },
+    {
+      "platform": "youtube",
+      "title": "How I Use Claude to Write All My Content (Full Workflow)",
+      "date": "2026-07-09",
+      "views": 87000,
+      "likes": 5100,
+      "comments": 720,
+      "engagementRate": 6.7,
+      "revenue": 560
+    },
+    {
+      "platform": "instagram",
+      "title": "Stop tracking the wrong metrics (Reel)",
+      "date": "2026-07-01",
+      "views": 52000,
+      "likes": 3800,
+      "comments": 210,
+      "engagementRate": 7.7,
+      "revenue": 95
+    },
+    {
+      "platform": "x",
+      "title": "Unpopular opinion: your engagement rate matters more than follower count (thread)",
+      "date": "2026-07-11",
+      "views": 34000,
+      "likes": 1100,
+      "comments": 88,
+      "engagementRate": 3.5,
+      "revenue": 0
+    },
+    {
+      "platform": "linkedin",
+      "title": "The exact email sequence that gets me brand deals (template inside)",
+      "date": "2026-07-07",
+      "views": 39000,
+      "likes": 1420,
+      "comments": 198,
+      "engagementRate": 4.1,
+      "revenue": 420
+    }
+  ]
+}
