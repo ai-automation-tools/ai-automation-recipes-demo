@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "iam-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "iam-prototypes",
+  "title": "IIQ Role Mining Overlap Triage",
+  "slug": "iiq-role-mining-overlap-triage",
+  "date": "2026-09-05",
+  "summary": "Checks a Role Mining task's output against the existing role catalog before anyone commits a new role, flagging duplicates and suggesting which role to extend.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "type": "Utility",
+    "theme": "Identify + Automation",
+    "platform": "SailPoint IdentityIQ"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "podcast-scripts",
+  "title": "Human Augmentation: From Wearables to Neural Interfaces",
+  "slug": "human-augmentation-from-wearables-to-neural-interfaces",
+  "date": "2026-06-10",
+  "summary": "A panel script on the road from fitness trackers to brain-computer interfaces: who gets upgraded, who gets left behind, and what it does to the species.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Pulse — Creator Analytics Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-name">Content Pulse</span>
+      </div>
+      <div class="header-right">
+        <span class="creator-meta" id="creatorHandle"></span>
+        <button class="cta-btn" onclick="alert('Connect your platforms — live OAuth coming in v1!')">
+          + Connect Platforms
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- Summary bar -->
+    <section class="summary-bar" id="summaryBar">
+      <div class="stat-card summary-card">
+        <div class="stat-label">Total Followers</div>
+        <div class="stat-value" id="sumFollowers">—</div>
+        <div class="stat-sub" id="sumFollowersSub"></div>
+      </div>
+      <div class="stat-card summary-card">
+        <div class="stat-label">Monthly Views</div>
+        <div class="stat-value" id="sumViews">—</div>
+      </div>
+      <div class="stat-card summary-card">
+        <div class="stat-label">Avg Engagement</div>
+        <div class="stat-value" id="sumEngagement">—</div>
+      </div>
+      <div class="stat-card summary-card">
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-value" id="sumRevenue">—</div>
+      </div>
+    </section>
+
+    <!-- Platform filter -->
+    <section class="filter-bar">
+      <span class="filter-label">Platform</span>
+      <div class="filter-pills" id="filterPills">
+        <button class="pill active" data-platform="all">All</button>
+      </div>
+    </section>
+
+    <!-- Charts row -->
+    <section class="charts-row">
+      <div class="chart-card wide">
+        <div class="card-header">
+          <h2>Follower Growth</h2>
+          <span class="card-sub">12 weeks</span>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card narrow">
+        <div class="card-header">
+          <h2>Revenue by Platform</h2>
+          <span class="card-sub" id="revenueMonth">This Month</span>
+        </div>
+        <div class="revenue-bars" id="revenueBars"></div>
+      </div>
+    </section>
+
+    <!-- Platform stat cards -->
+    <section class="platform-cards" id="platformCards"></section>
+
+    <!-- Top posts table -->
+    <section class="posts-section">
+      <div class="card-header">
+        <h2>Top Posts</h2>
+        <span class="card-sub">Click column headers to sort</span>
+      </div>
+      <div class="table-wrap">
+        <table id="postsTable">
+          <thead>
+            <tr>
+              <th data-col="platform" class="sortable">Platform</th>
+              <th data-col="title" class="sortable">Title</th>
+              <th data-col="date" class="sortable">Date</th>
+              <th data-col="views" class="sortable sort-active desc">Views ↓</th>
+              <th data-col="likes" class="sortable">Likes</th>
+              <th data-col="engagementRate" class="sortable">Eng %</th>
+              <th data-col="revenue" class="sortable">Revenue</th>
+            </tr>
+          </thead>
+          <tbody id="postsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>Content Pulse · Prototype · 2026-07-16</span>
+    <span>Sample data only — <a href="#" onclick="alert('OAuth platform connections coming in v1')">connect live data →</a></span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

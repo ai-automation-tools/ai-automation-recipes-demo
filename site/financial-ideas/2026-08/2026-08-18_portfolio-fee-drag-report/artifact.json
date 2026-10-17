@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "finance-app-prototype",
+  "recipe_version": "0.1.0",
+  "collection": "financial-ideas",
+  "title": "Portfolio Fee Drag Report",
+  "slug": "portfolio-fee-drag-report",
+  "date": "2026-08-18",
+  "summary": "Turns a list of fund holdings and expense ratios into a dollar cost, a comparison with a low-cost index lineup, and what the gap is worth over 10 and 20 years.",
+  "files": {
+    "main": "report-template.md"
+  },
+  "fields": {
+    "type": "Report",
+    "theme": "Investing",
+    "finance_area": "Investing"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Offbeat</title>
+<!--
+  OFFBEAT — rhythm clicker
+  Controls: click / tap / spacebar to hit the ring the instant it reaches the core.
+  Restart: tap/click/space on the game-over screen, or press R.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #05060c;
+    overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  #c {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+(function () {
+  "use strict";
+
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+
+  var DW = 400, DH = 700;
+  var CX = DW / 2, CY = 300;
+  var OUTER_R = 150, CORE_R = 42;
+
+  var STAGES = [
+    { hits: 0,  bpm: 88,  perfect: 70, good: 170, decoy: 0.00 },
+    { hits: 8,  bpm: 104, perfect: 60, good: 150, decoy: 0.15 },
+    { hits: 20, bpm: 120, perfect: 52, good: 135, decoy: 0.25 },
+    { hits: 35, bpm: 138, perfect: 46, good: 120, decoy: 0.32 },
+    { hits: 55, bpm: 156, perfect: 40, good: 108, decoy: 0.38 },
+    { hits: 80, bpm: 172, perfect: 36, good: 98,  decoy: 0.45 }
+  ];
+
+  var S = { TITLE: 'title', PLAYING: 'playing', OVER: 'over' };
+  var state = S.TITLE;
+
+  var dpr = 1, scale = 1, offX = 0, offY = 0;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    var w = window.innerWidth, h = window.innerHeight;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    scale = Math.min(w / DW, h / DH);
+    offX = (w - DW * scale) / 2;
+    offY = (h - DH * scale) / 2;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  var hiddenAt = null, pauseOffset = 0;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      hiddenAt = performance.now();
+    } else if (hiddenAt !== null) {
+      pauseOffset += performance.now() - hiddenAt;
+      hiddenAt = null;
+    }
+  });
+  function now() { return performance.now() - pauseOffset; }
+
+  var audioCtx = null;
+  function ensureAudio() {
+    if (!audioCtx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AC();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+  function tone(freq, dur, type, vol) {
+    if (!audioCtx) return;
+    var t0 = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(vol, t0);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(t0);
+    osc.stop(t0 + dur + 0.02);
+  }
+  function sfxTick()   { tone(880, 0.045, 'sine', 0.06); }
+  function sfxPerfect(){ tone(1180, 0.12, 'triangle', 0.22); tone(1770, 0.1, 'triangle', 0.1); }
+  function sfxGood()   { tone(740, 0.1, 'triangle', 0.18); }
+  function sfxMiss()   { tone(130, 0.28, 'sawtooth', 0.22); }
+  function sfxDecoy()  { tone(90, 0.3, 'sawtooth', 0.22); }
+  function sfxStart()  { tone(520, 0.08, 'sine', 0.15); tone(780, 0.1, 'sine', 0.12); }
+
+  var MAX_PARTICLES = 48;
+  var particles = [];
+  for (var pi = 0; pi < MAX_PARTICLES; pi++) {
+    particles.push({ active: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, maxLife: 1, color: '#fff', r: 2 });
+  }
+  function burst(x, y, color, count) {
+    var made = 0;
+    for (var i = 0; i < particles.length && made < count; i++) {
+      var p = particles[i];
+      if (p.active) continue;
+      var ang = Math.random() * Math.PI * 2;
+      var spd = 60 + Math.random() * 140;
+      p.active = true;
+      p.x = x; p.y = y;
+      p.vx = Math.cos(ang) * spd;
+      p.vy = Math.sin(ang) * spd;
+      p.life = 0;
+      p.maxLife = 0.4 + Math.random() * 0.3;
+      p.color = color;
+      p.r = 2 + Math.random() * 2.5;
+      made++;
+    }
+  }
+  function updateParticles(dt) {
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (!p.active) continue;
+      p.life += dt;
+      if (p.life >= p.maxLife) { p.active = false; continue; }
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vx *= 0.92;
+      p.vy *= 0.92;
+    }
+  }
+  function renderParticles() {
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      if (!p.active) continue;
+      var a = 1 - p.life / p.maxLife;
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  var MAX_FLOATS = 8;
+  var floats = [];
+  for (var fi = 0; fi < MAX_FLOATS; fi++) {
+    floats.push({ active: false, x: 0, y: 0, text: '', life: 0, maxLife: 0.8, color: '#fff' });
+  }
+  function floatText(x, y, text, color) {
+    for (var i = 0; i < floats.length; i++) {
+      if (floats[i].active) continue;
+      floats[i].active = true;
+      floats[i].x = x; floats[i].y = y;
+      floats[i].text = text; floats[i].color = color;
+      floats[i].life = 0; floats[i].maxLife = 0.8;
+      return;
+    }
+  }
+  function updateFloats(dt) {
+    for (var i = 0; i < floats.length; i++) {
+      var f = floats[i];
+      if (!f.active) continue;
+      f.life += dt;
+      if (f.life >= f.maxLife) { f.active = false; continue; }
+      f.y -= dt * 40;
+    }
+  }
+  function renderFloats() {
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 20px sans-serif';
+    for (var i = 0; i < floats.length; i++) {
+      var f = floats[i];
+      if (!f.active) continue;
+      ctx.globalAlpha = 1 - f.life / f.maxLife;
+      ctx.fillStyle = f.color;
+      ctx.fillText(f.text, f.x, f.y);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  var score = 0, combo = 0, lives = 3, successHits = 0;
+  var best = parseInt(localStorage.getItem('offbeat_best_score') || '0', 10);
+  var ring = null, decoy = null;
+  var shake = 0;
+
+  function currentStage() {
+    var st = STAGES[0];
+    for (var i = 0; i < STAGES.length; i++) {
+      if (successHits >= STAGES[i].hits) st = STAGES[i];
+    }
+    return st;
+  }
+
+  function multiplier() {
+    return 1 + Math.min(Math.floor(combo / 6), 8) * 0.5;
+  }
+
+  function spawnRing(t) {
+    var st = currentStage();
+    var interval = 60000 / st.bpm;
+    ring = { spawnTime: t, targetTime: t + interval, window: st.good, resolved: false, ticked: false };
+    if (Math.random() < st.decoy) {
+      var delay = interval * (0.3 + Math.random() * 0.35);
+      var travel = 420;
+      decoy = { spawnTime: t + delay - travel, targetTime: t + delay, window: 130, resolved: false, ticked: false };
+    } else {
+      decoy = null;
+    }
+  }
+
+  function success(base, label, color) {
+    combo++;
+    successHits++;
+    score += Math.round(base * multiplier());
+    floatText(CX, CY - CORE_R - 20, label, color);
+    burst(CX, CY, color, 16);
+  }
+
+  function miss() {
+    combo = 0;
+    lives--;
+    shake = 10;
+    burst(CX, CY, '#ff5566', 14);
+    sfxMiss();
+    floatText(CX, CY - CORE_R - 20, 'MISS', '#ff5566');
+    if (lives <= 0) gameOver();
+  }
+
+  function handleClick(t) {
+    if (decoy && !decoy.resolved && Math.abs(t - decoy.targetTime) <= decoy.window / 2) {
+      decoy.resolved = true;
+      sfxDecoy();
+      combo = 0;
+      lives--;
+      shake = 10;
+      burst(CX, CY, '#ffb454', 14);
+      floatText(CX, CY - CORE_R - 20, 'FAKE!', '#ffb454');
+      if (lives <= 0) gameOver();
+      return;
+    }
+    if (ring && !ring.resolved) {
+      var diff = Math.abs(t - ring.targetTime);
+      if (diff <= currentStage().perfect) {
+        ring.resolved = true;
+        sfxPerfect();
+        success(100, 'PERFECT', '#4bf2c8');
+        return;
+      } else if (diff <= ring.window) {
+        ring.resolved = true;
+        sfxGood();
+        success(45, 'GOOD', '#7fd1ff');
+        return;
+      } else {
+        ring.resolved = true;
+        miss();
+        return;
+      }
+    }
+    miss();
+  }
+
+  function startGame(t) {
+    score = 0; combo = 0; lives = 3; successHits = 0;
+    ring = null; decoy = null; shake = 0;
+    spawnRing(t);
+    state = S.PLAYING;
+    sfxStart();
+  }
+
+  function gameOver() {
+    state = S.OVER;
+    if (score > best) {
+      best = score;
+      localStorage.setItem('offbeat_best_score', String(best));
+    }
+  }
+
+  function update(t, dt) {
+    if (ring && !ring.resolved) {
+      if (!ring.ticked && t >= ring.targetTime) { ring.ticked = true; sfxTick(); }
+      if (t > ring.targetTime + ring.window) {
+        ring.resolved = true;
+        miss();
+      }
+    }
+    if (decoy && !decoy.resolved && t > decoy.targetTime + decoy.window) {
+      decoy.resolved = true;
+    }
+    if (ring && ring.resolved && (!decoy || decoy.resolved)) {
+      spawnRing(t);
+    }
+    updateParticles(dt);
+    updateFloats(dt);
+    if (shake > 0) shake = Math.max(0, shake - dt * 40);
+  }
+
+  function ringProgress(r, t) {
+    return (t - r.spawnTime) / (r.targetTime - r.spawnTime);
+  }
+
+  function drawRing(r, t, color, baseR) {
+    var p = ringProgress(r, t);
+    if (p < 0 || p > 1.15) return;
+    var rad = OUTER_R - (OUTER_R - baseR) * Math.min(p, 1);
+    ctx.beginPath();
+    ctx.arc(CX, CY, Math.max(rad, baseR * 0.9), 0, Math.PI * 2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 5;
+    ctx.globalAlpha = p > 1 ? Math.max(0, 1 - (p - 1) / 0.15) : 1;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function render(t) {
+    var sx = offX + Math.sin(shake * 1.7) * shake * 0.3;
+    var sy = offY + Math.cos(shake * 2.3) * shake * 0.3;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#05060c';
+    ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+
+    ctx.setTransform(dpr * scale, 0, 0, dpr * scale, dpr * sx, dpr * sy);
+
+    var grad = ctx.createRadialGradient(CX, CY, 10, CX, CY, OUTER_R + 40);
+    grad.addColorStop(0, '#101830');
+    grad.addColorStop(1, '#05060c');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, DW, DH);
+
+    var coreGlow = ctx.createRadialGradient(CX, CY, 0, CX, CY, CORE_R * 1.6);
+    coreGlow.addColorStop(0, '#4bf2c8');
+    coreGlow.addColorStop(1, 'rgba(75,242,200,0)');
+    ctx.fillStyle = coreGlow;
+    ctx.beginPath();
+    ctx.arc(CX, CY, CORE_R * 1.6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(CX, CY, CORE_R, 0, Math.PI * 2);
+    ctx.fillStyle = '#0d2a26';
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#4bf2c8';
+    ctx.stroke();
+
+    if (state === S.PLAYING) {
+      if (decoy) drawRing(decoy, t, '#ffb454', CORE_R * 0.7);
+      if (ring) drawRing(ring, t, '#4bf2c8', CORE_R);
+    }
+
+    renderParticles();
+    renderFloats();
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#e8f4ff';
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText(String(score), 20, 44);
+    ctx.font = '13px sans-serif';
+    ctx.fillStyle = '#8aa0c0';
+    ctx.fillText('BEST ' + best, 20, 64);
+
+    ctx.textAlign = 'right';
+    if (state === S.PLAYING) {
+      ctx.fillStyle = '#e8f4ff';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText('x' + multiplier().toFixed(1), DW - 20, 44);
+      ctx.font = '13px sans-serif';
+      ctx.fillStyle = '#8aa0c0';
+      ctx.fillText('combo ' + combo, DW - 20, 64);
+    }
+
+    ctx.textAlign = 'center';
+    ctx.font = '22px sans-serif';
+    var hearts = '';
+    for (var i = 0; i < 3; i++) hearts += (i < lives ? '♥ ' : '♡ ');
+    ctx.fillStyle = '#ff5566';
+    ctx.fillText(hearts.trim(), DW / 2, 40);
+
+    if (state === S.PLAYING) {
+      ctx.fillStyle = '#5a6f92';
+      ctx.font = '12px sans-serif';
+      ctx.fillText(Math.round(currentStage().bpm) + ' BPM', DW / 2, DH - 24);
+    }
+
+    if (state === S.TITLE) {
+      ctx.fillStyle = 'rgba(5,6,12,0.55)';
+      ctx.fillRect(0, 0, DW, DH);
+      ctx.fillStyle = '#e8f4ff';
+      ctx.font = 'bold 44px sans-serif';
+      ctx.fillText('OFFBEAT', DW / 2, DH / 2 - 60);
+      ctx.font = '16px sans-serif';
+      ctx.fillStyle = '#9fb4d6';
+      ctx.fillText('Click / tap / space the instant the ring', DW / 2, DH / 2 - 10);
+      ctx.fillText('meets the core. Ignore the orange decoys.', DW / 2, DH / 2 + 14);
+      ctx.fillStyle = '#4bf2c8';
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText('TAP TO START', DW / 2, DH / 2 + 70);
+    }
+
+    if (state === S.OVER) {
+      ctx.fillStyle = 'rgba(5,6,12,0.72)';
+      ctx.fillRect(0, 0, DW, DH);
+      ctx.fillStyle = '#e8f4ff';
+      ctx.font = 'bold 34px sans-serif';
+      ctx.fillText('OUT OF SYNC', DW / 2, DH / 2 - 60);
+      ctx.font = '20px sans-serif';
+      ctx.fillText('Score ' + score, DW / 2, DH / 2 - 20);
+      ctx.fillStyle = '#8aa0c0';
+      ctx.font = '15px sans-serif';
+      ctx.fillText('Best ' + best, DW / 2, DH / 2 + 6);
+      ctx.fillStyle = '#4bf2c8';
+      ctx.font = 'bold 17px sans-serif';
+      ctx.fillText('TAP TO RETRY  (R)', DW / 2, DH / 2 + 60);
+    }
+  }
+
+  function onPointer(e) {
+    if (e.cancelable) e.preventDefault();
+    ensureAudio();
+    var t = now();
+    if (state === S.TITLE || state === S.OVER) {
+      startGame(t);
+    } else if (state === S.PLAYING) {
+      handleClick(t);
+    }
+  }
+  canvas.addEventListener('mousedown', onPointer);
+  canvas.addEventListener('touchstart', onPointer, { passive: false });
+  window.addEventListener('keydown', function (e) {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      onPointer(e);
+    } else if (e.key === 'r' || e.key === 'R') {
+      if (state === S.OVER) {
+        ensureAudio();
+        startGame(now());
+      }
+    }
+  });
+
+  var lastT = now();
+  function frame() {
+    requestAnimationFrame(frame);
+    var t = now();
+    var dt = Math.min((t - lastT) / 1000, 0.05);
+    lastT = t;
+    if (state === S.PLAYING) update(t, dt);
+    else { updateParticles(dt); updateFloats(dt); }
+    render(t);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
