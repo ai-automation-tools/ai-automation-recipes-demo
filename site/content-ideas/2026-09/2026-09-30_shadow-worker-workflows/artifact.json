@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "content-idea-gen",
+  "recipe_version": "0.1.0",
+  "collection": "content-ideas",
+  "title": "The Shadow-Worker: 60-Second Daily Workflows",
+  "slug": "shadow-worker-workflows",
+  "date": "2026-09-30",
+  "summary": "A content series of small open-source automations that run locally or on free tiers, each clearing one everyday chore such as sorting a downloads folder or summarising a long thread.",
+  "files": {
+    "main": "shadow-worker-workflows_2026-09-30.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

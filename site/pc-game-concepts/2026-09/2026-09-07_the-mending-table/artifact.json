@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "pc-game-concept",
+  "recipe_version": "0.1.0",
+  "collection": "pc-game-concepts",
+  "title": "The Mending Table",
+  "slug": "the-mending-table",
+  "date": "2026-09-07",
+  "summary": "A cozy management sim about diagnosing a stranger's broken keepsake and choosing a repair that trades speed and materials against how much of its history survives.",
+  "files": {
+    "main": "game-design-brief.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

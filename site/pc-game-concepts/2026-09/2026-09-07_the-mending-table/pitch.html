@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mending Table — Game Pitch</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #14201d;
+    --hull:     #1c2b27;
+    --panel:    #223532;
+    --driftwood:#8a9691;
+    --sea:      #6fae95;
+    --sea2:     #9fd4b8;
+    --amber:    #d9a256;
+    --amber2:   #f0c483;
+    --bone:     #ece4d3;
+    --offwhite: #d6d0c1;
+    --line:     rgba(236, 228, 211, 0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--offwhite);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    width: 100%;
+    background: var(--ink);
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.88) saturate(1.02);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,32,29,0.05) 0%, rgba(20,32,29,0.35) 55%, rgba(20,32,29,0.97) 100%);
+    display: flex;
+    align-items: flex-end;
+  }
+  .hero-content {
+    padding: 5vw 6vw 4vw;
+    max-width: 980px;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sea2);
+    border: 1px solid rgba(159,212,184,0.4);
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    background: rgba(111,174,149,0.12);
+    margin-bottom: 1.1em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sea2);
+    box-shadow: 0 0 8px var(--sea2);
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+    line-height: 1.02;
+    color: var(--bone);
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  }
+  .hook {
+    margin-top: 0.9em;
+    font-size: clamp(1.05rem, 1.9vw, 1.35rem);
+    color: var(--offwhite);
+    max-width: 42em;
+    font-weight: 300;
+  }
+  .meta-line {
+    margin-top: 1.4em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em 1.4em;
+    font-size: 0.88rem;
+    color: var(--driftwood);
+  }
+  .meta-line span strong { color: var(--amber2); font-weight: 600; }
+
+  /* MAIN */
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 4vw 6vw 8vw;
+  }
+  section { margin-top: 4.2em; }
+  section:first-of-type { margin-top: 0; }
+
+  h2 {
+    font-size: 1.5rem;
+    color: var(--sea2);
+    letter-spacing: 0.01em;
+    margin-bottom: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+  h2::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--amber);
+    display: inline-block;
+  }
+
+  p { color: var(--offwhite); }
+  p + p { margin-top: 0.9em; }
+
+  .grid-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4em;
+  }
+  @media (max-width: 720px) {
+    .grid-two { grid-template-columns: 1fr; }
+  }
+
+  .loop-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.4em 1.5em;
+  }
+  .loop-card .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--driftwood);
+    margin-bottom: 0.6em;
+    display: block;
+  }
+  .loop-card p { color: var(--offwhite); font-size: 0.96rem; }
+
+  .systems-list {
+    list-style: none;
+    display: grid;
+    gap: 0.9em;
+  }
+  .systems-list li {
+    border-left: 2px solid var(--amber);
+    padding-left: 1em;
+  }
+  .systems-list li .sysname {
+    color: var(--bone);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.15em;
+  }
+  .systems-list li p { font-size: 0.94rem; color: var(--offwhite); }
+
+  /* DIFFERENTIATORS */
+  .diff-list {
+    list-style: none;
+    display: grid;
+    gap: 1em;
+  }
+  .diff-list li {
+    background: linear-gradient(135deg, rgba(111,174,149,0.14), rgba(217,162,86,0.08));
+    border: 1px solid rgba(240,196,131,0.22);
+    border-radius: 10px;
+    padding: 1.1em 1.3em;
+    color: var(--bone);
+    font-size: 0.98rem;
+    position: relative;
+    padding-left: 2.6em;
+  }
+  .diff-list li::before {
+    content: "◆";
+    position: absolute;
+    left: 1.1em;
+    top: 1.15em;
+    color: var(--amber2);
+    font-size: 0.7rem;
+  }
+
+  /* KEY FEATURES / COPY */
+  .feature-list {
+    list-style: none;
+    display: grid;
+    gap: 0.7em;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    background: var(--hull);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.85em 1em;
+  }
+  .feature-item .ftext { font-size: 0.94rem; color: var(--offwhite); }
+  .copy-btn {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--driftwood);
+    color: var(--driftwood);
+    font-size: 0.76rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.45em 0.9em;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    min-width: 84px;
+  }
+  .copy-btn:hover { border-color: var(--sea2); color: var(--sea2); }
+  .copy-btn.copied { border-color: var(--sea2); color: var(--ink); background: var(--sea2); }
+
+  /* PILL ROW */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    margin-top: 1em;
+  }
+  .pill {
+    font-size: 0.82rem;
+    color: var(--driftwood);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.4em 1em;
+  }
+
+  footer {
+    margin-top: 5em;
+    padding-top: 2em;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--driftwood);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6em;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="cover.jpg" alt="Key art for The Mending Table">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <span class="eyebrow">PC Game Concept · Cozy Management Sim</span>
+      <h1>The Mending Table</h1>
+      <p class="hook">Diagnose what's actually wrong with a stranger's broken keepsake, then choose a repair whose speed and materials trade off against how much of its history survives, before the next arrival crowds your bench.</p>
+      <div class="meta-line">
+        <span><strong>Platform</strong> &nbsp;PC (Windows, keyboard & mouse)</span>
+        <span><strong>Status</strong> &nbsp;Concept</span>
+        <span><strong>Date</strong> &nbsp;2026-09-07</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <h2>Target player</h2>
+    <p>Someone who finished Discounty or Coffee Talk and liked the shift work but wished the customers were more than a name and a request bubble. They've played Unpacking or PowerWash Simulator for the satisfaction of fixing one specific thing well, and they want that feeling stretched across a whole shop instead of one task. Not looking for Stardew's farm-empire scale — they want a small counter, a short queue, and a repair choice that actually meant something to the person who brought the object in.</p>
+  </section>
+
+  <section>
+    <h2>Core loop</h2>
+    <div class="grid-two">
+      <div class="loop-card">
+        <span class="tag">30-second loop</span>
+        <p>Inspect an object and every damage point lights up with the technique and material it needs — nothing hidden. Select a technique, drag the matching material, hold and release a short timing bar to apply it. Once every point is fixed, choose Full Restoration, which preserves the object's original character, or Quick Mend, which is faster and cheaper but visibly newer. That choice is supposed to match what the owner actually asked for.</p>
+      </div>
+      <div class="loop-card">
+        <span class="tag">30-minute loop</span>
+        <p>Three objects sit on the bench at once, each with a patience marker ambering toward its deadline. You triage which gets worked first, spend this week's limited peddler stock, and decide whether a rushed Quick Mend now is worth disappointing someone who clearly wanted the real thing. Finished pieces join the Keepsake Log and raise trust with whoever brought them in — trust that unlocks rarer materials and harder objects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Standout systems</h2>
+    <ul class="systems-list">
+      <li><span class="sysname">Inspect overlay & damage checklist</span><p>Every damage point shows its technique, material, and time cost before you commit — nothing about a repair's cost is ever discovered mid-repair.</p></li>
+      <li><span class="sysname">The authenticity/speed dial</span><p>Each damage type has techniques that trade time and material cost against how much of the object's original character survives — the whole skill is reading which trade the customer actually wants.</p></li>
+      <li><span class="sysname">Compound damage & contested keepsakes</span><p>Later objects have damage points that fight each other, and a handful of objects per playthrough arrive with two claimants — the finish you choose is read by the town as taking a side.</p></li>
+      <li><span class="sysname">Peddler cart & trust</span><p>A weekly, limited-stock cart and a per-family trust score that gates rarer materials and harder objects — missed deadlines cost trust gently, never a hard fail.</p></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Differentiators</h2>
+    <ul class="diff-list">
+      <li>The customer's want and the repair technique are the same decision, mechanically — not flavor text sitting next to the real gameplay, the way reviewers flagged Discounty's customer storylines for being.</li>
+      <li>Every cost is shown before you commit to it, answering the resource-visibility gap critics called out in Ember Folks, a comparable 2026 cozy-strategy entrant.</li>
+      <li>The objects are the town's own disaster history, and craftsmanship choices quietly take sides in it — contested keepsakes turn a repair into a relationship beat without a branching dialogue tree.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Key features</h2>
+    <ul class="feature-list" id="feature-list">
+      <li class="feature-item"><span class="ftext">Inspect overlay shows every repair's cost before you commit — no hidden costs, ever</span><button class="copy-btn">Copy</button></li>
+      <li class="feature-item"><span class="ftext">Authenticity-vs-speed dial makes the customer's want a real mechanical decision</span><button class="copy-btn">Copy</button></li>
+      <li class="feature-item"><span class="ftext">Compound damage forces genuine trade-offs: fixing one flaw can ruin the ideal fix for another</span><button class="copy-btn">Copy</button></li>
+      <li class="feature-item"><span class="ftext">Contested keepsakes let your craftsmanship quietly take a side in a small-town dispute</span><button class="copy-btn">Copy</button></li>
+      <li class="feature-item"><span class="ftext">The Keepsake Log turns every finished repair into a personal scrapbook, built from real choices</span><button class="copy-btn">Copy</button></li>
+      <li class="feature-item"><span class="ftext">No hard fail state — missed deadlines cost a small, recoverable trust dip, never a game over</span><button class="copy-btn">Copy</button></li>
+    </ul>
+    <div class="pill-row">
+      <span class="pill">Premium · 1.0 launch</span>
+      <span class="pill">$14.99–$19.99</span>
+      <span class="pill">One-year campaign, 12–15 hrs</span>
+      <span class="pill">Fully optional timing minigame</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>The Mending Table — game-design-brief.md for full detail</span>
+    <span>Weekly PC Game Concept · cozy management sim</span>
+  </footer>
+
+</main>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.previousElementSibling.textContent;
+      var onDone = function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(onDone).catch(function () {
+          fallbackCopy(text, onDone);
+        });
+      } else {
+        fallbackCopy(text, onDone);
+      }
+    });
+  });
+
+  function fallbackCopy(text, onDone) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    onDone();
+  }
+</script>
+
+</body>
+</html>

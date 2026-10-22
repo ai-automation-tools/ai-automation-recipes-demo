@@ -1,0 +1,40 @@
+{
+  "report_period": {
+    "label": "Annual Review, 2026",
+    "as_of_date": "2026-08-18"
+  },
+  "generated_date": "2026-08-18",
+  "person": {
+    "display_name": "Marcus T."
+  },
+  "holdings": [
+    { "name": "Large-Cap Blend Active Fund", "account": "Taxable Brokerage", "category": "US Large-Cap", "balance_cents": 4200000, "expense_ratio_bps": 68 },
+    { "name": "Mid-Cap Growth Active Fund", "account": "Taxable Brokerage", "category": "US Mid-Cap", "balance_cents": 1850000, "expense_ratio_bps": 82 },
+    { "name": "International Developed Active Fund", "account": "Roth IRA", "category": "Intl Developed", "balance_cents": 2230000, "expense_ratio_bps": 94 },
+    { "name": "Emerging Markets Active Fund", "account": "Roth IRA", "category": "Emerging Markets", "balance_cents": 980000, "expense_ratio_bps": 105 },
+    { "name": "Total Bond Market Active Fund", "account": "401(k)", "category": "US Bonds", "balance_cents": 1560000, "expense_ratio_bps": 55 },
+    { "name": "Target-Date 2050 Fund", "account": "401(k)", "category": "Target-Date", "balance_cents": 3890000, "expense_ratio_bps": 42 },
+    { "name": "S&P 500 Index Fund", "account": "Taxable Brokerage", "category": "US Large-Cap Index", "balance_cents": 2640000, "expense_ratio_bps": 4 }
+  ],
+  "category_comparison": [
+    { "category": "US Large-Cap", "current_name": "Large-Cap Blend Active Fund", "alt_name": "Total US Stock Market Index", "alt_expense_ratio_bps": 3 },
+    { "category": "US Mid-Cap", "current_name": "Mid-Cap Growth Active Fund", "alt_name": "Extended/Mid-Cap Market Index", "alt_expense_ratio_bps": 5 },
+    { "category": "Intl Developed", "current_name": "International Developed Active Fund", "alt_name": "Total International Stock Index", "alt_expense_ratio_bps": 7 },
+    { "category": "Emerging Markets", "current_name": "Emerging Markets Active Fund", "alt_name": "Emerging Markets Index", "alt_expense_ratio_bps": 10 },
+    { "category": "US Bonds", "current_name": "Total Bond Market Active Fund", "alt_name": "Total Bond Market Index", "alt_expense_ratio_bps": 3 },
+    { "category": "Target-Date", "current_name": "Target-Date 2050 Fund", "alt_name": "Target-Date 2050 Index Series", "alt_expense_ratio_bps": 8 },
+    { "category": "US Large-Cap Index", "current_name": "S&P 500 Index Fund", "alt_name": "(already index-priced)", "alt_expense_ratio_bps": 4 }
+  ],
+  "projection": {
+    "assumed_return_bps": 700,
+    "horizons_years": [10, 20]
+  },
+  "benchmarks": {
+    "benchmark_year": 2026,
+    "data_year": 2025,
+    "active_equity_er_bps": 58,
+    "active_equity_source_label": "Morningstar's 2026 U.S. Fund Fee Study",
+    "passive_er_bps": 10,
+    "index_fund_examples": "Fidelity, Vanguard, and Schwab total-market index funds currently run 0.015%–0.03%"
+  }
+}

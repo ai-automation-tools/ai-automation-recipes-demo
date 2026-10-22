@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "DiffCarve",
+  "slug": "diff-carve",
+  "date": "2026-09-15",
+  "summary": "A CLI and GitHub Action that carves an oversized AI-written pull request into a dependency-ordered stack of small pull requests, each gated by a reviewability score.",
+  "files": {
+    "main": "card.md"
+  },
+  "fields": {
+    "category": "GitHub Repo",
+    "form_factor": "CLI",
+    "monetization": "freemium",
+    "status": "idea"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

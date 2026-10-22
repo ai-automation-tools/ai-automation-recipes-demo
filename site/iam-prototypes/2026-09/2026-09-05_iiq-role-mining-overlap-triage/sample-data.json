@@ -1,0 +1,175 @@
+{
+  "miningTask": {
+    "name": "Finance_AD_SAP_RoleMining_2026Q3",
+    "type": "IT Role Mining",
+    "application": ["Active Directory", "SAP ECC - Finance"],
+    "population": "IPOP: Finance & Accounting (2,140 identities)",
+    "minIdentitiesPerRole": 25,
+    "minEntitlementsPerRole": 2,
+    "thresholdPercent": 70,
+    "maxGroupsToMine": 12,
+    "dateComplete": "2026-09-02"
+  },
+  "existingRoles": [
+    {
+      "id": "ROLE-0142",
+      "name": "AP Clerk - Standard",
+      "type": "IT",
+      "application": "SAP ECC - Finance",
+      "owner": "diana.ferro",
+      "lastModified": "2025-11-14",
+      "identityCount": 388,
+      "entitlements": ["FB60_INVOICE_ENTRY", "FBL1N_VENDOR_DISPLAY", "F110_PAYMENT_RUN_VIEW", "MIRO_INVOICE_VERIFY"]
+    },
+    {
+      "id": "ROLE-0158",
+      "name": "AR Analyst - Standard",
+      "type": "IT",
+      "application": "SAP ECC - Finance",
+      "owner": "diana.ferro",
+      "lastModified": "2025-09-30",
+      "identityCount": 241,
+      "entitlements": ["FBL5N_CUSTOMER_DISPLAY", "VF03_BILLING_DISPLAY", "F-28_INCOMING_PAYMENT", "FD10N_CUSTOMER_BALANCE"]
+    },
+    {
+      "id": "ROLE-0203",
+      "name": "Finance Shared Drive - Base",
+      "type": "IT",
+      "application": "Active Directory",
+      "owner": "marcus.oduya",
+      "lastModified": "2026-01-08",
+      "identityCount": 2015,
+      "entitlements": ["CN=Fin-ShareRead,OU=Groups,DC=corp", "CN=VPN-Standard,OU=Groups,DC=corp"]
+    },
+    {
+      "id": "ROLE-0211",
+      "name": "GL Close Participant",
+      "type": "IT",
+      "application": "SAP ECC - Finance",
+      "owner": "diana.ferro",
+      "lastModified": "2026-02-19",
+      "identityCount": 96,
+      "entitlements": ["F.01_GL_ACCOUNT_BALANCE", "FBL3N_GL_DISPLAY", "FS10N_GL_LINE_ITEMS"]
+    },
+    {
+      "id": "ROLE-0225",
+      "name": "Treasury Read-Only",
+      "type": "IT",
+      "application": "SAP ECC - Finance",
+      "owner": "raj.sundaram",
+      "lastModified": "2025-06-02",
+      "identityCount": 34,
+      "entitlements": ["F.30_CASH_POSITION_VIEW", "FF7A_LIQUIDITY_VIEW"]
+    },
+    {
+      "id": "ROLE-0233",
+      "name": "Finance Mgr - AD Baseline",
+      "type": "IT",
+      "application": "Active Directory",
+      "owner": "marcus.oduya",
+      "lastModified": "2025-12-11",
+      "identityCount": 118,
+      "entitlements": ["CN=Fin-ShareRead,OU=Groups,DC=corp", "CN=Fin-ShareWrite,OU=Groups,DC=corp", "CN=VPN-Standard,OU=Groups,DC=corp", "CN=BudgetTool-Approver,OU=Groups,DC=corp"]
+    }
+  ],
+  "candidates": [
+    {
+      "id": "CAND-01",
+      "application": "SAP ECC - Finance",
+      "population": 361,
+      "populationPct": 0.93,
+      "entitlements": ["FB60_INVOICE_ENTRY", "FBL1N_VENDOR_DISPLAY", "F110_PAYMENT_RUN_VIEW", "MIRO_INVOICE_VERIFY"]
+    },
+    {
+      "id": "CAND-02",
+      "application": "SAP ECC - Finance",
+      "population": 279,
+      "populationPct": 0.86,
+      "entitlements": ["FB60_INVOICE_ENTRY", "FBL1N_VENDOR_DISPLAY", "F110_PAYMENT_RUN_VIEW", "MIRO_INVOICE_VERIFY", "F-53_VENDOR_PAYMENT_POST"]
+    },
+    {
+      "id": "CAND-03",
+      "application": "SAP ECC - Finance",
+      "population": 214,
+      "populationPct": 0.79,
+      "entitlements": ["FBL5N_CUSTOMER_DISPLAY", "VF03_BILLING_DISPLAY", "F-28_INCOMING_PAYMENT"]
+    },
+    {
+      "id": "CAND-04",
+      "application": "SAP ECC - Finance",
+      "population": 71,
+      "populationPct": 0.74,
+      "entitlements": ["F.01_GL_ACCOUNT_BALANCE", "FBL3N_GL_DISPLAY", "FS10N_GL_LINE_ITEMS", "F.13_AUTO_CLEARING_RUN"]
+    },
+    {
+      "id": "CAND-05",
+      "application": "Active Directory",
+      "population": 1988,
+      "populationPct": 0.97,
+      "entitlements": ["CN=Fin-ShareRead,OU=Groups,DC=corp", "CN=VPN-Standard,OU=Groups,DC=corp"]
+    },
+    {
+      "id": "CAND-06",
+      "application": "Active Directory",
+      "population": 106,
+      "populationPct": 0.88,
+      "entitlements": ["CN=Fin-ShareRead,OU=Groups,DC=corp", "CN=Fin-ShareWrite,OU=Groups,DC=corp", "CN=VPN-Standard,OU=Groups,DC=corp", "CN=BudgetTool-Approver,OU=Groups,DC=corp"]
+    },
+    {
+      "id": "CAND-07",
+      "application": "SAP ECC - Finance",
+      "population": 29,
+      "populationPct": 0.71,
+      "entitlements": ["F.30_CASH_POSITION_VIEW", "FF7A_LIQUIDITY_VIEW", "FF63_CASH_FORECAST"]
+    },
+    {
+      "id": "CAND-08",
+      "application": "SAP ECC - Finance",
+      "population": 33,
+      "populationPct": 0.72,
+      "entitlements": ["ME23N_PO_DISPLAY", "MIGO_GOODS_RECEIPT", "MB51_MATERIAL_DOC_DISPLAY"]
+    },
+    {
+      "id": "CAND-09",
+      "application": "SAP ECC - Finance",
+      "population": 47,
+      "populationPct": 0.70,
+      "entitlements": ["FBL5N_CUSTOMER_DISPLAY", "VF03_BILLING_DISPLAY", "F-28_INCOMING_PAYMENT", "FD10N_CUSTOMER_BALANCE", "VA02_SALES_ORDER_CHANGE"]
+    },
+    {
+      "id": "CAND-10",
+      "application": "SAP ECC - Finance",
+      "population": 26,
+      "populationPct": 0.70,
+      "entitlements": ["FK10N_VENDOR_BALANCE", "MIRO_INVOICE_VERIFY"]
+    },
+    {
+      "id": "CAND-11",
+      "application": "Active Directory",
+      "population": 44,
+      "populationPct": 0.83,
+      "entitlements": ["CN=Fin-ShareRead,OU=Groups,DC=corp", "CN=AuditLog-Viewer,OU=Groups,DC=corp"]
+    },
+    {
+      "id": "CAND-12",
+      "application": "SAP ECC - Finance",
+      "population": 30,
+      "populationPct": 0.70,
+      "entitlements": ["F.01_GL_ACCOUNT_BALANCE", "FBL3N_GL_DISPLAY"]
+    },
+    {
+      "id": "CAND-13",
+      "application": "SAP ECC - Finance",
+      "population": 62,
+      "populationPct": 0.73,
+      "entitlements": ["FBCJ_CASH_JOURNAL_POST", "F.30_CASH_POSITION_VIEW"]
+    },
+    {
+      "id": "CAND-14",
+      "application": "SAP ECC - Finance",
+      "population": 25,
+      "populationPct": 0.70,
+      "entitlements": ["FB60_INVOICE_ENTRY", "MIRO_INVOICE_VERIFY"]
+    }
+  ]
+}
