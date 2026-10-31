@@ -1,0 +1,19 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "image-prompt-packs",
+  "recipe_version": "0.1.0",
+  "collection": "image-prompt-packs",
+  "title": "Bioluminescent Clockwork Botany",
+  "slug": "bioluminescent-clockwork-botany",
+  "date": "2026-10-17",
+  "summary": "An image-prompt pack of glowing mechanical flora: brass gear-vines, frosted glass petals, a clockwork dandelion and a mechanical weeping willow.",
+  "files": {
+    "main": "bioluminescent-clockwork-botany.md"
+  },
+  "fields": {
+    "theme": "Bioluminescent Clockwork Botany"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

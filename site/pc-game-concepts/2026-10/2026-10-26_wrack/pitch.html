@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrack — Game Pitch</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --abyss:   #0a1614;
+    --deep:    #122422;
+    --kelp:    #1d3a36;
+    --teal:    #4fc3b0;
+    --bioglow: #bff2e6;
+    --purple:  #8a6aa8;
+    --rust:    #c97a3d;
+    --bone:    #e9e4d4;
+    --offwhite:#d8dcd6;
+    --haze:    #8aa09a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--abyss);
+    color: var(--offwhite);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    width: 100%;
+    background: var(--abyss);
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.88) saturate(1.05);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(10,22,20,0.65) 66%, var(--abyss) 100%);
+  }
+  .hero-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(1rem, 4vw, 2.5rem) clamp(1rem, 5vw, 3rem);
+  }
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    font-weight: 800;
+    color: var(--bioglow);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 28px rgba(0,0,0,0.9);
+    margin-bottom: 0.6rem;
+  }
+  .hero-hook {
+    font-size: clamp(0.92rem, 2vw, 1.12rem);
+    color: var(--haze);
+    max-width: 620px;
+    line-height: 1.55;
+  }
+
+  /* META STRIP */
+  .meta-strip {
+    background: var(--deep);
+    border-top: 1px solid var(--kelp);
+    border-bottom: 1px solid var(--kelp);
+    padding: 0.65rem clamp(1rem, 5vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+    align-items: center;
+  }
+  .meta-item {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--haze);
+  }
+  .meta-item strong { color: var(--teal); font-weight: 700; }
+  .badge {
+    display: inline-block;
+    background: rgba(79,195,176,0.14);
+    border: 1px solid var(--teal);
+    border-radius: 3px;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  /* BODY */
+  .pitch-body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.2rem clamp(1rem, 5vw, 3rem) 4rem;
+  }
+
+  .section {
+    margin-bottom: 2.4rem;
+    padding-bottom: 2.4rem;
+    border-bottom: 1px solid var(--kelp);
+  }
+  .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .section-label {
+    display: block;
+    font-size: 0.64rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.9rem;
+    font-weight: 700;
+  }
+
+  .section p {
+    font-size: 0.93rem;
+    color: var(--offwhite);
+    line-height: 1.72;
+    max-width: 70ch;
+  }
+
+  /* TWO-COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* LOOP CARDS */
+  .loop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) { .loop-grid { grid-template-columns: 1fr; } }
+
+  .loop-card {
+    background: var(--deep);
+    border: 1px solid var(--kelp);
+    border-top: 3px solid var(--purple);
+    border-radius: 4px;
+    padding: 1.1rem 1.2rem;
+  }
+  .loop-card-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.55rem;
+    font-weight: 700;
+  }
+  .loop-card p {
+    font-size: 0.875rem;
+    color: var(--offwhite);
+    line-height: 1.65;
+    max-width: none;
+  }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 640px) { .stat-row { grid-template-columns: 1fr; } }
+  .stat-card {
+    background: var(--deep);
+    border: 1px solid var(--kelp);
+    border-radius: 4px;
+    padding: 0.9rem 1rem;
+  }
+  .stat-num {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--rust);
+  }
+  .stat-cap {
+    font-size: 0.72rem;
+    color: var(--haze);
+    margin-top: 0.2rem;
+  }
+
+  /* FEATURES LIST */
+  .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    background: var(--deep);
+    border: 1px solid var(--kelp);
+    border-left: 3px solid var(--teal);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    transition: border-left-color 0.15s, background 0.15s;
+  }
+  .feature-item:hover {
+    border-left-color: var(--bioglow);
+    background: #163230;
+  }
+  .feature-text {
+    flex: 1;
+    font-size: 0.875rem;
+    color: var(--offwhite);
+    line-height: 1.58;
+  }
+  .copy-btn {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--kelp);
+    color: var(--haze);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.22rem 0.55rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    font-family: inherit;
+    margin-top: 0.15rem;
+  }
+  .copy-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: rgba(79,195,176,0.08);
+  }
+  .copy-btn.copied {
+    border-color: var(--purple);
+    color: var(--bioglow);
+    background: rgba(138,106,168,0.18);
+  }
+
+  /* DIFFERENTIATORS */
+  .diff-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .diff-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--offwhite);
+    line-height: 1.6;
+  }
+  .diff-item::before {
+    content: '\25B2';
+    color: var(--rust);
+    font-size: 0.5rem;
+    margin-top: 0.42rem;
+    flex-shrink: 0;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--kelp);
+    margin: 0.5rem 0 1.8rem;
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="cover.jpg" alt="Wrack — a translucent bioluminescent tidal colony-creature spread across a drowned mudflat at dusk, a distant hunter's skiff approaching">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <div class="eyebrow">PC Game Concept &nbsp;·&nbsp; Tactical RPG</div>
+    <h1 class="hero-title">Wrack</h1>
+    <p class="hero-hook">You don't command a squad &mdash; you are a single tidal colony-creature, and every limb a hunter tears off stays on the grid as wreckage blocking your own ground until the next cycle regrows it.</p>
+  </div>
+</section>
+
+<!-- META STRIP -->
+<div class="meta-strip">
+  <div class="meta-item"><strong>Genre</strong>&nbsp; Tactical RPG</div>
+  <div class="meta-item"><strong>Platform</strong>&nbsp; PC (Windows)</div>
+  <div class="meta-item"><strong>Input</strong>&nbsp; KB&thinsp;+&thinsp;Mouse &middot; Controller</div>
+  <div class="meta-item"><strong>Price</strong>&nbsp; $24.99 &nbsp;(EA&nbsp;$19.99)</div>
+  <div class="meta-item"><strong>Status</strong>&nbsp; <span class="badge">Concept</span></div>
+</div>
+
+<!-- PITCH BODY -->
+<main class="pitch-body">
+
+  <!-- TARGET PLAYER + SETTING -->
+  <div class="two-col section">
+    <div>
+      <span class="section-label">Target Player</span>
+      <p>Fans of <em>Into the Breach</em> and <em>Demonschool</em> who want the next tactics game to change what a "unit" even is, not reskin the squad. They remember Shadow of Mordor's Nemesis system more fondly than the rest of that game. They're fine playing the monster &mdash; <em>Carrion</em> scratched that itch for an afternoon &mdash; but they want a real grid under it instead of a timer and a health bar.</p>
+    </div>
+    <div>
+      <span class="section-label">Setting</span>
+      <p>A drowned coastline of tidal flats, rusted harvesting platforms, and half-submerged church spires. Your creature is translucent and bioluminescent, more coral colony than monster &mdash; it pulses along its nerve-lines instead of roaring. Drowned teal and rust at low tide; bruise-purple and cold bone-white glow at high tide.</p>
+    </div>
+  </div>
+
+  <!-- CORE LOOP -->
+  <div class="section">
+    <span class="section-label">Core Loop</span>
+    <div class="loop-grid">
+      <div class="loop-card">
+        <span class="loop-card-label">30-Second Loop</span>
+        <p>Move and act each limb once &mdash; Claw, Frond, Eye-stalk, Maw, Anchor. Confirm the turn and the hunters respond. A limb at zero Integrity severs on the spot, becomes wreckage blocking its own tile, and spikes the shared Vitality pool.</p>
+      </div>
+      <div class="loop-card">
+        <span class="loop-card-label">30-Minute Loop</span>
+        <p>A Tide Season runs eight Cycles. Pick a feeding ground, fight a string of hunters against its tide window, bank Biomass. Back at the Shallows, regrow severed limbs, choose a Mutation for each, and decide whether to return a limb short or burn a Cycle waiting.</p>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">60</div>
+        <div class="stat-cap">Shared Vitality pool at Season start, drawn down whenever a limb severs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8&ndash;18</div>
+        <div class="stat-cap">Local Integrity range per limb type before it severs into wreckage</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2&ndash;4</div>
+        <div class="stat-cap">Turns in a tide window, narrowing from Cycle 1 to Cycle 5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY FEATURES -->
+  <div class="section">
+    <span class="section-label">Key Features</span>
+    <ul class="features-list" id="features-list">
+      <li class="feature-item">
+        <span class="feature-text"><strong>Shared Vitality, Local Integrity</strong> &mdash; one pool underlies every independently-acting limb, so losing a limb is a systemic cost to the whole creature, not a swapped-out character.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+      <li class="feature-item">
+        <span class="feature-text"><strong>Wreckage as Self-Made Terrain</strong> &mdash; a severed limb stays on the grid as cover and a chokepoint for the rest of the fight, reshaping the map with your own battle damage.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+      <li class="feature-item">
+        <span class="feature-text"><strong>Mark-and-Rend Combos</strong> &mdash; an Eye-stalk's Mark sets up a Rend from any other limb, and knocking a hunter into your own wreckage adds an Impale tick.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+      <li class="feature-item">
+        <span class="feature-text"><strong>Tide Windows</strong> &mdash; Low Water surfaces every limb but strips your cover; High Water hides you but only long-reach limbs can act. Timing the tide is a weapon.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+      <li class="feature-item">
+        <span class="feature-text"><strong>The Flenser</strong> &mdash; a named rival hunter who's never permanently dead, remembers which limb beat them, and comes back next Cycle with gear built to counter it.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+      <li class="feature-item">
+        <span class="feature-text"><strong>Regrowth as Build Choice</strong> &mdash; every severed limb regrows with a fresh Mutation pick, so your creature's loadout drifts across the Season based on what it actually lost.</span>
+        <button class="copy-btn" aria-label="Copy this feature" onclick="copyFeature(this)">Copy</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- DIFFERENTIATORS -->
+  <div class="section">
+    <span class="section-label">Why This Stands Apart in Tactical RPG</span>
+    <ul class="diff-list">
+      <li class="diff-item">You play the monster's limbs, not a squad: one shared Vitality pool underlies every independently-acting Claw, Frond, Eye-stalk, and Maw.</li>
+      <li class="diff-item">Your own wreckage becomes the map: a severed limb stays on the grid as cover and a chokepoint, so the battlefield is partly built from damage you already took.</li>
+      <li class="diff-item">A single hunter persists across the whole Season and counters your last fight, not a bigger number: the difficulty ramp is one person learning you.</li>
+      <li class="diff-item">Tide state decides who has the advantage, not turn order: Low Water and High Water are two different places to fight from, with real tradeoffs on both sides.</li>
+    </ul>
+  </div>
+
+  <div class="ornament">&#9650; &#9650; &#9650;</div>
+
+  <!-- PROTOTYPE PATH -->
+  <div class="section">
+    <span class="section-label">6-Week Prototype Path</span>
+    <p>Week 1 builds the grid, three limb types, and the sever-to-wreckage conversion. Week 2 adds the Mark-and-Rend combo and a full five-limb creature. Week 3 wires up Culling Crew AI and one complete encounter. Week 4 layers in tide windows and the Surveyor. Week 5 builds the Shallows hub, Biomass, and limb regrowth across two Cycles. Week 6 delivers a Flenser vertical slice for external playtesting, tuned against where runs actually fail.</p>
+  </div>
+
+</main>
+
+<script>
+(function () {
+  function copyFeature(btn) {
+    var text = btn.previousElementSibling.textContent.replace(/\s+/g, ' ').trim();
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        showCopied(btn);
+      }).catch(function () {
+        fallback(text, btn);
+      });
+    } else {
+      fallback(text, btn);
+    }
+  }
+
+  function fallback(text, btn) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); showCopied(btn); } catch (e) { /* silent */ }
+    document.body.removeChild(ta);
+  }
+
+  function showCopied(btn) {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1800);
+  }
+
+  window.copyFeature = copyFeature;
+}());
+</script>
+</body>
+</html>

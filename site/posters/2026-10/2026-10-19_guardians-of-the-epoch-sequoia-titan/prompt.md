@@ -1,0 +1,8 @@
+# Image Generation Prompt
+
+- **Model**: gemini-3.1-flash-image (Gemini SDK, billed)
+- **Positive Prompt**:
+  > A breathtaking cinematic poster titled 'Guardians of the Epoch: The Sequoia Titan'. A colossal, ancient Giant Sequoia tree dominates the center of a vertical 2:3 composition in a Solarpunk Celestial style. The tree's thick, deeply furrowed cinnamon-red bark pulses with glowing cyan and molten-amber bioluminescent sap flowing through intricate natural veins. Floating around its massive trunk are ethereal, glowing holographic temporal rings that display cosmic charts, starry timelines, and ancient chronological glyphs. The background features a mist-shrouded ancient forest canopy beneath a cosmic twilight sky filled with swirling deep violet and magenta nebulae, shimmering stardust, and luminous constellations. Soft, golden starlight filters through dense emerald and jade foliage. At the bottom, the title 'Guardians of the Epoch: The Sequoia Titan' is rendered in sleek, glowing metallic solarpunk typography. Elegantly integrated into the glowing root network at the base, the caption 'Rooted in centuries, branching into eternity.' appears in delicate, luminous celestial script, seamlessly blending into the environment. Hyper-detailed textures, volumetric lighting, rich color contrast, ultra-high resolution, masterpiece, 8k render.
+- **Negative Prompt**: 
+  > low quality, bad typography, distorted text, blurry, low resolution, dull colors, dark, muddy background, cluttered composition, out of frame, cropped, oversaturated, cartoon, anime, amateur design, flat lighting, illegible text, misspelled caption
+- **Aspect Ratio**: 2:3

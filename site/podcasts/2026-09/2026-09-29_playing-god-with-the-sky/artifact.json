@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-episode",
+  "recipe_version": "0.1.0",
+  "collection": "podcasts",
+  "title": "Playing God With The Sky",
+  "slug": "playing-god-with-the-sky",
+  "date": "2026-09-29",
+  "summary": "A round-table panel on geoengineering as a fix for the climate: sun-dimming aerosols, ocean iron, space sunshades and who gets to hold the planetary thermostat.",
+  "files": {
+    "main": "Playing-God-With-The-Sky-29-09-2026.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

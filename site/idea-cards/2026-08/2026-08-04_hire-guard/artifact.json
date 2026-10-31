@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "app-idea-card",
+  "recipe_version": "0.1.0",
+  "collection": "idea-cards",
+  "title": "HireGuard",
+  "slug": "hire-guard",
+  "date": "2026-08-04",
+  "summary": "A browser extension that reads recruiter messages as they arrive and flags the patterns of AI-run job scams, such as the pivot to WhatsApp or a sender domain that doesn't match the company's careers page.",
+  "files": {
+    "main": "card.md"
+  },
+  "fields": {
+    "category": "Browser Extension",
+    "form_factor": "browser extension",
+    "monetization": "freemium",
+    "status": "idea"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "podcast-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "podcast-scripts",
+  "title": "What If We Meet a Superintelligent Alien AI?",
+  "slug": "what-if-we-meet-a-superintelligent-alien-ai",
+  "date": "2026-05-30",
+  "summary": "A four-voice panel script on first contact with a machine civilization: how we would talk to it, what it might want, and what a sensible first-contact protocol looks like.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "pc-game-concept",
+  "recipe_version": "0.1.0",
+  "collection": "pc-game-concepts",
+  "title": "Wrack",
+  "slug": "wrack",
+  "date": "2026-10-26",
+  "summary": "A tactical RPG where you are a single tidal colony-creature, and every limb a hunter tears off stays on the grid as wreckage blocking your own ground until it regrows.",
+  "files": {
+    "main": "game-design-brief.md"
+  },
+  "fields": {
+    "workflow": "weekly-pc-game-concept (Claude)",
+    "genre": "tactical RPG"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
