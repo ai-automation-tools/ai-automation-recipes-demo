@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "icon-packs",
+  "recipe_version": "0.1.0",
+  "collection": "icon-packs",
+  "title": "Shelf: Media Library Folders",
+  "slug": "shelf-media-library-folders",
+  "date": "2026-10-21",
+  "summary": "Twelve folder icons, one per shelf of a home media library (movies, TV, anime, audiobooks, podcasts, photos and more), each with a single white symbol on its own tab colour.",
+  "files": {
+    "main": "prompt.md"
+  },
+  "fields": {
+    "category": "Folders",
+    "style": "Flat vector, single-weight white symbols",
+    "count": "12 icons"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

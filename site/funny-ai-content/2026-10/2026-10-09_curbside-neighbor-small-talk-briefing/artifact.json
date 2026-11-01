@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "funny-ai-content",
+  "recipe_version": "0.1.0",
+  "collection": "funny-ai-content",
+  "title": "CurbSide: The AI That Briefs You on Your Neighbors Before You Take Out the Trash",
+  "slug": "curbside-neighbor-small-talk-briefing",
+  "date": "2026-10-09",
+  "summary": "An AI times your trips to the curb so you meet the right neighbor, then whispers a ten-second dossier in your ear, right up until it tells you to ask about the wrong thing.",
+  "files": {
+    "main": "curbside-neighbor-small-talk-briefing_2026-10-09.md"
+  },
+  "fields": {
+    "type": "funny-ai-content",
+    "format": "short vertical video skit"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

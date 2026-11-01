@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "poster",
+  "recipe_version": "0.1.0",
+  "collection": "posters",
+  "title": "Guardians of the Epoch: The Sequoia Titan",
+  "slug": "guardians-of-the-epoch-sequoia-titan",
+  "date": "2026-10-19",
+  "summary": "A cinematic poster of a giant sequoia veined with glowing sap, ringed by floating star-map rings against a cosmic twilight sky.",
+  "files": {
+    "main": "caption.md"
+  },
+  "fields": {
+    "theme": "Sequoia Giant",
+    "style": "Solarpunk Celestial"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

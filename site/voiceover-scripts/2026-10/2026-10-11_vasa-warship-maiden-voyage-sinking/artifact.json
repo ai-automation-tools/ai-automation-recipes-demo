@@ -1,0 +1,20 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "voiceover-script-generator",
+  "recipe_version": "0.1.0",
+  "collection": "voiceover-scripts",
+  "title": "The Warship That Sank Before It Left the Harbor",
+  "slug": "vasa-warship-maiden-voyage-sinking",
+  "date": "2026-10-11",
+  "summary": "In 1628 Sweden's new flagship Vasa capsized barely a mile into its maiden voyage, after a stability test had already been stopped and nobody told the king. A 135-second voiceover script.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "category": "expensive-mistakes",
+    "topicSlug": "vasa-warship-maiden-voyage-sinking"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

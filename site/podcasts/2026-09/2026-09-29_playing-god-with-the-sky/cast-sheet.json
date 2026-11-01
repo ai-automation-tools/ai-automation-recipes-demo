@@ -1,0 +1,69 @@
+{
+  "host": "Dr. Penelope Hartwell",
+  "cast": [
+    {
+      "speaker": "Dr. Penelope Hartwell",
+      "display": "Dr. Penelope Hartwell",
+      "voice_key": "Juliet",
+      "voice_id": "QJksobp1edMNvmwcG5lm",
+      "persona": "Dr. Penelope Hartwell",
+      "role": "host",
+      "match": "persona",
+      "bio": "The host - a calm, devastatingly precise British public-radio interviewer who moderates with quiet curiosity and politely catches guests in their own contradictions.",
+      "visual": "a poised British woman in her 50s, sharp tailored blazer, silver-streaked hair pulled back, warm but incisive expression",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.5,
+      "style": 0.22,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Pastor Cole",
+      "display": "Pastor Cole",
+      "voice_key": "Youngblood",
+      "voice_id": "Q5WaVTqnkn6nqR4w9Hzv",
+      "persona": "Pastor Cole",
+      "role": "guest",
+      "match": "persona",
+      "bio": "A warm Southern shepherd with firm convictions delivered through genuine compassion, framing everything around grace, humility, and human flourishing.",
+      "visual": "a warm middle-aged Black Southern pastor, kind eyes, smart-casual jacket with a small cross pin, gentle authoritative presence",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.4,
+      "style": 0.3,
+      "similarity_boost": 0.85,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Prepper Paul",
+      "display": "Prepper Paul",
+      "voice_key": "Villain",
+      "voice_id": "TDTTIZEngvvWARkECefs",
+      "persona": "Prepper Paul",
+      "role": "guest",
+      "match": "persona",
+      "bio": "A paranoid survivalist with three bunkers and ten thousand rounds who whispers about EMPs and the deep state and ties every topic back to the coming collapse.",
+      "visual": "a wiry paranoid survivalist man in camo tactical gear, wary darting eyes, leaning in conspiratorially, a bug-out bag on his shoulder",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.4,
+      "style": 0.3,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    },
+    {
+      "speaker": "Boomer Bill",
+      "display": "Boomer Bill",
+      "voice_key": "Dennis",
+      "voice_id": "zBjSpfcokeTupfIZ8Ryx",
+      "persona": "Boomer Bill",
+      "role": "guest",
+      "match": "persona",
+      "bio": "A gruff retired union guy who calls a spade a spade, pines for 'back in my day,' and has no patience for participation trophies or newfangled anything.",
+      "visual": "a gruff white retired union man in his late 60s, ball cap, plaid flannel shirt, arms crossed, no-nonsense scowl",
+      "model_id": "eleven_multilingual_v2",
+      "stability": 0.5,
+      "style": 0.22,
+      "similarity_boost": 0.82,
+      "use_speaker_boost": true
+    }
+  ]
+}

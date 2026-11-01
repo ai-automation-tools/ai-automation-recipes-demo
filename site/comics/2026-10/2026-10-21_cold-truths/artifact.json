@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "comics",
+  "recipe_version": "0.1.0",
+  "collection": "comics",
+  "title": "Cold Truths",
+  "slug": "cold-truths",
+  "date": "2026-10-21",
+  "summary": "A man's 2 AM snack run is stopped by a smart fridge that judges his life choices, then rewards him with a very large order of kale powder.",
+  "files": {
+    "main": "script.md"
+  },
+  "fields": {
+    "series": "Byte-Sized Living",
+    "characters": "Arthur, Smart Fridge",
+    "setting": "Modern kitchen at midnight",
+    "humor_type": "Satire"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
