@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "song-generator",
+  "recipe_version": "0.1.0",
+  "collection": "songs",
+  "title": "Blue Is Tuesday",
+  "slug": "blue-is-tuesday",
+  "date": "2026-11-05",
+  "summary": "Each day of the week arrives as a color, and each color is a warm room you can stay in.",
+  "files": {
+    "main": "blue-is-tuesday_lyrics.md"
+  },
+  "fields": {
+    "genre": "meditative psychedelia",
+    "texture": "Slow desert groove",
+    "mood": "warm, unhurried",
+    "tempo": "74 BPM"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

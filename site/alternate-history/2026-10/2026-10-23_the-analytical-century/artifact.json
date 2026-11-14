@@ -1,0 +1,21 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "alternate-history",
+  "recipe_version": "0.1.0",
+  "collection": "alternate-history",
+  "title": "The Analytical Century",
+  "slug": "the-analytical-century",
+  "date": "2026-10-23",
+  "summary": "What if Charles Babbage's Analytical Engine had been funded and built in the 1840s, so programmable computing arrived a century early and spread through offices, armies and states by 1900?",
+  "files": {
+    "main": "story.md"
+  },
+  "fields": {
+    "era": "Victorian era / 19th century",
+    "word_count": "1078",
+    "scenes_rendered": "8/8"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

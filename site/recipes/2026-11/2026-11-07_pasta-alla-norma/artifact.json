@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "family-recipe",
+  "recipe_version": "0.1.0",
+  "collection": "recipes",
+  "title": "Pasta alla Norma",
+  "slug": "pasta-alla-norma",
+  "date": "2026-11-07",
+  "summary": "A Sicilian supper of roasted eggplant, tomato passata, basil and ricotta over rigatoni, plus a Cook's Card.",
+  "files": {
+    "main": "recipe.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
