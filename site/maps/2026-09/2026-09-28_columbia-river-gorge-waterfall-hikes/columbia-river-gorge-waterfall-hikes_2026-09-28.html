@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Columbia River Gorge Waterfall Hikes</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23060606'/%3E%3Cpath d='M50 16c-13.8 0-25 11-25 24.6C25 59 50 84 50 84s25-25 25-43.4C75 27 63.8 16 50 16z' fill='none' stroke='%2338bdf8' stroke-width='7' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='41' r='9' fill='%2338bdf8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #0f0f14; color: #e8e8f0; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* ── Header ── */
+  .app-header { background: #14141c; border-bottom: 1px solid #2a2a3a; padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; z-index: 1000; }
+  .header-icon { font-size: 22px; }
+  .header-text h1 { font-size: 16px; font-weight: 700; color: #38bdf8; letter-spacing: 0.01em; line-height: 1.2; }
+  .header-text p { font-size: 11px; color: #8888aa; margin-top: 1px; }
+  .legend { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #aaa; white-space: nowrap; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Main layout ── */
+  .app-body { display: flex; flex: 1; overflow: hidden; }
+  #map { flex: 1; }
+
+  /* ── Sidebar ── */
+  .sidebar { width: 300px; background: #14141c; border-left: 1px solid #2a2a3a; display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+  .sidebar-header { padding: 12px 14px; border-bottom: 1px solid #2a2a3a; }
+  .sidebar-header h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: #8888aa; font-weight: 600; }
+  .sidebar-filter { padding: 10px 14px; display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid #2a2a3a; }
+  .filter-btn { font-size: 10px; padding: 4px 9px; border-radius: 20px; border: 1px solid #333; background: #1e1e2a; color: #aaa; cursor: pointer; transition: all .15s; }
+  .filter-btn:hover, .filter-btn.active { border-color: currentColor; background: transparent; }
+  .filter-btn[data-cat="all"].active { color: #e8e8f0; border-color: #e8e8f0; }
+  .filter-btn[data-cat="Waterfall"].active { color: #38bdf8; border-color: #38bdf8; }
+  .filter-btn[data-cat="Overlook"].active { color: #f5d97a; border-color: #f5d97a; }
+  .filter-btn[data-cat="Visitor Center"].active { color: #4ade80; border-color: #4ade80; }
+  .stop-list { flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .stop-row { display: flex; align-items: center; gap: 10px; padding: 9px 14px; cursor: pointer; border-bottom: 1px solid #1e1e2a; transition: background .12s; }
+  .stop-row:hover { background: #1e1e2a; }
+  .stop-row.hidden { display: none; }
+  .stop-thumb-wrap { position: relative; flex-shrink: 0; width: 46px; height: 46px; }
+  .stop-thumb { width: 46px; height: 46px; object-fit: cover; border-radius: 6px; cursor: pointer; }
+  .thumb-count { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,.7); color: #fff; font-size: 9px; border-radius: 3px; padding: 1px 3px; pointer-events: none; }
+  .stop-info { flex: 1; min-width: 0; }
+  .stop-num { font-size: 10px; color: #666; }
+  .stop-name { font-size: 13px; font-weight: 600; color: #e8e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stop-cat { font-size: 10px; margin-top: 2px; }
+
+  /* ── Popup reset ── */
+  .leaflet-popup-content-wrapper { background: #16161e; border: 1px solid #2a2a3a; border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,.6); padding: 0; overflow: hidden; }
+  .leaflet-popup-tip { background: #16161e; }
+  .leaflet-popup-content { margin: 0; width: min(300px, 88vw) !important; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+
+  /* ── Popup card ── */
+  .popup-card { overflow: hidden; border-radius: 10px; }
+  .popup-media { position: relative; overflow: hidden; }
+  .popup-media img { width: 100%; height: 150px; object-fit: cover; display: block; cursor: pointer; }
+  .popup-expand { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 12px; padding: 2px 5px; border-radius: 4px; pointer-events: none; }
+  .popup-photo-count { position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+  .popup-thumbs { display: flex; gap: 4px; padding: 5px 5px 3px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+  .popup-thumbs img { width: 46px; height: 34px; object-fit: cover; border-radius: 4px; cursor: pointer; flex-shrink: 0; border: 1.5px solid transparent; transition: border-color .12s; }
+  .popup-thumbs img:hover { border-color: #38bdf8; }
+  .popup-body { padding: 10px 12px 10px; }
+  .popup-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 600; margin-bottom: 6px; }
+  .popup-title { font-size: 15px; font-weight: 700; color: #f0f0f8; line-height: 1.3; margin-bottom: 5px; }
+  .popup-desc { font-size: 12px; color: #aaa; line-height: 1.5; margin-bottom: 6px; }
+  .popup-tip { font-size: 11px; color: #c8b870; background: rgba(245,217,122,.08); border-left: 2px solid #f5d97a; padding: 4px 8px; border-radius: 0 4px 4px 0; margin-bottom: 8px; line-height: 1.4; }
+  .popup-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .popup-link { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid #333; color: #aaa; text-decoration: none; white-space: nowrap; transition: all .12s; }
+  .popup-link:hover { border-color: #38bdf8; color: #38bdf8; }
+  .popup-link.directions { border-color: #4ab8c8; color: #4ab8c8; }
+  .popup-link.directions:hover { background: rgba(74,184,200,.1); }
+
+  /* ── Lightbox ── */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 9999; justify-content: center; align-items: center; }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: min(90vw, 900px); max-height: 90vh; }
+  .lightbox-inner img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 6px; display: block; }
+  .lightbox-caption { text-align: center; color: #ccc; font-size: 13px; margin-top: 10px; }
+  .lightbox-close { position: absolute; top: -36px; right: 0; color: #fff; font-size: 26px; cursor: pointer; line-height: 1; background: none; border: none; }
+  .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.55); color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .lightbox-arrow.prev { left: -48px; }
+  .lightbox-arrow.next { right: -48px; }
+  .lightbox-arrow.hidden { display: none; }
+
+  /* ── Category colours ── */
+  .cat-waterfall { color: #38bdf8; }
+  .cat-overlook { color: #f5d97a; }
+  .cat-visitor { color: #4ade80; }
+  .badge-waterfall { background: rgba(56,189,248,.15); color: #38bdf8; }
+  .badge-overlook { background: rgba(245,217,122,.15); color: #f5d97a; }
+  .badge-visitor { background: rgba(74,222,128,.15); color: #4ade80; }
+
+  /* ── Mobile ── */
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+  }
+  @media (max-width: 560px) {
+    .leaflet-popup { max-width: 92vw !important; }
+    .leaflet-popup-content-wrapper { max-width: 92vw; }
+    .leaflet-popup-content { width: min(88vw, 320px) !important; max-height: min(46vh, 320px) !important; overflow-y: auto; }
+    .popup-media img { height: 116px !important; }
+    .lightbox-arrow.prev { left: -30px; }
+    .lightbox-arrow.next { right: -30px; }
+  }
+  @media (max-width: 400px) {
+    .legend { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-icon">💧</div>
+  <div class="header-text">
+    <h1>Columbia River Gorge Waterfall Hikes</h1>
+    <p>14 Stops · Troutdale to The Dalles · Waterfalls, Overlooks &amp; the Historic Highway</p>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Waterfall</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f5d97a"></div>Overlook</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div>Visitor Center</div>
+  </div>
+</header>
+
+<div class="app-body">
+  <div id="map"></div>
+  <aside class="sidebar">
+    <div class="sidebar-header"><h2>14 Stops · West → East</h2></div>
+    <div class="sidebar-filter">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="Waterfall">💧 Falls</button>
+      <button class="filter-btn" data-cat="Overlook">🏞 Overlooks</button>
+      <button class="filter-btn" data-cat="Visitor Center">🅿 Visitor Ctr</button>
+    </div>
+    <div class="stop-list" id="stopList"></div>
+  </aside>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox-arrow prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lightbox-arrow next" id="lbNext" aria-label="Next">&#8250;</button>
+    <p class="lightbox-caption" id="lbCaption"></p>
+  </div>
+</div>
+
+<script>
+// ── Stop Data (west → east along the Historic Columbia River Highway / I-84) ──
+const stops = [
+  {
+    name: "Vista House at Crown Point",
+    category: "Overlook",
+    lat: 45.539579, lng: -122.244401,
+    desc: "An octagonal 1918 rest stop cut from gray Kiona sandstone, perched 733 feet above the river on a hairpin bend of the old highway. Architect Edgar Lazarus built it as a highway comfort station and a memorial to Oregon's pioneers at once — the inside has stained glass and marble that don't match the plain purpose on the cornerstone.",
+    tip: "The lot is small and fills early on clear-day weekends. Wind on the point is sharper than it looks from the road — bring a layer even in summer.",
+    website: "https://en.wikipedia.org/wiki/Vista_House",
+    image: "Images/vista-house-1.jpg",
+    images: ["Images/vista-house-1.jpg", "Images/vista-house-2.jpg"]
+  },
+  {
+    name: "Latourell Falls",
+    category: "Waterfall",
+    lat: 45.5371, lng: -122.2169,
+    desc: "Water drops 249 feet in one unbroken plunge over a curved wall of columnar basalt streaked yellow-green with lichen — the single vertical drop and the lichen color are what separate this from the corridor's other falls. The paved viewpoint is a five-minute walk from the lot; a 2.1-mile loop climbs on to a second, quieter upper falls.",
+    tip: "The short trail to the base gets you most of the view for a fraction of the walk — save the full loop for when you have a couple of hours to spend.",
+    website: "https://en.wikipedia.org/wiki/Latourell_Falls",
+    image: "Images/latourell-falls-1.jpg",
+    images: ["Images/latourell-falls-1.jpg", "Images/latourell-falls-2.jpg"]
+  },
+  {
+    name: "Shepperd's Dell Falls",
+    category: "Waterfall",
+    lat: 45.5483, lng: -122.1950,
+    desc: "A tiered falls squeezed into a narrow side canyon, viewed from a 1914 concrete bridge that a Portland dairy farmer paid to build, then donated the whole ravine to the city in memory of his wife. The pullout is easy to miss at highway speed.",
+    tip: "There's no real trail here — a five-minute roadside look, good for stretching your legs between the bigger stops.",
+    website: "https://en.wikipedia.org/wiki/Shepperd%27s_Dell",
+    image: "Images/shepperds-dell-falls-1.jpg"
+  },
+  {
+    name: "Bridal Veil Falls",
+    category: "Waterfall",
+    lat: 45.5545, lng: -122.1803,
+    desc: "Two drops totaling around 120 feet, reached by a rooty, stair-stepped half-mile trail that feels more like a real hike than most paved viewpoints on this corridor. A separate flat loop from the same lot gives wheelchair and stroller users their own canyon overlook without the stairs.",
+    tip: "The unpaved Waterfall Trail gets you to the falls; the paved Overlook Loop is the one for a river view without the climb — they start at the same parking area but go opposite ways.",
+    website: "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=107",
+    image: "Images/bridal-veil-falls-1.jpg"
+  },
+  {
+    name: "Wahkeena Falls",
+    category: "Waterfall",
+    lat: 45.5745, lng: -122.1276,
+    desc: "A 242-foot tiered drop with a name that comes from a Yakama word for 'most beautiful,' and the trailhead for the corridor's best loop hike — up past Wahkeena to Multnomah Falls and back down, about 5 miles with 870 feet of climbing.",
+    tip: "The lot fills before 9am on weekends. If you're only stopping for a photo, the falls are visible right from the parking area — no walk required.",
+    website: "https://en.wikipedia.org/wiki/Wahkeena_Falls",
+    image: "Images/wahkeena-falls-1.jpg"
+  },
+  {
+    name: "Multnomah Falls",
+    category: "Waterfall",
+    lat: 45.57595, lng: -122.11536,
+    desc: "620 feet in two tiers, the tallest waterfall in Oregon and the most-visited natural site in the Pacific Northwest, at over two million visitors a year. The 1925 Benson Footbridge crosses 105 feet above the lower drop, close enough that spray reaches the railing on a windy day.",
+    tip: "A timed-use vehicle permit is required at the Exit 31 lot during peak season (roughly late May through early September) — check current dates and book on Recreation.gov, or park at the smaller Historic Highway surface-street lot instead.",
+    website: "https://www.fs.usda.gov/r06/columbiarivergorge/recreation/multnomah-falls",
+    image: "Images/multnomah-falls-1.jpg",
+    images: ["Images/multnomah-falls-1.jpg", "Images/multnomah-falls-2.jpg"]
+  },
+  {
+    name: "Oneonta Gorge",
+    category: "Waterfall",
+    lat: 45.5856, lng: -122.0728,
+    desc: "The slot canyon that made this stretch famous — a crack in the basalt you used to wade straight through to reach a hidden waterfall — has been closed since a massive logjam formed after the 2017 Eagle Creek Fire, and the Forest Service has no plan to remove it. The upland Oneonta Trail bypassing the gorge is open and reaches Triple Falls, a three-way split over a mossy ledge, about a mile up.",
+    tip: "Don't wade into the gorge itself — it's closed and the fine is real. Triple Falls, up the open trail, is the legitimate payoff here now.",
+    website: "https://www.fs.usda.gov/r06/columbiarivergorge/recreation/west-oneonta-trailhead",
+    image: "Images/oneonta-gorge-1.jpg"
+  },
+  {
+    name: "Horsetail Falls",
+    category: "Waterfall",
+    lat: 45.5896, lng: -122.0687,
+    desc: "176 feet, dropping straight off a basalt ledge a few steps from the Historic Highway shoulder — one of the easiest big falls to see in the whole corridor. A short, steep path climbs to Upper Horsetail Falls, where the trail cuts in behind the curtain of water.",
+    tip: "Stay on the marked trail near the upper falls — fatal falls have happened here when hikers left the path to get closer to the edge.",
+    website: "https://en.wikipedia.org/wiki/Horsetail_Falls_(Oregon)",
+    image: "Images/horsetail-falls-1.jpg"
+  },
+  {
+    name: "Elowah Falls",
+    category: "Waterfall",
+    lat: 45.6183, lng: -121.9670,
+    desc: "213 feet into a mossy stone bowl, reached by an easy creekside walk from the John B. Yeon trailhead. A fork continues up a narrow ledge trail cut into the cliff, guardrail included, to a second, smaller falls with a view back down to the Columbia.",
+    tip: "The full loop to both falls runs under 3 miles with modest climbing — a good pick if Multnomah's crowds have worn you down.",
+    website: "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=114",
+    image: "Images/elowah-falls-1.jpg"
+  },
+  {
+    name: "Wahclella Falls",
+    category: "Waterfall",
+    lat: 45.617917, lng: -121.949917,
+    desc: "A 350-foot two-drop falls that lands in a rock amphitheater at the end of Tanner Creek, fed by springs so its flow barely changes between July and January. The Forest Service flags this specific canyon for elevated flash-flood and falling-tree risk — it burned hot in the 2017 fire and the watershed is still recovering.",
+    tip: "Skip this one during or right after heavy rain, and check the current Forest Service alert before you drive out — the $5 day-use fee is card/QR only at the trailhead, no cash.",
+    website: "https://www.fs.usda.gov/r06/columbiarivergorge/recreation/trails/wahclella-falls-trail-436",
+    image: "Images/wahclella-falls-1.jpg",
+    images: ["Images/wahclella-falls-1.jpg", "Images/wahclella-falls-2.jpg"]
+  },
+  {
+    name: "Eagle Creek Trail to Punch Bowl Falls",
+    category: "Waterfall",
+    lat: 45.636574, lng: -121.91970,
+    desc: "A cliffside trail with cable handholds bolted into the basalt, leading about two miles to Punch Bowl Falls, where the creek drops into a round green pool. The trail has closed and reopened repeatedly since the 2017 fire — most recently shut down by winter storm damage from January to May of this year.",
+    tip: "This trail's open/closed status has flipped several times in two years — check the current Forest Service alert before you drive out, not after. A $5 day-use pass is required, and jumping into the pool is prohibited.",
+    website: "https://www.fs.usda.gov/r06/columbiarivergorge/recreation/eagle-creek-trailhead-trail-440",
+    image: "Images/eagle-creek-punch-bowl-falls-1.jpg",
+    images: ["Images/eagle-creek-punch-bowl-falls-1.jpg", "Images/eagle-creek-punch-bowl-falls-2.jpg"]
+  },
+  {
+    name: "Bonneville Dam Visitor Center",
+    category: "Visitor Center",
+    lat: 45.6442, lng: -121.9406,
+    desc: "A working hydroelectric dam with an underwater window built into the fish ladder, where you can watch salmon and steelhead muscle upstream past the glass. Late April through early November is the general viewing season, with volume typically peaking in early September.",
+    tip: "The Bradford Island center has an elevator to every viewing level — one of the few fully wheelchair-accessible stops on this list.",
+    website: "https://www.nwp.usace.army.mil/bonneville/",
+    image: "Images/bonneville-dam-1.jpg",
+    images: ["Images/bonneville-dam-1.jpg", "Images/bonneville-dam-2.jpg"]
+  },
+  {
+    name: "Starvation Creek Falls",
+    category: "Waterfall",
+    lat: 45.6881732, lng: -121.6892416,
+    desc: "190 feet in two tiers, and the least effort of any waterfall on this list — a boardwalk gets you from the parking lot to the base in under a minute. The creek is named for an 1884 train that got snowbound near here; the stranded passengers were resupplied by locals on skis.",
+    tip: "Eastbound only off I-84 Exit 55 — there's no westbound exit, so plan which direction you're driving before you commit.",
+    website: "https://en.wikipedia.org/wiki/Starvation_Creek_State_Park",
+    image: "Images/starvation-creek-falls-1.jpg"
+  },
+  {
+    name: "Rowena Crest Viewpoint",
+    category: "Overlook",
+    lat: 45.6827, lng: -121.2997,
+    desc: "The point where the wet, forested western gorge gives way to dry grassland and oak savanna, with a view down two horseshoe bends of the Columbia from the Rowena Plateau. The Tom McCall Preserve's flat Plateau Trail is open year-round; the steeper McCall Point Trail closes over winter.",
+    tip: "Come in April or May for the balsamroot and lupine bloom — the preserve prohibits picking flowers or leaving the trail, so bring a long lens instead.",
+    website: "https://www.nature.org/en-us/get-involved/how-to-help/places-we-protect/tom-mccall-preserve-at-rowena/",
+    image: "Images/rowena-crest-1.jpg",
+    images: ["Images/rowena-crest-1.jpg", "Images/rowena-crest-2.jpg"]
+  }
+];
+
+// ── Category helpers ───────────────────────────────────────────────────────
+function catClass(cat) {
+  if (cat === "Overlook") return "overlook";
+  if (cat === "Visitor Center") return "visitor";
+  return "waterfall";
+}
+function catColor(cat) {
+  if (cat === "Overlook") return "#f5d97a";
+  if (cat === "Visitor Center") return "#4ade80";
+  return "#38bdf8";
+}
+function markerIcon(cat) {
+  const col = catColor(cat);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 42">
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity=".4"/></filter>
+    <path d="M15 1C8.4 1 3 6.4 3 13c0 9.5 12 27 12 27s12-17.5 12-27C27 6.4 21.6 1 15 1z" fill="${col}" stroke="rgba(0,0,0,.3)" stroke-width="1" filter="url(#s)"/>
+    <circle cx="15" cy="13" r="5" fill="rgba(0,0,0,.35)"/>
+  </svg>`;
+  return L.divIcon({
+    className: "",
+    html: `<div style="width:30px;height:42px">${svg}</div>`,
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -44]
+  });
+}
+
+// ── Lightbox ───────────────────────────────────────────────────────────────
+let lbPhotos = [], lbIdx = 0, lbStopName = "";
+const lightbox = document.getElementById("lightbox");
+const lbImg    = document.getElementById("lbImg");
+const lbCaption= document.getElementById("lbCaption");
+const lbClose  = document.getElementById("lbClose");
+const lbPrev   = document.getElementById("lbPrev");
+const lbNext   = document.getElementById("lbNext");
+
+function openLightbox(photos, idx, stopName) {
+  lbPhotos = photos; lbIdx = idx; lbStopName = stopName;
+  showLbSlide();
+  lightbox.classList.add("open");
+  document.addEventListener("keydown", lbKeyHandler);
+}
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.removeEventListener("keydown", lbKeyHandler);
+}
+function showLbSlide() {
+  lbImg.src = lbPhotos[lbIdx];
+  lbCaption.textContent = lbPhotos.length > 1
+    ? `${lbStopName} — ${lbIdx + 1}/${lbPhotos.length}`
+    : lbStopName;
+  lbPrev.classList.toggle("hidden", lbPhotos.length <= 1);
+  lbNext.classList.toggle("hidden", lbPhotos.length <= 1);
+}
+function lbKeyHandler(e) {
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft" && lbPhotos.length > 1) { lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length; showLbSlide(); }
+  if (e.key === "ArrowRight" && lbPhotos.length > 1) { lbIdx = (lbIdx + 1) % lbPhotos.length; showLbSlide(); }
+}
+lbClose.onclick = closeLightbox;
+lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
+lbPrev.onclick = (e) => { e.stopPropagation(); lbIdx = (lbIdx - 1 + lbPhotos.length) % lbPhotos.length; showLbSlide(); };
+lbNext.onclick = (e) => { e.stopPropagation(); lbIdx = (lbIdx + 1) % lbPhotos.length; showLbSlide(); };
+
+// ── Build popup HTML ───────────────────────────────────────────────────────
+function buildPopupHtml(stop) {
+  const photos = stop.images || (stop.image ? [stop.image] : []);
+  const cls = catClass(stop.category);
+  const badgeCls = `badge-${cls}`;
+
+  let mediaHtml = "";
+  if (stop.image) {
+    const countPill = photos.length > 1
+      ? `<div class="popup-photo-count">1/${photos.length}</div>` : "";
+    const thumbs = photos.length > 1
+      ? `<div class="popup-thumbs">${photos.map((p,i) =>
+          `<img src="${p}" alt="photo ${i+1}" onclick="openLightbox(${JSON.stringify(photos)},${i},${JSON.stringify(stop.name)});event.stopPropagation()">`
+        ).join("")}</div>` : "";
+    mediaHtml = `
+      <div class="popup-media">
+        <button onclick="openLightbox(${JSON.stringify(photos)},0,${JSON.stringify(stop.name)})" style="border:none;padding:0;cursor:pointer;display:block;width:100%">
+          <img src="${stop.image}" alt="${stop.name}" onerror="this.parentElement.style.display='none'">
+        </button>
+        ${countPill}
+        <div class="popup-expand">⤢</div>
+      </div>${thumbs}`;
+  }
+
+  const tipHtml = stop.tip ? `<div class="popup-tip">💡 ${stop.tip}</div>` : "";
+  const websiteLink = stop.website
+    ? `<a href="${stop.website}" target="_blank" rel="noopener" class="popup-link" onclick="event.stopPropagation()">Website</a>` : "";
+  const directionsLink = `<a href="https://www.google.com/maps/dir/?api=1&destination=${stop.lat},${stop.lng}" target="_blank" rel="noopener" class="popup-link directions" onclick="event.stopPropagation()">Directions</a>`;
+
+  return `<div class="popup-card">
+    ${mediaHtml}
+    <div class="popup-body">
+      <div class="popup-badge ${badgeCls}">${stop.category}</div>
+      <div class="popup-title">${stop.name}</div>
+      <div class="popup-desc">${stop.desc}</div>
+      ${tipHtml}
+      <div class="popup-actions">${websiteLink}${directionsLink}</div>
+    </div>
+  </div>`;
+}
+
+// ── Map ────────────────────────────────────────────────────────────────────
+const map = L.map("map", { center: [45.62, -121.85], zoom: 10, zoomControl: false });
+L.control.zoom({ position: "bottomright" }).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+// Single route line in driving order (west → east)
+const routeCoords = stops.map(s => [s.lat, s.lng]);
+L.polyline(routeCoords, { color: "#e8e8f0", weight: 2.5, opacity: 0.35, dashArray: "6 5" }).addTo(map);
+
+// Markers
+const markers = stops.map((stop) => {
+  const marker = L.marker([stop.lat, stop.lng], { icon: markerIcon(stop.category) })
+    .bindPopup(buildPopupHtml(stop), {
+      maxWidth: 330, minWidth: 300, maxHeight: 380,
+      autoPanPadding: L.point(40, 40)
+    })
+    .bindTooltip(stop.name, { permanent: false, direction: "top", offset: [0, -42] })
+    .addTo(map);
+  return marker;
+});
+
+// ── Sidebar stop list ──────────────────────────────────────────────────────
+const stopList = document.getElementById("stopList");
+stops.forEach((stop, idx) => {
+  const cls = catClass(stop.category);
+  const photos = stop.images || (stop.image ? [stop.image] : []);
+  const thumbHtml = stop.image
+    ? `<div class="stop-thumb-wrap">
+        <img class="stop-thumb" src="${stop.image}" alt="${stop.name}"
+          onclick="openLightbox(${JSON.stringify(photos)},0,${JSON.stringify(stop.name)});event.stopPropagation()">
+        ${photos.length > 1 ? `<div class="thumb-count">▤ ${photos.length}</div>` : ""}
+      </div>`
+    : "";
+
+  const row = document.createElement("div");
+  row.className = "stop-row";
+  row.dataset.cat = stop.category;
+  row.innerHTML = `${thumbHtml}
+    <div class="stop-info">
+      <div class="stop-num">${idx + 1}</div>
+      <div class="stop-name">${stop.name}</div>
+      <div class="stop-cat cat-${cls}">${stop.category}</div>
+    </div>`;
+  row.addEventListener("click", () => {
+    map.setView([stop.lat, stop.lng], 14, { animate: true });
+    setTimeout(() => markers[idx].openPopup(), 400);
+  });
+  stopList.appendChild(row);
+});
+
+// ── Filter buttons ─────────────────────────────────────────────────────────
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const cat = btn.dataset.cat;
+    document.querySelectorAll(".stop-row").forEach(row => {
+      row.classList.toggle("hidden", cat !== "all" && row.dataset.cat !== cat);
+    });
+    markers.forEach((marker, idx) => {
+      const visible = cat === "all" || stops[idx].category === cat;
+      if (visible) {
+        if (!map.hasLayer(marker)) marker.addTo(map);
+      } else {
+        if (map.hasLayer(marker)) marker.removeFrom(map);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

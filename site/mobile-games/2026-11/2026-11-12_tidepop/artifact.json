@@ -1,0 +1,22 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "mobile-game",
+  "recipe_version": "0.1.0",
+  "collection": "mobile-games",
+  "title": "Tidepop",
+  "slug": "tidepop",
+  "date": "2026-11-12",
+  "summary": "A portrait bubble shooter under the sea: every shot that pops nothing fills a pressure meter, a full meter drops the ceiling a row, and the way out is cutting whole clusters loose.",
+  "files": {
+    "main": "index.html"
+  },
+  "fields": {
+    "workflow": "weekly-mobile-game (Claude)",
+    "genre": "bubble shooter",
+    "platform": "Mobile (portrait, touch-first)",
+    "game": "Tidepop"
+  },
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

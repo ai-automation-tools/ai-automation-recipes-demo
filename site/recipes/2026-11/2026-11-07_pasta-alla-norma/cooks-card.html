@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pasta alla Norma</title>
+<style>
+:root {
+  --accent: #ea580c; --accent-dark: #a83f08; --accent-tint: #fceee6;
+  --ink: #1f2937; --muted: #6b7280; --bg: #ffffff; --panel: #fceee6;
+  --border: #e5e7eb; --body: #374151;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f3f4f6; --muted: #9ca3af; --bg: #0f1115; --panel: #171a21;
+    --border: #2a2f3a; --body: #d1d5db; --accent-dark: #f19261;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 20px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px; line-height: 1.6; color: var(--body); background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.kicker {
+  font-size: 12px; color: var(--accent); text-transform: uppercase;
+  letter-spacing: .16em; font-weight: 700; margin: 0 0 8px;
+}
+h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; color: var(--ink); margin: 0 0 18px; letter-spacing: -.02em; }
+.hero { width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 0 22px; }
+.statbar {
+  display: flex; flex-wrap: wrap; gap: 1px; background: var(--border);
+  border-top: 3px solid var(--accent); border-bottom: 1px solid var(--border);
+  border-radius: 0 0 10px 10px; overflow: hidden; margin: 0 0 18px;
+}
+.stat { flex: 1 1 120px; background: var(--panel); padding: 12px 10px; text-align: center; }
+.stat-l { color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+.stat-v { color: var(--accent-dark); font-size: 17px; font-weight: 700; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.tag {
+  background: var(--panel); color: var(--accent-dark); padding: 4px 11px;
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.intro { font-size: 18px; color: var(--body); font-style: italic; line-height: 1.6; margin: 0 0 30px; }
+h2.sec {
+  font-size: 22px; font-weight: 700; color: var(--ink); margin: 36px 0 14px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--accent);
+}
+.panel { background: var(--panel); border-radius: 10px; padding: 6px 20px 14px; }
+.panel h3 {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 16px 0 6px;
+}
+.panel ul { margin: 6px 0 10px; padding-left: 20px; }
+.panel li { margin-bottom: 5px; }
+.step { display: flex; gap: 14px; align-items: flex-start; margin: 0 0 14px; }
+.step-num {
+  flex: 0 0 32px; height: 32px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-txt { flex: 1; padding-top: 4px; }
+.substep {
+  font-size: 13px; font-weight: 700; color: var(--accent-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin: 22px 0 10px;
+}
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 5px; }
+strong { color: var(--ink); }
+a { color: var(--accent-dark); }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; color: var(--accent-dark); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; width: 100%; overflow-x: auto; display: block; }
+td, th { border: 1px solid var(--border); padding: 6px 10px; text-align: left; }
+.footer {
+  margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+@media print {
+  :root { --bg: #fff; --ink: #1f2937; --body: #374151; --panel: #fceee6; --border: #e5e7eb; }
+  body { font-size: 11pt; padding: 0; }
+  .step, .panel { break-inside: avoid; }
+  h2.sec { break-after: avoid; }
+  .hero { max-height: 3in; object-fit: cover; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">Italian  &middot;  2026-11-07</p>
+<h1>Pasta alla Norma</h1>
+<img class="hero" src="cover.jpg" alt="Hero image of Pasta alla Norma" />
+<div class="statbar"><div class="stat"><div class="stat-l">Yield</div><div class="stat-v">4 servings</div></div><div class="stat"><div class="stat-l">Active</div><div class="stat-v">25 min</div></div><div class="stat"><div class="stat-l">Total</div><div class="stat-v">55 min</div></div><div class="stat"><div class="stat-l">Region</div><div class="stat-v">Italian</div></div></div>
+<ul class="tags"><li class="tag">italian</li><li class="tag">pasta</li><li class="tag">family-dinner</li><li class="tag">meatless</li></ul>
+<p class="intro">Pasta alla Norma comes from Catania, Sicily: eggplant, tomato, basil, and salted ricotta turn a simple pasta supper into a regional favorite. Great Italian Chefs describes its traditional fried-eggplant preparation. This adaptation uses RecipeTin Eats&#x27; roasted method for an easier family dinner, with ricotta salata to finish. The tomato sauce stays mild; chili is optional.</p>
+<h2 class="sec">Ingredients</h2><div class="panel"><h3>Main Components</h3>
+<ul>
+<li>800 g (1 lb 12 oz) eggplant, trimmed and cut into 1-inch (2.5 cm) cubes</li>
+<li>30 ml (2 tablespoons) extra-virgin olive oil, for roasting</li>
+<li>1/2 teaspoon fine salt, for the eggplant</li>
+<li>1/2 teaspoon ground black pepper, for the eggplant</li>
+<li>300 g (10.6 oz) dried egg-free durum-wheat rigatoni</li>
+<li>3 liters water and 1 teaspoon fine salt, for boiling pasta</li>
+</ul>
+<h3>For the Sauce/Garnish</h3>
+<ul>
+<li>30 ml (2 tablespoons) extra-virgin olive oil</li>
+<li>2 garlic cloves, finely minced</li>
+<li>1/2 small onion (about 60 g), finely chopped</li>
+<li>700 g (24.7 oz) plain tomato passata, preferably no-salt-added</li>
+<li>60 ml (1/4 cup) water</li>
+<li>1 teaspoon dried oregano</li>
+<li>1/2 teaspoon fine salt</li>
+<li>1/2 teaspoon ground black pepper</li>
+<li>1/2 teaspoon crushed red pepper flakes (optional)</li>
+<li>1/2 cup loosely packed fresh basil leaves, roughly torn</li>
+<li>40 g (1.4 oz) pasteurized-milk ricotta salata, grated</li>
+</ul>
+<p><strong>Substitutions:</strong></p>
+<ul>
+<li>Rigatoni → the same weight of egg-free penne.</li>
+<li>Ricotta salata → the same weight of pasteurized-milk Pecorino Romano; it will taste sharper and saltier. Both contain dairy.</li>
+</ul></div>
+<h2 class="sec">Equipment</h2><div class="panel"><ul>
+<li>Large rimmed baking sheet and parchment rated for the oven temperature</li>
+<li>Large pasta pot and colander</li>
+<li>Large deep skillet and spatula</li>
+<li>Grater and instant-read thermometer for reheating leftovers</li>
+</ul></div>
+<h2 class="sec">Instructions</h2><div class="substep">Preparation (Active time: 10 min)</div><div class="step"><div class="step-num">1</div><div class="step-txt"><strong>Heat the oven:</strong> Set it to 450°F (230°C conventional; 220°C fan). Line the baking sheet with suitable parchment, or use the bare metal sheet. Wash and cut the eggplant, mince the garlic, and chop the onion.</div></div><div class="step"><div class="step-num">2</div><div class="step-txt"><strong>Season:</strong> Toss eggplant with its 2 tablespoons oil, 1/2 teaspoon salt, and 1/2 teaspoon pepper. Spread in one layer with room between the pieces; use a second sheet if crowded.</div></div><div class="substep">Cooking (Active time: 12 min)</div><div class="step"><div class="step-num">3</div><div class="step-txt"><strong>Roast:</strong> Cook for 20 minutes, turn the cubes, then roast about 5 minutes more. The surfaces should brown and the centers should be soft all the way through. Let the eggplant sit on its tray while finishing the sauce.</div></div><div class="step"><div class="step-num">4</div><div class="step-txt"><strong>Simmer:</strong> While the eggplant roasts, heat the remaining oil in the skillet over medium heat. Stir in garlic for 20 seconds, then onion for 2–3 minutes, until softened; avoid scorching. Add passata, 1/4 cup water, oregano, the sauce salt and pepper, and optional chili. Simmer gently for 5 minutes, stirring occasionally, then hold on low heat.</div></div><div class="step"><div class="step-num">5</div><div class="step-txt"><strong>Boil:</strong> Meanwhile, bring the 3 liters water and 1 teaspoon salt to a boil. Add rigatoni and cook according to its package, usually 10–12 minutes, until tender with a firm center. Reserve 1/2 cup cooking water before draining.</div></div><div class="substep">Assembly &amp; Finishing</div><div class="step"><div class="step-num">6</div><div class="step-txt"><strong>Toss gently:</strong> Fold eggplant and drained pasta into the sauce over low heat. Loosen with reserved pasta water a tablespoon at a time if needed; stop when sauce coats the pasta without pooling. Allow about 3 minutes for finishing.</div></div><div class="step"><div class="step-num">7</div><div class="step-txt"><strong>Garnish and serve:</strong> Divide among four bowls and distribute the basil and grated ricotta salata evenly. Serve hot, before the pasta absorbs more sauce.</div></div>
+<h2 class="sec">Food Safety &amp; Storage</h2><ul>
+<li><strong>Minimum safe internal temperature:</strong> No raw animal protein is used. Cook eggplant until fully tender; use pasteurized dairy. Reheat leftovers to 165°F (74°C), checked in several places.</li>
+<li><strong>Storage:</strong> Refrigerate in shallow airtight containers within 2 hours, or within 1 hour above 90°F (32°C). Keep at 40°F (4°C) or below and use within 3–4 days.</li>
+<li><strong>Freezing:</strong> Freeze cooled sauce and eggplant separately from freshly cooked pasta for best texture, up to 3 months for quality. Thaw in the refrigerator.</li>
+<li><strong>Reheating:</strong> Warm covered in a skillet with a splash of water, stirring to heat evenly, until the temperature above is reached.</li>
+<li><strong>Allergens:</strong> Wheat pasta contains gluten; ricotta salata and the cheese substitution contain dairy. Use egg-free dried pasta as specified and check packaged ingredient labels for additional allergens.</li>
+</ul><h2 class="sec">Serving Suggestions</h2><ul>
+<li>Serve in shallow bowls with the cheese scattered on top, as a pasta main course.</li>
+<li>A plain green salad with lemon makes a fresh accompaniment.</li>
+</ul><h2 class="sec">Scaling Notes</h2><p><strong>Half recipe (½×):</strong> Use half of each ingredient and a smaller skillet; start checking the eggplant at the same time.</p>
+<p><strong>Double recipe (2×):</strong> Use two baking sheets and rotate their positions while roasting. Toss in a very large pot or two batches; do not crowd the eggplant onto one sheet.</p><h2 class="sec">Chef&#x27;s Notes</h2><ul>
+<li><strong>Sourcing:</strong> Ricotta salata is firm and grateable; soft tub ricotta gives a different finish.</li>
+<li><strong>Make-ahead:</strong> Prepare sauce and eggplant a day ahead, refrigerate promptly, then reheat to 165°F (74°C) before combining with freshly cooked pasta.</li>
+<li><strong>Variations:</strong> The traditional version shallow-fries the eggplant, as described by Great Italian Chefs. This recipe keeps the roasted method throughout.</li>
+<li><strong>Common pitfalls:</strong> Crowded trays steam the eggplant; rough stirring breaks the softened cubes apart.</li>
+<li><strong>Adaptation:</strong> The roasted eggplant proportions and quick passata sauce follow RecipeTin Eats. Wine is omitted, cheese is measured, and pasta-water salt is specified. Basil and ricotta salata retain the traditional finish documented by the other sources.</li>
+<li><strong>Review status:</strong> @Codex performed a desk review and automated validation; this recipe has not been kitchen-tested. @Coordinator is the requested verification metadata, not a claim of independent tasting.</li>
+</ul><h2 class="sec">Nutrition Information (Optional)</h2><p><em>Per serving: approximately 540 kcal; estimates vary with cheese and passata brands and pasta-water absorption.</em>
+- Protein: 16 g | Fat: 18 g | Carbohydrates: 80 g | Fiber: 10 g
+- Sodium: approximately 850 mg | Saturated fat: approximately 4 g | Added sugar: 0 g with unsweetened passata
+- Sodium estimate: (2,300 mg from the 1 teaspoon salt added directly to food + about 500 mg from cheese + about 200 mg from tomatoes + about 400 mg retained from pasta water) / 4 = about 850 mg per bowl. Pasta-water retention is an estimate.
+- Saturated-fat estimate: (about 8 g from olive oil + 7 g from cheese + 1 g from other ingredients) / 4 = about 4 g per bowl. This is a fairly salty pasta dinner, not a low-sodium dish.</p><h2 class="sec">Sources</h2><p>Researched on 2026-11-07. Adapted from the recipes below; ratings are snapshots from that date, not a claim of a new food trend.
+- <a href="https://www.recipetineats.com/pasta-alla-norma-eggplant-pasta/">RecipeTin Eats: Pasta alla Norma</a> — roasted method and sauce proportions; 4.99/5 from 77 votes at research time.
+- <a href="https://www.greatitalianchefs.com/recipes/pasta-alla-norma-recipe">Great Italian Chefs: Pasta alla Norma</a> — Sicilian context and traditional cheese-and-basil finish; displayed rating 5.00/5.
+- <a href="https://www.allrecipes.com/recipe/260344/pasta-alla-norma/">Allrecipes: Pasta alla Norma</a> — comparison of home-cooking method and serving style; 4.1/5 from 8 ratings.
+- <a href="https://commons.wikimedia.org/wiki/File:Pasta_alla_Norma_-_Wiki_Loves_Sicilia.jpg">Hero photograph source and license</a>.
+- <a href="https://upload.wikimedia.org/wikipedia/commons/e/e4/Pasta_alla_Norma_-_Wiki_Loves_Sicilia.jpg?utm_campaign=index&amp;utm_content=original&amp;utm_source=commons.wikimedia.org">Direct image download</a>.
+- <a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety">USDA: Leftovers and Food Safety</a> — cooling, storage, and reheating guidance.</p>
+<hr />
+<p><strong>Version History:</strong></p>
+<ul>
+<li>v1 (2026-11-07): Initial adaptation and desk validation by @Codex.</li>
+</ul>
+<p><strong>Credits:</strong></p>
+<ul>
+<li>Recipe adaptation: @Codex, from the sources listed above.</li>
+<li>Testing: @Codex (desk validation only; not kitchen-tested).</li>
+<li>Verification: @Coordinator (requested metadata; no independent tasting performed).</li>
+<li>Photography: 8w9d, "Pasta alla Norma - Wiki Loves Sicilia," 16 May 2025, via <a href="https://commons.wikimedia.org/wiki/File:Pasta_alla_Norma_-_Wiki_Loves_Sicilia.jpg">Wikimedia Commons</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Representative dish photograph; the HTML renderer may downscale it.</li>
+</ul>
+<hr />
+<p class="footer">Pasta alla Norma · 2026-11-07 &middot; AI Automation Recipes</p>
+</div>
+</body>
+</html>

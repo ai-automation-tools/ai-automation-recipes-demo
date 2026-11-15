@@ -1,0 +1,3 @@
+# Synopsis
+
+Babbage's programmable engine is completed in the 1840s, a full century ahead of its real debut. Error-free navigation and actuarial tables prove its worth, and computing bureaus spread first across London, then through Europe and America. Punched cards become an industry of their own, warfare turns partly into a problem of schedules, and clerical labour is automated two generations early. By 1900 the engines are electric and everywhere — and so are the things that come with them: the state that knows its population in detail, and the habit of trusting a number because a machine printed it.

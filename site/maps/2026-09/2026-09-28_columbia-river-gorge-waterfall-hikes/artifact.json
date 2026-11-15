@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "ai-map",
+  "recipe_version": "0.1.0",
+  "collection": "maps",
+  "title": "Columbia River Gorge Waterfall Hikes",
+  "slug": "columbia-river-gorge-waterfall-hikes",
+  "date": "2026-09-28",
+  "summary": "An interactive 14-stop guide to the Oregon side of the Columbia River Gorge, covering waterfalls, overlooks and visitor centers along about 65 miles from Crown Point to Rowena Crest.",
+  "files": {
+    "main": "columbia-river-gorge-waterfall-hikes_2026-09-28.html"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

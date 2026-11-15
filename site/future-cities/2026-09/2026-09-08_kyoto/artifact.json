@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "future-cities",
+  "recipe_version": "0.1.0",
+  "collection": "future-cities",
+  "title": "Future Cities: Kyoto",
+  "slug": "kyoto",
+  "date": "2026-09-08",
+  "summary": "Kyoto in 2500 is The Garden Basin: temple terraces and low machiya streets preserved inside a vast inhabited garden, with the Kamo River as a flood-adapted ecological corridor and denser timber-and-ceramic arcologies beyond the historic core.",
+  "files": {
+    "main": "city.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}

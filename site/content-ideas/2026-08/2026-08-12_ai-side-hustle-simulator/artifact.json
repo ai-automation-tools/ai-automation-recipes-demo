@@ -1,0 +1,17 @@
+{
+  "schema": "ai-automation-recipes/artifact@1",
+  "recipe": "content-idea-gen",
+  "recipe_version": "0.1.0",
+  "collection": "content-ideas",
+  "title": "The AI Side-Hustle Simulator",
+  "slug": "ai-side-hustle-simulator",
+  "date": "2026-08-12",
+  "summary": "A content concept: adversarial AI agents (an optimist, a realist and a pessimist) stress-test a popular side-hustle idea and publish a viability score, with formats and hooks for each platform.",
+  "files": {
+    "main": "ai-side-hustle-simulator_2026-08-12.md"
+  },
+  "fields": {},
+  "generator": {
+    "note": "Sample from an earlier run of this recipe"
+  }
+}
